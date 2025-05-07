@@ -1,0 +1,163 @@
+.div_cp {
+    margin-top: -100px;
+    width: 100%; /* Ocupa todo el ancho de la página */
+    height: 55vh; /* Ocupa toda la altura visible del navegador */
+    overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+    position: relative; /* Para posicionar elementos dentro del carousel */
+}
+
+#carousel-principal .carousel-home-principal img {
+    width: 100%; /* Asegura que las imágenes ocupen todo el ancho */
+    height: 100%; /* Asegura que las imágenes ocupen toda la altura */
+    object-fit: cover; /* Ajusta la imagen para que se recorte proporcionalmente */
+}
+
+.div_categoria, .div_marca, .carousel__elements {
+    display: inline-block;
+    width: 20%;
+}
+
+.div_marca{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.div_tipo, .div_producto{
+    width:80%;
+    margin-left:20%;
+}
+
+.div_categoria, .div_tipo, .div_producto, .div_accesorio, .div_popular, .div_rating, .div_rating_categoria, .div_rating_tipo{
+    margin-top:4%;
+}
+
+.container {
+    width: 100%;
+}
+
+.rod-pad-row {
+    margin-left: 20%;
+    /* background-color: red; */
+}
+
+.div_tipo img, .div_categoria img, .div_marca img, .carousel__elements img{
+    width: 100%;
+}
+
+#carousel-principal{
+    height:230px;
+}
+
+#containerCategoria {
+    /* background-color: blueviolet; */
+    margin-top: 2%;
+}
+
+.portfolio-items2-col-1, .home-demo {
+    margin-top: 8%;
+    /* background-color: skyblue; */
+}
+
+.portfolio-items-col-3, .portfolio-items2-col-3 {
+    margin-top: 2%;
+    border-top: 3px solid slategrey;
+}
+
+.portfolio-image2 {
+    margin-top: 10%;
+}
+
+#title-carousel-home, #title-carousel-tipo, #title-carousel-producto, #title-carousel-accesorio, #title-carousel-popularidad, #title-carousel-rating, #title-carousel-rating-categoria, #title-carousel-rating-tipo{
+    text-align: center;
+}
+
+.div_producto img, .div_accesorio img{
+    width:512px;
+    height:512px;
+    object-fit:contain;
+}
+
+#title-categoria{
+    margin-top:3%;
+}
+
+.carousel-home .div_marca,
+.carousel-tipo .div_tipo,
+.carousel-producto .div_producto,
+.carousel-accesorio .div_accesorio,
+.carousel-popular .div_popular,
+.carousel-rating .div_rating,
+.carousel-rating-categoria .div_rating_categoria,
+.carousel-rating-tipo .div_rating_tipo{
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    width: 250px; /* Aumenta el ancho del cuadrado */
+    height: 250px; /* Aumenta el alto del cuadrado */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px auto; /* Ajusta el margen */
+}
+
+.carousel-home .div_marca:hover,
+.carousel-tipo .div_tipo:hover,
+.carousel-producto .div_producto:hover,
+.carousel-accesorio .div_accesorio:hover,
+.carousel-popular .div_popular:hover,
+.carousel-rating .div_rating:hover,
+.carousel-rating-categoria .div_rating_categoria:hover,
+.carousel-rating-tipo .div_rating_tipo:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px orange;
+    border-color: goldenrod;
+}
+
+.carousel-home .div_marca img,
+.carousel-tipo .div_tipo img,
+.carousel-producto .div_producto img,
+.carousel-accesorio .div_accesorio img,
+.carousel-popular .div_popular img,
+.carousel-rating .div_rating img,
+.carousel-rating-categoria .div_rating_categoria img,
+.carousel-rating-tipo .div_rating_tipo img{
+    width: 100%;
+    height: 75%; /* Ajusta la imagen para ocupar más espacio */
+    object-fit: cover;
+    border-bottom: 2px solid goldenrod;
+}
+
+.carousel-home .div_marca h5,
+.carousel-tipo .div_tipo h5,
+.carousel-producto .div_producto h5,
+.carousel-accesorio .div_accesorio h5,
+.carousel-popular .div_popular h5,
+.carousel-rating .div_rating h5,
+.carousel-rating-categoria .div_rating_categoria h5
+.carousel-rating-tipo .div_rating_tipo h5{
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    color: #333;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.carousel-home .div_marca:hover h5,
+.carousel-tipo .div_tipo:hover h5,
+.carousel-producto .div_producto:hover h5,
+.carousel-accesorio .div_accesorio:hover h5,
+.carousel-popular .div_popular:hover h5,
+.carousel-rating .div_rating:hover h5,
+.carousel-rating-categoria .div_rating_categoria:hover h5,
+.carousel-rating-tipo .div_rating_tipo:hover h5{
+    color: orange;
+    text-shadow: 0 0 5px goldenrod;
+}

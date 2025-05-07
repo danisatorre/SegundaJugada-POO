@@ -85,13 +85,19 @@
         }
         
         private function loadFunction() {
-            echo 'hola loadFunction';
-            exit;
+            // echo 'hola loadFunction';
+            // exit;
             $path = MODULES_PATH . $this -> moduleName . '/resources/function.xml'; 
+            // echo $path;
+            // exit;
             if (file_exists($path)) {
+                // echo 'file exists $path';
+                // exit;
                 $functions = simplexml_load_file($path);
                 foreach ($functions as $row) {
                     if (in_array($this -> uriFunction, (Array) $row -> uri)) {
+                        // echo (string) $row -> name;
+                        // exit;
                         return (String) $row -> name;
                     }
                 }

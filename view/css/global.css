@@ -1,0 +1,129 @@
+body {
+    /* text-align: center; */
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    /* margin: 0; */
+    /* padding: 0; */
+}
+
+#header {
+    /* background-color: goldenrod; */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buscar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8%;
+}
+
+.buscar select, .buscar input[type="text"], .buscar input[type="button"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.buscar select {
+    background-color: white;
+    color: black;
+}
+
+.buscar input[type="text"] {
+    width: 200px;
+}
+
+.buscar input[type="button"] {
+    background-color: orange;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buscar input[type="button"]:hover {
+    /* background-color: darkorange; */
+}
+
+#buscar_producto {
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width:auto;
+    display:inline-block;
+}
+
+.buscarElemento {
+    background-color:rgb(231, 196, 131);
+    color:rgb(236, 52, 52);
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buscarElemento:hover {
+    background-color: goldenrod;
+    color: white;
+}
+
+#nav_desp_user {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#nav_desp_user li {
+    display: inline-block;
+    position: relative;
+}
+
+#nav_desp_user li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#nav_desp_user li:hover ul {
+    display: block;
+}
+
+#nav_desp_user li ul li {
+    display: block;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+#nav_desp_user li ul li:hover {
+    /* background-color: goldenrod; */
+    color: white;
+}
+
+.log-icon {
+    background-color: orange;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.log-icon:hover {
+    /* background-color: darkorange; */
+}
+
+#logout, #switch-cuenta{
+    cursor:pointer;
+}

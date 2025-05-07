@@ -1,5 +1,5 @@
 <?php
-    define('PROJECT', '/SegundaJugada-POO');
+    define('PROJECT', '/SegundaJugada-POO/');
 
     //SITE_ROOT
     define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
@@ -11,28 +11,28 @@
     define('PRODUCTION', true);
     
     //MODEL
-    define('MODEL_PATH', SITE_ROOT . '/model/');
+    define('MODEL_PATH', SITE_ROOT . 'model/');
     
     //MODULES
-    define('MODULES_PATH', SITE_ROOT . '/module/');
+    define('MODULES_PATH', SITE_ROOT . 'module/');
     
     //RESOURCES
-    define('RESOURCES', SITE_ROOT . '/resources/');
+    define('RESOURCES', SITE_ROOT . 'resources/');
     
     //UTILS
-    define('UTILS', SITE_ROOT . '/utils/');
+    define('UTILS', SITE_ROOT . 'utils/');
 
     //VIEW
-    define('VIEW_PATH_INC', SITE_ROOT . '/view/inc/');
+    define('VIEW_PATH_INC', SITE_ROOT . 'view/inc/');
 
     //CSS
-    define('CSS_PATH', SITE_ROOT . '/view/css/');
+    define('CSS_PATH', SITE_ROOT . 'view/css/');
     
     //JS
-    define('JS_PATH', SITE_ROOT . '/view/js/');
+    define('JS_PATH', SITE_ROOT . 'view/js/');
     
     //IMG
-    define('IMG_PATH', SITE_ROOT . '/view/images/');
+    define('IMG_PATH', SITE_ROOT . 'view/images/');
     
     //MODEL_HOME
     // define('UTILS_HOME', SITE_ROOT . 'module/home/utils/');
