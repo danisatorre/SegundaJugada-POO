@@ -1,10 +1,10 @@
 <?php
     class common {
         public static function load_error() {
-            echo 'hola load_error';
-            exit;
+            // echo 'hola load_error';
+            // exit;
             require_once (VIEW_PATH_INC . 'top_page.html');
-            require_once (VIEW_PATH_INC . 'header.html');
+            require_once (VIEW_PATH_INC . 'menu.html');
             require_once (VIEW_PATH_INC . 'error404.html');
             require_once (VIEW_PATH_INC . 'footer.html');
         }
