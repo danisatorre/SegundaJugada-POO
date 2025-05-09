@@ -14,6 +14,12 @@
             common::load_view('top_page_home.html', VIEW_PATH_HOME . 'home.html');
         }
 
+        function marcas(){
+            // echo json_encode('hola marcas home');
+            // exit;
+            echo json_encode(common::load_model('home_model', 'getMarcas'));
+        }
+
     } // ctrl_home
 
 ?>

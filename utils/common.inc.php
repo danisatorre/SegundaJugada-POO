@@ -32,8 +32,10 @@
         }
         
         public static function load_model($model, $function = null, $args = null) {
-            echo 'hola load_model';
-            exit;
+            // echo 'hola load_model';
+            // exit;
+            // echo json_encode('hola load_model common.inc.php');
+            // exit;
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
             if (file_exists($path)) {

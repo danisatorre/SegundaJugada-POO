@@ -37,7 +37,7 @@ function carouselPrincipal(){
 function carouselMarcas() {
     // console.log("hola CAROUSELMARCAS");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageMarca','GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=marcas','GET', 'JSON')
     .then(function(data) {
             for (row in data) {
                 // console.log("hola data FUNCTION CAROUSELMARCAS");
@@ -45,7 +45,7 @@ function carouselMarcas() {
                 // return false;
                 $('<div></div>').attr('class', "div_marca").attr('id_marca', data[row].id_marca).appendTo(".carousel-home")
                 .html(
-                    "<img src='" + data[row].img_marca + "' alt='foto' >" +
+                    "<img src=' /SegundaJugada-POO/" + data[row].img_marca + "' alt='foto' >" +
                     "<h5>" + data[row].nom_marca + "</h5>"
                 )
             }
@@ -583,15 +583,15 @@ function goToShop(){
 } // end goToShop (saltar del home al shop con filtros aplicados)
 
 $(document).ready(function() {
-    carouselPrincipal();
+    // carouselPrincipal();
     carouselMarcas();
-    loadCategorias();
-    loadCatTipos();
-    loadProductos();
-    loadAccesorios();
-    loadPopulares();
-    loadMostRating();
-    loadMostRatingCategoria();
-    loadMostRatingTipo();
-    goToShop();
+    // loadCategorias();
+    // loadCatTipos();
+    // loadProductos();
+    // loadAccesorios();
+    // loadPopulares();
+    // loadMostRating();
+    // loadMostRatingCategoria();
+    // loadMostRatingTipo();
+    // goToShop();
 });
