@@ -16,4 +16,32 @@
         <name>tipos</name>
         <uri>tipos</uri>
     </function>
+    <function>
+        <name>carousel_principal</name>
+        <uri>carousel_principal</uri>
+    </function>
+    <function>
+        <name>carousel_productos</name>
+        <uri>carousel_productos</uri>
+    </function>
+    <function>
+        <name>accesorios</name>
+        <uri>accesorios</uri>
+    </function>
+    <function>
+        <name>populares</name>
+        <uri>populares</uri>
+    </function>
+    <function>
+        <name>mostrating</name>
+        <uri>mostrating</uri>
+    </function>
+    <function>
+        <name>mostratingcategoria</name>
+        <uri>mostratingcategoria</uri>
+    </function>
+    <function>
+        <name>mostratingtipo</name>
+        <uri>mostratingtipo</uri>
+    </function>
 </functions>

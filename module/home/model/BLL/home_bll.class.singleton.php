@@ -26,12 +26,40 @@
 			//return $this -> dao -> select_data_carrusel();
 		}
 
-		public function get_category_BLL() {
-			return $this -> dao -> select_data_category($this -> db);
+		public function carousel_principal_BLL(){
+			return $this -> dao -> select_cphome($this -> db);
 		}
 
-		public function get_type_BLL() {
-			return $this -> dao -> select_data_type($this -> db);
+		public function get_categorias_BLL() {
+			return $this -> dao -> select_categoria($this -> db);
+		}
+
+		public function get_tipos_BLL() {
+			return $this -> dao -> select_tipo($this -> db);
+		}
+
+		public function get_productos_BLL(){
+			return $this -> dao -> select_productos($this -> db);
+		}
+
+		public function get_accesorios_BLL(){
+			return $this -> dao -> select_accesorios($this -> db);
+		}
+
+		public function get_populares_BLL(){
+			return $this -> dao -> select_populares($this -> db);
+		}
+
+		public function get_mostrating_BLL(){
+			return $this -> dao -> select_most_rating($this -> db);
+		}
+
+		public function get_mostratingcategoria_BLL(){
+			return $this -> dao -> select_most_rating_categoria($this -> db);
+		}
+
+		public function get_mostratingtipo_BLL(){
+			return $this -> dao -> select_most_rating_tipo($this -> db);
 		}
 	}
 ?>

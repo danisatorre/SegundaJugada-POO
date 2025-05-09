@@ -3,12 +3,12 @@
 // return false;
 
 function carouselPrincipal(){
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=carouselPrincipal','GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=carousel_principal','GET', 'JSON')
     .then(function(data) {
             for (row in data) {
                 $('<div></div>').attr('class', "div_cp").attr('id_cphome', data[row].id_cphome).appendTo(".carousel-home-principal")
                 .html(
-                    "<img src='" + data[row].ruta_img + "' alt='foto' >"
+                    "<img src='/SegundaJugada-POO/" + data[row].ruta_img + "' alt='foto' >"
                 )
             }
 
@@ -78,7 +78,7 @@ function carouselMarcas() {
 function loadCategorias() {
     // console.log("hola LOADCATEGORIAS");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageCategoria','GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=categorias','GET', 'JSON')
     .then(function(data) { 
         // console.log("hola data FUNCTION");
         // return false;
@@ -90,7 +90,7 @@ function loadCategorias() {
                     "<li class='portfolio-item'>" +
                     "<div class='item-main'>" +
                     "<div class='portfolio-image'>" +
-                    "<img src = " + data[row].img_categoria + " alt='foto' </img> " +
+                    "<img src = /SegundaJugada-POO/" + data[row].img_categoria + " alt='foto' </img> " +
                     "</div>" +
                     "<h5>" + data[row].categoria + "</h5>" +
                     "</div>" +
@@ -107,7 +107,7 @@ function loadCategorias() {
 function loadCatTipos() {
     // console.log("hola loadCatTipos");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageTipo','GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=tipos','GET', 'JSON')
     .then(function(data) {
             for (row in data) {
                 // console.log("hola data FUNCTION loadCatTipos");
@@ -115,7 +115,7 @@ function loadCatTipos() {
                 // return false;
                 $('<div></div>').attr('class', "div_tipo").attr('id_tipo', data[row].id_tipo).appendTo(".carousel-tipo")
                 .html(
-                    "<img src='" + data[row].img_tipo + "' alt='foto' >" +
+                    "<img src='/SegundaJugada-POO/" + data[row].img_tipo + "' alt='foto' >" +
                     "<h5>" + data[row].tipo + "</h5>"
                 )
             }
@@ -146,7 +146,7 @@ function loadCatTipos() {
 function loadProductos() {
     // console.log("hola loadProductos");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageProductos','GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=carousel_productos','GET', 'JSON')
     .then(function(data) {
         // console.log("hola loadProductos then function data");
         // return false;
@@ -156,7 +156,7 @@ function loadProductos() {
                 // return false;
                 $('<div></div>').attr('class', "div_producto").attr('id_producto', data[row].id_producto).appendTo(".carousel-producto")
                 .html(
-                    "<img src='" + data[row].img_producto + "' alt='foto' >" +
+                    "<img src='/SegundaJugada-POO/" + data[row].img_producto + "' alt='foto' >" +
                     "<h5>" + data[row].nom_prod + "</h5>"
                 );
             }
@@ -187,12 +187,12 @@ function loadProductos() {
 function loadAccesorios(){
     // console.log("hola loadAccesorios");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageAccesorios', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=accesorios', 'GET', 'JSON')
     .then(function(data){
         for (row in data){
             $('<div></div>').attr('class', "div_accesorio").attr('id_accesorio', data[row].tipo).appendTo(".carousel-accesorio")
             .html(
-                "<img src=' " + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + "</h5>"
             )
         }
@@ -217,12 +217,12 @@ function loadAccesorios(){
 function loadPopulares(){
     // console.log("hola loadPpopulares");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePagePopulares', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=populares', 'GET', 'JSON')
     .then(function(data){
         for (row in data){
             $('<div></div>').attr('class', "div_popular").attr('id_popular', data[row].id_producto).appendTo(".carousel-popular")
             .html(
-                "<img src=' " + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + "</h5>"
             )
         }
@@ -247,12 +247,12 @@ function loadPopulares(){
 function loadMostRating(){
     // console.log("hola loadMostRating");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageRating', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=mostrating', 'GET', 'JSON')
     .then(function(data){
         for (row in data){
             $('<div></div>').attr('class', "div_rating").attr('id_rating', data[row].id_producto).appendTo(".carousel-rating")
             .html(
-                "<img src=' " + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + 
                 "<br>" +
                 "Valoración: " + data[row].rating +
@@ -280,12 +280,12 @@ function loadMostRating(){
 function loadMostRatingCategoria(){
     // console.log("hola loadMostRatingCategoria");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageRatingCategoria', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=mostratingcategoria', 'GET', 'JSON')
     .then(function(data){
         for (row in data){
             $('<div></div>').attr('class', "div_rating_categoria").attr('id_rating_categoria', data[row].id_categoria).appendTo(".carousel-rating-categoria")
             .html(
-                "<img src=' " + data[row].img_categoria + " 'alt='foto'>" +
+                "<img src='/SegundaJugada-POO/" + data[row].img_categoria + " 'alt='foto'>" +
                 "<h5>" + data[row].categoria + 
                 "<br>" +
                 "Visitas: " + data[row].visitas_cat +
@@ -313,12 +313,12 @@ function loadMostRatingCategoria(){
 function loadMostRatingTipo(){
     // console.log("hola loadMostRatingTipo");
     // return false;
-    ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageRatingTipo', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=mostratingtipo', 'GET', 'JSON')
     .then(function(data){
         for (row in data){
             $('<div></div>').attr('class', "div_rating_tipo").attr('id_rating_tipo', data[row].id_tipo).appendTo(".carousel-rating-tipo")
             .html(
-                "<img src=' " + data[row].img_tipo + " 'alt='foto'>" +
+                "<img src='/SegundaJugada-POO/" + data[row].img_tipo + " 'alt='foto'>" +
                 "<h5>" + data[row].tipo + 
                 "<br>" +
                 "Visitas: " + data[row].visitas_tipo +
@@ -583,15 +583,15 @@ function goToShop(){
 } // end goToShop (saltar del home al shop con filtros aplicados)
 
 $(document).ready(function() {
-    // carouselPrincipal();
+    carouselPrincipal();
     carouselMarcas();
-    // loadCategorias();
-    // loadCatTipos();
-    // loadProductos();
-    // loadAccesorios();
-    // loadPopulares();
-    // loadMostRating();
-    // loadMostRatingCategoria();
-    // loadMostRatingTipo();
+    loadCategorias();
+    loadCatTipos();
+    loadProductos();
+    loadAccesorios();
+    loadPopulares();
+    loadMostRating();
+    loadMostRatingCategoria();
+    loadMostRatingTipo();
     // goToShop();
 });
