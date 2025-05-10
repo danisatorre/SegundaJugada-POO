@@ -28,7 +28,7 @@ function loadShop(total_productos, items_por_pagina){
         loadProductoDetails(details_home);
     }else{
         // console.log("loadshop else (url...getall)");
-        ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=getall');
+        ajaxForSearch('index.php?module=shop&op=getall');
     }
 } // end loadShop (controlador del controlador)
 
@@ -60,7 +60,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
     ajaxPromise(url, 'POST', 'JSON', sdata)
         .then(function (shop) {
             console.log("Datos shop: ", shop);
-            // return false;
+            return false;
             $(".container-productos").empty();
             if(shop != "error"){
                 console.log("ajaxForSearch shop.id");
@@ -983,7 +983,7 @@ function mas_productos_relacionados(tipo, id_producto){
     // return false;
     var tipo_producto = tipo;
     let items = 0;
-    ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=count_productos_relacionados", "POST", "JSON", {"tipo": tipo_producto, "id_producto": id_producto})
+    ajaxPromise("index.php?module=shop&op=mas_productos_relacionados", "POST", "JSON", {"tipo": tipo_producto, "id_producto": id_producto})
         .then(function(data){
             // console.log("mpr id: ", data)
             // return false;
@@ -1209,18 +1209,18 @@ function paginacion() {
 
     if (localStorage.getItem('filtro')) {
         const filtro = JSON.parse(localStorage.getItem('filtro'));
-        url = 'module/shop/ctrl/ctrl_shop.php?op=count_productos_filtros';
+        url = 'index.php?module=shop&op=count_productos_filtros';
         sdata = { 'filtro': filtro };
     } else if (localStorage.getItem('buscar')) {
         const buscar = JSON.parse(localStorage.getItem('buscar'));
-        url = 'module/shop/ctrl/ctrl_shop.php?op=count_buscador';
+        url = 'index.php?module=shop&op=count_buscador';
         sdata = { 'buscar': buscar };
     } else if (localStorage.getItem('order')) {
         const value_orderby = JSON.parse(localStorage.getItem('order'));
-        url = 'module/shop/ctrl/ctrl_shop.php?op=count_order_filtro';
+        url = 'index.php?module=shop&op=count_order_filtro';
         sdata = { 'value_orderby': value_orderby };
     } else {
-        url = 'module/shop/ctrl/ctrl_shop.php?op=count_productos_all';
+        url = 'index.php?module=shop&op=count_productos_all';
     }
 
     ajaxPromise(url, 'POST', 'JSON', sdata)
@@ -1434,7 +1434,22 @@ function redirect_login_like(){
     }
 } // end redirect_login_like
 
+function prueba_POST_framework(){
+    // $parametro1 = "parametro1_prueba_POST";
+    // $parametro2 = "parametro2_prueba_POST";
+    // ajaxPromise('index.php?module=shop&op=prueba_POST_framework', 'POST', 'JSON', {'parametro1': $parametro1, 'parametro2': $parametro2})
+    //     .then(function(data){
+    //         console.log('Datos de prueba de POST\n' + data);
+    //     });
+    $parametro = "parametro_solo_POST";
+    ajaxPromise('index.php?module=shop&op=prueba_POST_framework', 'POST', 'JSON', {'parametro': $parametro})
+        .then(function(data){
+            console.log('Dato parametro solo de POST\n' + data);
+        });
+} // 
+
 $(document).ready(function(){
+    // prueba_POST_framework();
     print_filtros();
     loadEquipos();
 
