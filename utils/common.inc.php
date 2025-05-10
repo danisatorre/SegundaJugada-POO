@@ -38,9 +38,21 @@
             // exit;
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
+            // echo json_encode($path);
+            // exit;
             if (file_exists($path)) {
+                // echo json_encode('file exists load_model common.inc');
+                // echo json_encode($model);
+                // echo json_encode($function);
+                // exit;
+                // var_dump($path);
+                // var_dump(file_exists($path));
                 require_once ($path);
+                // var_dump(class_exists('shop_bll'));
+                // exit;
                 if (method_exists($model, $function)) {
+                    // echo json_encode('method exists load_model common.inc');
+                    // exit;
                     $obj = $model::getInstance();
                     if ($args != null) {
                         return call_user_func(array($obj, $function), $args);

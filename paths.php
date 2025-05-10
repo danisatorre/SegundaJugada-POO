@@ -49,7 +49,7 @@
     // define('JS_VIEW_SEARCH', SITE_PATH . 'module/search/view/js/');
 
     //MODEL_SHOP
-    define('UTILS_SHOP', SITE_ROOT . 'module/shop/utils/');
+    // define('UTILS_SHOP', SITE_ROOT . 'module/shop/utils/');
     define('DAO_SHOP', SITE_ROOT . 'module/shop/model/DAO/');
     define('BLL_SHOP', SITE_ROOT . 'module/shop/model/BLL/');
     define('MODEL_SHOP', SITE_ROOT . 'module/shop/model/model/');

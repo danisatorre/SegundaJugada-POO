@@ -9,6 +9,10 @@
 
     include($path . "/module/home/model/BLL/home_bll.class.singleton.php");
     include($path . "/module/home/model/DAO/home_dao.class.singleton.php");
+
+    include($path . "/module/shop/model/BLL/shop_bll.class.singleton.php");
+    include($path . "/module/shop/model/DAO/shop_dao.class.singleton.php");
+
     include($path . "/model/db.class.singleton.php");
     include($path . "/model/Conf.class.singleton.php");
 

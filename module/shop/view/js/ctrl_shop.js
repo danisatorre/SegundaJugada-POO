@@ -137,7 +137,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
 function loadProductos(){
     console.log("hola loadProductos");
     // return false;
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=getall', 'GET', 'JSON')
+    ajaxPromise('index.php?module=shop&op=getall', 'GET', 'JSON')
     .then(function(data){
         // console.log(data);
         // return false;
@@ -170,8 +170,10 @@ function primera_entrada(){
 function loadEquipos() {
     console.log("hola loadEquipos");
     // return false;
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_equipos', 'POST', 'JSON')
+    ajaxPromise('index.php?module=shop&op=filtro_equipos', 'POST', 'JSON')
     .then(function(equipos){
+        // console.log(equipos);
+        // return false;
         $('.checkbox-equipo').empty();
         for (row in equipos){
             $('.checkbox-equipo').append(
@@ -1436,19 +1438,19 @@ $(document).ready(function(){
     print_filtros();
     loadEquipos();
 
-    loadShop();
+    // loadShop();
 
-    botones_filtros();
+    // botones_filtros();
 
-    loadDetails();
+    // loadDetails();
 
-    scrollOnTop();
+    // scrollOnTop();
 
     // paginacion();
 
-    delete_home_details();
+    // delete_home_details();
 
-    like_clicks();
+    // like_clicks();
 });
 
 // $(document).ready(function(){

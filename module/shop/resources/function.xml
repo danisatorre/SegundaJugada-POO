@@ -5,8 +5,8 @@
         <uri>view</uri>
     </function>
     <function>
-        <name>list</name>
-        <uri>list</uri>
+        <name>filtro_equipos</name>
+        <uri>filtro_equipos</uri>
     </function>
     <function>
         <name>filters</name>
