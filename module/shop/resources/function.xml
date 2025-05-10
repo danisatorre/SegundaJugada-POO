@@ -9,8 +9,8 @@
         <uri>filtro_equipos</uri>
     </function>
     <function>
-        <name>filters</name>
-        <uri>filters</uri>
+        <name>filtrar</name>
+        <uri>filtrar</uri>
     </function>
     <function>
         <name>mas_productos_relacionados</name>
@@ -24,17 +24,13 @@
         <name>count_buscador</name>
         <uri>count_buscador</uri>
     </function>
-        <function>
-        <name>count_order_filtro</name>
-        <uri>count_order_filtro</uri>
+    <function>
+        <name>count_productos_all</name>
+        <uri>count_productos_all</uri>
     </function>
     <function>
-        <name>count</name>
-        <uri>count</uri>
-    </function>
-    <function>
-        <name>count_filters</name>
-        <uri>count_filters</uri>
+        <name>getall</name>
+        <uri>getall</uri>
     </function>
     <function>
         <name>cars</name>

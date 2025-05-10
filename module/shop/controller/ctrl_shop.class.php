@@ -12,7 +12,10 @@
         }
 
         function getall(){
+            $offset = $_POST['offset'];
+            $limit = $_POST['limit'];
 
+            echo json_encode(common::load_model('shop_model', 'getAll', [$offset, $limit]));
         }
 
         function filtro_equipos(){
@@ -34,10 +37,30 @@
             // exit;
             echo json_encode(common::load_model('shop_model', 'pruebaPOST', $parametro));
         } // funcion de prueba para aprender a pasar uno o más parametros por POST a los demas ficheros
+
+        function filtrar(){
+            $filtro=($_POST['filtro']);
+            $offset = $_POST['offset'];
+            $limit = $_POST['limit'];
+
+            echo json_encode(common::load_model('shop_model', 'getFiltrar', [$filtro, $offset, $limit]));
+        }
         
         function count_productos_filtros(){
             $filtro = $_POST['filtro'];
-            echo json_encode(common::load_model('shop_model', 'getCountProductosFiltros', [$filtro]));
+            echo json_encode(common::load_model('shop_model', 'getCountProductosFiltros', $filtro));
+        }
+
+        function count_buscador(){
+            $buscador = $_POST['buscar'];
+            $ciudad = ($buscador[0]['filtro_ciudad']);
+            $tipo = ($buscador[1]['filtro_tipo'][0]);
+            $categoria = ($buscador[2]['filtro_categoria']);
+            echo json_encode(common::load_model('shop_model', 'getCountBuscador', [$ciudad, $tipo, $categoria]));
+        }
+
+        function count_productos_all(){
+            echo json_encode(common::load_model('shop_model', 'getCountProductosAll'));
         }
 
     } // ctrl_home

@@ -59,8 +59,8 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
     
     ajaxPromise(url, 'POST', 'JSON', sdata)
         .then(function (shop) {
-            console.log("Datos shop: ", shop);
-            return false;
+            // console.log("Datos shop: ", shop);
+            // return false;
             $(".container-productos").empty();
             if(shop != "error"){
                 console.log("ajaxForSearch shop.id");
@@ -72,7 +72,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
                         $('<div></div>').attr('class', "producto").attr({'id': shop[row].id_producto}).appendTo('.container-productos')
                             .html(
                                 "<div class='click-producto' id='" + shop[row].id_producto + "'>" +
-                                    "<img src = " + shop[row].img_producto + " alt='foto' </img> " +
+                                    "<img src = /SegundaJugada-POO/" + shop[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
                                     "<h3>" + shop[row].nom_prod + "</h5>" +
                                     "<p class='precio'>" + shop[row].precio + "€</p>" +
@@ -389,7 +389,7 @@ function eliminar_filtros() {
     $("#texto-nofiltros").empty();
     location.reload();
     if(!localStorage.getItem('filtro')){
-        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=getall");
+        ajaxForSearch("index.php?module=shop&op=getall");
         highlight();
     }
 } // end eliminar_filtros (se ejecuta al pulsar en el boton remover filtros)
@@ -421,10 +421,10 @@ function getall(total_productos, items_por_pagina) {
             filtro = filtro.filter(f => f[0] !== 'equipo');
             localStorage.setItem('filtro', JSON.stringify(filtro));
         }
-        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filtrar", filtro, total_productos, items_por_pagina);
+        ajaxForSearch("index.php?module=shop&op=filtrar", filtro, total_productos, items_por_pagina);
     } else { // cargar list del shop sin filtros
         console.log("getall no filtro")
-        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=getall");
+        ajaxForSearch("index.php?module=shop&op=getall");
     }
 } // end getall
 
@@ -606,14 +606,14 @@ function botones_filtros(){
 
         if(filtro.length > 0){
             paginacion();
-            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filtrar", filtro);
+            ajaxForSearch("index.php?module=shop&op=filtrar", filtro);
         }else{
             paginacion();
-            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=getall");
+            ajaxForSearch("index.php?module=shop&op=getall");
         }
 
         highlight();
-        highlight_buscador(); // funcion en ctrl_search.js
+        //highlight_buscador(); // funcion en ctrl_search.js
     });
 } // end botones_filtros (aplicar los filtros al pulsar sobre el boton filtrar)
 
@@ -1153,7 +1153,7 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
                         $('<div></div>').attr('class', "producto").attr({'id': buscador[row].id_producto}).appendTo('.container-productos')
                             .html(
                                 "<div class='click-producto' id='" + buscador[row].id_producto + "'>" +
-                                    "<img src = " + buscador[row].img_producto + " alt='foto' </img> " +
+                                    "<img src = /SegundaJugada-POO/" + buscador[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
                                         "<h3>" + buscador[row].nom_prod + "</h5>" +
                                         "<p class='precio'>" + buscador[row].precio + "€</p>" +
@@ -1215,11 +1215,7 @@ function paginacion() {
         const buscar = JSON.parse(localStorage.getItem('buscar'));
         url = 'index.php?module=shop&op=count_buscador';
         sdata = { 'buscar': buscar };
-    } else if (localStorage.getItem('order')) {
-        const value_orderby = JSON.parse(localStorage.getItem('order'));
-        url = 'index.php?module=shop&op=count_order_filtro';
-        sdata = { 'value_orderby': value_orderby };
-    } else {
+    }else {
         url = 'index.php?module=shop&op=count_productos_all';
     }
 
@@ -1402,7 +1398,7 @@ function click_like(id_producto, lugar){
 function load_likes_user(){
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=load_likes_user", 'POST', 'JSON', {'token': token})
+        ajaxPromise("index.php?module=shop&op=load_likes_user", 'POST', 'JSON', {'token': token})
             .then(function(like){
                 console.log(like);
                 // return false;
@@ -1453,19 +1449,19 @@ $(document).ready(function(){
     print_filtros();
     loadEquipos();
 
-    // loadShop();
+    loadShop();
 
-    // botones_filtros();
+    botones_filtros();
 
     // loadDetails();
 
-    // scrollOnTop();
+    scrollOnTop();
 
-    // paginacion();
+    paginacion();
 
-    // delete_home_details();
+    delete_home_details();
 
-    // like_clicks();
+    like_clicks();
 });
 
 // $(document).ready(function(){

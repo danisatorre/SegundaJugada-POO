@@ -35,14 +35,40 @@
             exit;
         } // prueba para manejar múltiples datos pasados por POST
 
+        public function getAll($params){
+            $offset = $params[0];
+            $limit = $params[1];
+
+            return $this -> bll -> get_all_BLL($offset, $limit);
+        }
+
+        public function getFiltrar($params){
+            $filtro = $params[0];
+            $offset = $params[1];
+            $limit = $params[2];
+
+            return $this -> bll -> get_filtrar_BLL($filtro, $offset, $limit);
+        }
+
         public function getEquipos(){
             // echo json_encode('hola getEquipos shop_model');
             // exit;
             return $this -> bll -> get_equipos_BLL();
         } // getEquipos
 
-        public function getCountProductosFiltros($params){
-            $filtro = $params[0];
+        public function getCountProductosFiltros($filtro){
+            return $this -> bll -> get_count_productos_filtros_BLL($filtro);
+        }
+
+        public function getCountBuscador($params){
+            $ciudad = $params[0];
+            $tipo = $params[1];
+            $categoria = $params[2];
+            return $this -> bll -> get_count_buscador_BLL($ciudad, $tipo, $categoria);
+        }
+
+        public function getCountProductosAll(){
+            return $this -> bll -> get_count_productos_all_BLL();
         }
 
     } // shop_model

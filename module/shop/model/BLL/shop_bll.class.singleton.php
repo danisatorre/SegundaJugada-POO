@@ -22,11 +22,31 @@
             return self::$_instance;
         } // getInstance
 
+        public function get_all_BLL($offset, $limit){
+            return $this -> dao -> select_all($this -> db, $offset, $limit);
+        }
+
+        public function get_filtrar_BLL($filtro, $offset, $limit){
+            return $this -> dao -> select_filtrar($this -> db, $filtro, $offset, $limit);
+        }
+
         public function get_equipos_BLL(){
             // echo json_encode('hola get_equipos_BLL');
             // exit;
             return $this -> dao -> select_equipos($this -> db);
         } // get_equipos_BLL
+
+        public function get_count_productos_filtros_BLL($filtro){
+            return $this -> dao -> select_count_productos_filtros($this -> db, $filtro);
+        }
+
+        public function get_count_buscador_BLL($ciudad, $tipo, $categoria){
+            return $this -> dao -> select_count_buscador($this -> db, $ciudad, $tipo, $categoria);
+        }
+
+        public function get_count_productos_all_BLL(){
+            return $this -> dao -> select_count_all($this -> db);
+        }
 
     } // shop_bll
 
