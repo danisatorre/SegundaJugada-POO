@@ -188,6 +188,60 @@
             return $db -> listar($stmt);
         }
 
+		public function select_load_likes_user($db, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like = (SELECT u.id_user
+							FROM users u
+							WHERE u.username = '$username')";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_likes($db, $id_producto, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like = (SELECT u.id_user
+							FROM users u
+							WHERE u.username = '$username')
+			AND l.id_producto_like = '$id_producto'";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function set_like_user($db, $id_producto, $username){
+			$sql = "INSERT INTO likes (id_user_like, id_producto_like) VALUES ((SELECT u.id_user FROM users u WHERE u.username = '$username'), '$id_producto');";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_like_producto($db, $id_producto){
+			$sql = "UPDATE productos p
+			SET p.likes = p.likes +1
+			WHERE p.id_producto = $id_producto";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_dislike_user($db, $id_producto, $username){
+			$sql = "DELETE l FROM likes l
+			JOIN users u ON l.id_user_like = u.id_user
+			WHERE l.id_producto_like = '$id_producto'
+			AND u.username = '$username';";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_dislike_producto($db, $id_producto){
+			$sql = "UPDATE productos p
+			SET p.likes = p.likes -1
+			WHERE p.id_producto = $id_producto";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
     } // shop_dao
 
 ?>

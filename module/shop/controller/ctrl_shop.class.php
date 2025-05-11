@@ -63,6 +63,55 @@
             echo json_encode(common::load_model('shop_model', 'getCountProductosAll'));
         }
 
+        function load_likes_user(){
+            $tokenNormal = $_POST['token'];
+            $token = decode_token($tokenNormal);
+            $username = $token['username'];
+            echo json_encode(common::load_model('shop_model', 'getLoadLikesUser'), $username);
+        }
+
+        function ctrl_likes(){
+            $id_producto = $_POST['id_producto'];
+            $tokenNormal = $_POST['token'];
+            $token = decode_token($tokenNormal);
+            $username = $token['username'];
+            
+            $likes = common::load_model('shop_model', 'getLikes', [$id_producto, $username]);
+
+            if(!$likes){
+                echo json_encode('error');
+                exit;
+            }else{
+                $dsinfo = array();
+                foreach($likes as $row){
+                    array_push($dsinfo, $row);
+                }
+
+                if(count($dsinfo) === 0){
+                    $select_ctrl_likes = common::load_model('shop_model', 'like', [$id_producto, $username]);
+                    $update_ctrl_likes = common::load_model('shop_model', 'sumar_like', $id_producto);
+                    echo json_encode('0');
+                    exit;
+                }else{
+                    $select_ctrl_likes = common::load_model('shop_model', 'dislike', [$id_producto, $username]);
+                    $update_ctrl_likes = common::load_model('shop_model', 'restar_like', $id_producto);
+                    echo json_encode('1');
+                    exit;
+                }
+            } // end if-else !$likes
+        }
+
+        function filtro_buscador(){
+            $buscador = $_POST['buscar'];
+            $ciudad = ($buscador[0]['filtro_ciudad']);
+            $tipo = ($buscador[1]['filtro_tipo'][0]);
+            $categoria = ($buscador[2]['filtro_categoria']);
+            $offset = $_POST['offset'];
+            $limit = $_POST['limit'];
+
+            
+        }
+
     } // ctrl_home
 
 ?>

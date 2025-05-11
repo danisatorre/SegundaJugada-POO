@@ -1124,7 +1124,7 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
         ? { 'buscar': buscar, 'offset': offset, 'limit': items_por_pagina } 
         : { 'offset': offset, 'limit': items_por_pagina };
 
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_buscador', 'POST', 'JSON', sdata)
+    ajaxPromise('index.php?module=shop&op=filtro_buscador', 'POST', 'JSON', sdata)
         .then(function(buscador){
             console.log(buscador)
             // return false;
@@ -1182,6 +1182,8 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
                     }
             }
         }).catch(function(){
+            console.error('ERROR load_buscador_shop');
+            return false;
             window.location.href = "index.php?module=ctrl_exceptions&op=503";
         });
 } // end load_buscador_shop (cargar los productos del list del shop al filtrar por el buscador)
@@ -1370,7 +1372,7 @@ function like_clicks(){
 function click_like(id_producto, lugar){
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=ctrl_likes", 'POST', 'JSON', {'id_producto': id_producto, 'token': token})
+        ajaxPromise("index.php?module=shop&op=ctrl_likes", 'POST', 'JSON', {'id_producto': id_producto, 'token': token})
             .then(function(like){
                 console.log(like);
                 // return false;
@@ -1381,6 +1383,8 @@ function click_like(id_producto, lugar){
                 }
                 // $("#" + id_producto + ".fa-hearth").toggleClass('like_red');
             }).catch(function(){
+                console.error('ERROR click_like');
+                return false;
                 window.location.href = "index.php?module=ctrl_exceptions&op=503";
             });
     }else{
@@ -1391,7 +1395,7 @@ function click_like(id_producto, lugar){
         localStorage.setItem('id_producto', id_producto);
 
         toastr.warning("Inicia sesión para poder guardar en favoritos productos");
-        setTimeout("location.href= 'index.php?module=ctrl_auth&op=login-view';", 1000);
+        setTimeout("location.href= 'index.php?module=AUTH&op=login-view';", 1000);
     }
 } // end click_like (manejar que hacer al hacer click sobre el corazón del like)
 
@@ -1400,7 +1404,7 @@ function load_likes_user(){
     if(token){
         ajaxPromise("index.php?module=shop&op=load_likes_user", 'POST', 'JSON', {'token': token})
             .then(function(like){
-                console.log(like);
+                // console.log(like);
                 // return false;
                 for(row in like){
                     // console.log(like[row].id_producto_like);
@@ -1417,7 +1421,7 @@ function load_likes_user(){
 function redirect_login_like(){
     var token = JSON.parse(localStorage.getItem('token'));
     var id_producto = localStorage.getItem('id_producto');
-    ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=ctrl_likes", 'POST', 'JSON', {'token':token, 'id_producto':id_producto})
+    ajaxPromise("index.php?module=shop&op=ctrl_likes", 'POST', 'JSON', {'token':token, 'id_producto':id_producto})
 
     var redirect = localStorage.getItem('redirect_like').split(",");
     if(redirect[1] == "details"){

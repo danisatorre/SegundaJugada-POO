@@ -33,15 +33,19 @@
         <uri>getall</uri>
     </function>
     <function>
-        <name>cars</name>
-        <uri>cars</uri>
+        <name>load_likes_user</name>
+        <uri>load_likes_user</uri>
     </function>
     <function>
-        <name>load_likes</name>
-        <uri>load_likes</uri>
+        <name>ctrl_likes</name>
+        <uri>ctrl_likes</uri>
     </function>
     <function>
         <name>prueba_POST_framework</name>
         <uri>prueba_POST_framework</uri>
+    </function>
+    <function>
+        <name>filtro_buscador</name>
+        <uri>filtro_buscador</uri>
     </function>
 </functions>

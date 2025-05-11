@@ -16,6 +16,9 @@
     include($path . "/model/db.class.singleton.php");
     include($path . "/model/Conf.class.singleton.php");
 
+    include($path . "/model/jwt.class.php");
+    include($path . "/model/middleware_auth.php");
+
     ob_start();
     session_start();
 
