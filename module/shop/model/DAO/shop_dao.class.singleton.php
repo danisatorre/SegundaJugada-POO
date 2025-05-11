@@ -242,6 +242,109 @@
 			$stmt = $db -> ejecutar($sql);
 		}
 
+		public function select_categoria_buscador($db, $categoria, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE c.id_categoria = '$categoria'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_tipo_buscador($db, $tipo, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE ti.id_tipo = '$tipo'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_ciudad_buscador($db, $ciudad, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE p.ciudad = '$ciudad'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_categoria_tipo_buscador($db, $categoria, $tipo, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE c.id_categoria = '$categoria'
+			AND ti.id_tipo = '$tipo'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_tipo_ciudad_buscador($db, $tipo, $ciudad, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE p.ciudad = '$ciudad'
+			AND ti.id_tipo = '$tipo'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_categoria_ciudad_buscador($db, $categoria, $ciudad, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE p.ciudad = '$ciudad'
+			AND c.id_categoria = '$categoria'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_get_all_buscador($db, $categoria, $tipo, $ciudad, $offset, $limit){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE p.ciudad = '$ciudad'
+			AND c.id_categoria = '$categoria'
+			AND ti.id_tipo = '$tipo'
+			LIMIT $offset, $limit";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
     } // shop_dao
 
 ?>

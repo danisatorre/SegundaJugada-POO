@@ -109,7 +109,28 @@
             $offset = $_POST['offset'];
             $limit = $_POST['limit'];
 
-            
+            try {
+                if (($categoria != "0") && ($tipo == "0") && ($ciudad == "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getCategoriaBuscador', [$categoria, $offset, $limit]));
+                } else if (($categoria == "0") && ($tipo != "0") && ($ciudad == "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getTipoBuscador', [$tipo, $offset, $limit]));
+                } else if (($categoria == "0") && ($tipo == "0") && ($ciudad != "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getCiudadBuscador', [$ciudad, $offset, $limit]));
+                } else if (($categoria != "0") && ($tipo != "0") && ($ciudad == "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getCategoriaTipoBuscador', [$categoria, $tipo, $offset, $limit]));
+                } else if (($categoria == "0") && ($tipo != "0") && ($ciudad != "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getTipoCiudadBuscador', [$tipo, $ciudad, $offset, $limit]));
+                } else if (($categoria != "0") && ($tipo == "0") && ($ciudad != "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getCategoriaCiudadBuscador', [$categoria, $ciudad, $offset, $limit]));
+                } else if (($categoria != "0") && ($tipo != "0") && ($ciudad != "0")) {
+                    echo json_encode(common::load_model('shop_model', 'getAllBuscador', [$categoria, $tipo, $ciudad, $offset, $limit]));
+                } else {
+                    echo json_encode(common::load_model('shop_model', 'getAll', [$offset, $limit]));
+                }
+            } catch (Exception $e) {
+                echo json_encode("error");
+                exit;
+            }
         }
 
     } // ctrl_home

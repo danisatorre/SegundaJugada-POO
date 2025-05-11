@@ -72,6 +72,34 @@
             $this -> dao -> set_dislike_producto($this -> db, $id_producto);
         }
 
+        public function get_categoria_buscador_BLL($categoria, $offset, $limit){
+            $this -> dao -> select_categoria_buscador($this -> db, $categoria, $offset, $limit);
+        }
+
+        public function get_tipo_buscador_BLL($tipo, $offset, $limit){
+            $this -> dao -> select_tipo_buscador($this -> db, $tipo, $offset, $limit);
+        }
+
+        public function get_ciudad_buscador_BLL($ciudad, $offset, $limit){
+            $this -> dao -> select_ciudad_buscador($this -> db, $ciudad, $offset, $limit);
+        }
+
+        public function get_categoria_tipo_buscador_BLL($categoria, $tipo, $offset, $limit){
+            $this -> dao -> select_categoria_tipo_buscador($this -> db, $categoria, $tipo, $offset, $limit);
+        }
+
+        public function get_tipo_ciudad_buscador_BLL($tipo, $ciudad, $offset, $limit){
+            $this -> dao -> select_tipo_ciudad_buscador($this -> db, $tipo, $ciudad, $offset, $limit);
+        }
+
+        public function get_categoria_ciudad_buscador_BLL($categoria, $ciudad, $offset, $limit){
+            $this -> dao -> select_categoria_ciudad_buscador($this -> db, $categoria, $ciudad, $offset, $limit);
+        }
+
+        public function get_all_buscador_BLL($categoria, $tipo, $ciudad, $offset, $limit){
+            $this -> dao -> select_get_all_buscador($this -> db, $categoria, $tipo, $ciudad, $offset, $limit);
+        }
+
     } // shop_bll
 
 ?>

@@ -101,6 +101,66 @@
             $this -> bll -> restar_like_BLL($id_producto);
         }
 
+        public function getCategoriaBuscador($params){
+            $categoria = $params[0];
+            $offset = $params[1];
+            $limit = $params[2];
+
+            $this -> bll -> get_categoria_buscador_BLL($categoria, $offset, $limit);
+        }
+
+        public function getTipoBuscador($params){
+            $tipo = $params[0];
+            $offset = $params[1];
+            $limit = $params[2];
+
+            $this -> bll -> get_tipo_buscador_BLL($tipo, $offset, $limit);
+        }
+
+        public function getCiudadBuscador($params){
+            $ciudad = $params[0];
+            $offset = $params[1];
+            $limit = $params[2];
+
+            $this -> bll -> get_ciudad_buscador_BLL($ciudad, $offset, $limit);
+        }
+
+        public function getCategoriaTipoBuscador($params){
+            $categoria = $params[0];
+            $tipo = $params[1];
+            $offset = $params[2];
+            $limit = $params[3];
+
+            $this -> bll -> get_categoria_tipo_buscador_BLL($categoria, $tipo, $offset, $limit);
+        }
+
+        public function getTipoCiudadBuscador($params){
+            $tipo = $params[0];
+            $ciudad = $params[1];
+            $offset = $params[2];
+            $limit = $params[3];
+
+            $this -> bll -> get_tipo_ciudad_buscador_BLL($tipo, $ciudad, $offset, $limit);
+        }
+
+        public function getCategoriaCiudadBuscador($params){
+            $categoria = $params[0];
+            $ciudad = $params[1];
+            $offset = $params[2];
+            $limit = $params[3];
+
+            $this -> bll -> get_categoria_ciudad_buscador_BLL($categoria, $ciudad, $offset, $limit);
+        }
+
+        public function getAllBuscador($params){
+            $categoria = $params[0];
+            $tipo = $params[1];
+            $ciudad = $params[2];
+            $offset = $params[3];
+            $limit = $params[4];
+            $this -> bll -> get_all_buscador_BLL($categoria, $tipo, $ciudad, $offset, $limit);
+        }
+
     } // shop_model
 
 ?>
