@@ -73,31 +73,63 @@
         }
 
         public function get_categoria_buscador_BLL($categoria, $offset, $limit){
-            $this -> dao -> select_categoria_buscador($this -> db, $categoria, $offset, $limit);
+            return $this -> dao -> select_categoria_buscador($this -> db, $categoria, $offset, $limit);
         }
 
         public function get_tipo_buscador_BLL($tipo, $offset, $limit){
-            $this -> dao -> select_tipo_buscador($this -> db, $tipo, $offset, $limit);
+            return $this -> dao -> select_tipo_buscador($this -> db, $tipo, $offset, $limit);
         }
 
         public function get_ciudad_buscador_BLL($ciudad, $offset, $limit){
-            $this -> dao -> select_ciudad_buscador($this -> db, $ciudad, $offset, $limit);
+            return $this -> dao -> select_ciudad_buscador($this -> db, $ciudad, $offset, $limit);
         }
 
         public function get_categoria_tipo_buscador_BLL($categoria, $tipo, $offset, $limit){
-            $this -> dao -> select_categoria_tipo_buscador($this -> db, $categoria, $tipo, $offset, $limit);
+            return $this -> dao -> select_categoria_tipo_buscador($this -> db, $categoria, $tipo, $offset, $limit);
         }
 
         public function get_tipo_ciudad_buscador_BLL($tipo, $ciudad, $offset, $limit){
-            $this -> dao -> select_tipo_ciudad_buscador($this -> db, $tipo, $ciudad, $offset, $limit);
+            return $this -> dao -> select_tipo_ciudad_buscador($this -> db, $tipo, $ciudad, $offset, $limit);
         }
 
         public function get_categoria_ciudad_buscador_BLL($categoria, $ciudad, $offset, $limit){
-            $this -> dao -> select_categoria_ciudad_buscador($this -> db, $categoria, $ciudad, $offset, $limit);
+            return $this -> dao -> select_categoria_ciudad_buscador($this -> db, $categoria, $ciudad, $offset, $limit);
         }
 
         public function get_all_buscador_BLL($categoria, $tipo, $ciudad, $offset, $limit){
-            $this -> dao -> select_get_all_buscador($this -> db, $categoria, $tipo, $ciudad, $offset, $limit);
+            return $this -> dao -> select_get_all_buscador($this -> db, $categoria, $tipo, $ciudad, $offset, $limit);
+        }
+
+        public function get_details_BLL($id_producto){
+            return $this -> dao -> select_details($this -> db, $id_producto);
+        }
+
+        public function get_img_details_BLL($id_producto){
+            return $this -> dao -> select_img_details($this -> db, $id_producto);
+        }
+
+        public function get_count_productos_relacionados_BLL($tipo, $id_producto){
+            return $this -> dao -> select_count_productos_relacionados($this -> db, $tipo, $id_producto);
+        }
+
+        public function get_productos_relacionados_BLL($tipo, $loaded, $items, $id_producto){
+            return $this -> dao -> select_productos_relacionados($this -> db, $tipo, $loaded, $items, $id_producto);
+        }
+
+        public function sumar_visitas_BLL($id_producto){
+            $this -> dao -> sumar_visitas($this -> db, $id_producto);
+        }
+
+        public function update_rating_BLL($id_producto, $rating){
+            $this -> dao -> update_rating($this -> db, $id_producto, $rating);
+        }
+
+        public function update_visitas_categoria_BLL($id_categoria){
+            $this -> dao -> update_visitas_categoria($this -> db, $id_categoria);
+        }
+
+        public function update_visitas_tipo_BLL($id_tipo){
+            $this -> dao -> update_visitas_tipo($this -> db, $id_tipo);
         }
 
     } // shop_bll

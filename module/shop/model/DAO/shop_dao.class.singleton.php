@@ -345,6 +345,91 @@
             return $db -> listar($stmt);
 		}
 
+		public function select_details($db, $id_producto){
+			// echo json_encode($id_producto);
+			// exit;
+			$sql="SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			LEFT JOIN users u ON p.id_vendedor = u.id_user
+			WHERE p.id_producto = $id_producto";
+
+			// echo json_encode($sql);
+			// exit;
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_img_details($db, $id_producto){
+			$sql="SELECT pi.pimage_producto, pi.pimage_route
+				FROM producto_img pi
+				WHERE pi.pimage_producto = '$id_producto'";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_count_productos_relacionados($db, $tipo, $id_producto){
+			$sql = "SELECT COUNT(*) contador
+			FROM productos p 
+			WHERE p.tipo = '$tipo'
+			AND p.id_producto <> $id_producto";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_productos_relacionados($db, $tipo, $loaded, $items, $id_producto){
+			$sql = "SELECT * 
+				FROM productos p
+				LEFT JOIN marcas m ON p.marca = m.id_marca
+				LEFT JOIN teams t ON p.equipo = t.id_team
+				LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+				LEFT JOIN categorias c ON p.categoria = c.id_categoria
+				WHERE p.tipo = '$tipo'
+				AND p.id_producto <> $id_producto
+				LIMIT $loaded, $items";
+			
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function sumar_visitas($db, $id_producto){
+			$sql = "UPDATE productos p
+			SET p.visitas = p.visitas + 1
+			WHERE id_producto = $id_producto";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function update_rating($db, $id_producto, $rating){
+			$sql = "UPDATE productos p
+			SET p.rating = $rating
+			WHERE id_producto = $id_producto";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function update_visitas_categoria($db, $id_categoria){
+			$sql = "UPDATE categorias c
+			SET c.visitas_cat = c.visitas_cat + 1
+			WHERE id_categoria = $id_categoria";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function update_visitas_tipo($db, $id_tipo){
+			$sql = "UPDATE tipo t
+			SET t.visitas_tipo = t.visitas_tipo + 1
+			WHERE id_tipo = $id_tipo";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
     } // shop_dao
 
 ?>

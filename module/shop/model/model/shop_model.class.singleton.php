@@ -106,7 +106,7 @@
             $offset = $params[1];
             $limit = $params[2];
 
-            $this -> bll -> get_categoria_buscador_BLL($categoria, $offset, $limit);
+            return $this -> bll -> get_categoria_buscador_BLL($categoria, $offset, $limit);
         }
 
         public function getTipoBuscador($params){
@@ -114,7 +114,7 @@
             $offset = $params[1];
             $limit = $params[2];
 
-            $this -> bll -> get_tipo_buscador_BLL($tipo, $offset, $limit);
+            return $this -> bll -> get_tipo_buscador_BLL($tipo, $offset, $limit);
         }
 
         public function getCiudadBuscador($params){
@@ -122,7 +122,7 @@
             $offset = $params[1];
             $limit = $params[2];
 
-            $this -> bll -> get_ciudad_buscador_BLL($ciudad, $offset, $limit);
+            return $this -> bll -> get_ciudad_buscador_BLL($ciudad, $offset, $limit);
         }
 
         public function getCategoriaTipoBuscador($params){
@@ -131,7 +131,7 @@
             $offset = $params[2];
             $limit = $params[3];
 
-            $this -> bll -> get_categoria_tipo_buscador_BLL($categoria, $tipo, $offset, $limit);
+            return $this -> bll -> get_categoria_tipo_buscador_BLL($categoria, $tipo, $offset, $limit);
         }
 
         public function getTipoCiudadBuscador($params){
@@ -140,7 +140,7 @@
             $offset = $params[2];
             $limit = $params[3];
 
-            $this -> bll -> get_tipo_ciudad_buscador_BLL($tipo, $ciudad, $offset, $limit);
+            return $this -> bll -> get_tipo_ciudad_buscador_BLL($tipo, $ciudad, $offset, $limit);
         }
 
         public function getCategoriaCiudadBuscador($params){
@@ -149,7 +149,7 @@
             $offset = $params[2];
             $limit = $params[3];
 
-            $this -> bll -> get_categoria_ciudad_buscador_BLL($categoria, $ciudad, $offset, $limit);
+            return $this -> bll -> get_categoria_ciudad_buscador_BLL($categoria, $ciudad, $offset, $limit);
         }
 
         public function getAllBuscador($params){
@@ -158,7 +158,51 @@
             $ciudad = $params[2];
             $offset = $params[3];
             $limit = $params[4];
-            $this -> bll -> get_all_buscador_BLL($categoria, $tipo, $ciudad, $offset, $limit);
+            return $this -> bll -> get_all_buscador_BLL($categoria, $tipo, $ciudad, $offset, $limit);
+        }
+
+        public function getDetails($id_producto){
+            // echo json_encode($id_producto);
+            // exit;
+            return $this -> bll -> get_details_BLL($id_producto);
+        }
+
+        public function getImgDetails($id_producto){
+            return $this -> bll -> get_img_details_BLL($id_producto);
+        }
+
+        public function getCountProductosRelacionados($params){
+            $tipo = $params[0];
+            $id_producto = $params[1];
+            return $this -> bll -> get_count_productos_relacionados_BLL($tipo, $id_producto);
+        }
+
+        public function getProductosRelacionados($params){
+            $tipo = $params[0];
+            // echo json_encode($tipo);
+            // exit;
+            $loaded = $params[1];
+            $items = $params[2];
+            $id_producto = $params[3];
+            return $this -> bll -> get_productos_relacionados_BLL($tipo, $loaded, $items, $id_producto);
+        }
+
+        public function sumarVisitas($id_producto){
+            $this -> bll -> sumar_visitas_BLL($id_producto);
+        }
+
+        public function updateRating($params){
+            $id_producto = $params[0];
+            $rating = $params[1];
+            $this -> bll -> update_rating_BLL($id_producto, $rating);
+        }
+
+        public function updateVisitasCategoria($id_categoria){
+            $this -> bll -> update_visitas_categoria_BLL($id_categoria);
+        }
+
+        public function updateVisitasTipo($id_tipo){
+            $this -> bll -> update_visitas_tipo_BLL($id_tipo);
         }
 
     } // shop_model

@@ -13,8 +13,8 @@
         <uri>filtrar</uri>
     </function>
     <function>
-        <name>mas_productos_relacionados</name>
-        <uri>mas_productos_relacionados</uri>
+        <name>count_productos_relacionados</name>
+        <uri>count_productos_relacionados</uri>
     </function>
     <function>
         <name>count_productos_filtros</name>
@@ -47,5 +47,29 @@
     <function>
         <name>filtro_buscador</name>
         <uri>filtro_buscador</uri>
+    </function>
+    <function>
+        <name>details</name>
+        <uri>details</uri>
+    </function>
+    <function>
+        <name>productos_relacionados</name>
+        <uri>productos_relacionados</uri>
+    </function>
+    <function>
+        <name>update_visitas</name>
+        <uri>update_visitas</uri>
+    </function>
+    <function>
+        <name>update_rating</name>
+        <uri>update_rating</uri>
+    </function>
+    <function>
+        <name>update_visitas_categoria</name>
+        <uri>update_visitas_categoria</uri>
+    </function>
+    <function>
+        <name>update_visitas_tipo</name>
+        <uri>update_visitas_tipo</uri>
     </function>
 </functions>

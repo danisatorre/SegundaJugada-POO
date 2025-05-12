@@ -133,6 +133,72 @@
             }
         }
 
+        function details(){
+            $id_producto = $_POST['id_producto'];
+            // echo json_encode($id_producto);
+            // exit;
+            $infProducto = common::load_model('shop_model', 'getDetails', $id_producto);
+            // echo json_encode($infProducto);
+            // exit;
+            $imgProducto = common::load_model('shop_model', 'getImgDetails', $id_producto);
+            // echo json_encode($imgProducto);
+            // exit;
+
+            if (!empty($infProducto) || !empty($imgProducto)) {
+                $rdo = array();
+                $rdo[0] = $infProducto;
+                $rdo[1][] = $imgProducto;
+                echo json_encode($rdo);
+                exit;
+            } else {
+                echo json_encode('error');
+                exit;
+            }
+        }
+
+        function count_productos_relacionados(){
+            $tipo = $_POST['tipo'];
+            $id_producto = $_POST['id_producto'];
+            echo json_encode(common::load_model('shop_model', 'getCountProductosRelacionados', [$tipo, $id_producto]));
+        }
+
+        function productos_relacionados(){
+            $tipo = $_POST['tipo_producto'];
+            // echo json_encode($tipo);
+            // exit;
+            $loaded =  $_POST['loaded'];
+            // echo json_encode($loaded);
+            // exit;
+            $items =  $_POST['items'];
+            // echo json_encode($items);
+            // exit;
+            $id_producto = $_POST['id_producto'];
+            // echo json_encode($id_producto);
+            // exit;
+            echo json_encode(common::load_model('shop_model', 'getProductosRelacionados', [$tipo, $loaded, $items, $id_producto]));
+        }
+
+        function update_visitas(){
+            $id_producto = $_POST['id_producto'];
+            common::load_model('shop_model', 'sumarVisitas', $id_producto);
+        }
+
+        function update_rating(){
+            $id_producto = $_POST['id_producto'];
+            $rating = $_POST['rating'];
+            common::load_model('shop_model', 'updateRating', [$id_producto, $rating]);
+        }
+
+        function update_visitas_categoria(){
+            $id_categoria = $_POST['id_categoria'];
+            common::load_model('shop_model', 'updateVisitasCategoria', $id_categoria);
+        }
+
+        function update_visitas_tipo(){
+            $id_tipo = $_POST['id_tipo'];
+            common::load_model('shop_model', 'updateVisitasTipo', $id_tipo);
+        }
+
     } // ctrl_home
 
 ?>
