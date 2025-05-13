@@ -1,0 +1,24 @@
+<div class="login-container">
+    <h1 class="login-title">Iniciar Sesión</h1>
+    <form class="login-form" method="POST">
+        <div class="form-group">
+            <label for="username">Usuario / Correo electrónico</label>
+            <input type="text" id="username" name="username" placeholder="Introduce tu usuario o correo electrónico">
+            <span id="error_username_log" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Introduce tu contraseña">
+            <span id="error_pwd_log" class="error"></span>
+        </div>
+        <div class="form-group">
+            <span id="timeout_sesion"></span>
+        </div>
+        <button type="submit" class="login-button">Iniciar Sesión</button>
+        <button type="button" class="google-login-button">
+            <img src="view/images/icons/google-icon.webp" alt="Google Logo">
+            Iniciar sesión con Google
+        </button>
+        <p class="register-link">¿No tienes cuenta? <a href="index.php?module=auth&op=register-view">Regístrate aquí</a></p>
+    </form>
+</div>
