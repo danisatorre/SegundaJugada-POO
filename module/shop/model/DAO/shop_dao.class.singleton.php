@@ -429,6 +429,19 @@
 
 			$stmt = $db -> ejecutar($sql);
 		}
+		
+		public function filtro_home($db, $filtro_home){
+			$sql = "SELECT *
+			FROM productos p
+			LEFT JOIN marcas m ON p.marca = m.id_marca
+			LEFT JOIN teams t ON p.equipo = t.id_team
+			LEFT JOIN tipo ti ON p.tipo = ti.id_tipo
+			LEFT JOIN categorias c ON p.categoria = c.id_categoria
+			WHERE $filtro_home";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
 
     } // shop_dao
 

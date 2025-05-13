@@ -55,35 +55,13 @@
     define('MODEL_SHOP', SITE_ROOT . 'module/shop/model/model/');
     define('JS_VIEW_SHOP', SITE_PATH . 'module/shop/view/js/');
     define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
-
-    //MODEL_ERRORS
-    // define('UTILS_ERRORS', SITE_ROOT . 'module/errors/utils/');
-    // define('DAO_ERRORS', SITE_ROOT . 'module/errors/model/DAO/');
-    // define('BLL_ERRORS', SITE_ROOT . 'module/errors/model/BLL/');
-    // define('MODEL_ERRORS', SITE_ROOT . 'module/errors/model/model/');
-    // define('JS_VIEW_ERRORS', SITE_PATH . 'module/errors/view/js/');
-    // define ('VIEW_PATH_ERRORS', SITE_ROOT . 'module/errors/view/');
-    
-    //MODEL_CONTACT
-    // define('MODEL_CONTACT', SITE_ROOT . 'module/contact/model/model/');
-    // define('JS_VIEW_CONTACT', SITE_PATH . 'module/contact/view/js/');
-    // define ('VIEW_PATH_CONTACT', SITE_ROOT . 'module/contact/view/');
-    
-    // //MODEL_CART
-    // define('UTILS_CART', SITE_ROOT . 'module/cart/utils/');
-    // define('DAO_CART', SITE_ROOT . 'module/cart/model/DAO/');
-    // define('BLL_CART', SITE_ROOT . 'module/cart/model/BLL/');
-    // define('MODEL_CART', SITE_ROOT . 'module/cart/model/model/');
-    // define('JS_VIEW_CART', SITE_PATH . 'module/cart/view/js/');
-    // define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
     
     //MODEL_LOGIN
-    // define('UTILS_LOGIN', SITE_ROOT . 'module/login/utils/');
-    // define('DAO_LOGIN', SITE_ROOT . 'module/login/model/DAO/');
-    // define('BLL_LOGIN', SITE_ROOT . 'module/login/model/BLL/');
-    // define('MODEL_LOGIN', SITE_ROOT . 'module/login/model/model/');
-    // define('JS_VIEW_LOGIN', SITE_PATH . 'module/login/view/js/');
-    // define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
+    define('DAO_LOGIN', SITE_ROOT . 'module/AUTH/model/DAO/');
+    define('BLL_LOGIN', SITE_ROOT . 'module/AUTH/model/BLL/');
+    define('MODEL_LOGIN', SITE_ROOT . 'module/AUTH/model/model/');
+    define('JS_VIEW_LOGIN', SITE_PATH . 'module/AUTH/view/js/');
+    define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/AUTH/view/');
 
     // Friendly
     define('URL_FRIENDLY', TRUE);

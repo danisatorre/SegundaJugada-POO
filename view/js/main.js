@@ -18,6 +18,8 @@ function friendlyURL(url) {
 }
 
 function load_menu() {
+    // console.log(friendlyURL("?module=shop"));
+    // console.log(friendlyURL("?module=shop&op=view"));
     $('.main-nav').html(
         '<a href="/SegundaJugada-POO/" class="logo"><img src="/SegundaJugada-POO/view/images/web-logo/b-logo.png"></a>' +
         '<ul class="nav">' +
@@ -44,7 +46,7 @@ function load_menu() {
     // return false;
     $('.submenu-cuenta').empty();
     if (token) {
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=data_user', 'POST', 'JSON', { 'token': token })
+        ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token })
             .then(function(data) {
                 // console.log(data)
                 // console.log(token.username);
@@ -62,7 +64,7 @@ function load_menu() {
                 $('<a href="javascript:;"><img src="' + data.avatar + '" id="user-icon">' + data.username + '</a>' +
                     '<ul>' +
                     '<li id="logout"><a>Cerrar sesión</a></li>' +
-                    '<li id="switch-cuenta"><a href="index.php?module=ctrl_auth&op=login-view">Cambiar de cuenta</a></li>' +
+                    '<li id="switch-cuenta"><a href="index.php?module=auth&op=login-view">Cambiar de cuenta</a></li>' +
                     '</ul>' 
                 ).appendTo('.submenu-cuenta');
                 // $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
@@ -86,7 +88,6 @@ function load_menu() {
         ).appendTo('.submenu-cuenta');                  
     }
 }
-
 
 //================CLICK-LOGIUT================
 function click_logout() {
@@ -112,20 +113,20 @@ function click_logout() {
 function logout() {
     var timeout = localStorage.getItem('timeoutSesion');
     if(timeout == "Si"){
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=logout', 'POST', 'JSON')
+        ajaxPromise('index.php?module=auth&op=logout', 'POST', 'JSON')
         .then(function(data) {
             localStorage.removeItem('token');
             // console.log('hola logout');
-            window.location.href="index.php?module=ctrl_auth&op=login-view";
+            window.location.href="index.php?module=auth&op=login-view";
         }).catch(function() {
             console.error('ERROR al cerrar sesión');
         });
     }else{
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=logout', 'POST', 'JSON')
+        ajaxPromise('index.php?module=auth&op=logout', 'POST', 'JSON')
         .then(function(data) {
             localStorage.removeItem('token');
             // console.log('hola logout');
-            window.location.href = "index.php";
+            window.location.href = "/SegundaJugada-POO/";
         }).catch(function() {
             console.error('ERROR al cerrar sesión');
         });

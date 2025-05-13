@@ -2,7 +2,7 @@ function protecturl() {
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
         console.log("protecturl: SI TOKEN");
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=control_user', 'POST', 'JSON', { 'token': token })
+        ajaxPromise('index.php?module=AUTH&op=control_user', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
             console.log(data);
             if (data == "UsuarioValido") {
@@ -21,7 +21,7 @@ function protecturl() {
 function control_activity(){
     var token = localStorage.getItem('token');
     if(token){
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=actividad', 'POST', 'JSON')
+        ajaxPromise('index.php?module=AUTH&op=actividad', 'POST', 'JSON')
             .then(function(actividad){
                 if(actividad == "inactivo"){
                     console.warn("USUARIO INACTIVO");
@@ -39,7 +39,7 @@ function control_activity(){
 function refresh_token(){
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=refresh_token', 'POST', 'JSON', {'token': token})
+        ajaxPromise('index.php?module=AUTH&op=refresh_token', 'POST', 'JSON', {'token': token})
             .then(function(refToken){
                 console.log(refToken);
                 console.log("refres_token\nToken refrescado correctamente");
@@ -52,7 +52,7 @@ function refresh_token(){
 } // end refresh_token
 
 function refresh_cookie(){
-    ajaxPromise('module/AUTH/ctrl/ctrl_auth.php?op=refresh_cookie', 'POST', 'JSON')
+    ajaxPromise('index.php?module=AUTH&op=refresh_cookie', 'POST', 'JSON')
         .then(function(cookie){
             console.log(cookie);
             console.log("refresh_cookie\nCookie actualizada correctamente");

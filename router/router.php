@@ -27,11 +27,15 @@
             // echo 'hola __construct';
             // exit;
             if(isset($_GET['module'])){
+                // echo $_GET['module'];
+                // exit;
                 $this -> uriModule = $_GET['module'];
             }else{
                 $this -> uriModule = 'home';
             }
             if(isset($_GET['op'])){
+                // echo $_GET['op'];
+                // exit;
                 $this -> uriFunction = ($_GET['op'] === "") ? 'view' : $_GET['op'];
             }else{
                 $this -> uriFunction = 'view';

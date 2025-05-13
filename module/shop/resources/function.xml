@@ -72,4 +72,8 @@
         <name>update_visitas_tipo</name>
         <uri>update_visitas_tipo</uri>
     </function>
+    <function>
+        <name>filtro_home</name>
+        <uri>filtro_home</uri>
+    </function>
 </functions>

@@ -8,6 +8,8 @@
         function view(){
             // echo 'hola view shop';
             // exit;
+            // echo VIEW_PATH_SHOP . 'shop.html';
+            // exit;
             common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
         }
 
@@ -197,6 +199,26 @@
         function update_visitas_tipo(){
             $id_tipo = $_POST['id_tipo'];
             common::load_model('shop_model', 'updateVisitasTipo', $id_tipo);
+        }
+
+        function filtro_home(){
+            $filtro = "";
+
+            if (isset($_POST['filtro_categoria'])) {
+                $filtro = $_POST['filtro_categoria'];
+                $filtro_home = "p.categoria = '" . $filtro . "'";
+            } else if (isset($_POST['filtro_marca'])) {
+                $filtro = $_POST['filtro_marca'];
+                $filtro_home = "p.marca = '" . $filtro . "'";
+            } else if (isset($_POST['filtro_tipo'])) {
+                $filtro = $_POST['filtro_tipo'];
+                $filtro_home = "p.tipo = '" . $filtro . "'";
+            } else if (isset($_POST['filtro_accesorio'])) {
+                $filtro = $_POST['filtro_accesorio'];
+                $filtro_home = "p.tipo = '" . $filtro . "'";
+            }
+
+            echo json_encode(common::load_model('shop_model', 'getFiltroHome', $filtro_home));
         }
 
     } // ctrl_home

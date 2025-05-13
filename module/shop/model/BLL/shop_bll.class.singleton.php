@@ -132,6 +132,10 @@
             $this -> dao -> update_visitas_tipo($this -> db, $id_tipo);
         }
 
+        public function get_filtro_home_BLL($filtro_home){
+            return $this -> dao -> filtro_home($this -> db, $filtro_home);
+        }
+
     } // shop_bll
 
 ?>

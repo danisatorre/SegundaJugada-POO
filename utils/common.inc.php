@@ -22,10 +22,16 @@
                 require_once ($topPage);
                 // echo VIEW_PATH_INC . 'header.html';
                 // exit;
+                // echo VIEW_PATH_INC . 'menu.html';
+                // exit;
                 require_once (VIEW_PATH_INC . 'menu.html');
+                // echo VIEW_PATH_INC . 'menu.html';
+                // exit;
                 require_once (VIEW_PATH_INC . 'header.html');
                 require_once ($view);
                 require_once (VIEW_PATH_INC . 'footer.html');
+                // echo 'hola despues require_once';
+                // exit;
             }else {
                 self::load_error();
             }

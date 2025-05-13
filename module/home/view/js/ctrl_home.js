@@ -366,11 +366,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro)); 
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_home', 'POST', 'JSON', {filtro_categoria: filtro_categoria})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_categoria: filtro_categoria})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error) {
                 console.error(error);
@@ -399,11 +399,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro));
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_home', 'POST', 'JSON', {filtro_marca: filtro_marca})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_marca: filtro_marca})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false;
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error) {
                 console.error(error);
@@ -432,11 +432,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro));
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop?op=filtro_home', 'POST', 'JSON', {filtro_tipo: filtro_tipo})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_tipo: filtro_tipo})
             .then(function(data){
                 console.log(data);
                 // return false
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error){
                 console.error(error);
@@ -465,11 +465,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro));
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop?op=filtro_home', 'POST', 'JSON', {filtro_accesorio: filtro_accesorio})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_accesorio: filtro_accesorio})
             .then(function(data){
                 console.log(data);
                 // return false;
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error){
                 console.error(error);
@@ -492,7 +492,7 @@ function goToShop(){
         localStorage.setItem('details_home', filtro_visitas);
 
         setTimeout(function(){
-            window.location.href = 'index.php?module=ctrl_shop&op=list';
+            window.location.href = friendlyURL("?module=shop");
         }, 500);
     });
     // rating (go to detials)
@@ -511,7 +511,7 @@ function goToShop(){
         localStorage.setItem('details_home', rating);
 
         setTimeout(function(){
-            window.location.href = 'index.php?module=ctrl_shop&op=list';
+            window.location.href = friendlyURL("?module=shop");
         }, 500);
     });
     // rating categoria
@@ -536,11 +536,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro)); 
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_home', 'POST', 'JSON', {filtro_categoria: rating_categoria})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_categoria: rating_categoria})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error) {
                 console.error(error);
@@ -569,11 +569,11 @@ function goToShop(){
         localStorage.setItem('filtro', JSON.stringify(filtro));
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_home', 'POST', 'JSON', {filtro_tipo: rating_tipo})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_tipo: rating_tipo})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error) {
                 console.error(error);
@@ -593,5 +593,5 @@ $(document).ready(function() {
     loadMostRating();
     loadMostRatingCategoria();
     loadMostRatingTipo();
-    // goToShop();
+    goToShop();
 });

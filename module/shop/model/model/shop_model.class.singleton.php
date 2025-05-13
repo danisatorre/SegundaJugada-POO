@@ -205,6 +205,10 @@
             $this -> bll -> update_visitas_tipo_BLL($id_tipo);
         }
 
+        public function getFiltroHome($filtro_home){
+            return $this -> bll -> get_filtro_home_BLL($filtro_home);
+        }
+
     } // shop_model
 
 ?>
