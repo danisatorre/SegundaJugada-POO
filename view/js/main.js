@@ -1,4 +1,41 @@
+function friendlyURL(url) {
+    // console.log('hola friendlyURL');
+    // return false;
+    var link = "";
+    url = url.replace("?", "");
+    url = url.split("&");
+    cont = 0;
+    for (var i = 0; i < url.length; i++) {
+    	cont++;
+        var aux = url[i].split("=");
+        if (cont == 2) {
+        	link += "/" + aux[1] + "/";	
+        }else{
+        	link += "/" + aux[1];
+        }
+    }
+    return "/SegundaJugada-POO" + link;
+}
+
 function load_menu() {
+    $('.main-nav').html(
+        '<a href="/SegundaJugada-POO/" class="logo"><img src="/SegundaJugada-POO/view/images/web-logo/b-logo.png"></a>' +
+        '<ul class="nav">' +
+        '<li class="scroll-to-section"><a href="/SegundaJugada-POO/" class="active">Home</a></li>' +
+        '<li class="scroll-to-section"><a href="' + friendlyURL("?module=shop") + '" id="page-productos">Productos</a></li>' +
+        '<li class="submenu"><a href="javascript:;">Categorías</a>' +
+        '<ul>' +
+        '<li><a class="categoria_menu" id_categoria_menu="1">Hombre</a></li>' +
+        '<li><a class="categoria_menu" id_categoria_menu="2">Mujer</a></li>' +
+        '<li><a class="categoria_menu" id_categoria_menu="3">Niños</a></li>' +
+        '<li><a class="categoria_menu" id_categoria_menu="4">Adolescentes</a></li>' +
+        '<li><a class="categoria_menu" id_categoria_menu="5">Bebes</a></li>' +
+        '</ul>' +
+        '</li>' +
+        '<li class="submenu submenu-cuenta"></li>' +
+        '</ul>' +
+        '<a class="menu-trigger"><span>Menu</span></a>'
+    );
     // var token = localStorage.getItem('token');
     var token = JSON.parse(localStorage.getItem('token'));
     // const token = JSON.parse(localStorage.getItem("token"));
@@ -39,7 +76,7 @@ function load_menu() {
                 console.error("load_menu:\nError al cargar los datos del user");
             });
     } else {
-        console.log("No hay token disponible");
+        console.log("load_menu: no hay token disponible");
         $('.submenu-cuenta').empty();
         $('<a href="javascript:;"><img src="view/images/top-page/user.svg" id="user-icon">Cuenta</a>' +
             '<ul>' +

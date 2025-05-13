@@ -73,8 +73,8 @@
         }
 
         function friendlyURL_php($url) {
-            echo 'hola friendlyURL_php';
-            exit;
+            // echo 'hola friendlyURL_php';
+            // exit;
             $link = "";
             if (URL_FRIENDLY) {
                 $url = explode("&", str_replace("?", "", $url));
