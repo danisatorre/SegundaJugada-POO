@@ -613,7 +613,7 @@ function botones_filtros(){
         }
 
         highlight();
-        //highlight_buscador(); // funcion en ctrl_search.js
+        highlight_buscador(); // funcion en ctrl_search.js
     });
 } // end botones_filtros (aplicar los filtros al pulsar sobre el boton filtrar)
 
