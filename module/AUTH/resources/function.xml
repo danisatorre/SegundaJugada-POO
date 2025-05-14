@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>login-view</name>
-        <uri>login-view</uri>
+        <name>login_view</name>
+        <uri>login_view</uri>
     </function>
     <function>
-        <name>register-view</name>
-        <uri>register-view</uri>
+        <name>register_view</name>
+        <uri>register_view</uri>
     </function>
     <function>
         <name>login</name>

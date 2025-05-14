@@ -1,6 +1,6 @@
 function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-    console.log("hola ajaxPromise");
-    console.log("sUrl -> " + sUrl + " sType -> " + sType + " sTData -> " + sTData + " sData -> " + sData);
+    // console.log("hola ajaxPromise");
+    // console.log("sUrl -> " + sUrl + " sType -> " + sType + " sTData -> " + sTData + " sData -> " + sData);
     // return false;
     return new Promise((resolve, reject) => {
         $.ajax({ // dirige al servidor
@@ -9,11 +9,11 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             dataType: sTData,
             data: sData
         }).done((data) => {
-            console.log("Respuesta del servidor: ", data);
+            // console.log("Respuesta del servidor: ", data);
             // return false;
             resolve(data);
         }).fail((jqXHR, textStatus, errorThrow) => {
-            console.log("Error ajax:", textStatus, errorThrow);
+            console.error("Error ajax:", textStatus, errorThrow);
             reject(errorThrow);
         }); 
     });

@@ -181,7 +181,7 @@ function eliminar_filtros_buscar(){
 }
 
 function highlight_buscador(){
-    console.log("hola highlight buscador")
+    // console.log("hola highlight buscador")
     // return false;
 
     // rellenar buscador con filtros aplicados desde el buscador

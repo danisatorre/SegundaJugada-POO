@@ -1,17 +1,22 @@
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
 }
 
 .register-container {
-    margin-top:55%;
-    margin-left:32%;
+    margin-top:8%;
+    margin-left:35%;
     background-color: white;
     width: 100%;
     max-width: 400px;

@@ -64,7 +64,7 @@ function load_menu() {
                 $('<a href="javascript:;"><img src="' + data.avatar + '" id="user-icon">' + data.username + '</a>' +
                     '<ul>' +
                     '<li id="logout"><a>Cerrar sesión</a></li>' +
-                    '<li id="switch-cuenta"><a href="index.php?module=auth&op=login-view">Cambiar de cuenta</a></li>' +
+                    '<li id="switch-cuenta"><a href="'+ friendlyURL("?module=auth&op=login_view") +'">Cambiar de cuenta</a></li>' +
                     '</ul>' 
                 ).appendTo('.submenu-cuenta');
                 // $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
@@ -78,12 +78,12 @@ function load_menu() {
                 console.error("load_menu:\nError al cargar los datos del user");
             });
     } else {
-        console.log("load_menu: no hay token disponible");
+        // console.log("load_menu: no hay token disponible");
         $('.submenu-cuenta').empty();
         $('<a href="javascript:;"><img src="'+ TOP_PAGE_IMG +'user.svg" id="user-icon">Cuenta</a>' +
             '<ul>' +
-            '<li><a href="index.php?module=ctrl_auth&op=login-view">Iniciar sesión</a></li>' +
-            '<li><a href="index.php?module=ctrl_auth&op=register-view">Registrarse</a></li>' +
+            '<li><a href="'+ friendlyURL("?module=auth&op=login_view") +'">Iniciar sesión</a></li>' +
+            '<li><a href="'+ friendlyURL("?module=auth&op=register_view") +'">Registrarse</a></li>' +
             '</ul>' 
         ).appendTo('.submenu-cuenta');                  
     }
@@ -117,7 +117,7 @@ function logout() {
         .then(function(data) {
             localStorage.removeItem('token');
             // console.log('hola logout');
-            window.location.href="index.php?module=auth&op=login-view";
+            window.location.href=friendlyURL("?module=auth&op=login_view");
         }).catch(function() {
             console.error('ERROR al cerrar sesión');
         });

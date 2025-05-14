@@ -35,7 +35,7 @@ function register() {
                         confirmButtonText: "Iniciar Sesión"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "index.php?module=auth&op=login-view";
+                            window.location.href = friendlyURL("?module=auth&op=login_view");
                         }
                     });
                 }
@@ -129,7 +129,17 @@ function validate_register() {
     }
 }
 
+function google_icon_register(){
+    document.getElementById('google-icon-register').src = ICONS_IMG + 'google-icon.webp';
+}
+
+function login_link(){
+    document.getElementById('login-link').href = friendlyURL("?module=auth&op=login_view");
+}
+
 $(document).ready(function() {
     key_register();
     button_register();
+    google_icon_register();
+    login_link();
 });

@@ -19,11 +19,11 @@ function goToShopMenu(){
         localStorage.setItem('filtro', JSON.stringify(filtro)); 
 
         setTimeout(function(){
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_home', 'POST', 'JSON', {filtro_categoria: filtro_categoria})
+            ajaxPromise('index.php?module=shop&op=filtro_home', 'POST', 'JSON', {filtro_categoria: filtro_categoria})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false
-                window.location.href = 'index.php?module=ctrl_shop&op=list';
+                window.location.href = friendlyURL("?module=shop");
             })
             .catch(function(error) {
                 console.error(error);

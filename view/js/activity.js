@@ -1,12 +1,12 @@
 function protecturl() {
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        console.log("protecturl: SI TOKEN");
+        // console.log("protecturl: SI TOKEN");
         ajaxPromise('index.php?module=AUTH&op=control_user', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
             console.log(data);
             if (data == "UsuarioValido") {
-                console.log("CORRECTO --> El usario coincide con la session");
+                // console.log("CORRECTO --> El usario coincide con la session");
             } else if (data == "UsuarioNoValido") {
                 console.warn("INCORRCTO --> Estan intentando acceder a una cuenta");
                 logout(); // funcion en main.js
@@ -14,7 +14,7 @@ function protecturl() {
         })
         .catch(function(error) { console.error("ANONYMOUS_user", error) });
     }else{
-        console.log("protecturl: NO TOKEN");
+        // console.log("protecturl: NO TOKEN");
     }
 } // end protecturl
 
@@ -24,11 +24,11 @@ function control_activity(){
         ajaxPromise('index.php?module=AUTH&op=actividad', 'POST', 'JSON')
             .then(function(actividad){
                 if(actividad == "inactivo"){
-                    console.warn("USUARIO INACTIVO");
+                    // console.warn("USUARIO INACTIVO");
                     localStorage.setItem("timeoutSesion", "Si");
                     logout(); // funcion en main.js
                 }else{
-                    console.warn("USUARIO ACTIVO");
+                    // console.warn("USUARIO ACTIVO");
                 }
             });
     }else{
@@ -41,8 +41,8 @@ function refresh_token(){
     if(token){
         ajaxPromise('index.php?module=AUTH&op=refresh_token', 'POST', 'JSON', {'token': token})
             .then(function(refToken){
-                console.log(refToken);
-                console.log("refres_token\nToken refrescado correctamente");
+                // console.log(refToken);
+                // console.log("refres_token\nToken refrescado correctamente");
                 // localStorage.setItem("token", refToken);
                 // JSON.parse(localStorage.setItem("token", refToken));
                 localStorage.setItem("token", JSON.stringify(refToken));

@@ -12,9 +12,11 @@
         public static function load_view($topPage, $view) {
             // echo 'load_view';
             // exit;
+            $topPageOriginal = $topPage;
             $topPage = VIEW_PATH_INC . $topPage;
             // echo $topPage;
             // echo $view;
+            // echo $topPageOriginal;
             // exit;
             if ((file_exists($topPage)) && (file_exists($view))) {
                 // echo 'hola file exists $topPage & $view';
@@ -27,7 +29,9 @@
                 require_once (VIEW_PATH_INC . 'menu.html');
                 // echo VIEW_PATH_INC . 'menu.html';
                 // exit;
-                require_once (VIEW_PATH_INC . 'header.html');
+                if($topPageOriginal != "top_page_auth.html"){ // no mostrar el buscador en el modulo de auth
+                    require_once (VIEW_PATH_INC . 'header.html');
+                }
                 require_once ($view);
                 require_once (VIEW_PATH_INC . 'footer.html');
                 // echo 'hola despues require_once';

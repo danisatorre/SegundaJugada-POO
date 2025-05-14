@@ -93,10 +93,18 @@ function timeoutSesion(){
     }
 } // timeoutSesion
 
-// alert
+function google_icon_login(){
+    document.getElementById('google-icon-login').src = ICONS_IMG + 'google-icon.webp';
+}
+
+function register_link(){
+    document.getElementById('register-link').href = friendlyURL("?module=auth&op=register_view");
+}
 
 $(document).ready(function(){
     key_login()
     button_login()
     timeoutSesion()
+    google_icon_login();
+    register_link();
 });
