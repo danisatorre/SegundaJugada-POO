@@ -101,10 +101,15 @@ function register_link(){
     document.getElementById('register-link').href = friendlyURL("?module=auth&op=register_view");
 }
 
+function github_icon_login(){
+    document.getElementById('github-icon-login').src = ICONS_IMG + 'github-icon.png';
+}
+
 $(document).ready(function(){
     key_login()
     button_login()
     timeoutSesion()
     google_icon_login();
     register_link();
+    github_icon_login();
 });
