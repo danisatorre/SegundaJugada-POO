@@ -24,7 +24,7 @@ function load_menu() {
         '<a href="' + SITE_PATH + '/" class="logo"><img src="' + WEB_LOGO_IMG + 'b-logo.png"></a>' +
         '<ul class="nav">' +
         '<li class="scroll-to-section"><a href="' + SITE_PATH + '/" class="active">Home</a></li>' +
-        '<li class="scroll-to-section"><a href="' + friendlyURL("?module=shop&op=view") + '" id="page-productos">Productos</a></li>' +
+        '<li class="scroll-to-section"><a href="' + friendlyURL("?module=shop") + '" id="page-productos">Productos</a></li>' +
         '<li class="submenu"><a href="javascript:;">Categorías</a>' +
         '<ul>' +
         '<li><a class="categoria_menu" id_categoria_menu="1">Hombre</a></li>' +

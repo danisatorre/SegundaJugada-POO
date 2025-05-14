@@ -33,11 +33,11 @@ function loadShop(total_productos, items_por_pagina){
 } // end loadShop (controlador del controlador)
 
 function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina = 3) {
-    console.log("hola ajaxForSearch");
-    console.log("AFS filtros: ", filtro);
-    console.log("AFS url: ", url);
-    console.log("AFS total_productos: ", total_productos);
-    console.log("AFS items_por_pagina: ", items_por_pagina);
+    // console.log("hola ajaxForSearch");
+    // console.log("AFS filtros: ", filtro);
+    // console.log("AFS url: ", url);
+    // console.log("AFS total_productos: ", total_productos);
+    // console.log("AFS items_por_pagina: ", items_por_pagina);
     // return false;
 
     if (total_productos != 0) {
@@ -63,7 +63,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
             // return false;
             $(".container-productos").empty();
             if(shop != "error"){
-                console.log("ajaxForSearch shop.id");
+                // console.log("ajaxForSearch shop.id");
                 try{
                     for (row in shop) {
                         $("#nofiltros").empty();
@@ -72,7 +72,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
                         $('<div></div>').attr('class', "producto").attr({'id': shop[row].id_producto}).appendTo('.container-productos')
                             .html(
                                 "<div class='click-producto' id='" + shop[row].id_producto + "'>" +
-                                    "<img src = /SegundaJugada-POO/" + shop[row].img_producto + " alt='foto' </img> " +
+                                    "<img src = "+ PRODUCT_IMAGES + shop[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
                                     "<h3>" + shop[row].nom_prod + "</h5>" +
                                     "<p class='precio'>" + shop[row].precio + "€</p>" +
@@ -112,7 +112,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
                 $('<div></div>').appendTo('.container-shop-list')
                 .html(
                     "<div class='nofiltrosdiv'>" +
-                    "<img class='imgnofdiv' src='view/images/icons/no_productos.png'>" +
+                    "<img class='imgnofdiv' src="+ ICONS_IMG +"'no_productos.png'>" +
                     "<h1 id='nofiltros'>No se han encontrado productos con los filtros especificados</h1>" +
                     "<br>" +
                     "<p id='texto-nofiltros'>Pulse el boton 'remover filtros' para volver a la busqueda</p>" +
@@ -145,7 +145,7 @@ function loadProductos(){
         for (row in data){
             $('<div></div>').attr('class', "producto").attr({'id': data[row].id_producto}).appendTo('.container-productos')
                 .html(
-                    "<img src = " + data[row].img_producto + " alt='foto' </img> " +
+                    "<img src = "+ + PRODUCT_IMAGES + data[row].img_producto + " alt='foto' </img> " +
                     "<div class='inf-producto'>" +
                     "<h3>" + data[row].nom_prod + "</h5>" +
                     "<p class='precio'>" + data[row].precio + "€</p>" +
@@ -639,7 +639,7 @@ function update_rating(id_producto, rating){
 }
 
 function update_visitas_categoria(id_categoria){
-    console.log("hola update_visitas_categoria")
+    // console.log("hola update_visitas_categoria")
     // console.log("update_visitas_categoria: categoria seleccionada:\n", id_categoria)
     // return false;
     var filtro = [];
@@ -654,7 +654,7 @@ function update_visitas_categoria(id_categoria){
             filtro.push(['categoria', localStorage.getItem('filtro_categoria')])
         }
         localStorage.setItem('filtro', JSON.stringify(filtro));
-        window.location.href = 'index.php?module=shop&op=view';
+        window.location.href = friendlyURL("?module=shop");
         // botones_filtros();
         // location.reload();
         // loadShop();
@@ -662,7 +662,7 @@ function update_visitas_categoria(id_categoria){
 } // end update_visitas_categoria
 
 function update_visitas_tipo(id_tipo){
-    console.log("hola update_visitas_tipo")
+    // console.log("hola update_visitas_tipo")
     // console.log("update_visitas_tipo: tipo seleccionado:\n", id_tipo)
     // return false;
     var filtro = [];
@@ -677,7 +677,7 @@ function update_visitas_tipo(id_tipo){
             filtro.push(['tipo', localStorage.getItem('filtro_tipo')])
         }
         localStorage.setItem('filtro', JSON.stringify(filtro));
-        window.location.href = 'index.php?module=shop&op=view';
+        window.location.href = friendlyURL("?module=shop");
         // botones_filtros();
         // location.reload();
         // loadShop();
@@ -706,7 +706,7 @@ function loadProductoDetails(id_producto){
             $('<div></div>').attr({ 'id': shop[1][0].id_pimg, class: 'pimg' }).appendTo('.productos_img')
                 .html(
                     "<div class='content-img-details'>" +
-                    "<img src= '" + shop[1][0][row].pimage_route + "'" + "</img>" +
+                    "<img src= '"+ PRODUCT_IMAGES + shop[1][0][row].pimage_route + "'" + "</img>" +
                     "</div>" // end .content-img-details
                 )
         }
@@ -927,7 +927,7 @@ function productos_relacionados(loadeds = 0, total_productos, tipo, id_producto)
                                     "<li class='prelacionado-producto'>" +
                                     "<div class='prelacionado-item'>" +
                                     "<div class='prelacionado-img'>" +
-                                    "<img src = " + data[row].img_producto + " alt='imagen producto' </img> " +
+                                    "<img src = "+ PRODUCT_IMAGES + data[row].img_producto + " alt='imagen producto' </img> " +
                                     "</div>" +
                                     "<h5> <b>" + data[row].nom_marca + "</b> <br><br> " + data[row].nom_prod + "</h5>" +
                                     "<h5><a class='prelacionado-precio'>" + data[row].precio + "€</a></h5>" +
@@ -949,7 +949,7 @@ function productos_relacionados(loadeds = 0, total_productos, tipo, id_producto)
                                     "<li class='prelacionado-producto'>" +
                                     "<div class='prelacionado-item'>" +
                                     "<div class='prelacionado-img'>" +
-                                    "<img src = " + data[row].img_producto + " alt='imagen producto' </img> " +
+                                    "<img src = "+ PRODUCT_IMAGES + data[row].img_producto + " alt='imagen producto' </img> " +
                                     "</div>" +
                                     "<h5> <b>" + data[row].nom_marca + "</b> <br><br> " + data[row].nom_prod + "</h5>" +
                                     "<h5><a class='prelacionado-precio'>" + data[row].precio + "€</a></h5>" +
@@ -1073,7 +1073,7 @@ function leafleft(shop, zoom){
         // return false;
         for (row in shop){
             var mapicon = L.icon({ // añadir la imagen del marcador
-                iconUrl: 'view/images/web-logo/favicon.png',
+                iconUrl: WEB_LOGO_IMG + 'favicon.png',
                 iconSize: [50, 50],
                 iconAnchor: [50, 50],
                 popupAnchor: [20, 20]
@@ -1082,14 +1082,14 @@ function leafleft(shop, zoom){
             var popup = marker.bindPopup( // añadir la información del popup para cada producto
                 "<div class='product_popup' id='" + shop[row].id_producto + "'>" +
                 "<p>" + shop[row].nom_prod + "</p>" +
-                "<img src = '" + shop[row].img_producto + "' class='img_popup'>" +
+                "<img src = '"+ PRODUCT_IMAGES + shop[row].img_producto + "' class='img_popup'>" +
                 "</div>");
         }
     }else{ // cargar el mapa si lo que llega es solo un producto en vez de un array (details)
         console.log("leafleft NO ARRAY");
         // return false;
         var mapicon = L.icon({ // añadir la imagen del marcador
-            iconUrl: 'view/images/web-logo/favicon.png',
+            iconUrl: WEB_LOGO_IMG + 'favicon.png',
             iconSize: [50, 50],
             iconAnchor: [50, 50],
             popupAnchor: [20, 20]
@@ -1098,7 +1098,7 @@ function leafleft(shop, zoom){
         var popup = marker.bindPopup( // añadir la informacion del popup para el producto
             "<div class='product_popup' id='" + shop.id_producto + "'>" +
             "<p>" + shop.nom_prod + "</p>" +
-            "<img src = '" + shop.img_producto + "' class='img_popup'>" +
+            "<img src = '"+ PRODUCT_IMAGES + shop.img_producto + "' class='img_popup'>" +
             "</div>"
         );
     }
@@ -1131,25 +1131,25 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
 
     ajaxPromise('index.php?module=shop&op=filtro_buscador', 'POST', 'JSON', sdata)
         .then(function(buscador){
-            console.log(buscador)
+            // console.log(buscador)
             // return false;
             $('.container-productos').empty();
             $("#nofiltros").empty();
             $("#texto-nofiltros").empty();
             
             if(buscador == "error"){
-                console.log("load_buscador error")
+                // console.log("load_buscador error")
                 $('<div></div>').appendTo('.container-productos')
                     .html(
                         "<div class='nofiltrosdiv'>" +
-                        "<img class='imgnofdiv' src='view/images/icons/no_productos.png'>" +
+                        "<img class='imgnofdiv' src="+ ICONS_IMG +"'no_productos.png'>" +
                         "<h1 id='nofiltros'>No se han encontrado productos con los filtros especificados</h1>" +
                         "<br>" +
                         "<p id='texto-nofiltros'>Pulse el boton 'remover filtros' para volver a la busqueda</p>" +
                         "</div>" // end .nofiltrosdiv
                     );
             }else{
-                console.log("load_buscador no error")
+                // console.log("load_buscador no error")
                     for (row in buscador) {
                         $("#nofiltros").empty();
                         $("#texto-nofiltros").empty();
@@ -1158,7 +1158,7 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
                         $('<div></div>').attr('class', "producto").attr({'id': buscador[row].id_producto}).appendTo('.container-productos')
                             .html(
                                 "<div class='click-producto' id='" + buscador[row].id_producto + "'>" +
-                                    "<img src = /SegundaJugada-POO/" + buscador[row].img_producto + " alt='foto' </img> " +
+                                    "<img src = "+ PRODUCT_IMAGES + buscador[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
                                         "<h3>" + buscador[row].nom_prod + "</h5>" +
                                         "<p class='precio'>" + buscador[row].precio + "€</p>" +
