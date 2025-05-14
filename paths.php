@@ -57,11 +57,11 @@
     define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
     
     //MODEL_LOGIN
-    define('DAO_LOGIN', SITE_ROOT . 'module/AUTH/model/DAO/');
-    define('BLL_LOGIN', SITE_ROOT . 'module/AUTH/model/BLL/');
-    define('MODEL_LOGIN', SITE_ROOT . 'module/AUTH/model/model/');
-    define('JS_VIEW_LOGIN', SITE_PATH . 'module/AUTH/view/js/');
-    define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/AUTH/view/');
+    define('DAO_LOGIN', SITE_ROOT . 'module/auth/model/DAO/');
+    define('BLL_LOGIN', SITE_ROOT . 'module/auth/model/BLL/');
+    define('MODEL_LOGIN', SITE_ROOT . 'module/auth/model/model/');
+    define('JS_VIEW_LOGIN', SITE_PATH . 'module/auth/view/js/');
+    define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/auth/view/');
 
     // Friendly
     define('URL_FRIENDLY', TRUE);

@@ -21,10 +21,10 @@ function load_menu() {
     // console.log(friendlyURL("?module=shop"));
     // console.log(friendlyURL("?module=shop&op=view"));
     $('.main-nav').html(
-        '<a href="/SegundaJugada-POO/" class="logo"><img src="/SegundaJugada-POO/view/images/web-logo/b-logo.png"></a>' +
+        '<a href="' + SITE_PATH + '/" class="logo"><img src="' + WEB_LOGO_IMG + 'b-logo.png"></a>' +
         '<ul class="nav">' +
-        '<li class="scroll-to-section"><a href="/SegundaJugada-POO/" class="active">Home</a></li>' +
-        '<li class="scroll-to-section"><a href="' + friendlyURL("?module=shop") + '" id="page-productos">Productos</a></li>' +
+        '<li class="scroll-to-section"><a href="' + SITE_PATH + '/" class="active">Home</a></li>' +
+        '<li class="scroll-to-section"><a href="' + friendlyURL("?module=shop&op=view") + '" id="page-productos">Productos</a></li>' +
         '<li class="submenu"><a href="javascript:;">Categorías</a>' +
         '<ul>' +
         '<li><a class="categoria_menu" id_categoria_menu="1">Hombre</a></li>' +
@@ -80,7 +80,7 @@ function load_menu() {
     } else {
         console.log("load_menu: no hay token disponible");
         $('.submenu-cuenta').empty();
-        $('<a href="javascript:;"><img src="view/images/top-page/user.svg" id="user-icon">Cuenta</a>' +
+        $('<a href="javascript:;"><img src="'+ TOP_PAGE_IMG +'user.svg" id="user-icon">Cuenta</a>' +
             '<ul>' +
             '<li><a href="index.php?module=ctrl_auth&op=login-view">Iniciar sesión</a></li>' +
             '<li><a href="index.php?module=ctrl_auth&op=register-view">Registrarse</a></li>' +
@@ -103,7 +103,7 @@ function click_logout() {
             confirmButtonText: "Continuar"
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "index.php";
+                window.location.href = SITE_PATH;
             }
         });
     });
@@ -126,7 +126,7 @@ function logout() {
         .then(function(data) {
             localStorage.removeItem('token');
             // console.log('hola logout');
-            window.location.href = "/SegundaJugada-POO/";
+            window.location.href = SITE_PATH;
         }).catch(function() {
             console.error('ERROR al cerrar sesión');
         });

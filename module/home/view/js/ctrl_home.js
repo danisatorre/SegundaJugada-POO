@@ -8,7 +8,7 @@ function carouselPrincipal(){
             for (row in data) {
                 $('<div></div>').attr('class', "div_cp").attr('id_cphome', data[row].id_cphome).appendTo(".carousel-home-principal")
                 .html(
-                    "<img src='/SegundaJugada-POO/" + data[row].ruta_img + "' alt='foto' >"
+                    "<img src='"+ CAROUSEL_HOME_IMG + data[row].ruta_img + "' alt='foto' >"
                 )
             }
 
@@ -45,7 +45,7 @@ function carouselMarcas() {
                 // return false;
                 $('<div></div>').attr('class', "div_marca").attr('id_marca', data[row].id_marca).appendTo(".carousel-home")
                 .html(
-                    "<img src=' /SegundaJugada-POO/" + data[row].img_marca + "' alt='foto' >" +
+                    "<img src='"+ MARCAS_IMG + data[row].img_marca + "' alt='foto' >" +
                     "<h5>" + data[row].nom_marca + "</h5>"
                 )
             }
@@ -87,15 +87,15 @@ function loadCategorias() {
             // return false;
             $('<div></div>').attr('class', "div_categoria").attr({ 'id_categoria': data[row].id_categoria }).appendTo('#containerCategoria')
                 .html(
-                    "<li class='portfolio-item'>" +
-                    "<div class='item-main'>" +
-                    "<div class='portfolio-image'>" +
-                    "<img src = /SegundaJugada-POO/" + data[row].img_categoria + " alt='foto' </img> " +
-                    "</div>" +
-                    "<h5>" + data[row].categoria + "</h5>" +
-                    "</div>" +
-                    "</li>"
-                )
+                    `<li class='portfolio-item'>
+                        <div class='item-main'>
+                            <div class='portfolio-image'>
+                                <img src="${CATEGORIAS_IMG + data[row].img_categoria}" alt='foto'>
+                            </div>
+                            <h5>${data[row].categoria}</h5>
+                        </div>
+                    </li>`
+                );
         }
     }).catch(function() {
         // console.log("ERROR loadCategorias");
@@ -115,7 +115,7 @@ function loadCatTipos() {
                 // return false;
                 $('<div></div>').attr('class', "div_tipo").attr('id_tipo', data[row].id_tipo).appendTo(".carousel-tipo")
                 .html(
-                    "<img src='/SegundaJugada-POO/" + data[row].img_tipo + "' alt='foto' >" +
+                    "<img src='"+ TIPOS_IMG + data[row].img_tipo + "' alt='foto' >" +
                     "<h5>" + data[row].tipo + "</h5>"
                 )
             }
@@ -156,7 +156,7 @@ function loadProductos() {
                 // return false;
                 $('<div></div>').attr('class', "div_producto").attr('id_producto', data[row].id_producto).appendTo(".carousel-producto")
                 .html(
-                    "<img src='/SegundaJugada-POO/" + data[row].img_producto + "' alt='foto' >" +
+                    "<img src='"+ PRODUCT_IMAGES + data[row].img_producto + "' alt='foto' >" +
                     "<h5>" + data[row].nom_prod + "</h5>"
                 );
             }
@@ -192,7 +192,7 @@ function loadAccesorios(){
         for (row in data){
             $('<div></div>').attr('class', "div_accesorio").attr('id_accesorio', data[row].tipo).appendTo(".carousel-accesorio")
             .html(
-                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='"+ PRODUCT_IMAGES + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + "</h5>"
             )
         }
@@ -222,7 +222,7 @@ function loadPopulares(){
         for (row in data){
             $('<div></div>').attr('class', "div_popular").attr('id_popular', data[row].id_producto).appendTo(".carousel-popular")
             .html(
-                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='"+ PRODUCT_IMAGES + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + "</h5>"
             )
         }
@@ -252,7 +252,7 @@ function loadMostRating(){
         for (row in data){
             $('<div></div>').attr('class', "div_rating").attr('id_rating', data[row].id_producto).appendTo(".carousel-rating")
             .html(
-                "<img src='/SegundaJugada-POO/" + data[row].img_producto + " 'alt='foto'>" +
+                "<img src='"+ PRODUCT_IMAGES + data[row].img_producto + " 'alt='foto'>" +
                 "<h5>" + data[row].nom_prod + 
                 "<br>" +
                 "Valoración: " + data[row].rating +
@@ -285,7 +285,7 @@ function loadMostRatingCategoria(){
         for (row in data){
             $('<div></div>').attr('class', "div_rating_categoria").attr('id_rating_categoria', data[row].id_categoria).appendTo(".carousel-rating-categoria")
             .html(
-                "<img src='/SegundaJugada-POO/" + data[row].img_categoria + " 'alt='foto'>" +
+                "<img src='"+ CATEGORIAS_IMG + data[row].img_categoria + " 'alt='foto'>" +
                 "<h5>" + data[row].categoria + 
                 "<br>" +
                 "Visitas: " + data[row].visitas_cat +
@@ -318,7 +318,7 @@ function loadMostRatingTipo(){
         for (row in data){
             $('<div></div>').attr('class', "div_rating_tipo").attr('id_rating_tipo', data[row].id_tipo).appendTo(".carousel-rating-tipo")
             .html(
-                "<img src='/SegundaJugada-POO/" + data[row].img_tipo + " 'alt='foto'>" +
+                "<img src='"+ TIPOS_IMG + data[row].img_tipo + " 'alt='foto'>" +
                 "<h5>" + data[row].tipo + 
                 "<br>" +
                 "Visitas: " + data[row].visitas_tipo +

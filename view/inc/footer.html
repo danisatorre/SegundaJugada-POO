@@ -5,7 +5,7 @@
             <div class="col-lg-3">
                 <div class="first-item">
                     <div class="logo">
-                        <img src="view/images/web-logo/b-logo.png" alt="hexashop ecommerce templatemo">
+                        <img id="footer-logo" alt="hexashop ecommerce templatemo">
                     </div>
                     <ul>
                         <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
@@ -59,26 +59,30 @@
 
 
 <!-- jQuery -->
-<script src="view/js/jquery-2.1.0.min.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/jquery-2.1.0.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="view/js/popper.js"></script>
-<script src="view/js/bootstrap.min.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/popper.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/bootstrap.min.js"></script>
 
 <!-- Plugins -->
-<script src="view/js/owl-carousel.js"></script>
-<script src="view/js/accordions.js"></script>
-<script src="view/js/datepicker.js"></script>
-<script src="view/js/scrollreveal.min.js"></script>
-<script src="view/js/waypoints.min.js"></script>
-<script src="view/js/jquery.counterup.min.js"></script>
-<script src="view/js/imgfix.min.js"></script> 
-<script src="view/js/slick.js"></script> 
-<script src="view/js/lightbox.js"></script> 
-<script src="view/js/isotope.js"></script> 
+<script src="<?php echo SITE_PATH?>view/js/owl-carousel.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/accordions.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/datepicker.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/scrollreveal.min.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/waypoints.min.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/jquery.counterup.min.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/imgfix.min.js"></script> 
+<script src="<?php echo SITE_PATH?>view/js/slick.js"></script> 
+<script src="<?php echo SITE_PATH?>view/js/lightbox.js"></script> 
+<script src="<?php echo SITE_PATH?>view/js/isotope.js"></script> 
 
 <!-- Global Init -->
-<script src="view/js/custom.js"></script>
+<script src="<?php echo SITE_PATH?>view/js/custom.js"></script>
+
+<script>
+    document.getElementById('footer-logo').src = WEB_LOGO_IMG + 'b-logo.png';
+</script>
 
 <script>
 
