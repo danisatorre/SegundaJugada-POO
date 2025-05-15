@@ -1,0 +1,79 @@
+/* Puedes añadir esto al final de tu login.css o en un nuevo recover.css */
+.recover-container {
+    margin-top: 8%;
+    margin-left: 35%;
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.recover-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: goldenrod;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.recover-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.recover-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: orange;
+    border: 2px solid goldenrod;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.recover-button:hover {
+    background-color: goldenrod;
+    border-color: orange;
+    box-shadow: 0 0 10px goldenrod;
+}
+
+@media (max-width: 768px) {
+    .recover-container {
+        margin-top: 20%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        max-width: 400px;
+        padding: 15px;
+    }
+    .recover-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .recover-form {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recover-container {
+        margin-top: 15%;
+        width: 95%;
+    }
+    .recover-title {
+        font-size: 20px;
+    }
+    .recover-button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

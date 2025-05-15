@@ -47,6 +47,8 @@ function key_login() {
             login();
         }
     });
+
+
 } // key_login
 
 function button_login() {
@@ -105,6 +107,75 @@ function github_icon_login(){
     document.getElementById('github-icon-login').src = ICONS_IMG + 'github-icon.png';
 }
 
+function google_login(){
+    $('.google-login-button').on('click', function(e) {
+        social_login('google');
+    }); 
+}
+
+function social_login(param){
+    // console.log(param);
+    // return false;
+    authService = firebase_config();
+    authService.signInWithPopup(provider_config(param))
+    .then(function(result) {
+        console.log('Hemos autenticado al usuario ', result.user);
+        email_name = result.user.email;
+        console.log(result.user.email);
+        let username = email_name.split('@');
+        console.log(username[0]);
+        console.log(result.user.photoURL);
+        // return false;
+
+        var social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
+        console.log(social_user);
+        // return false;
+        if (result) {
+            console.log('social_login: SI result');
+            ajaxPromise("index.php?module=auth&op=social_login", 'POST', 'JSON', social_user)
+            .then(function(data) {
+                console.log(data);
+                return false;
+                localStorage.setItem("token", data);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+                if(localStorage.getItem('likes') == null) {
+                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+                } else {
+                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                }
+            })
+            .catch(function() {
+                console.error('Error: Social login error');
+            });
+        }else{
+            console.error('social_login: NO result')
+        }
+    })
+    .catch(function(error) {
+        var errorCode = error.code;
+        console.log(errorCode);
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        var email = error.email;
+        console.log(email);
+        var credential = error.credential;
+        console.log(credential);
+    });
+}
+
+function provider_config(param){
+    // console.log(param);
+    // return false;
+    if(param === 'google'){
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('email');
+        return provider;
+    }else if(param === 'github'){
+        return provider = new firebase.auth.GithubAuthProvider();
+    }
+}
+
 $(document).ready(function(){
     key_login()
     button_login()
@@ -112,4 +183,5 @@ $(document).ready(function(){
     google_icon_login();
     register_link();
     github_icon_login();
+    google_login();
 });

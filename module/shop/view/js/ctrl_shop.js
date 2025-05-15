@@ -1061,7 +1061,7 @@ function leafleft(shop, zoom){
         console.error("ERROR AL INICIALIZAR EL MAPA");
         return false;
     }
-    console.log("leafleft mapa inicializado")
+    // console.log("leafleft mapa inicializado")
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -1069,7 +1069,7 @@ function leafleft(shop, zoom){
     }).addTo(map);
     
     if(Array.isArray(shop)){ // cargar el mapa si lo que llega es un array (list del shop)
-        console.log("leafleft ARRAY");
+        // console.log("leafleft ARRAY");
         // return false;
         for (row in shop){
             var mapicon = L.icon({ // añadir la imagen del marcador
@@ -1086,7 +1086,7 @@ function leafleft(shop, zoom){
                 "</div>");
         }
     }else{ // cargar el mapa si lo que llega es solo un producto en vez de un array (details)
-        console.log("leafleft NO ARRAY");
+        // console.log("leafleft NO ARRAY");
         // return false;
         var mapicon = L.icon({ // añadir la imagen del marcador
             iconUrl: WEB_LOGO_IMG + 'favicon.png',
@@ -1209,7 +1209,7 @@ function scrollOnTop(){
 } // end scrollOnTop (situarse en la parte de arriba del todo de la página)
 
 function paginacion() {
-    console.log("hola paginacion")
+    // console.log("hola paginacion")
     // return false;
     let url = '';
     let sdata = {};
@@ -1232,7 +1232,7 @@ function paginacion() {
             const items_por_pagina = 3; // Número de productos por página
             const total_paginas = Math.ceil(total_productos / items_por_pagina);
 
-            console.log("Total_productos: ", total_productos, " Items por pagina: ", items_por_pagina, " Total paginas: ", total_paginas)
+            // console.log("Total_productos: ", total_productos, " Items por pagina: ", items_por_pagina, " Total paginas: ", total_paginas)
             // return false;
 
             // Generar los botones de paginación
@@ -1244,7 +1244,7 @@ function paginacion() {
 } // end paginacion
 
 function generarBotonesPaginacion(total_paginas, items_por_pagina, total_productos) {
-    console.log("hola generarBotonesPaginacion")
+    // console.log("hola generarBotonesPaginacion")
     // console.log(total_productos)
     // return false;
     $('#paginacion').empty();

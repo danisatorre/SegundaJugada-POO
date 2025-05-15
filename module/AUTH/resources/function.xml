@@ -9,6 +9,10 @@
         <uri>register_view</uri>
     </function>
     <function>
+        <name>recover_view</name>
+        <uri>recover_view</uri>
+    </function>
+    <function>
         <name>login</name>
         <uri>login</uri>
     </function>
@@ -39,5 +43,9 @@
     <function>
         <name>refresh_cookie</name>
         <uri>refresh_cookie</uri>
+    </function>
+    <function>
+        <name>social_login</name>
+        <uri>social_login</uri>
     </function>
 </functions>
