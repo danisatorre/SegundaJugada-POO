@@ -48,18 +48,7 @@ function load_menu() {
     if (token) {
         ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token })
             .then(function(data) {
-                // console.log(data)
-                // console.log(token.username);
-                // return false;
-                // if (data.tipo_usuario == "Cliente") {
-                //     console.log("Cliente logeado");
-                //     $('.opc_CRUD').empty();
-                //     $('.opc_exceptions').empty();
-                // } else {
-                //     console.log("Admin loged");
-                //     $('.opc_CRUD').show();
-                //     $('.opc_exceptions').show();
-                // }
+                console.log(data);
                 $('.submenu-cuenta').empty();
                 $('<a href="javascript:;"><img src="' + data.avatar + '" id="user-icon">' + data.username + '</a>' +
                     '<ul>' +

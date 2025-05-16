@@ -119,31 +119,39 @@ function social_login(param){
     authService = firebase_config();
     authService.signInWithPopup(provider_config(param))
     .then(function(result) {
-        console.log('Hemos autenticado al usuario ', result.user);
+        // console.log('Hemos autenticado al usuario ', result.user);
         email_name = result.user.email;
-        console.log(result.user.email);
+        // console.log(result.user.email);
         let username = email_name.split('@');
-        console.log(username[0]);
-        console.log(result.user.photoURL);
+        // console.log(username[0]);
+        // console.log(result.user.photoURL);
         // return false;
 
         var social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
-        console.log(social_user);
+        // console.log(social_user);
         // return false;
         if (result) {
             console.log('social_login: SI result');
-            ajaxPromise("index.php?module=auth&op=social_login", 'POST', 'JSON', social_user)
+            ajaxPromise("index.php?module=auth&op=social_login_google", 'POST', 'JSON', social_user)
             .then(function(data) {
                 console.log(data);
-                return false;
-                localStorage.setItem("token", data);
-                toastr.options.timeOut = 3000;
-                toastr.success("Inicio de sesión realizado");
-                if(localStorage.getItem('likes') == null) {
-                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-                } else {
-                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-                }
+                // return false;
+                localStorage.setItem("token", JSON.stringify(data));
+                console.log('social_login despues de añadir el token en localStorage')
+                    Swal.fire({
+                        title: "Has iniciado sesión",
+                        text: "Pulsa en Continuar para ver todos nuestros productos",
+                        icon: "success",
+                        confirmButtonText: "Continuar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            if(localStorage.getItem('redirect_like')){
+                                setTimeout('window.location.href =' + friendlyURL("?module=shop") + ';', 2000);
+                            }else{
+                                setTimeout('window.location.href = "/SegundaJugada-POO/";', 2000);
+                            }
+                        }
+                    });
             })
             .catch(function() {
                 console.error('Error: Social login error');
@@ -154,13 +162,13 @@ function social_login(param){
     })
     .catch(function(error) {
         var errorCode = error.code;
-        console.log(errorCode);
+        console.error(errorCode);
         var errorMessage = error.message;
-        console.log(errorMessage);
+        console.error(errorMessage);
         var email = error.email;
-        console.log(email);
+        console.error(email);
         var credential = error.credential;
-        console.log(credential);
+        console.error(credential);
     });
 }
 

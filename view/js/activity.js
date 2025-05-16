@@ -2,7 +2,7 @@ function protecturl() {
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
         // console.log("protecturl: SI TOKEN");
-        ajaxPromise('index.php?module=AUTH&op=control_user', 'POST', 'JSON', { 'token': token })
+        ajaxPromise('index.php?module=auth&op=control_user', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
             console.log(data);
             if (data == "UsuarioValido") {
