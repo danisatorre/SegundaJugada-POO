@@ -2,6 +2,10 @@
     // echo 'hola ctrl_shop.class.php';
     // exit;
     $path = $_SERVER['DOCUMENT_ROOT'] . '/SegundaJugada-POO';
+    // ACTIVIDAD DEL USUARIO
+    if(isset($_SESSION['tiempo'])){
+        $_SESSION['tiempo'] = time(); // devuelve la fecha actual
+    }
 
     class ctrl_shop{
         

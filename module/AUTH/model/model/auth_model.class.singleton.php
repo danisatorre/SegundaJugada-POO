@@ -26,6 +26,16 @@
         public function getDataUser($username){
             return $this -> bll -> get_data_user_BLL($username);
         }
+
+        public function getUserLog($username){
+            // echo json_encode($username);
+            // exit;
+            return $this -> bll -> get_user_log_BLL($username);
+        }
+
+        public function getEmailLog($email){
+            return $this -> bll -> get_email_log_BLL($email);
+        }
     } // auth_model
 
 ?>

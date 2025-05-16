@@ -49,8 +49,9 @@ function load_menu() {
         ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token })
             .then(function(data) {
                 console.log(data);
+                // return false;
                 $('.submenu-cuenta').empty();
-                $('<a href="javascript:;"><img src="' + data.avatar + '" id="user-icon">' + data.username + '</a>' +
+                $('<a href="javascript:;"><img src="' + data[0].avatar + '" id="user-icon">' + data[0].username + '</a>' +
                     '<ul>' +
                     '<li id="logout"><a>Cerrar sesión</a></li>' +
                     '<li id="switch-cuenta"><a href="'+ friendlyURL("?module=auth&op=login_view") +'">Cambiar de cuenta</a></li>' +

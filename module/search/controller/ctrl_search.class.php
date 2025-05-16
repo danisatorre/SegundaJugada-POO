@@ -1,5 +1,10 @@
 <?php
 
+    // ACTIVIDAD DEL USUARIO
+    if(isset($_SESSION['tiempo'])){
+        $_SESSION['tiempo'] = time(); // devuelve la fecha actual
+    }
+
     class ctrl_search{
 
         function categoria(){

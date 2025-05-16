@@ -5,8 +5,9 @@ function protecturl() {
         ajaxPromise('index.php?module=auth&op=control_user', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
             console.log(data);
+            // return false;
             if (data == "UsuarioValido") {
-                // console.log("CORRECTO --> El usario coincide con la session");
+                console.warn("CORRECTO --> El usario coincide con la session");
             } else if (data == "UsuarioNoValido") {
                 console.warn("INCORRCTO --> Estan intentando acceder a una cuenta");
                 logout(); // funcion en main.js
@@ -21,14 +22,14 @@ function protecturl() {
 function control_activity(){
     var token = localStorage.getItem('token');
     if(token){
-        ajaxPromise('index.php?module=AUTH&op=actividad', 'POST', 'JSON')
+        ajaxPromise('index.php?module=auth&op=actividad', 'POST', 'JSON')
             .then(function(actividad){
                 if(actividad == "inactivo"){
-                    // console.warn("USUARIO INACTIVO");
+                    console.warn("USUARIO INACTIVO");
                     localStorage.setItem("timeoutSesion", "Si");
                     logout(); // funcion en main.js
                 }else{
-                    // console.warn("USUARIO ACTIVO");
+                    console.warn("USUARIO ACTIVO");
                 }
             });
     }else{
@@ -39,7 +40,7 @@ function control_activity(){
 function refresh_token(){
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        ajaxPromise('index.php?module=AUTH&op=refresh_token', 'POST', 'JSON', {'token': token})
+        ajaxPromise('index.php?module=auth&op=refresh_token', 'POST', 'JSON', {'token': token})
             .then(function(refToken){
                 // console.log(refToken);
                 // console.log("refres_token\nToken refrescado correctamente");
@@ -52,10 +53,10 @@ function refresh_token(){
 } // end refresh_token
 
 function refresh_cookie(){
-    ajaxPromise('index.php?module=AUTH&op=refresh_cookie', 'POST', 'JSON')
+    ajaxPromise('index.php?module=auth&op=refresh_cookie', 'POST', 'JSON')
         .then(function(cookie){
-            console.log(cookie);
-            console.log("refresh_cookie\nCookie actualizada correctamente");
+            // console.log(cookie);
+            console.warn("refresh_cookie\nCookie actualizada correctamente");
         });
 } // end refresh_cookie
 

@@ -20,18 +20,34 @@
 		public function get_social_login_google_BLL($uid, $username, $email, $avatar){
 			if (!empty($this -> dao -> select_user_google($this->db, $username, $email))) {
 				$user = $this -> dao -> select_user_google($this->db, $username, $email);
+				// echo json_encode($user[0]['username']);
+				// exit;
 				$token = middleware::create_token($user[0]['username']);
-				return json_encode($token);
+				return $token;
             } else {
 				$this -> dao -> insert_user_google($this->db, $uid, $username, $email, $avatar);
+				// echo json_encode($username);
+				// exit;
 				$user = $this -> dao -> select_user_google($this->db, $username, $email);
+				// echo json_encode($user[0]['username']);
+				// exit;
 				$token = middleware::create_token($user[0]['username']);
-				return json_encode($token);
+				return $token;
 			}
 		}
 
 		public function get_data_user_BLL($username){
 			return $this -> dao -> select_data_user($this -> db, $username);
+		}
+
+		public function get_user_log_BLL($username){
+			// echo json_encode('Login BLL ' . $username);
+			// exit;
+			return $this -> dao -> select_user_log($this -> db, $username);
+		}
+
+		public function get_email_log_BLL($email){
+			return $this -> dao -> select_email_log($this -> db, $username);
 		}
     } // auth_bll
 
