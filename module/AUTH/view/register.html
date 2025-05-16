@@ -22,14 +22,8 @@
             <span id="error_pwd2_reg" class="error"></span>
         </div>
         <button type="submit" class="register-button">Registrarse</button>
-        <button type="button" class="google-login-button">
-            <img id="google-icon-register" alt="Google Logo">
-            Registrarse con Google
-        </button>
-        <button type="button" class="github-login-button">
-            <img id="github-icon-register" alt="GitHub Logo">
-            Registrarse con GitHub
-        </button>
         <p class="login-link">¿Ya tienes cuenta? <a id="login-link">Inicia sesión aquí</a></p>
     </form>
 </div>
+
+<script>document.getElementById('login-link').href = friendlyURL("?module=auth&op=login_view");</script>

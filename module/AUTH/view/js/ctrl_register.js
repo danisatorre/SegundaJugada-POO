@@ -133,10 +133,6 @@ function google_icon_register(){
     document.getElementById('google-icon-register').src = ICONS_IMG + 'google-icon.webp';
 }
 
-function login_link(){
-    document.getElementById('login-link').href = friendlyURL("?module=auth&op=login_view");
-}
-
 function github_icon_register(){
     document.getElementById('github-icon-register').src = ICONS_IMG + 'github-icon.png';
 }
@@ -145,6 +141,5 @@ $(document).ready(function() {
     key_register();
     button_register();
     google_icon_register();
-    login_link();
     github_icon_register();
 });

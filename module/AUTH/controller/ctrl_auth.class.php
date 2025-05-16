@@ -112,16 +112,16 @@
             // echo json_encode($tokenNormal);
             // exit();
 
-            $tokenDec = middleware::decode_username($tokenNormal);
-            echo json_encode($tokenDec);
-            exit();
+            $tokenDec = middleware::decode_token($tokenNormal);
+            // echo json_encode($tokenDec['username']);
+            // exit();
 
             if ($tokenDec['exp'] < time()) {
                 echo json_encode("UsuarioNoValido");
                 exit();
             }
 
-            if (isset($_SESSION['username']) && ($_SESSION['username']) == $tokenDec) {
+            if (isset($_SESSION['username']) && ($_SESSION['username']) == $tokenDec['username']) {
                 echo json_encode("UsuarioValido");
                 exit();
             } else {
@@ -158,6 +158,14 @@
         function refres_cookie(){
             session_regenerate_id();
             echo json_encode("cookie_actualizada");
+        }
+
+        function logout(){
+            unset($_SESSION['username']);
+            unset($_SESSION['tiempo']);
+            session_destroy();
+
+            echo json_encode('logout_correct');
         }
 
     } //ctrl_auth

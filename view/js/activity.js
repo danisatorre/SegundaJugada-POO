@@ -4,7 +4,7 @@ function protecturl() {
         // console.log("protecturl: SI TOKEN");
         ajaxPromise('index.php?module=auth&op=control_user', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
-            console.log(data);
+            // console.log(data);
             // return false;
             if (data == "UsuarioValido") {
                 console.warn("CORRECTO --> El usario coincide con la session");
