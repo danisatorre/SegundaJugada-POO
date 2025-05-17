@@ -29,7 +29,17 @@
             $avatar = $_POST['avatar'];
             // echo json_encode($avatar);
             // exit;
-            echo json_encode(common::load_model('auth_model', 'getSocialLoginGoogle', [$uid, $username, $email, $avatar]));
+            $googleLogin = common::load_model('auth_model', 'getSocialLoginGoogle', [$uid, $username, $email, $avatar]);
+
+            if($googleLogin){
+                $_SESSION['username'] = $username;
+                $_SESSION['tiempo'] = time();
+                echo json_encode($googleLogin);
+                exit;
+            }else{
+                echo json_encode('ERRORgoogleLogin');
+                exit;
+            }
         }
 
         function login(){

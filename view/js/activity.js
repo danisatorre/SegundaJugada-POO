@@ -10,6 +10,7 @@ function protecturl() {
                 console.warn("CORRECTO --> El usario coincide con la session");
             } else if (data == "UsuarioNoValido") {
                 console.warn("INCORRCTO --> Estan intentando acceder a una cuenta");
+                // return false;
                 logout(); // funcion en main.js
             }
         })
