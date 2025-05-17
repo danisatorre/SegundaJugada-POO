@@ -56,6 +56,13 @@
             // exit;
             return $this -> bll -> get_email_log_BLL($email);
         }
+
+        public function insertLocalUser($params){
+            $username = $params[0];
+            $email = $params[1];
+            $pwd = $params[2];
+            return $this -> bll -> insert_local_user_BLL($username, $email, $pwd);
+        }
     } // auth_model
 
 ?>

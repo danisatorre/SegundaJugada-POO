@@ -121,6 +121,64 @@
             }
         }
 
+        function register(){
+            $email = $_POST['email_reg'];
+            $username = $_POST['username_reg'];
+            $pwd = $_POST['pwd1_reg'];
+            // echo json_encode($email);
+            // exit;
+            // Comprobar que la email no exista
+            try {
+                $checkEmail = common::load_model('auth_model', 'getEmailLog', $email);
+            } catch (Exception $e) {
+                echo json_encode("error");
+                exit;
+            }
+
+            try {
+                $checkUsername = common::load_model('auth_model', 'getUserLog', $username);
+            } catch (Exception $e) {
+                echo json_encode("error");
+                exit;
+            }
+    
+            if ($checkEmail == "error_email") {
+                $check_email = false;
+            } else {
+                $check_email = true;
+            }
+
+            if($checkUsername == "error_user"){
+                $check_username = false;
+            }else {
+                $check_username = true;
+            }
+    
+            // Si no existe el email creará el usuario
+            if ($check_email) {
+                echo json_encode("error_email");
+                exit;
+            }else if($check_username){
+                echo json_encode("error_username");
+                exit;
+            }else {
+                try {
+                    $rdo = common::load_model('auth_model', 'insertLocalUser', [$username, $email, $pwd]);
+                } catch (Exception $e) {
+                    echo json_encode("error");
+                    exit;
+                }
+                if (!$rdo) {
+                    echo json_encode("error_user");
+                    exit;
+                } else {
+                    // echo json_encode($rdo); // ver consulta insert por consola
+                    echo json_encode("ok");
+                    exit;
+                }
+            }
+        }
+
         function data_user(){
             $token = $_POST['token'];
             // echo json_encode($token);

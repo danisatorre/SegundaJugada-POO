@@ -108,6 +108,15 @@
                 return $result;
             }
         }
+
+        public function insert_local_user($db, $username, $email, $pwd){
+            $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]); // encriptar la contraseña
+            $hashemail = md5(strtolower(trim($email)));
+            $avatar = "https://i.pravatar.cc/500?u=$hashemail";
+            $sql ="   INSERT INTO `users`(`username`, `pwd`, `email`, `tipo_usuario`, `avatar`) 
+            VALUES ('$username','$hashpwd','$email','client','$avatar')";
+            return $stmt = $db->ejecutar($sql);
+        }
     } // auth_dao
 
 ?>

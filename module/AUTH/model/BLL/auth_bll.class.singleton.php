@@ -80,6 +80,10 @@
 			// exit;
 			return $this -> dao -> select_email_log($this -> db, $email);
 		}
+
+		public function insert_local_user_BLL($username, $email, $pwd){
+			return $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd);
+		}
     } // auth_bll
 
 ?>
