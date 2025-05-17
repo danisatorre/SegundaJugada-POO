@@ -117,6 +117,58 @@
             VALUES ('$username','$hashpwd','$email','client','$avatar')";
             return $stmt = $db->ejecutar($sql);
         }
+
+        // revisar que no exista una cuenta de google con el mismo email al registrarse
+        public function check_google_email($db, $email){
+            $sql = "SELECT uid, username, email, tipo_usuario, avatar, token_email, activate
+                FROM google_users 
+                WHERE email = '$email'";
+
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return 1;
+            } else {
+                return "error_email_google";
+            }
+        }
+
+        // revisar que no exista una cuenta de github con el mismo email al registrarse
+        public function check_github_email($db, $email){
+            $sql = "SELECT uid, username, email, tipo_usuario, avatar, token_email, activate
+                FROM github_users 
+                WHERE email = '$email'";
+
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return 1;
+            } else {
+                return "error_email_github";
+            }
+        }
+
+        public function check_local_email($db, $email){
+            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE email='$email'";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            if(empty($result)){
+                return 1;
+            }else{
+                return "error_email";
+            }
+        }
+
+        public function check_username($db, $username){
+            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE username='$username'";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return 1;
+            } else {
+                return "error_username";
+            }
+        }
     } // auth_dao
 
 ?>

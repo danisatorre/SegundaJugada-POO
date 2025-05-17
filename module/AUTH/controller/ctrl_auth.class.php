@@ -129,39 +129,64 @@
             // exit;
             // Comprobar que la email no exista
             try {
-                $checkEmail = common::load_model('auth_model', 'getEmailLog', $email);
+                $checkEmail = common::load_model('auth_model', 'checkLocalEmail', $email);
             } catch (Exception $e) {
                 echo json_encode("error");
                 exit;
             }
 
             try {
-                $checkUsername = common::load_model('auth_model', 'getUserLog', $username);
+                $checkUsername = common::load_model('auth_model', 'checkUsername', $username);
             } catch (Exception $e) {
                 echo json_encode("error");
                 exit;
             }
+
+            try{
+                $checkEmailGoogle = common::load_model('auth_model', 'checkGoogleEmail', $email);
+            }catch(Exception $e){
+                echo json_encode("error");
+                exit;
+            }
+
+            try{
+                $checkEmailGithub = common::load_model('auth_model', 'checkGithubEmail', $email);
+            }catch(Exception $e){
+                echo json_encode("error");
+                exit;
+            }
     
-            if ($checkEmail == "error_email") {
+            if ($checkEmail == "error_email") { // evitar redundancia de emails
                 $check_email = false;
+                echo json_encode("error_email");
+                exit;
             } else {
                 $check_email = true;
             }
 
-            if($checkUsername == "error_user"){
+            if($checkUsername == "error_username"){ // evitar redundancia de nombres de usuario
                 $check_username = false;
-            }else {
-                $check_username = true;
-            }
-    
-            // Si no existe el email creará el usuario
-            if ($check_email) {
-                echo json_encode("error_email");
-                exit;
-            }else if($check_username){
                 echo json_encode("error_username");
                 exit;
             }else {
+                $check_username = true;
+            }
+
+            if ($checkEmailGoogle == "error_email") { // evitar redundancia de emails
+                $check_email_google = false;
+                echo json_encode("error_email_google");
+                exit;
+            } else {
+                $check_email_google = true;
+            }
+
+            if ($checkEmailGithub == "error_email_github") { // evitar redundancia de emails
+                $check_email_github = false;
+                echo json_encode("error_email_github");
+                exit;
+            } else {
+                $check_email_github = true;
+            }
                 try {
                     $rdo = common::load_model('auth_model', 'insertLocalUser', [$username, $email, $pwd]);
                 } catch (Exception $e) {
@@ -176,7 +201,6 @@
                     echo json_encode("ok");
                     exit;
                 }
-            }
         }
 
         function data_user(){

@@ -84,6 +84,22 @@
 		public function insert_local_user_BLL($username, $email, $pwd){
 			return $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd);
 		}
+		
+		public function check_google_email_BLL($email){
+			return $this -> dao -> check_google_email($this -> db, $email);
+		}
+
+		public function check_github_email_BLL($email){
+			return $this -> dao -> check_github_email($this -> db, $email);
+		}
+
+		public function check_local_email_BLL($email){
+			return $this -> dao -> check_local_email($this -> db, $email);
+		}
+
+		public function check_username_BLL($username){
+			return $this -> dao -> check_username($this -> db, $username);
+		}
     } // auth_bll
 
 ?>

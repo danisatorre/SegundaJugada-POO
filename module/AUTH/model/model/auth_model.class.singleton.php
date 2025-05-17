@@ -63,6 +63,22 @@
             $pwd = $params[2];
             return $this -> bll -> insert_local_user_BLL($username, $email, $pwd);
         }
+
+        public function checkGoogleEmail($email){
+            return $this -> bll -> check_google_email_BLL($email);
+        }
+
+        public function checkGithubEmail($email){
+            return $this -> bll -> check_github_email_BLL($email);
+        }
+
+        public function checkLocalEmail($email){
+            return $this -> bll -> check_local_email_BLL($email);
+        }
+
+        public function checkUsername($username){
+            return $this -> bll -> check_username_BLL($username);
+        }
     } // auth_model
 
 ?>
