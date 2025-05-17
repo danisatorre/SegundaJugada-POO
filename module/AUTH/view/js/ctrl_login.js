@@ -8,7 +8,7 @@ function login() {
         var data = $('.login-form').serialize();
         ajaxPromise('index.php?module=auth&op=login', 'POST', 'JSON', data)
             .then(function(login) {
-                console.log('Login: ', login)
+                // console.log('Login: ', login)
                 // return false;
                 if (login == "error_user") {
                     document.getElementById('error_username_log').innerHTML = "El usario o correo electrónico introducido no existe, asegurase de que lo a escrito correctamente"

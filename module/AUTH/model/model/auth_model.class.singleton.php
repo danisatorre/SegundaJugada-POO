@@ -52,6 +52,8 @@
         }
 
         public function getEmailLog($email){
+            // echo json_encode('hols email log MODEL');
+            // exit;
             return $this -> bll -> get_email_log_BLL($email);
         }
     } // auth_model

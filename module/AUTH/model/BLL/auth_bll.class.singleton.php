@@ -76,7 +76,9 @@
 		}
 
 		public function get_email_log_BLL($email){
-			return $this -> dao -> select_email_log($this -> db, $username);
+			// echo json_encode('hola email log BLL '. $email);
+			// exit;
+			return $this -> dao -> select_email_log($this -> db, $email);
 		}
     } // auth_bll
 

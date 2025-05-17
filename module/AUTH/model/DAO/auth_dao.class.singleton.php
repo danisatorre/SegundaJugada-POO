@@ -86,22 +86,26 @@
             // exit;
             $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE username='$username'";
             $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return "error_user";
+            } else {
+                return $result;
+            }
             // echo json_encode('Login DAO despues de ejecutar la consulta');
             // exit;
-            if ($stmt) {
-                return $db->listar($stmt);
-            }else {
-                return "error_user";
-            }
         }
 
         public function select_email_log($db, $email){
+            // echo json_encode('hola email log DAO '. $email);
+            // exit;
             $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE email='$email'";
             $stmt = $db->ejecutar($sql);
-            if ($stmt) {
-                return $db->listar($stmt);
-            }else {
+            $result = $db->listar($stmt);
+            if (empty($result)) {
                 return "error_email";
+            } else {
+                return $result;
             }
         }
     } // auth_dao
