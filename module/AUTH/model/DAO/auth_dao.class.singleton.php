@@ -21,10 +21,38 @@
             return $stmt = $db -> ejecutar($sql);
         }
 
-        public function select_user_google($db, $username, $email){
+        public function insert_user_github($db, $uid, $username, $email, $avatar){
+            // echo json_encode('hola inset_user_google');
+            // exit;
+            $sql = "INSERT INTO github_users (uid, username, email, tipo_usuario, avatar, token_email, activate)
+                VALUES ('$uid', '$username', '$email', 'client', '$avatar', '', 1)";
+            return $stmt = $db -> ejecutar($sql);
+        }
+
+        public function select_user_google($db, $username){
             $sql = "SELECT uid, username, email, tipo_usuario, avatar, token_email, activate
                 FROM google_users 
-                WHERE username = '$username' OR email = '$email'";
+                WHERE username = '$username'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function select_user_github($db, $email){
+            $sql = "SELECT uid, username, email, tipo_usuario, avatar, token_email, activate
+                FROM github_users 
+                WHERE email = '$email'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function select_user_github_menu($db, $username){
+            // echo json_encode('hola dao github user '. $username);
+            // exit;
+            $sql = "SELECT uid, username, email, tipo_usuario, avatar, token_email, activate
+                FROM github_users 
+                WHERE username = '$username'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -34,26 +62,23 @@
             // buscar usuarios locales
             $sql = "SELECT * FROM users WHERE username='$username'";
             $stmt = $db->ejecutar($sql);
-            $result = $db->listar($stmt);
-            if (!empty($result)) {
-                return $result;
-            }
+            return $db->listar($stmt);
 
-            // buscar usuarios de google
-            $sql = "SELECT * FROM google_users WHERE username='$username'";
-            $stmt = $db->ejecutar($sql);
-            $result = $db->listar($stmt);
-            if (!empty($result)) {
-                return $result;
-            }
+            // // buscar usuarios de google
+            // $sql = "SELECT * FROM google_users WHERE username='$username'";
+            // $stmt = $db->ejecutar($sql);
+            // $result = $db->listar($stmt);
+            // if (!empty($result)) {
+            //     return $result;
+            // }
 
-            // buscar usuarios de github
-            $sql = "SELECT * FROM github_users WHERE username='$username'";
-            $stmt = $db->ejecutar($sql);
-            $result = $db->listar($stmt);
-            if (!empty($result)) {
-                return $result;
-            }
+            // // buscar usuarios de github
+            // $sql = "SELECT * FROM github_users WHERE username='$username'";
+            // $stmt = $db->ejecutar($sql);
+            // $result = $db->listar($stmt);
+            // if (!empty($result)) {
+            //     return $result;
+            // }
         }
 
         public function select_user_log($db, $username){

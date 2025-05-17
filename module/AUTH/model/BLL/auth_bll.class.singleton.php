@@ -18,8 +18,8 @@
 		}
 
 		public function get_social_login_google_BLL($uid, $username, $email, $avatar){
-			if (!empty($this -> dao -> select_user_google($this->db, $username, $email))) {
-				$user = $this -> dao -> select_user_google($this->db, $username, $email);
+			if (!empty($this -> dao -> select_user_google($this->db, $username))) {
+				$user = $this -> dao -> select_user_google($this->db, $username);
 				// echo json_encode($user[0]['username']);
 				// exit;
 				$token = middleware::create_token($user[0]['username']);
@@ -28,7 +28,26 @@
 				$this -> dao -> insert_user_google($this->db, $uid, $username, $email, $avatar);
 				// echo json_encode($username);
 				// exit;
-				$user = $this -> dao -> select_user_google($this->db, $username, $email);
+				$user = $this -> dao -> select_user_google($this->db, $username);
+				// echo json_encode($user[0]['username']);
+				// exit;
+				$token = middleware::create_token($user[0]['username']);
+				return $token;
+			}
+		}
+
+		public function get_social_login_github_BLL($uid, $username, $email, $avatar){
+			if (!empty($this -> dao -> select_user_github($this->db, $email))) {
+				$user = $this -> dao -> select_user_github($this->db, $email);
+				// echo json_encode($user[0]['username']);
+				// exit;
+				$token = middleware::create_token($user[0]['username']);
+				return $token;
+            } else {
+				$this -> dao -> insert_user_github($this->db, $uid, $username, $email, $avatar);
+				// echo json_encode($username);
+				// exit;
+				$user = $this -> dao -> select_user_github($this->db, $email);
 				// echo json_encode($user[0]['username']);
 				// exit;
 				$token = middleware::create_token($user[0]['username']);
@@ -38,6 +57,16 @@
 
 		public function get_data_user_BLL($username){
 			return $this -> dao -> select_data_user($this -> db, $username);
+		}
+
+		public function get_data_user_google_bll($username){
+			return $this -> dao -> select_user_google($this -> db, $username);
+		}
+
+		public function get_data_user_github_bll($username){
+			// echo json_encode('hola github BLL '. $username);
+			// exit;
+			return $this -> dao -> select_user_github_menu($this -> db, $username);
 		}
 
 		public function get_user_log_BLL($username){

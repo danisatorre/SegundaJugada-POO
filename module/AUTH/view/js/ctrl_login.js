@@ -114,29 +114,37 @@ function google_login(){
     }); 
 }
 
+function github_login(){
+    $('.github-login-button').on('click', function(e) {
+        social_login('github');
+    });
+}
+
 function social_login(param){
     // console.log(param);
     // return false;
     authService = firebase_config();
     authService.signInWithPopup(provider_config(param))
     .then(function(result) {
-        // console.log('Hemos autenticado al usuario ', result.user);
+        console.log('Hemos autenticado al usuario ', result.user);
         email_name = result.user.email;
         // console.log(result.user.email);
         let username = email_name.split('@');
         // console.log(username[0]);
         // console.log(result.user.photoURL);
         // return false;
+        // console.log(result);
 
-        var social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
+        var social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL, provider: param};
         // console.log(social_user);
         // return false;
         if (result) {
             console.log('social_login: SI result');
-            ajaxPromise("index.php?module=auth&op=social_login_google", 'POST', 'JSON', social_user)
+            ajaxPromise("index.php?module=auth&op=social_login", 'POST', 'JSON', social_user)
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // return false;
+                localStorage.setItem("provider", param);
                 localStorage.setItem("token", JSON.stringify(data));
                 console.log('social_login despues de añadir el token en localStorage')
                     Swal.fire({
@@ -193,4 +201,5 @@ $(document).ready(function(){
     register_link();
     github_icon_login();
     google_login();
+    github_login();
 });

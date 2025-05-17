@@ -16,7 +16,7 @@
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'recover.html');
         }
 
-        function social_login_google(){
+        function social_login(){
             $uid = $_POST['id'];
             // echo json_encode($uid);
             // exit;
@@ -29,16 +29,31 @@
             $avatar = $_POST['avatar'];
             // echo json_encode($avatar);
             // exit;
-            $googleLogin = common::load_model('auth_model', 'getSocialLoginGoogle', [$uid, $username, $email, $avatar]);
-
-            if($googleLogin){
-                $_SESSION['username'] = $username;
-                $_SESSION['tiempo'] = time();
-                echo json_encode($googleLogin);
-                exit;
-            }else{
-                echo json_encode('ERRORgoogleLogin');
-                exit;
+            $provider = $_POST['provider'];
+            if($provider == "google"){
+                $googleLogin = common::load_model('auth_model', 'getSocialLoginGoogle', [$uid, $username, $email, $avatar]);
+                if($googleLogin){
+                    $_SESSION['username'] = $username;
+                    $_SESSION['tiempo'] = time();
+                    echo json_encode($googleLogin);
+                    exit;
+                }else{
+                    echo json_encode('ERRORgoogleLogin');
+                    exit;
+                }
+            }else if($provider == "github"){
+                // echo json_encode("social_login: github");
+                // exit;
+                $githubLogin = common::load_model('auth_model', 'getSocialLoginGithub', [$uid, $username, $email, $avatar]);
+                if($githubLogin){
+                    $_SESSION['username'] = $username;
+                    $_SESSION['tiempo'] = time();
+                    echo json_encode($githubLogin);
+                    exit;
+                }else{
+                    echo json_encode('ERRORgithubLogin');
+                    exit;
+                }
             }
         }
 
@@ -110,11 +125,20 @@
             $token = $_POST['token'];
             // echo json_encode($token);
             // exit;
+            $provider = $_POST['provider'];
             $json_token = middleware::decode_token($token);
             // echo json_encode($json_token);
             // echo json_encode($json_token['username']);
             // exit();
-            echo json_encode(common::load_model('auth_model', 'getDataUser', $json_token['username']));
+            if($provider == "google"){
+                echo json_encode(common::load_model('auth_model', 'getDataUserGoogle', $json_token['username']));
+            }else if($provider == "github"){
+                // echo json_encode('hola data_user github');
+                // exit;
+                echo json_encode(common::load_model('auth_model', 'getDataUserGithub', $json_token['username']));
+            }else {
+                echo json_encode(common::load_model('auth_model', 'getDataUser', $json_token['username']));
+            }
         }
 
         function control_user(){

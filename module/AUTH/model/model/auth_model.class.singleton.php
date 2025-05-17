@@ -23,8 +23,26 @@
             return $this -> bll -> get_social_login_google_BLL($uid, $username, $email, $avatar);
         }
 
+        public function getSocialLoginGithub($params){
+            $uid = $params[0];
+            $username = $params[1];
+            $email = $params[2];
+            $avatar = $params[3];
+            return $this -> bll -> get_social_login_github_BLL($uid, $username, $email, $avatar);
+        }
+
         public function getDataUser($username){
             return $this -> bll -> get_data_user_BLL($username);
+        }
+
+        public function getDataUserGoogle($username){
+            return $this -> bll -> get_data_user_google_bll($username);
+        }
+
+        public function getDataUserGithub($username){
+            // echo json_encode("hola getDataUserGithub " . $username);
+            // exit;
+            return $this -> bll -> get_data_user_github_bll($username);
         }
 
         public function getUserLog($username){
