@@ -24,9 +24,13 @@ function login() {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             if(localStorage.getItem('redirect_like')){
-                                setTimeout('window.location.href =' + friendlyURL("?module=shop") + ';', 2000);
+                                setTimeout(function() {
+                                    window.location.href = friendlyURL("?module=shop");
+                                }, 2000);
                             }else{
-                                setTimeout('window.location.href = "/SegundaJugada-POO/";', 2000);
+                                setTimeout(function() {
+                                    window.location.href = "/SegundaJugada-POO/";
+                                }, 2000);
                             }
                         }
                     });
@@ -155,9 +159,13 @@ function social_login(param){
                     }).then((result) => {
                         if (result.isConfirmed) {
                             if(localStorage.getItem('redirect_like')){
-                                setTimeout('window.location.href =' + friendlyURL("?module=shop") + ';', 2000);
+                                setTimeout(function() {
+                                    window.location.href = friendlyURL("?module=shop");
+                                }, 2000);
                             }else{
-                                setTimeout('window.location.href = "/SegundaJugada-POO/";', 2000);
+                                setTimeout(function() {
+                                    window.location.href = "/SegundaJugada-POO/";
+                                }, 2000);
                             }
                         }
                     });

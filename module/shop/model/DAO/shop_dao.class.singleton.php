@@ -207,6 +207,9 @@
 							WHERE u.username = '$username')
 			AND l.id_producto_like = '$id_producto'";
 
+			// echo json_encode($sql);
+			// exit;
+
 			$stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
 		}

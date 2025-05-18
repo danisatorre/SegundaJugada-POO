@@ -1400,7 +1400,9 @@ function click_like(id_producto, lugar){
         localStorage.setItem('id_producto', id_producto);
 
         toastr.warning("Inicia sesión para poder guardar en favoritos productos");
-        setTimeout("location.href="+ friendlyURL("?module=auth&op=login_view") +";", 1000);
+        setTimeout(function() {
+            window.location.href = friendlyURL("?module=auth&op=login_view");
+        }, 1000);
     }
 } // end click_like (manejar que hacer al hacer click sobre el corazón del like)
 
