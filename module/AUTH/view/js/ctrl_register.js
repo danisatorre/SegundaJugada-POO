@@ -21,8 +21,8 @@ function register() {
         // console.log("Validación de register correcta\nDatos introducidos:\n" + data)
         ajaxPromise('index.php?module=auth&op=register', 'POST', 'JSON', data)
             .then(function(register){
-                console.log(register)
-                return false;
+                // console.log(register)
+                // return false;
                 if(register == "error_email"){
                     document.getElementById('error_email_reg').innerHTML = "El correo introducido ya esta en úso por otro usuario, intenta con iniciar sesión"
                 }else if(register == "error_username"){
@@ -31,8 +31,7 @@ function register() {
                     document.getElementById('error_email_reg').innerHTML = "Ya existe una cuenta de google registrada con el correo introducido, prueba a iniciar sesión mediante google"
                 }else if(register == "error_email_github"){
                     document.getElementById('error_email_reg').innerHTML = "Ya existe una cuenta de github registrada con el correo introducido, prueba a iniciar sesión mediante github"
-                }
-                else{
+                }else{
                     Swal.fire({
                         title: "Cuenta creada",
                         text: "Pulsa en Iniciar Sesión para acceder a tu cuenta",

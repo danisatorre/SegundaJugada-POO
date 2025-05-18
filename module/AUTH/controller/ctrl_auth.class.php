@@ -156,37 +156,20 @@
                 exit;
             }
     
-            if ($checkEmail == "error_email") { // evitar redundancia de emails
-                $check_email = false;
+            // evitar redundancia de emails
+            if ($checkEmail == "error_email") {
                 echo json_encode("error_email");
                 exit;
-            } else {
-                $check_email = true;
-            }
-
-            if($checkUsername == "error_username"){ // evitar redundancia de nombres de usuario
-                $check_username = false;
+            } else if($checkUsername == "error_username"){
                 echo json_encode("error_username");
                 exit;
-            }else {
-                $check_username = true;
-            }
-
-            if ($checkEmailGoogle == "error_email") { // evitar redundancia de emails
-                $check_email_google = false;
+            } else if ($checkEmailGoogle == "error_email_google"){
                 echo json_encode("error_email_google");
                 exit;
-            } else {
-                $check_email_google = true;
-            }
-
-            if ($checkEmailGithub == "error_email_github") { // evitar redundancia de emails
-                $check_email_github = false;
+            } else if ($checkEmailGithub == "error_email_github"){
                 echo json_encode("error_email_github");
                 exit;
-            } else {
-                $check_email_github = true;
-            }
+            }else{
                 try {
                     $rdo = common::load_model('auth_model', 'insertLocalUser', [$username, $email, $pwd]);
                 } catch (Exception $e) {
@@ -201,6 +184,8 @@
                     echo json_encode("ok");
                     exit;
                 }
+            }
+                
         }
 
         function data_user(){
