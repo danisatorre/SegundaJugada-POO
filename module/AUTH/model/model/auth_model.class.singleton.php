@@ -79,6 +79,12 @@
         public function checkUsername($username){
             return $this -> bll -> check_username_BLL($username);
         }
+
+        public function welcomeEmail($params){
+            $email = $params[0];
+            $username = $params[1];
+            $this -> bll -> welcome_email_BLL($email, $username);
+        }
     } // auth_model
 
 ?>

@@ -3,7 +3,8 @@
     require_once("paths.php");
     require_once(SITE_ROOT . 'model/middleware_auth.php');
     require_once(SITE_ROOT . 'model/jwt.class.php');
-    
+    require_once(SITE_ROOT . 'utils/mail.inc.php');
+
     spl_autoload_extensions('.php,.inc.php,.class.php,.class.singleton.php');
     spl_autoload_register('loadClasses');
     

@@ -127,7 +127,6 @@
             $pwd = $_POST['pwd1_reg'];
             // echo json_encode($email);
             // exit;
-            // Comprobar que la email no exista
             try {
                 $checkEmail = common::load_model('auth_model', 'checkLocalEmail', $email);
             } catch (Exception $e) {
@@ -181,6 +180,7 @@
                     exit;
                 } else {
                     // echo json_encode($rdo); // ver consulta insert por consola
+                    $sendEmail = common::load_model('auth_model', 'welcomeEmail', [$email, $username]);
                     echo json_encode("ok");
                     exit;
                 }

@@ -100,6 +100,11 @@
 		public function check_username_BLL($username){
 			return $this -> dao -> check_username($this -> db, $username);
 		}
+
+		public function welcome_email_BLL($email, $username){
+			$dataEmail = ['tipo' => 'welcome', 'email' => $email, 'username' => $username ];
+			mail::send_email($dataEmail);
+		}
     } // auth_bll
 
 ?>
