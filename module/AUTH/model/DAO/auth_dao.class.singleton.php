@@ -84,7 +84,7 @@
         public function select_user_log($db, $username){
             // echo json_encode('Login DAO '. $username);
             // exit;
-            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE username='$username'";
+            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar`, `token_email`, `activate` FROM `users` WHERE username='$username'";
             $stmt = $db->ejecutar($sql);
             $result = $db->listar($stmt);
             if (empty($result)) {
@@ -99,7 +99,7 @@
         public function select_email_log($db, $email){
             // echo json_encode('hola email log DAO '. $email);
             // exit;
-            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar` FROM `users` WHERE email='$email'";
+            $sql = "SELECT `username`, `pwd`, `email`, `tipo_usuario`, `avatar`, `token_email`, `activate` FROM `users` WHERE email='$email'";
             $stmt = $db->ejecutar($sql);
             $result = $db->listar($stmt);
             if (empty($result)) {

@@ -14,6 +14,8 @@ function login() {
                     document.getElementById('error_username_log').innerHTML = "El usario o correo electrónico introducido no existe, asegurase de que lo a escrito correctamente"
                 } else if (login == "error_pwd") {
                     document.getElementById('error_pwd_log').innerHTML = "La contraseña es incorrecta"
+                } else if (login == "cuenta_desactivada"){
+                    document.getElementById('cuenta_desactivada').innerHTML = "Esta cuenta esta desactivada <br> Activa tu cuenta en el correo de registro que recibiste al registrarte"
                 } else {
                     localStorage.setItem("token", JSON.stringify(login));
                     Swal.fire({

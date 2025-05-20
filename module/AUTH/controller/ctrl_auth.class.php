@@ -86,14 +86,21 @@
                         echo json_encode("error_user");
                         exit;
                     }else{
+                        // echo json_encode($rdo_email);
+                        // exit;
                         if (password_verify($pwd, $rdo_email[0]['pwd'])) {
-                            $token = middleware::create_token($rdo_email[0]["username"]);
-                            // echo json_encode($rdo_email);
-                            // exit;
-                            $_SESSION['username'] = $rdo_email[0]['username']; //Guardamos el correo
-                            $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
-                            echo json_encode($token);
-                            exit;
+                            if($rdo_email[0]['activate'] == 0){
+                                echo json_encode('cuenta_desactivada');
+                                exit;
+                            }else{
+                                $token = middleware::create_token($rdo_email[0]["username"]);
+                                // echo json_encode($rdo_email);
+                                // exit;
+                                $_SESSION['username'] = $rdo_email[0]['username']; //Guardamos el correo
+                                $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+                                echo json_encode($token);
+                                exit;
+                            }
                         } else {
                             echo json_encode("error_pwd");
                             exit;
@@ -104,16 +111,23 @@
                     // exit;
                     // echo json_encode($rdo['pwd']);
                     // exit;
+                    // echo json_encode($rdo);
+                    // exit;
                     if (password_verify($pwd, $rdo[0]['pwd'])) {
-                        // echo json_encode('hola login antes de crear token');
-                        // exit;
-                        $token= middleware::create_token($rdo[0]["username"]);
-                        // echo json_encode($token);
-                        // exit;
-                        $_SESSION['username'] = $rdo[0]['username']; //Guardamos el usario 
-                        $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
-                        echo json_encode($token);
-                        exit;
+                        if($rdo[0]['activate'] == 0){
+                            echo json_encode('cuenta_desactivada');
+                            exit;
+                        }else{
+                            // echo json_encode('hola login antes de crear token');
+                            // exit;
+                            $token= middleware::create_token($rdo[0]["username"]);
+                            // echo json_encode($token);
+                            // exit;
+                            $_SESSION['username'] = $rdo[0]['username']; //Guardamos el usario 
+                            $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+                            echo json_encode($token);
+                            exit;
+                        }
                     } else {
                         echo json_encode("error_pwd");
                         exit;
