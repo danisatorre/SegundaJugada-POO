@@ -82,7 +82,13 @@
 		}
 
 		public function insert_local_user_BLL($username, $email, $pwd){
-			return $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd);
+			$tokenEmail = common::generate_token_secure(20);
+			$insert = $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd, $tokenEmail);
+			$dataEmail = ['tipo' => 'register', 'email' => $email, 'username' => $username, 'tokenEmail' => $tokenEmail];
+			$email = mail::send_email($dataEmail);
+			if(!empty($email)){
+				return $insert;
+			}
 		}
 		
 		public function check_google_email_BLL($email){

@@ -109,12 +109,12 @@
             }
         }
 
-        public function insert_local_user($db, $username, $email, $pwd){
+        public function insert_local_user($db, $username, $email, $pwd, $tokenEmail){
             $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]); // encriptar la contraseña
             $hashemail = md5(strtolower(trim($email)));
             $avatar = "https://i.pravatar.cc/500?u=$hashemail";
-            $sql ="   INSERT INTO `users`(`username`, `pwd`, `email`, `tipo_usuario`, `avatar`) 
-            VALUES ('$username','$hashpwd','$email','client','$avatar')";
+            $sql ="   INSERT INTO `users`(`username`, `pwd`, `email`, `tipo_usuario`, `avatar`, `token_email`, `activate`) 
+            VALUES ('$username','$hashpwd','$email','client','$avatar','$tokenEmail', 0)";
             return $stmt = $db->ejecutar($sql);
         }
 
@@ -171,17 +171,19 @@
         }
 
         public function select_verify_email($db, $tokenEmail){
-            $sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
+            $sql = "SELECT token_email FROM users WHERE token_email = '$tokenEmail'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
 
         public function update_verify_email($db, $tokenEmail){
-            $sql = "UPDATE users SET activate = 1, token_email= '' WHERE token_email = '$token_email'";
+            $sql = "UPDATE users 
+                    SET activate = 1, token_email= ''
+                    WHERE token_email = '$tokenEmail'";
 
             $stmt = $db->ejecutar($sql);
-            return "update";
+            return "updated";
         }
     } // auth_dao
 

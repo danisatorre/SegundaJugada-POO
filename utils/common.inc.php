@@ -74,8 +74,8 @@
         }
 
         public static function generate_token_secure($longitud){
-            echo 'hola generate_token_secure';
-            exit;
+            // echo 'hola generate_token_secure';
+            // exit;
             if ($longitud < 4) {
                 $longitud = 4;
             }

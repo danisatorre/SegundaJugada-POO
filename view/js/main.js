@@ -49,7 +49,8 @@ function load_menu() {
     if (token) {
         ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token, 'provider': provider })
             .then(function(data) {
-                // console.log(data);
+                console.log(data);
+                console.log(data[0].avatar);
                 // return false;
                 $('.submenu-cuenta').empty();
                 $('<a href="javascript:;"><img src="' + data[0].avatar + '" id="user-icon">' + data[0].username + '</a>' +
@@ -71,7 +72,7 @@ function load_menu() {
     } else {
         // console.log("load_menu: no hay token disponible");
         $('.submenu-cuenta').empty();
-        $('<a href="javascript:;"><img src="'+ TOP_PAGE_IMG +'user.svg" id="user-icon">Cuenta</a>' +
+        $('<a href="javascript:;"><img src="'+ TOP_PAGE_IMG +'user.svg" id="user-icon" style="border-radius: 0px;">Cuenta</a>' +
             '<ul>' +
             '<li><a href="'+ friendlyURL("?module=auth&op=login_view") +'">Iniciar sesión</a></li>' +
             '<li><a href="'+ friendlyURL("?module=auth&op=register_view") +'">Registrarse</a></li>' +
@@ -144,21 +145,28 @@ function load_content() {
         localStorage.setItem("token_email", path[4]);
         window.location.href = friendlyURL("?module=auth&op=recover_view");
     }else if (path[3] === 'verify') {
-        ajaxPromise(friendlyURL("?module=auth&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
-        .then(function(data) {
-            toastr.options.timeOut = 3000;
-            toastr.success('Correo verificado');
-            setTimeout(function() {
-                window.location.href = "/SegundaJugada-POO/";
-            }, 1000);
+        var tokenEmail = path[4];
+        // console.log(tokenEmail);
+        // return false;
+        ajaxPromise(friendlyURL("?module=auth&op=verify_email"), 'POST', 'JSON', {token_email: tokenEmail})
+        .then(function(verify) {
+            console.log(verify);
+            // return false;
+            if(verify == 'verify'){
+                toastr.options.timeOut = 2000;
+                toastr.success('Cuenta verificada correctamente');
+                setTimeout(function() {
+                    window.location.href = friendlyURL("?module=auth&op=login_view");
+                }, 2000);
+            }else if(verify == 'fail'){
+                toastr.error('Hubo un error al verificar tu cuenta');
+            }
         })
         .catch(function() {
-          console.error('Error: verify email error');
+            toastr.error('Hubo un error al verificar tu cuenta');
+            console.error('ERROR: verify email error');
         });
-    }else if (path[4] === 'view') {
-        $(".login-wrap").show();
-        $(".forget_html").hide();
-    }else if (path[4] === 'recover_view') {
+    }else if (path[3] === 'recover_view') {
         load_form_new_password();
     }
 }

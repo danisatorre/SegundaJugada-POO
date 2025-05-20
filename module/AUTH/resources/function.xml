@@ -56,4 +56,8 @@
         <name>verify_email</name>
         <uri>verify_email</uri>
     </function>
+    <function>
+        <name>verify</name>
+        <uri>verify</uri>
+    </function>
 </functions>

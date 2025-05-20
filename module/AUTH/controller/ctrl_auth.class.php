@@ -20,6 +20,10 @@
             ctrl_auth::recover_view();
         }
 
+        function verify(){
+            ctrl_auth::login_view();
+        }
+
         function social_login(){
             $uid = $_POST['id'];
             // echo json_encode($uid);
@@ -140,6 +144,9 @@
         }
 
         function register(){
+            // $pruebaTokenSecure = common::generate_token_secure(20);
+            // echo json_encode($pruebaTokenSecure);
+            // exit;
             $email = $_POST['email_reg'];
             $username = $_POST['username_reg'];
             $pwd = $_POST['pwd1_reg'];
@@ -198,7 +205,7 @@
                     exit;
                 } else {
                     // echo json_encode($rdo); // ver consulta insert por consola
-                    $sendEmail = common::load_model('auth_model', 'welcomeEmail', [$email, $username]);
+                    // $sendEmail = common::load_model('auth_model', 'welcomeEmail', [$email, $username]);
                     echo json_encode("ok");
                     exit;
                 }
@@ -288,7 +295,11 @@
         }
 
         function verify_email() {
+            // echo json_encode('hola verify_email');
+            // exit;
             $tokenEmail = $_POST['token_email'];
+            // echo json_encode($tokenEmail);
+            // exit;
             echo json_encode(common::load_model('auth_model', 'getVerifyEmail', $tokenEmail));
         }
 

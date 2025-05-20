@@ -21,7 +21,7 @@ function register() {
         // console.log("Validación de register correcta\nDatos introducidos:\n" + data)
         ajaxPromise('index.php?module=auth&op=register', 'POST', 'JSON', data)
             .then(function(register){
-                // console.log(register)
+                console.log(register)
                 // return false;
                 if(register == "error_email"){
                     document.getElementById('error_email_reg').innerHTML = "El correo introducido ya esta en úso por otro usuario, intenta con iniciar sesión"
