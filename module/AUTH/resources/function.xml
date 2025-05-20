@@ -13,6 +13,10 @@
         <uri>recover_view</uri>
     </function>
     <function>
+        <name>recover</name>
+        <uri>recover</uri>
+    </function>
+    <function>
         <name>login</name>
         <uri>login</uri>
     </function>
@@ -47,5 +51,9 @@
     <function>
         <name>social_login</name>
         <uri>social_login</uri>
+    </function>
+    <function>
+        <name>verify_email</name>
+        <uri>verify_email</uri>
     </function>
 </functions>

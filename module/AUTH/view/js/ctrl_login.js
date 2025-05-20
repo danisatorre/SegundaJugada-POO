@@ -45,13 +45,17 @@ function login() {
 
 function key_login() {
     // console.log("hola key_login")
-    $(".login-button").keypress(function(e) {
+    let path = window.location.pathname.split('/');
+    if(path[3] == 'login_view'){
+        console.log('key_login enter');
+        $(".login-button").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) {
             e.preventDefault();
             login();
         }
     });
+    }
 
 
 } // key_login
@@ -106,6 +110,10 @@ function google_icon_login(){
 
 function register_link(){
     document.getElementById('register-link').href = friendlyURL("?module=auth&op=register_view");
+}
+
+function recuperar_pwd(){
+    document.getElementById('recuperar_pwd').href = friendlyURL("?module=auth&op=recover_view");
 }
 
 function github_icon_login(){
@@ -201,12 +209,160 @@ function provider_config(param){
     }
 }
 
+///////////////
+/// RECOVER ///
+///////////////
+
+function verify_pwd_recover(){
+    var pwd_regex = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
+    var error = false;
+
+    if (document.getElementById('new_pwd_recover').value.length === 0) {
+        document.getElementById('error_new_pwd').innerHTML = "Tienes que escribir la contraseña";
+        error = true;
+    } else if (document.getElementById('new_pwd_recover').value.length < 8) {
+        document.getElementById('error_new_pwd').innerHTML = "La contraseña tiene que tener 8 caracteres como mínimo";
+        error = true;
+    } else if (!pwd_regex.test(document.getElementById('new_pwd_recover').value)) {
+        document.getElementById('error_new_pwd').innerHTML = "La contraseña debe contener mínimo 8 caracteres, mayúsculas, minúsculas y símbolos especiales";
+        error = true;
+    } else {
+        document.getElementById('error_new_pwd').innerHTML = "";
+    }
+
+    if (document.getElementById('repeat_pwd_recover').value !== document.getElementById('new_pwd_recover').value) {
+        document.getElementById('error_repeat_pwd').innerHTML = "Las contraseñas no coinciden";
+        error = true;
+    }
+
+    if(error == true){
+        return 0;
+    }
+}
+
+function verify_recover_email(){
+    var mail_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    var error = false;
+
+    if (document.getElementById('email_recover').value.length === 0) {
+        document.getElementById('error_email_recover').innerHTML = "Tienes que escribir un correo";
+        error = true;
+    } else {
+        if (!mail_regex.test(document.getElementById('email_recover').value)) {
+            document.getElementById('error_email_recover').innerHTML = "El formato del mail es invalido";
+            error = true;
+        } else {
+            document.getElementById('error_email_recover').innerHTML = "";
+        }
+    }
+
+    if(error == true){
+        return 0;
+    }
+}
+
+function click_recover_email(){
+    let path = window.location.pathname.split('/');
+    var redirectRecover = localStorage.getItem('redirect_recover');
+    $(document).on("click", ".recover-email-button", function() {
+        if(verify_recover_email() != 0){
+            // $('.recover-form').remove();
+            // $('.recover-email-container').empty();
+            // show_recover_pwd();
+        }
+    });
+    // no hacer caso al click del enter si redirectRecover es = a yes
+    if(path[3] == 'recover_view'){
+        if(redirectRecover != 'yes'){
+            console.log('click_recover_email enter');
+            $(".recover-email-button").keypress(function(e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) {
+                e.preventDefault();
+                if(verify_recover_email() != 0){
+                    // $('.recover-form').remove();
+                    // show_recover_pwd();
+                    alert('hola click_recover_email');
+                }
+            }
+            });
+        }
+    }
+}
+
+function click_recover_pwd(){
+    let path = window.location.pathname.split('/');
+    var redirect_recover = localStorage.getItem('redirect_recover');
+    $(document).on("click", ".recover-pwd-button", function(){
+        if(verify_pwd_recover() != 0){
+            update_recover_pwd();
+        }
+    });
+    // solo hacer caso al click del enter si en la ruta esta recover_view y si redirectRecover es = a yes
+    if(path[3] == 'recover_view'){
+        if(redirect_recover == 'yes'){
+            console.log('click_recover_pwd enter');
+            $(".recover-pwd-button").keypress(function(e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    e.preventDefault();
+                    if(verify_pwd_recover() != 0){
+                        update_recover_pwd();
+                    }
+                }
+            });
+        }
+    }
+}
+
+function update_recover_pwd(){
+    alert('Hola update_recover_pwd');
+}
+
+function show_recover_pwd(){
+    $('<div></div>').attr('class', "recover-codigo-container").appendTo('.show-recover-pwd')
+            .html(
+            `
+            <form class="pwd-form" method="POST">
+                <div class="form-group">
+                    <label for="new_password">Nueva Contraseña</label>
+                    <input type="password" id="new_pwd_recover" name="new_pwd_recover" placeholder="Introduce tu nueva contraseña">
+                    <span id="error_new_pwd" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="repeat_password">Repetir Contraseña</label>
+                    <input type="password" id="repeat_pwd_recover" name="repeat_pwd_recover" placeholder="Repite tu nueva contraseña">
+                    <span id="error_repeat_pwd" class="error"></span>
+                </div>
+                <button type="button" class="recover-pwd-button">Cambiar contraseña</button>
+            </form>
+            `
+            );
+}
+
+function recover_pwd_redirect(){
+    if(localStorage.getItem('redirect_recover') == 'yes'){
+        $tokenEmail = localStorage.getItem('token_email');
+        localStorage.removeItem('token_email');
+        localStorage.removeItem('redirect_recover');
+        console.log($tokenEmail);
+        $('.recover-form').remove();
+        show_recover_pwd();
+    }
+} // carga directamente el formulario de cambiar contraseña si en la ruta existe el tokenEmail
+
 $(document).ready(function(){
+    // RECOVER
+    click_recover_email();
+    click_recover_pwd();
+    recover_pwd_redirect();
+    // LOGIN
     key_login()
     button_login()
     timeoutSesion()
     google_icon_login();
     register_link();
+    recuperar_pwd();
     github_icon_login();
     google_login();
     github_login();

@@ -16,6 +16,10 @@
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'recover.html');
         }
 
+        function recover(){
+            ctrl_auth::recover_view();
+        }
+
         function social_login(){
             $uid = $_POST['id'];
             // echo json_encode($uid);
@@ -267,6 +271,11 @@
             session_destroy();
 
             echo json_encode('logout_correct');
+        }
+
+        function verify_email() {
+            $tokenEmail = $_POST['token_email'];
+            echo json_encode(common::load_model('auth_model', 'getVerifyEmail', $tokenEmail));
         }
 
     } //ctrl_auth

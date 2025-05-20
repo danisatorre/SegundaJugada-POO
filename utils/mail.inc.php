@@ -13,7 +13,7 @@
             $tipo = $dataEmail['tipo'];
             $email = $dataEmail['email'];
             $username = $dataEmail['username'];
-            
+
             switch ($tipo) {
                 case 'welcome';
                     try {
@@ -47,12 +47,12 @@
                         exit('Error: ' . $e->getMessage());
                     }
                 break;
-                case 'validate';
+                case 'register';
                     try {
                         $sendEmail = $resend->emails->send([
-                            'from' => 'Acme <onboarding@resend.dev>',
+                            'from' => 'SegundaJugada <onboarding@resend.dev>',
                             'to' => ['danisatorrecucart@gmail.com'],
-                            'subject' => 'Hello world',
+                            'subject' => 'SegundaJugada - Validar cuenta',
                             'html' => '<strong>Hola ;)</strong>',
                         ]);
                     } catch (\Exception $e) {
@@ -60,10 +60,16 @@
                     }
                 break;
                 case 'recover';
-                    // $email['fromEmail'] = 'secondchanceonti@gmail.com';
-                    // $email['inputEmail'] = 'secondchanceonti@gmail.com';
-                    // $email['inputMatter'] = 'Recover password';
-                    // $email['inputMessage'] = "<a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/recover/$email[token]'>Click here for recover your password.</a>";
+                    try {
+                        $sendEmail = $resend->emails->send([
+                            'from' => 'SegundaJugada <onboarding@resend.dev>',
+                            'to' => ['danisatorrecucart@gmail.com'],
+                            'subject' => 'SegundaJugada - Recuperar contraseña',
+                            'html' => '<strong>Hola ;)</strong>',
+                        ]);
+                    } catch (\Exception $e) {
+                        exit('Error: ' . $e->getMessage());
+                    }
                 break;
             }
             // return self::resend_mail($email);

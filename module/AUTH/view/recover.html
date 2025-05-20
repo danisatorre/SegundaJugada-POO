@@ -1,6 +1,22 @@
-<div class="recover-container">
-    <h1 class="recover-title">Recuperar Contraseña</h1>
+<div class="recover-email-container">
+    <h1 class="recover-title">Recuperar contraseña</h1>
     <form class="recover-form" method="POST">
+        <div class="form-group">
+            <label for="email_recover">Correo electrónico</label>
+            <input type="text" id="email_recover" name="email_recover" placeholder="Introduce tu correo electrónico ">
+            <span id="error_email_recover" class="error"></span>
+        </div>
+        <button type="button" class="recover-email-button">Enviar correo de recuperación</button>
+    </form>
+</div>
+
+<div class="show-recover-pwd">
+
+</div>
+
+<!-- <div class="recover-pwd-container">
+    <h1 class="recover-title">Recuperar Contraseña</h1>
+    <form class="pwd-form" method="POST">
         <div class="form-group">
             <label for="new_password">Nueva Contraseña</label>
             <input type="password" id="new_password" name="new_password" placeholder="Introduce tu nueva contraseña">
@@ -11,6 +27,6 @@
             <input type="password" id="repeat_password" name="repeat_password" placeholder="Repite tu nueva contraseña">
             <span id="error_repeat_password" class="error"></span>
         </div>
-        <button type="submit" class="recover-button">Cambiar Contraseña</button>
+        <button type="submit" class="recover-pwd-button">Cambiar contraseña</button>
     </form>
-</div>
+</div> -->

@@ -151,6 +151,15 @@ footer {
     margin-right: 10px;
 }
 
+#recuperar_pwd{
+    color:#777;
+    font-size:14px;
+}
+
+#recuperar_pwd:hover{
+    color:#777;
+}
+
 .login-button:hover {
     background-color: goldenrod;
     border-color: orange;

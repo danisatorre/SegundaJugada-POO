@@ -169,6 +169,20 @@
                 return "error_username";
             }
         }
+
+        public function select_verify_email($db, $tokenEmail){
+            $sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function update_verify_email($db, $tokenEmail){
+            $sql = "UPDATE users SET activate = 1, token_email= '' WHERE token_email = '$token_email'";
+
+            $stmt = $db->ejecutar($sql);
+            return "update";
+        }
     } // auth_dao
 
 ?>

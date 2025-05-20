@@ -85,6 +85,10 @@
             $username = $params[1];
             $this -> bll -> welcome_email_BLL($email, $username);
         }
+
+        public function getVerifyEmail($tokenEmail){
+            return $this -> bll -> get_verify_email_BLL($tokenEmail);
+        }
     } // auth_model
 
 ?>

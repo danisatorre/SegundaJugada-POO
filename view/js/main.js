@@ -133,19 +133,27 @@ function click_shop() {
 
 function load_content() {
     let path = window.location.pathname.split('/');
+    console.log(path);
+    // return false;
     
-    if(path[5] === 'recover'){
-        window.location.href = friendlyURL("?module=login&op=recover_view");
-        localStorage.setItem("token_email", path[6]);
-    }else if (path[5] === 'verify') {
-        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
+    if(path[3] === 'recover'){
+        console.log('hola recover load_content');
+        localStorage.setItem('redirect_recover', 'yes');
+        // return false;
+        // localStorage.setItem('token_email', 'pruebaTokenEmail');
+        localStorage.setItem("token_email", path[4]);
+        window.location.href = friendlyURL("?module=auth&op=recover_view");
+    }else if (path[3] === 'verify') {
+        ajaxPromise(friendlyURL("?module=auth&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
         .then(function(data) {
             toastr.options.timeOut = 3000;
-            toastr.success('Email verified');
-            setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+            toastr.success('Correo verificado');
+            setTimeout(function() {
+                window.location.href = "/SegundaJugada-POO/";
+            }, 1000);
         })
         .catch(function() {
-          console.log('Error: verify email error');
+          console.error('Error: verify email error');
         });
     }else if (path[4] === 'view') {
         $(".login-wrap").show();
@@ -156,6 +164,7 @@ function load_content() {
 }
 
 $(document).ready(function() {
+    load_content();
     load_menu();
     click_logout();
     click_shop();

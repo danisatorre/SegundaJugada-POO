@@ -105,6 +105,15 @@
 			$dataEmail = ['tipo' => 'welcome', 'email' => $email, 'username' => $username ];
 			mail::send_email($dataEmail);
 		}
+
+		public function get_verify_email_BLL($tokenEmail){
+			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
+				$this -> dao -> update_verify_email($this->db, $tokenEmail);
+				return 'verify';
+			} else {
+				return 'fail';
+			}
+		}
     } // auth_bll
 
 ?>
