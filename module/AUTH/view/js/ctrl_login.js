@@ -302,7 +302,12 @@ function send_email_recover_pwd(email){
     ajaxPromise(friendlyURL('?module=auth&op=send_email_recover_pwd'), 'POST', 'JSON', {email: email})
         .then(function(data){
             console.log(data);
-            toastr.info('Te hemos envíado un correo electrónico para que restablezcas tu contraseña');
+            if(data == 'fail'){
+                toastr.error('No se pudo encontrar el email introducido');
+                document.getElementById('error_email_recover').innerHTML = "No existe una cuenta local con el correo introducido. Recuerda que si has iniciado sesión con alguna red social no puedes cambiar tu contraseña";
+            }else{
+                toastr.info('Te hemos envíado un correo electrónico para que restablezcas tu contraseña');
+            }
         })
 }
 

@@ -124,6 +124,10 @@
 		public function send_email_recover_pwd_BLL($email){
 			// echo json_encode($email);
 			// exit;
+			$checkEmail = $this -> dao -> check_local_email($this -> db, $email);
+			if($checkEmail == 1){ // si el email introducido no existe devolver fail para avisar al cliente
+				return 'fail';
+			}
 			$tokenEmail = common::generate_token_secure(20);
 			$insertToken = $this -> dao -> insert_token_recover_pwd($this->db, $email, $tokenEmail);
 			$dataEmail = ['tipo' => 'recover', 'email' => $email, 'tokenEmail' => $tokenEmail];

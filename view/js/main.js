@@ -153,7 +153,7 @@ function load_content() {
             console.log(verify);
             // return false;
             if(verify == 'verify'){
-                toastr.options.timeOut = 2000;
+                // toastr.options.timeOut = 2000;
                 toastr.success('Cuenta verificada correctamente');
                 setTimeout(function() {
                     window.location.href = friendlyURL("?module=auth&op=login_view");
