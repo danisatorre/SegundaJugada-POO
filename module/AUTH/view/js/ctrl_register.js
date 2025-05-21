@@ -34,7 +34,7 @@ function register() {
                 }else{
                     Swal.fire({
                         title: "Cuenta creada",
-                        text: "Pulsa en Iniciar Sesión para acceder a tu cuenta",
+                        text: "Te hemos enviado un correo electronico para que verifiques tu cuenta",
                         icon: "success",
                         confirmButtonText: "Iniciar Sesión"
                     }).then((result) => {

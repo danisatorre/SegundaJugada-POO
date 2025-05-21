@@ -120,6 +120,27 @@
 				return 'fail';
 			}
 		}
+
+		public function send_email_recover_pwd_BLL($email){
+			// echo json_encode($email);
+			// exit;
+			$tokenEmail = common::generate_token_secure(20);
+			$insertToken = $this -> dao -> insert_token_recover_pwd($this->db, $email, $tokenEmail);
+			$dataEmail = ['tipo' => 'recover', 'email' => $email, 'tokenEmail' => $tokenEmail];
+			$email = mail::send_email($dataEmail);
+			if(!empty($email)){
+				return $insertToken;
+			}
+		}
+
+		public function get_verify_token_BLL($tokenEmail, $pwd){
+			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
+				$updatePWD = $this -> dao -> update_pwd($this->db, $tokenEmail, $pwd);
+				return 'ok';
+			}else{
+				return 'fail';
+			}
+		}
     } // auth_bll
 
 ?>

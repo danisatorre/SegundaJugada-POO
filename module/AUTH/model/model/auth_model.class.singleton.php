@@ -89,6 +89,17 @@
         public function getVerifyEmail($tokenEmail){
             return $this -> bll -> get_verify_email_BLL($tokenEmail);
         }
+
+
+        public function sendEmailRecoverPwd($email){
+            return $this -> bll -> send_email_recover_pwd_BLL($email);
+        }
+
+        public function getVerifyToken($params){
+            $tokenEmail = $params[0];
+            $pwd = $params[1];
+            return $this -> bll -> get_verify_token_BLL($tokenEmail, $pwd);
+        }
     } // auth_model
 
 ?>

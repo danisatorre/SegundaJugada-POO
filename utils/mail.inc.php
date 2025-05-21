@@ -85,8 +85,29 @@
                         $sendEmail = $resend->emails->send([
                             'from' => 'SegundaJugada <onboarding@resend.dev>',
                             'to' => ['danisatorrecucart@gmail.com'],
-                            'subject' => 'SegundaJugada - Recuperar contraseña',
-                            'html' => '<strong>Hola ;)</strong>',
+                            'subject' => 'SegundaJugada - Restablecer contraseña',
+                            'html' => '
+                                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eaeaea; border-radius: 10px; overflow: hidden;">
+                                    <div style="background-color: #f5f5f5; padding: 20px; text-align: center;">
+                                        <img src="https://i.imgur.com/BEsqPIV.png" alt="logo" style="max-width: 150px; margin-bottom: 10px;">
+                                        <h2 style="color: #333;">¿Olvidaste tu contraseña?</h2>
+                                    </div>
+                                    <div style="padding: 20px; color: #444;">
+                                        <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta asociada al correo <strong>' . $email . '</strong>.</p>
+                                        <p>Si hiciste esta solicitud, haz clic en el botón de abajo para cambiar la contraseña de tu cuenta:</p>
+                                        <div style="text-align: center; margin: 30px 0;">
+                                            <a href="http://localhost/SegundaJugada-POO/auth/recover/'. $tokenEmail .'" style="background-color: goldenrod; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                                                Cambiar contraseña
+                                            </a>
+                                        </div>
+                                        <p>Si no solicitaste este cambio, puedes ignorar este correo. Tu contraseña seguirá siendo la misma.</p>
+                                        <p style="margin-top: 30px;">Gracias por confiar en nosotros.<br>— El equipo de SegundaJugada</p>
+                                    </div>
+                                    <div style="background-color: #f0f0f0; padding: 15px; text-align: center; font-size: 12px; color: #999;">
+                                        SegundaJugada © ' . date("Y") . ' | <a href="https://localhost/SegundaJugada-POO/" style="color: #999;">www.segundajugada.com</a>
+                                    </div>
+                                </div>
+                            ',
                         ]);
                     } catch (\Exception $e) {
                         exit('Error: ' . $e->getMessage());

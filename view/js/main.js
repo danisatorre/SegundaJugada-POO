@@ -138,7 +138,7 @@ function load_content() {
     // return false;
     
     if(path[3] === 'recover'){
-        console.log('hola recover load_content');
+        // console.log('hola recover load_content');
         localStorage.setItem('redirect_recover', 'yes');
         // return false;
         // localStorage.setItem('token_email', 'pruebaTokenEmail');
@@ -166,8 +166,6 @@ function load_content() {
             toastr.error('Hubo un error al verificar tu cuenta');
             console.error('ERROR: verify email error');
         });
-    }else if (path[3] === 'recover_view') {
-        load_form_new_password();
     }
 }
 

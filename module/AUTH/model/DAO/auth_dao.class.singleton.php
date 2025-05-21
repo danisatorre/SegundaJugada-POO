@@ -185,6 +185,24 @@
             $stmt = $db->ejecutar($sql);
             return "updated";
         }
+
+        public function insert_token_recover_pwd($db, $email, $tokenEmail){
+            $sql = "UPDATE users
+                    SET activate = 0, token_email = '$tokenEmail'
+                    WHERE email = '$email'";
+
+            return $stmt = $db->ejecutar($sql);
+        }
+
+        public function update_pwd($db, $tokenEmail, $pwd){
+            $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]);
+
+            $sql = "UPDATE users
+                    SET activate = 1, token_email = '', pwd = '$hashpwd'
+                    WHERE token_email = '$tokenEmail'";
+
+            return $stmt = $db->ejecutar($sql);
+        }
     } // auth_dao
 
 ?>

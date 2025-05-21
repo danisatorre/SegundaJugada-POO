@@ -294,13 +294,27 @@
             echo json_encode('logout_correct');
         }
 
-        function verify_email() {
+        function verify_email() { // validar el email al registrarse
             // echo json_encode('hola verify_email');
             // exit;
             $tokenEmail = $_POST['token_email'];
             // echo json_encode($tokenEmail);
             // exit;
             echo json_encode(common::load_model('auth_model', 'getVerifyEmail', $tokenEmail));
+        }
+
+
+        function send_email_recover_pwd(){ // enviar el email para cambiar la contraseña
+            $email = $_POST['email'];
+            // echo json_encode($email);
+            // exit;
+            echo json_encode(common::load_model('auth_model', 'sendEmailRecoverPwd', $email));
+        }
+        
+        function verify_token(){ // validar el token al querer cambiar la contraseña
+            $tokenEmail = $_POST['token_email'];
+            $pwd = $_POST['pwd'];
+            echo json_encode(common::load_model('auth_model', 'getVerifyToken', [$tokenEmail, $pwd]));
         }
 
     } //ctrl_auth

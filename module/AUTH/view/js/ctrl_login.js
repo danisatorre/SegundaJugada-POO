@@ -1,5 +1,6 @@
 // console.log("hola ctrl_login.js")
 // return false;
+let tokenEmailRecoverPwd = null;
 
 function login() {
     // console.log("hola login")
@@ -268,9 +269,11 @@ function click_recover_email(){
     var redirectRecover = localStorage.getItem('redirect_recover');
     $(document).on("click", ".recover-email-button", function() {
         if(verify_recover_email() != 0){
+            var email = $('#email_recover').val();
             // $('.recover-form').remove();
             // $('.recover-email-container').empty();
             // show_recover_pwd();
+            send_email_recover_pwd(email);
         }
     });
     // no hacer caso al click del enter si redirectRecover es = a yes
@@ -282,9 +285,11 @@ function click_recover_email(){
             if (code == 13) {
                 e.preventDefault();
                 if(verify_recover_email() != 0){
+                    var email = $('#email_recover').val();
                     // $('.recover-form').remove();
                     // show_recover_pwd();
-                    alert('hola click_recover_email');
+                    // alert('hola click_recover_email');
+                    send_email_recover_pwd(email);
                 }
             }
             });
@@ -292,12 +297,22 @@ function click_recover_email(){
     }
 }
 
+function send_email_recover_pwd(email){
+    console.log(email);
+    ajaxPromise(friendlyURL('?module=auth&op=send_email_recover_pwd'), 'POST', 'JSON', {email: email})
+        .then(function(data){
+            console.log(data);
+            toastr.info('Te hemos envíado un correo electrónico para que restablezcas tu contraseña');
+        })
+}
+
 function click_recover_pwd(){
     let path = window.location.pathname.split('/');
     var redirect_recover = localStorage.getItem('redirect_recover');
     $(document).on("click", ".recover-pwd-button", function(){
         if(verify_pwd_recover() != 0){
-            update_recover_pwd();
+            var pwd = $('#new_pwd_recover').val();
+            update_recover_pwd(tokenEmailRecoverPwd, pwd);
         }
     });
     // solo hacer caso al click del enter si en la ruta esta recover_view y si redirectRecover es = a yes
@@ -309,7 +324,8 @@ function click_recover_pwd(){
                 if (code == 13) {
                     e.preventDefault();
                     if(verify_pwd_recover() != 0){
-                        update_recover_pwd();
+                        var pwd = $('#new_pwd_recover').val();
+                        update_recover_pwd(tokenEmailRecoverPwd, pwd);
                     }
                 }
             });
@@ -317,8 +333,24 @@ function click_recover_pwd(){
     }
 }
 
-function update_recover_pwd(){
-    alert('Hola update_recover_pwd');
+function update_recover_pwd(tokenEmail, pwd){
+    // alert('Hola update_recover_pwd\n' + tokenEmail);
+    ajaxPromise(friendlyURL('?module=auth&op=verify_token'), 'POST', 'JSON', {token_email: tokenEmail, pwd: pwd})
+        .then(function(data){
+            console.log(data);
+            if(data == 'ok'){
+                // toastr.succes('Contraseña actualizada correctamente');
+                setTimeout(function() {
+                    window.location.href = friendlyURL("?module=auth&op=login_view");
+                }, 2000);
+            }else if(data == 'fail'){
+                toastr.error('Hubo un error al acutalizar la contraseña');
+                setTimeout(function(){
+                    window.location.href = '/SegundaJugada-POO/';
+                }, 2000);
+            }
+        });
+    
 }
 
 function show_recover_pwd(){
@@ -344,10 +376,10 @@ function show_recover_pwd(){
 
 function recover_pwd_redirect(){
     if(localStorage.getItem('redirect_recover') == 'yes'){
-        $tokenEmail = localStorage.getItem('token_email');
+        tokenEmailRecoverPwd = localStorage.getItem('token_email');
         localStorage.removeItem('token_email');
         localStorage.removeItem('redirect_recover');
-        console.log($tokenEmail);
+        console.log(tokenEmailRecoverPwd);
         $('.recover-form').remove();
         show_recover_pwd();
     }
