@@ -81,8 +81,9 @@
 			return $this -> dao -> select_email_log($this -> db, $email);
 		}
 
-		public function insert_local_user_BLL($username, $email, $pwd){
-			$tokenEmail = common::generate_token_secure(20);
+		public function insert_local_user_BLL($username, $email, $pwd){ // registrar un usuario local
+			// $tokenEmail = common::generate_token_secure(20);
+			$tokenEmail = middleware::create_token_24h($email);
 			$insert = $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd, $tokenEmail);
 			$dataEmail = ['tipo' => 'register', 'email' => $email, 'username' => $username, 'tokenEmail' => $tokenEmail];
 			$email = mail::send_email($dataEmail);
@@ -113,6 +114,12 @@
 		}
 
 		public function get_verify_email_BLL($tokenEmail){
+			$tokenDec = middleware::decode_token($tokenEmail);
+			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
+				$deleteAccount = $this -> dao -> token_register_expires($this -> db, $tokenEmail);
+				return 'fail';
+			}
+
 			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
 				$this -> dao -> update_verify_email($this->db, $tokenEmail);
 				return 'verify';
@@ -128,7 +135,8 @@
 			if($checkEmail == 1){ // si el email introducido no existe devolver fail para avisar al cliente
 				return 'fail';
 			}
-			$tokenEmail = common::generate_token_secure(20);
+			// $tokenEmail = common::generate_token_secure(20);
+			$tokenEmail = middleware::create_token_24h($email);
 			$insertToken = $this -> dao -> insert_token_recover_pwd($this->db, $email, $tokenEmail);
 			$dataEmail = ['tipo' => 'recover', 'email' => $email, 'tokenEmail' => $tokenEmail];
 			$email = mail::send_email($dataEmail);
@@ -138,6 +146,12 @@
 		}
 
 		public function get_verify_token_BLL($tokenEmail, $pwd){
+			// decodificar el token para verificar si su tiempo ha expirado
+			$tokenDec = middleware::decode_token($tokenEmail);
+			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
+				return 'fail';
+			}
+			// si el token es válido verificar que usuario existe con el mismo token para cambiar su contraseña
 			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
 				$updatePWD = $this -> dao -> update_pwd($this->db, $tokenEmail, $pwd);
 				return 'ok';

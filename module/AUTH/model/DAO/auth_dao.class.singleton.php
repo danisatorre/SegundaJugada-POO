@@ -203,6 +203,15 @@
 
             return $stmt = $db->ejecutar($sql);
         }
+
+        public function token_register_expires($db, $tokenEmail){
+            $sql = "DELETE *
+                    FROM users
+                    WHERE token_email = '$tokenEmail'";
+
+            $stmt = $db->ejecutar($sql);
+            return 1;
+        }
     } // auth_dao
 
 ?>
