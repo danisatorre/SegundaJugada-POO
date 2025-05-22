@@ -81,10 +81,10 @@
 			return $this -> dao -> select_email_log($this -> db, $email);
 		}
 
-		public function insert_local_user_BLL($username, $email, $pwd){ // registrar un usuario local
+		public function insert_local_user_BLL($username, $email, $pwd, $tlf){ // registrar un usuario local
 			// $tokenEmail = common::generate_token_secure(20);
 			$tokenEmail = middleware::create_token_2h($email);
-			$insert = $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd, $tokenEmail);
+			$insert = $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd, $tokenEmail, $tlf);
 			$dataEmail = ['tipo' => 'register', 'email' => $email, 'username' => $username, 'tokenEmail' => $tokenEmail];
 			$email = mail::send_email($dataEmail);
 			if(!empty($email)){

@@ -109,12 +109,12 @@
             }
         }
 
-        public function insert_local_user($db, $username, $email, $pwd, $tokenEmail){
+        public function insert_local_user($db, $username, $email, $pwd, $tokenEmail, $tlf){
             $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]); // encriptar la contraseña
             $hashemail = md5(strtolower(trim($email)));
             $avatar = "https://i.pravatar.cc/500?u=$hashemail";
-            $sql ="   INSERT INTO `users`(`username`, `pwd`, `email`, `tipo_usuario`, `avatar`, `token_email`, `activate`) 
-            VALUES ('$username','$hashpwd','$email','client','$avatar','$tokenEmail', 0)";
+            $sql ="   INSERT INTO `users`(`username`, `pwd`, `email`, `tipo_usuario`, `avatar`, `telf`, `token_email`, `activate`)
+            VALUES ('$username','$hashpwd','$email','client','$avatar','$tlf','$tokenEmail', 0)";
             return $stmt = $db->ejecutar($sql);
         }
 

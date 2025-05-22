@@ -61,7 +61,8 @@
             $username = $params[0];
             $email = $params[1];
             $pwd = $params[2];
-            return $this -> bll -> insert_local_user_BLL($username, $email, $pwd);
+            $tlf = $params[3];
+            return $this -> bll -> insert_local_user_BLL($username, $email, $pwd, $tlf);
         }
 
         public function checkGoogleEmail($email){

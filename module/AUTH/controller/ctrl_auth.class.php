@@ -150,6 +150,12 @@
             $email = $_POST['email_reg'];
             $username = $_POST['username_reg'];
             $pwd = $_POST['pwd1_reg'];
+            $prefijoTLF = $_POST['phone_prefix'];
+            $numTLF = $_POST['phone_number'];
+            // juntar el prefijo con el número de teléfono introducido
+            $tlf = $prefijoTLF . $numTLF;
+            // echo json_encode($tlf);
+            // exit;
             // echo json_encode($email);
             // exit;
             try {
@@ -195,7 +201,7 @@
                 exit;
             }else{
                 try {
-                    $rdo = common::load_model('auth_model', 'insertLocalUser', [$username, $email, $pwd]);
+                    $rdo = common::load_model('auth_model', 'insertLocalUser', [$username, $email, $pwd, $tlf]);
                 } catch (Exception $e) {
                     echo json_encode("error");
                     exit;
