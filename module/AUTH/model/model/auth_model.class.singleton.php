@@ -100,6 +100,10 @@
             $pwd = $params[1];
             return $this -> bll -> get_verify_token_BLL($tokenEmail, $pwd);
         }
+
+        public function getPrefijosPhone(){
+            return $this -> bll -> get_prefijos_phone_BLL();
+        }
     } // auth_model
 
 ?>

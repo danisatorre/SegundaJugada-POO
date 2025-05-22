@@ -317,6 +317,10 @@
             echo json_encode(common::load_model('auth_model', 'getVerifyToken', [$tokenEmail, $pwd]));
         }
 
+        function get_prefijos_phone(){
+            echo json_encode(common::load_model('auth_model', 'getPrefijosPhone'));
+        }
+
     } //ctrl_auth
 
 ?>

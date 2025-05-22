@@ -19,6 +19,7 @@ function register() {
         // alert("Validación de register correcta\nDatos introducidos:\n" + data)
         // return false;
         // console.log("Validación de register correcta\nDatos introducidos:\n" + data)
+        // return false;
         ajaxPromise('index.php?module=auth&op=register', 'POST', 'JSON', data)
             .then(function(register){
                 console.log(register)
@@ -71,6 +72,7 @@ function validate_register() {
     var username_regex = /^(?=.{5,}$)(?=.*[a-zA-Z0-9]).*$/;
     var mail_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     var pwd_regex = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
+    var phone_regex = /^[0-9]{9}$/;
     var error = false;
 
     if (document.getElementById('username_reg').value.length === 0) {
@@ -128,12 +130,46 @@ function validate_register() {
         document.getElementById('error_pwd2_reg').innerHTML = "";
     }
 
+    if (document.getElementById('phone_prefix').value === "") {
+        document.getElementById('error_phone').innerHTML = "Selecciona un prefijo";
+        error = true;
+    } else if (document.getElementById('phone_number').value.length === 0) {
+        document.getElementById('error_phone').innerHTML = "Introduce el número de teléfono";
+        error = true;
+    } else if (!phone_regex.test(document.getElementById('phone_number').value)) {
+        document.getElementById('error_phone').innerHTML = "El número de teléfono no es válido";
+        error = true;
+    } else {
+        document.getElementById('error_phone').innerHTML = "";
+    }
+
     if (error == true) {
         return 0;
     }
 }
 
+function load_prefijos_phone(){ // cargar los prefijos de teléfonos en los select
+    ajaxPromise(friendlyURL('?module=auth&op=get_prefijos_phone'), 'POST', 'JSON')
+        .then(function(prefijos) {
+            // console.log(prefijos);
+            // return false;
+            var select = $('#phone_prefix');
+            select.empty();
+            select.append('<option value="">Prefijo</option>');
+            for (row in prefijos) {
+                select.append(
+                    '<option value="+' + prefijos[row].country_phone_code + '">' +
+                    '+' + prefijos[row].country_phone_code + ' (' + prefijos[row].country_name + ')' +
+                    '</option>'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar los prefijos:', error);
+        });
+}
+
 $(document).ready(function() {
+    load_prefijos_phone();
     key_register();
     button_register();
     google_icon_register();

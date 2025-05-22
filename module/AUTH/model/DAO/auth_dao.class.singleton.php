@@ -213,6 +213,13 @@
             $stmt = $db->ejecutar($sql);
             return 1;
         }
+
+        public function select_prefijos_phone($db){
+            $sql ="SELECT * FROM country";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
     } // auth_dao
 
 ?>

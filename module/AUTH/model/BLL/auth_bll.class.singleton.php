@@ -160,6 +160,10 @@
 				return 'fail';
 			}
 		}
+
+		public function get_prefijos_phone_BLL(){
+			return $this -> dao -> select_prefijos_phone($this->db);
+		}
     } // auth_bll
 
 ?>

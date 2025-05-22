@@ -21,6 +21,17 @@
             <input type="password" id="pwd2_reg" name="pwd2_reg" placeholder="Confirma tu contraseña">
             <span id="error_pwd2_reg" class="error"></span>
         </div>
+        <div class="form-group-register">
+            <label for="phone_prefix">Teléfono</label>
+            <div style="display: flex; gap: 8px;">
+                <select id="phone_prefix" name="phone_prefix" style="width: 80px;">
+                    <option value="">Prefijo</option>
+                    <!-- llenar los prefijos dinámicamente de la db -->
+                </select>
+                <input type="text" id="phone_number" name="phone_number" placeholder="Número de teléfono" style="flex:1;">
+            </div>
+            <span id="error_phone" class="error"></span>
+        </div>
         <button type="submit" class="register-button">Registrarse</button>
         <p class="login-link">¿Ya tienes cuenta? <a id="login-link">Inicia sesión aquí</a></p>
     </form>
