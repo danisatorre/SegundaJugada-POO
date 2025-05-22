@@ -305,10 +305,10 @@ function send_email_recover_pwd(email){
             if(data == 'fail'){
                 toastr.error('No se pudo encontrar el email introducido');
                 document.getElementById('error_email_recover').innerHTML = "No existe una cuenta local con el correo introducido. Recuerda que si has iniciado sesión con alguna red social no puedes cambiar tu contraseña";
-            }else{
+            }else if(data == 'ok'){
                 toastr.info('Te hemos envíado un correo electrónico para que restablezcas tu contraseña');
             }
-        })
+        });
 }
 
 function click_recover_pwd(){
@@ -353,6 +353,11 @@ function update_recover_pwd(tokenEmail, pwd){
                 setTimeout(function(){
                     window.location.href = '/SegundaJugada-POO/';
                 }, 2000);
+            }else if(data == 'expired'){
+                toastr.error('El tiempo para restablecer tu contraseña caduco. Vuelve a pedir otro correo para restablecer tu contraseña');
+                setTimeout(function(){
+                    window.location.href = '/SegundaJugada-POO/';
+                }, 5000);
             }
         });
     

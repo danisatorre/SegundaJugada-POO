@@ -160,6 +160,11 @@ function load_content() {
                 }, 2000);
             }else if(verify == 'fail'){
                 toastr.error('Hubo un error al verificar tu cuenta');
+            }else if(verify == 'expired'){
+                toastr.error('El enlaze para validar tu cuenta caduco. Vuelve a registrarte');
+                setTimeout(function() {
+                    window.location.href = friendlyURL("?module=auth&op=register_view");
+                }, 3000);
             }
         })
         .catch(function() {

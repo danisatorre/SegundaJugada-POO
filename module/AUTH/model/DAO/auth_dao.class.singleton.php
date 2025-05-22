@@ -191,7 +191,8 @@
                     SET activate = 0, token_email = '$tokenEmail'
                     WHERE email = '$email'";
 
-            return $stmt = $db->ejecutar($sql);
+            $stmt = $db->ejecutar($sql);
+            return 'ok';
         }
 
         public function update_pwd($db, $tokenEmail, $pwd){
@@ -205,7 +206,7 @@
         }
 
         public function token_register_expires($db, $tokenEmail){
-            $sql = "DELETE *
+            $sql = "DELETE
                     FROM users
                     WHERE token_email = '$tokenEmail'";
 

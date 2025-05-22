@@ -23,11 +23,11 @@
         return $token;
     }
 
-    public static function create_token_24h($param){
+    public static function create_token_2h($param){
         $jwt = parse_ini_file(UTILS . 'jwt.ini');
         $header = $jwt['JWT_HEADER'];
         $secret = $jwt['JWT_SECRET'];
-        $payload = '{"iat":"' . time() . '","exp":"' . time() + (60) . '","username":"' . $param . '"}';
+        $payload = '{"iat":"' . time() . '","exp":"' . time() + (7200) . '","username":"' . $param . '"}';
 
         $JWT = new JWT;
         $token = $JWT->encode($header, $payload, $secret);

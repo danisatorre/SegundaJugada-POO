@@ -83,7 +83,7 @@
 
 		public function insert_local_user_BLL($username, $email, $pwd){ // registrar un usuario local
 			// $tokenEmail = common::generate_token_secure(20);
-			$tokenEmail = middleware::create_token_24h($email);
+			$tokenEmail = middleware::create_token_2h($email);
 			$insert = $this -> dao -> insert_local_user($this -> db, $username, $email, $pwd, $tokenEmail);
 			$dataEmail = ['tipo' => 'register', 'email' => $email, 'username' => $username, 'tokenEmail' => $tokenEmail];
 			$email = mail::send_email($dataEmail);
@@ -116,8 +116,9 @@
 		public function get_verify_email_BLL($tokenEmail){
 			$tokenDec = middleware::decode_token($tokenEmail);
 			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
+				// si el token ha expirado se elimina la cuenta
 				$deleteAccount = $this -> dao -> token_register_expires($this -> db, $tokenEmail);
-				return 'fail';
+				return 'expired';
 			}
 
 			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
@@ -136,12 +137,12 @@
 				return 'fail';
 			}
 			// $tokenEmail = common::generate_token_secure(20);
-			$tokenEmail = middleware::create_token_24h($email);
+			$tokenEmail = middleware::create_token_2h($email);
 			$insertToken = $this -> dao -> insert_token_recover_pwd($this->db, $email, $tokenEmail);
 			$dataEmail = ['tipo' => 'recover', 'email' => $email, 'tokenEmail' => $tokenEmail];
 			$email = mail::send_email($dataEmail);
 			if(!empty($email)){
-				return $insertToken;
+				return 'ok';
 			}
 		}
 
@@ -149,7 +150,7 @@
 			// decodificar el token para verificar si su tiempo ha expirado
 			$tokenDec = middleware::decode_token($tokenEmail);
 			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
-				return 'fail';
+				return 'expired';
 			}
 			// si el token es válido verificar que usuario existe con el mismo token para cambiar su contraseña
 			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
