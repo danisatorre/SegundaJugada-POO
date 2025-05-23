@@ -105,6 +105,10 @@
         public function getPrefijosPhone(){
             return $this -> bll -> get_prefijos_phone_BLL();
         }
+
+        public function sendOTP($param){
+            return $this -> bll -> send_OTP_BLL($param);
+        }
     } // auth_model
 
 ?>

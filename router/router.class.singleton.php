@@ -66,7 +66,7 @@
                 // exit;
                 foreach ($modules as $row) {
                     if (in_array($this -> uriModule, (Array) $row -> uri)) {
-                        $path = MODULES_PATH . $row->name . '/controller/ctrl_' . (string) $row->name . '.class.php';
+                        $path = MODULES_PATH . $row->name . '/controller/ctrl_' . (string) $row->name . '.class.singleton.php';
                         // echo $path;
                         // exit;
                         if (file_exists($path)) {
@@ -77,7 +77,9 @@
                             $this -> moduleName = (String) $row -> name;
                             // echo $controllerName;
                             // exit;
-                            return new $controllerName;
+                            //return new $controllerName;
+
+                            return $controllerName::getInstance();
                         }
                     }
                 }

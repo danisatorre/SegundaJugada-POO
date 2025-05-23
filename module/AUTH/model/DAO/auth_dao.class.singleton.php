@@ -220,6 +220,40 @@
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
+
+        public function check_username_or_email_local($db, $param){
+            $sql = "SELECT *
+                    FROM users
+                    WHERE username = '$param'
+                    OR email = '$param'";
+
+            $stmt = $db -> ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+
+        public function select_log_intents($db, $param){
+            $sql = "SELECT log_intents
+                    FROM users
+                    WHERE username = '$param'
+                    OR email = '$param'";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+
+        public function update_log_intents($db, $param){
+            $sql = "UPDATE users
+                    SET log_intents = log_intents + 1
+                    WHERE username = '$param'
+                    OR email = '$param'";
+            
+            $stmt = $db -> ejecutar($sql);
+        }
     } // auth_dao
 
 ?>

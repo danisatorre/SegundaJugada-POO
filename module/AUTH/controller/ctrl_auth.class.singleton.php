@@ -3,6 +3,18 @@
     @session_start();
 
     class ctrl_auth{
+        
+        static $_instance;
+
+		function __construct() {
+		}
+
+		public static function getInstance() {
+			if (!(self::$_instance instanceof self)) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
 
         function login_view(){
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'login.html');
@@ -106,6 +118,7 @@
                                 exit;
                             }
                         } else {
+                            $otp = common::load_model('auth_model', 'sendOTP', $username);
                             echo json_encode("error_pwd");
                             exit;
                         }
@@ -133,6 +146,7 @@
                             exit;
                         }
                     } else {
+                        $otp = common::load_model('auth_model', 'sendOTP', $username);
                         echo json_encode("error_pwd");
                         exit;
                     }

@@ -7,6 +7,17 @@
         $_SESSION['tiempo'] = time(); // devuelve la fecha actual
     }
     class ctrl_home{
+        static $_instance;
+
+		function __construct() {
+		}
+
+		public static function getInstance() {
+			if (!(self::$_instance instanceof self)) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
         
         function view(){
             // echo 'hola view home';

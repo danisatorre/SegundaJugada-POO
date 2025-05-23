@@ -3,6 +3,7 @@
     require __DIR__ . '/vendor/autoload.php';
 
     class mail {
+        
         public static function send_email($dataEmail) {
             // echo 'hola send_email';
             // exit;
@@ -116,8 +117,6 @@
             }
             return 'email_send';
         }
-
-        
 
         public static function resend_mail($values){
             echo 'hola resend_mail';

@@ -8,6 +8,18 @@
     }
 
     class ctrl_shop{
+
+        static $_instance;
+
+		function __construct() {
+		}
+
+		public static function getInstance() {
+			if (!(self::$_instance instanceof self)) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
         
         function view(){
             // echo 'hola view shop';

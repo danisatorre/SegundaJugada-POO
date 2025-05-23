@@ -164,6 +164,32 @@
 		public function get_prefijos_phone_BLL(){
 			return $this -> dao -> select_prefijos_phone($this->db);
 		}
+
+		public function send_OTP_BLL($param){
+			// echo json_encode('hola send OTP BLL');
+			// exit;
+			$check = $this -> dao -> check_username_or_email_local($this -> db, $param);
+			// echo json_encode('hola despues de check username or email local' . $check);
+			// exit;
+			if($check == 1){
+				$intents = $this -> dao -> select_log_intents($this -> db, $param);
+				// echo json_encode('var intents send OTP BLL' . $intents[0]['log_intents']);
+				// exit;
+				if($intents[0]['log_intents'] == 3){
+					$otp = common::generate_token_secure(4);
+					// echo json_encode($otp);
+					// exit;
+					ultramsg::sendOTP($otp);
+				}else{
+					// echo json_encode('hola log_intents <3');
+					// exit;
+					$this -> dao -> update_log_intents($this -> db, $param);
+					return 1;
+				}
+			}
+			return 0;
+			
+		}
     } // auth_bll
 
 ?>
