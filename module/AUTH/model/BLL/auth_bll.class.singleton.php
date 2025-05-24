@@ -176,10 +176,13 @@
 				// echo json_encode('var intents send OTP BLL' . $intents[0]['log_intents']);
 				// exit;
 				if($intents[0]['log_intents'] == 3){
+					$dataUser = $this -> dao -> select_username_or_email_local($this->db, $param);
 					$otp = common::generate_token_secure(4);
+					$this -> dao -> set_otp_db($this->db, $param, $otp);
 					// echo json_encode($otp);
 					// exit;
-					ultramsg::sendOTP($otp);
+					$dataMessage = ['tipo' => 'otp', 'otp' => $otp, 'tlf' => $dataUser[0]['telf']];
+					ultramsg::sendOTP($dataMessage);
 				}else{
 					// echo json_encode('hola log_intents <3');
 					// exit;

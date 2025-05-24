@@ -254,6 +254,25 @@
             
             $stmt = $db -> ejecutar($sql);
         }
+
+        public function select_username_or_email_local($db, $param){
+            $sql = "SELECT *
+                    FROM users
+                    WHERE username = '$param'
+                    OR email = '$param'";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+
+        public function set_otp_db($db, $param, $otp){
+            $sql = "UPDATE users
+                    SET otp = '$otp'
+                    WHERE username = '$param'
+                    OR email = '$param'";
+            
+            $stmt = $db -> ejecutar($sql);
+        }
     } // auth_dao
 
 ?>
