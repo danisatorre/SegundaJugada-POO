@@ -13,15 +13,22 @@
             $tipo = $dataMessage['tipo'];
             $otp = $dataMessage['otp'];
             $tlf = $dataMessage['tlf'];
+            // echo json_encode('hola ultramsg');
+            // exit;
 
-            switch($tipo){
-                case 'otp';
-                    $to=$tlf;
-                    $body="Tu código OTP para iniciar sesión es:\n" . $otp;
-                    $api=$client->sendChatMessage($to,$body);
-                break;
+            try {
+                switch($tipo){
+                    case 'otp':
+                        $to = $tlf;
+                        $body = "Tu código OTP para iniciar sesión es:\n" . $otp;
+                        $api = $client->sendChatMessage($to, $body);
+                        break;
+                }
+                return 'whatsapp_send';
+            } catch (\Exception $e) {
+                // Puedes loguear el error o devolverlo para debug
+                return 'error: ' . $e->getMessage();
             }
-            return 'whatsapp_send';
         }
 
     } // ultramsg

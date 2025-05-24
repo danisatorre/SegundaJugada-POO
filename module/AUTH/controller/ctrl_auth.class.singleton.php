@@ -119,6 +119,12 @@
                             }
                         } else {
                             $otp = common::load_model('auth_model', 'sendOTP', $username);
+                            // echo json_encode($otp);
+                            // exit;
+                            if($otp == "otp_send"){
+                                echo json_encode($otp);
+                                exit;
+                            }
                             echo json_encode("error_pwd");
                             exit;
                         }
@@ -147,6 +153,12 @@
                         }
                     } else {
                         $otp = common::load_model('auth_model', 'sendOTP', $username);
+                        // echo json_encode($otp);
+                        // exit;
+                        if($otp == "otp_send"){
+                            echo json_encode($otp);
+                            exit;
+                        }
                         echo json_encode("error_pwd");
                         exit;
                     }
@@ -322,7 +334,6 @@
             // exit;
             echo json_encode(common::load_model('auth_model', 'getVerifyEmail', $tokenEmail));
         }
-
 
         function send_email_recover_pwd(){ // enviar el email para cambiar la contraseña
             $email = $_POST['email'];

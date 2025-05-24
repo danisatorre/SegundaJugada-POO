@@ -175,14 +175,19 @@
 				$intents = $this -> dao -> select_log_intents($this -> db, $param);
 				// echo json_encode('var intents send OTP BLL' . $intents[0]['log_intents']);
 				// exit;
-				if($intents[0]['log_intents'] == 3){
+				if($intents[0]['log_intents'] == 3){ // enviar OTP por whatsapp al fallar 3 veces la contraseña
 					$dataUser = $this -> dao -> select_username_or_email_local($this->db, $param);
 					$otp = common::generate_token_secure(4);
 					$this -> dao -> set_otp_db($this->db, $param, $otp);
 					// echo json_encode($otp);
 					// exit;
 					$dataMessage = ['tipo' => 'otp', 'otp' => $otp, 'tlf' => $dataUser[0]['telf']];
-					ultramsg::sendOTP($dataMessage);
+					// echo json_encode($dataMessage);
+					// exit;
+					//ultramsg::send_whatsapp($dataMessage);
+					return 'otp_send';
+					
+					
 				}else{
 					// echo json_encode('hola log_intents <3');
 					// exit;

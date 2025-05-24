@@ -91,7 +91,6 @@
             return $this -> bll -> get_verify_email_BLL($tokenEmail);
         }
 
-
         public function sendEmailRecoverPwd($email){
             return $this -> bll -> send_email_recover_pwd_BLL($email);
         }

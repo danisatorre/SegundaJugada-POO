@@ -10,14 +10,17 @@ function login() {
         ajaxPromise('index.php?module=auth&op=login', 'POST', 'JSON', data)
             .then(function(login) {
                 console.log('Login: ', login)
-                return false;
+                // return false;
                 if (login == "error_user") {
                     document.getElementById('error_username_log').innerHTML = "El usario o correo electrónico introducido no existe, asegurase de que lo a escrito correctamente"
                 } else if (login == "error_pwd") {
                     document.getElementById('error_pwd_log').innerHTML = "La contraseña es incorrecta"
                 } else if (login == "cuenta_desactivada"){
                     document.getElementById('cuenta_desactivada').innerHTML = "Esta cuenta esta desactivada <br> Activa tu cuenta en el correo de registro que recibiste al registrarte"
-                } else {
+                } else if (login == "otp_send"){
+                    document.getElementById('otp_send').innerHTML = "Acabamos de enviarte un código único de inicio de sesión a tu whatsapp para que puedas acceder a tu cuenta<br>Haz click <span id='otp_click'>aquí</span> para iniciar sesión con el código que recibiste en tu whatsapp"
+                } 
+                else {
                     localStorage.setItem("token", JSON.stringify(login));
                     Swal.fire({
                         title: "Has iniciado sesión",
@@ -395,11 +398,69 @@ function recover_pwd_redirect(){
     }
 } // carga directamente el formulario de cambiar contraseña si en la ruta existe el tokenEmail
 
+function otp_click(){
+    $(document).on("click", "#otp_click", function(){
+        showModalOTP();
+    });
+}
+
+function showModalOTP(){
+    $('#otp_modal_content, #otp_modal').remove();
+
+    // Crea el contenedor del modal
+    $('<div></div>').attr('id', 'otp_modal').appendTo('body');
+    $('<div></div>').attr('id', 'otp_modal_content').appendTo('#otp_modal');
+
+    // Estructura del contenido del modal
+    $('#otp_modal_content').html(`
+        <form id="otp_form" class="otp-modal-form" autocomplete="off">
+            <div class="otp-modal-title">Validar código OTP</div>
+            <div class="otp-modal-group">
+                <label for="otp_username">Introduce tu usuario o correo electrónico</label>
+                <input type="text" id="otp_username" name="otp_username" placeholder="Usuario / Correo electrónico" autocomplete="off">
+                <span id="error_otp_username" class="otp-modal-error"></span>
+            </div>
+            <a id='message_otp'>Introduce aquí el código otp que has recibido en tu whatsapp</a><br>
+            <div class="otp-modal-group otp-modal-otp-row">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_1" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_2" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_3" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_4" autocomplete="off">
+            </div>
+            <span id="error_otp_code" class="otp-modal-error"></span>
+            <button type="button" id="validate_otp_btn" class="otp-modal-btn">Validar código</button>
+        </form>
+    `);
+
+    $("#otp_modal_content").dialog({
+        title: "Validar código OTP",
+        width: 400,
+        height: 350,
+        resizable: false,
+        modal: true,
+        hide: "scale",
+        show: "scale",
+        close: function() {
+            $('#otp_modal, #otp_modal_content').remove();
+        }
+    });
+
+    $('#validate_otp_btn').on('click', function() {
+        verify_userOTP();
+    });
+
+} // mostrar el modal para el formulario del OTP
+
+function verify_userOTP(){
+    alert('hola verify_userOTP');
+}
+
 $(document).ready(function(){
     // RECOVER
     click_recover_email();
     click_recover_pwd();
     recover_pwd_redirect();
+    otp_click();
     // LOGIN
     key_login()
     button_login()
