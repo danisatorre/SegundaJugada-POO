@@ -19,8 +19,7 @@ function login() {
                     document.getElementById('cuenta_desactivada').innerHTML = "Esta cuenta esta desactivada <br> Activa tu cuenta en el correo de registro que recibiste al registrarte"
                 } else if (login == "otp_send"){
                     document.getElementById('otp_send').innerHTML = "Acabamos de enviarte un código único de inicio de sesión a tu whatsapp para que puedas acceder a tu cuenta<br>Haz click <span id='otp_click'>aquí</span> para iniciar sesión con el código que recibiste en tu whatsapp"
-                } 
-                else {
+                } else {
                     localStorage.setItem("token", JSON.stringify(login));
                     Swal.fire({
                         title: "Has iniciado sesión",
@@ -422,12 +421,12 @@ function showModalOTP(){
             </div>
             <a id='message_otp'>Introduce aquí el código otp que has recibido en tu whatsapp</a><br>
             <div class="otp-modal-group otp-modal-otp-row">
-                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_1" autocomplete="off">
-                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_2" autocomplete="off">
-                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_3" autocomplete="off">
-                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_4" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_1" name="otp_digit_1" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_2" name="otp_digit_2" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_3" name="otp_digit_3" autocomplete="off">
+                <input type="text" maxlength="1" class="otp-digit" id="otp_digit_4" name="otp_digit_4" autocomplete="off">
             </div>
-            <span id="error_otp_code" class="otp-modal-error"></span>
+            <span id="error_otp_code" class="error"></span>
             <button type="button" id="validate_otp_btn" class="otp-modal-btn">Validar código</button>
         </form>
     `);
@@ -452,7 +451,40 @@ function showModalOTP(){
 } // mostrar el modal para el formulario del OTP
 
 function verify_userOTP(){
-    alert('hola verify_userOTP');
+    // alert('hola verify_userOTP');
+    var data = $('.otp-modal-form').serialize();
+    // console.log(data);
+    // return false;
+    ajaxPromise(friendlyURL('?module=auth&op=verify_OTP'), 'POST', 'JSON', data)
+        .then(function(verify){
+            //console.log(verify);
+            // return false;
+            if(verify == "otp_no_valido"){
+                document.getElementById('error_otp_code').innerHTML = "El código OTP introducido no es válido"
+            }else if(verify == "cuenta_desactivada"){
+                document.getElementById('error_otp_code').innerHTML = "Esta cuenta esta desactivada <br> Activa tu cuenta en el correo de registro que recibiste al registrarte"
+            }else {
+                localStorage.setItem("token", JSON.stringify(verify));
+                    Swal.fire({
+                        title: "Has iniciado sesión",
+                        text: "Pulsa en Continuar para ver todos nuestros productos",
+                        icon: "success",
+                        confirmButtonText: "Continuar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            if(localStorage.getItem('redirect_like')){
+                                setTimeout(function() {
+                                    window.location.href = friendlyURL("?module=shop");
+                                }, 2000);
+                            }else{
+                                setTimeout(function() {
+                                    window.location.href = "/SegundaJugada-POO/";
+                                }, 2000);
+                            }
+                        }
+                    });
+            }
+        });
 }
 
 $(document).ready(function(){

@@ -72,4 +72,8 @@
         <name>get_prefijos_phone</name>
         <uri>get_prefijos_phone</uri>
     </function>
+    <function>
+        <name>verify_OTP</name>
+        <uri>verify_OTP</uri>
+    </function>
 </functions>

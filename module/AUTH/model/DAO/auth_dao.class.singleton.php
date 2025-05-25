@@ -273,6 +273,29 @@
             
             $stmt = $db -> ejecutar($sql);
         }
+
+        public function verify_OTP($db, $user, $otp){
+            $sql = "SELECT *
+                    FROM users
+                    WHERE (username = '$user' OR email = '$user')
+                    AND otp = '$otp'";
+            
+            $stmt = $db -> ejecutar($sql);
+            $result = $db->listar($stmt);
+            if (empty($result)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+
+        public function disable_OTP_db($db, $username){
+            $sql = "UPDATE users
+                    SET otp = '', log_intents = 0
+                    WHERE username = '$username'";
+
+            $stmt = $db -> ejecutar($sql);
+        }
     } // auth_dao
 
 ?>

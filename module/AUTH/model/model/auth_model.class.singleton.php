@@ -108,6 +108,20 @@
         public function sendOTP($param){
             return $this -> bll -> send_OTP_BLL($param);
         }
+
+        public function verifyOTP($params){
+            $user = $params[0];
+            $otp = $params[1];
+            return $this -> bll -> verify_OTP_BLL($user, $otp);
+        }
+
+        public function iniciarSesionOTP($user){
+            return $this -> bll -> iniciar_sesion_OTP_BLL($user);
+        }
+
+        public function disableOTPDb($username){
+            $this -> bll -> disable_OTP_db_BLL($username);
+        }
     } // auth_model
 
 ?>

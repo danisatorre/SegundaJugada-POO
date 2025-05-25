@@ -114,6 +114,7 @@
                                 // exit;
                                 $_SESSION['username'] = $rdo_email[0]['username']; //Guardamos el correo
                                 $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+                                common::load_model('auth_model', 'disableOTPDb', $rdo_email[0]['username']);
                                 echo json_encode($token);
                                 exit;
                             }
@@ -148,6 +149,7 @@
                             // exit;
                             $_SESSION['username'] = $rdo[0]['username']; //Guardamos el usario 
                             $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+                            common::load_model('auth_model', 'disableOTPDb', $rdo[0]['username']);
                             echo json_encode($token);
                             exit;
                         }
@@ -350,6 +352,38 @@
 
         function get_prefijos_phone(){
             echo json_encode(common::load_model('auth_model', 'getPrefijosPhone'));
+        }
+
+        function verify_OTP(){
+            $user = $_POST['otp_username'];
+            $digit1 = $_POST['otp_digit_1'];
+            $digit2 = $_POST['otp_digit_2'];
+            $digit3 = $_POST['otp_digit_3'];
+            $digit4 = $_POST['otp_digit_4'];
+            $otp = $digit1 . $digit2 . $digit3 . $digit4;
+            // echo json_encode($user);
+            // echo json_encode($otp);
+            // exit;
+            $verifyOTP = common::load_model('auth_model', 'verifyOTP', [$user, $otp]);
+            if($verifyOTP == 0){
+                echo json_encode('otp_no_valido');
+                exit;
+            }else if($verifyOTP == 1){
+                $rdo = common::load_model('auth_model', 'iniciarSesionOTP', $user);
+                if($rdo[0]['activate'] == 0){
+                    echo json_encode('cuenta_desactivada');
+                    exit;
+                }else{
+                    $token= middleware::create_token($rdo[0]["username"]);
+                    // echo json_encode($token);
+                    // exit;
+                    $_SESSION['username'] = $rdo[0]['username'];
+                    $_SESSION['tiempo'] = time();
+                    common::load_model('auth_model', 'disableOTPDb', $rdo[0]['username']);
+                    echo json_encode($token);
+                    exit;
+                }
+            }
         }
 
     } //ctrl_auth

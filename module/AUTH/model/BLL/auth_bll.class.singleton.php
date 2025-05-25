@@ -202,6 +202,18 @@
 			return 0;
 			
 		}
+
+		public function verify_OTP_BLL($user, $otp){
+			return $this -> dao -> verify_OTP($this -> db, $user, $otp);
+		}
+
+		public function iniciar_sesion_OTP_BLL($user){
+			return $this -> dao -> select_username_or_email_local($this -> db, $user);
+		}
+
+		public function disable_OTP_db_BLL($username){
+			$this -> dao -> disable_OTP_db($this -> db, $username);
+		}
     } // auth_bll
 
 ?>
