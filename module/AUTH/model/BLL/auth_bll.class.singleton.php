@@ -181,10 +181,14 @@
 					$this -> dao -> set_otp_db($this->db, $param, $otp);
 					// echo json_encode($otp);
 					// exit;
+					// echo json_encode($dataUser[0]['telf']);
+					// exit;
 					$dataMessage = ['tipo' => 'otp', 'otp' => $otp, 'tlf' => $dataUser[0]['telf']];
 					// echo json_encode($dataMessage);
 					// exit;
-					//ultramsg::send_whatsapp($dataMessage);
+					$sendOTP = ultramsg::send_whatsapp($dataMessage);
+					// echo json_encode($sendOTP);
+					// exit;
 					return 'otp_send';
 					
 					

@@ -3,7 +3,7 @@
         'name' => 'resend/resend-php-example',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2f09ba1932ab305d329c6d26bac527420d7e721f',
+        'reference' => '622be7760306f9075ed0b839ebc44d9320cc9897',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,7 +103,7 @@
         'resend/resend-php-example' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2f09ba1932ab305d329c6d26bac527420d7e721f',
+            'reference' => '622be7760306f9075ed0b839ebc44d9320cc9897',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
