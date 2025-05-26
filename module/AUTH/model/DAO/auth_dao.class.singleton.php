@@ -262,8 +262,7 @@
         public function select_username_or_email_local($db, $param){
             $sql = "SELECT *
                     FROM users
-                    WHERE username = '$param'
-                    OR email = '$param'";
+                    WHERE (username = '$param' OR email = '$param')";
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
