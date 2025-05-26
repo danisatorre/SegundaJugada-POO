@@ -115,14 +115,15 @@
 
 		public function get_verify_email_BLL($tokenEmail){
 			$tokenDec = middleware::decode_token($tokenEmail);
+			$user = $tokenDec['username'];
 			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
 				// si el token ha expirado se elimina la cuenta
 				$deleteAccount = $this -> dao -> token_register_expires($this -> db, $tokenEmail);
 				return 'expired';
 			}
 
-			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
-				$this -> dao -> update_verify_email($this->db, $tokenEmail);
+			if($this -> dao -> select_verify_email_token($this->db, $tokenEmail, $user)){
+				$this -> dao -> update_verify_email($this->db, $tokenEmail, $user);
 				return 'verify';
 			} else {
 				return 'fail';
@@ -149,12 +150,15 @@
 		public function get_verify_token_BLL($tokenEmail, $pwd){
 			// decodificar el token para verificar si su tiempo ha expirado
 			$tokenDec = middleware::decode_token($tokenEmail);
+			// echo json_encode($tokenDec['username']);
+			// exit;
+			$user = $tokenDec['username'];
 			if (!$tokenDec || !isset($tokenDec['exp']) || time() > $tokenDec['exp']) {
 				return 'expired';
 			}
 			// si el token es válido verificar que usuario existe con el mismo token para cambiar su contraseña
-			if($this -> dao -> select_verify_email($this->db, $tokenEmail)){
-				$updatePWD = $this -> dao -> update_pwd($this->db, $tokenEmail, $pwd);
+			if($this -> dao -> select_verify_email_token($this->db, $tokenEmail, $user)){
+				$updatePWD = $this -> dao -> update_pwd($this->db, $tokenEmail, $pwd, $user);
 				return 'ok';
 			}else{
 				return 'fail';

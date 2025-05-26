@@ -300,7 +300,7 @@ function click_recover_email(){
 }
 
 function send_email_recover_pwd(email){
-    console.log(email);
+    // console.log(email);
     ajaxPromise(friendlyURL('?module=auth&op=send_email_recover_pwd'), 'POST', 'JSON', {email: email})
         .then(function(data){
             console.log(data);
@@ -325,7 +325,7 @@ function click_recover_pwd(){
     // solo hacer caso al click del enter si en la ruta esta recover_view y si redirectRecover es = a yes
     if(path[3] == 'recover_view'){
         if(redirect_recover == 'yes'){
-            console.log('click_recover_pwd enter');
+            // console.log('click_recover_pwd enter');
             $(".recover-pwd-button").keypress(function(e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
                 if (code == 13) {
@@ -345,8 +345,9 @@ function update_recover_pwd(tokenEmail, pwd){
     ajaxPromise(friendlyURL('?module=auth&op=verify_token'), 'POST', 'JSON', {token_email: tokenEmail, pwd: pwd})
         .then(function(data){
             console.log(data);
+            // return false;
             if(data == 'ok'){
-                // toastr.succes('Contraseña actualizada correctamente');
+                //toastr.succes('Contraseña actualizada correctamente');
                 setTimeout(function() {
                     window.location.href = friendlyURL("?module=auth&op=login_view");
                 }, 2000);
@@ -391,7 +392,7 @@ function recover_pwd_redirect(){
         tokenEmailRecoverPwd = localStorage.getItem('token_email');
         localStorage.removeItem('token_email');
         localStorage.removeItem('redirect_recover');
-        console.log(tokenEmailRecoverPwd);
+        // console.log(tokenEmailRecoverPwd);
         $('.recover-form').remove();
         show_recover_pwd();
     }

@@ -170,8 +170,11 @@
             }
         }
 
-        public function select_verify_email($db, $tokenEmail){
-            $sql = "SELECT token_email FROM users WHERE token_email = '$tokenEmail'";
+        public function select_verify_email_token($db, $tokenEmail, $user){
+            $sql = "SELECT token_email
+                    FROM users 
+                    WHERE (username = '$user' OR email = '$user')
+                    AND token_email = '$tokenEmail'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -195,12 +198,13 @@
             return 'ok';
         }
 
-        public function update_pwd($db, $tokenEmail, $pwd){
+        public function update_pwd($db, $tokenEmail, $pwd, $email){
             $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]);
 
             $sql = "UPDATE users
                     SET activate = 1, token_email = '', pwd = '$hashpwd'
-                    WHERE token_email = '$tokenEmail'";
+                    WHERE email = '$email'
+                    AND token_email = '$tokenEmail'";
 
             return $stmt = $db->ejecutar($sql);
         }
