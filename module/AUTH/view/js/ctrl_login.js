@@ -361,6 +361,8 @@ function update_recover_pwd(tokenEmail, pwd){
                 setTimeout(function(){
                     window.location.href = '/SegundaJugada-POO/';
                 }, 5000);
+            }else if(data == 'samePwd'){
+                document.getElementById('error_repeat_pwd').innerHTML = "No puedes usar la misma contraseña que tenías anteriormente";
             }
         });
     

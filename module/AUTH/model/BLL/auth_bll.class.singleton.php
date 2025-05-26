@@ -158,6 +158,11 @@
 			}
 			// si el token es válido verificar que usuario existe con el mismo token para cambiar su contraseña
 			if($this -> dao -> select_verify_email_token($this->db, $tokenEmail, $user)){
+				$checkPwd = $this -> dao -> select_email_log($this->db, $user);
+				if(password_verify($pwd, $checkPwd[0]['pwd'])){
+					return 'samePwd';
+					exit;
+				}
 				$updatePWD = $this -> dao -> update_pwd($this->db, $tokenEmail, $pwd, $user);
 				return 'ok';
 			}else{
