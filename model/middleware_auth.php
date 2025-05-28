@@ -23,6 +23,17 @@
         return $token;
     }
 
+    public static function create_token_provider($username, $provider){
+        $jwt = parse_ini_file(UTILS . 'jwt.ini');
+        $header = $jwt['JWT_HEADER'];
+        $secret = $jwt['JWT_SECRET'];
+        $payload = '{"iat":"' . time() . '","exp":"' . time() + (600) . '","username":"' . $username . '","provider":"' . $provider . '"}';
+
+        $JWT = new JWT;
+        $token = $JWT->encode($header, $payload, $secret);
+        return $token;
+    }
+
     public static function create_token_2h($param){
         $jwt = parse_ini_file(UTILS . 'jwt.ini');
         $header = $jwt['JWT_HEADER'];

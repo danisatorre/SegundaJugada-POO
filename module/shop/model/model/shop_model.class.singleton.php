@@ -71,20 +71,24 @@
             return $this -> bll -> get_count_productos_all_BLL();
         }
 
-        public function getLoadLikesUser($username){
-            return $this -> bll -> get_load_likes_user_BLL($username);
+        public function getLoadLikesUser($params){
+            $username = $params[0];
+            $provider = $params[1];
+            return $this -> bll -> get_load_likes_user_BLL($username, $provider);
         }
 
         public function getLikes($params){
             $id_producto = $params[0];
             $username = $params[1];
-            return $this -> bll -> get_likes_BLL($id_producto, $username);
+            $provider = $params[2];
+            return $this -> bll -> get_likes_BLL($id_producto, $username, $provider);
         }
 
         public function like($params){
             $id_producto = $params[0];
             $username = $params[1];
-            $this -> bll -> like_BLL($id_producto, $username);
+            $provider = $params[2];
+            $this -> bll -> like_BLL($id_producto, $username, $provider);
         }
 
         public function sumar_like($id_producto){
@@ -94,7 +98,8 @@
         public function dislike($params){
             $id_producto = $params[0];
             $username = $params[1];
-            $this -> bll -> dislike_BLL($id_producto, $username);
+            $provider = $params[2];
+            $this -> bll -> dislike_BLL($id_producto, $username, $provider);
         }
 
         public function restar_like($id_producto){

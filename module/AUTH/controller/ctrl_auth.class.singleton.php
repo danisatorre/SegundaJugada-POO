@@ -109,7 +109,7 @@
                                 echo json_encode('cuenta_desactivada');
                                 exit;
                             }else{
-                                $token = middleware::create_token($rdo_email[0]["username"]);
+                                $token = middleware::create_token_provider($rdo_email[0]["username"], 'local');
                                 // echo json_encode($rdo_email);
                                 // exit;
                                 $_SESSION['username'] = $rdo_email[0]['username']; //Guardamos el correo
@@ -144,7 +144,7 @@
                         }else{
                             // echo json_encode('hola login antes de crear token');
                             // exit;
-                            $token= middleware::create_token($rdo[0]["username"]);
+                            $token= middleware::create_token_provider($rdo[0]["username"], 'local');
                             // echo json_encode($token);
                             // exit;
                             $_SESSION['username'] = $rdo[0]['username']; //Guardamos el usario 
@@ -251,8 +251,10 @@
             $token = $_POST['token'];
             // echo json_encode($token);
             // exit;
-            $provider = $_POST['provider'];
+            // $provider = $_POST['provider'];
             $json_token = middleware::decode_token($token);
+            $provider = $json_token['provider'];
+            // echo json_encode($provider);
             // echo json_encode($json_token);
             // echo json_encode($json_token['username']);
             // exit();
@@ -262,7 +264,7 @@
                 // echo json_encode('hola data_user github');
                 // exit;
                 echo json_encode(common::load_model('auth_model', 'getDataUserGithub', $json_token['username']));
-            }else {
+            }else if($provider == "local"){
                 echo json_encode(common::load_model('auth_model', 'getDataUser', $json_token['username']));
             }
         }
@@ -311,7 +313,7 @@
             // exit;
 
             $oldToken = middleware::decode_token($tokenNormal);
-            $newToken = middleware::create_token($oldToken['username']);
+            $newToken = middleware::create_token_provider($oldToken['username'], $oldToken['provider']);
             echo json_encode($newToken);
         }
 
@@ -374,7 +376,7 @@
                     echo json_encode('cuenta_desactivada');
                     exit;
                 }else{
-                    $token= middleware::create_token($rdo[0]["username"]);
+                    $token= middleware::create_token_provider($rdo[0]["username"], 'local');
                     // echo json_encode($token);
                     // exit;
                     $_SESSION['username'] = $rdo[0]['username'];

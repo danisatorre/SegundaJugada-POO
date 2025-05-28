@@ -22,7 +22,7 @@
 				$user = $this -> dao -> select_user_google($this->db, $username);
 				// echo json_encode($user[0]['username']);
 				// exit;
-				$token = middleware::create_token($user[0]['username']);
+				$token = middleware::create_token_provider($user[0]['username'], 'google');
 				return $token;
             } else {
 				$this -> dao -> insert_user_google($this->db, $uid, $username, $email, $avatar);
@@ -31,7 +31,7 @@
 				$user = $this -> dao -> select_user_google($this->db, $username);
 				// echo json_encode($user[0]['username']);
 				// exit;
-				$token = middleware::create_token($user[0]['username']);
+				$token = middleware::create_token_provider($user[0]['username'], 'google');
 				return $token;
 			}
 		}
@@ -41,7 +41,7 @@
 				$user = $this -> dao -> select_user_github($this->db, $email);
 				// echo json_encode($user[0]['username']);
 				// exit;
-				$token = middleware::create_token($user[0]['username']);
+				$token = middleware::create_token_provider($user[0]['username'], 'github');
 				return $token;
             } else {
 				$this -> dao -> insert_user_github($this->db, $uid, $username, $email, $avatar);
@@ -50,7 +50,7 @@
 				$user = $this -> dao -> select_user_github($this->db, $email);
 				// echo json_encode($user[0]['username']);
 				// exit;
-				$token = middleware::create_token($user[0]['username']);
+				$token = middleware::create_token_provider($user[0]['username'], 'github');
 				return $token;
 			}
 		}

@@ -199,11 +199,63 @@
             return $db -> listar($stmt);
 		}
 
+		public function select_load_likes_user_google($db, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like_google = (SELECT u.uid
+							FROM google_users u
+							WHERE u.username = '$username')";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_load_likes_user_github($db, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like_github = (SELECT u.uid
+							FROM github_users u
+							WHERE u.username = '$username')";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
 		public function select_likes($db, $id_producto, $username){
 			$sql = "SELECT l.id_producto_like
 			FROM likes l
 			WHERE l.id_user_like = (SELECT u.id_user
 							FROM users u
+							WHERE u.username = '$username')
+			AND l.id_producto_like = '$id_producto'";
+
+			// echo json_encode($sql);
+			// exit;
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_likes_google($db, $id_producto, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like_google = (SELECT u.uid
+							FROM google_users u
+							WHERE u.username = '$username')
+			AND l.id_producto_like = '$id_producto'";
+
+			// echo json_encode($sql);
+			// exit;
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
+		public function select_likes_github($db, $id_producto, $username){
+			$sql = "SELECT l.id_producto_like
+			FROM likes l
+			WHERE l.id_user_like_github = (SELECT u.uid
+							FROM github_users u
 							WHERE u.username = '$username')
 			AND l.id_producto_like = '$id_producto'";
 
@@ -220,6 +272,18 @@
 			$stmt = $db -> ejecutar($sql);
 		}
 
+		public function set_like_user_google($db, $id_producto, $username){
+			$sql = "INSERT INTO likes (id_user_like_google, id_producto_like) VALUES ((SELECT u.uid FROM google_users u WHERE u.username = '$username'), '$id_producto');";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_like_user_github($db, $id_producto, $username){
+			$sql = "INSERT INTO likes (id_user_like_github, id_producto_like) VALUES ((SELECT u.uid FROM github_users u WHERE u.username = '$username'), '$id_producto');";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
 		public function set_like_producto($db, $id_producto){
 			$sql = "UPDATE productos p
 			SET p.likes = p.likes +1
@@ -231,6 +295,24 @@
 		public function set_dislike_user($db, $id_producto, $username){
 			$sql = "DELETE l FROM likes l
 			JOIN users u ON l.id_user_like = u.id_user
+			WHERE l.id_producto_like = '$id_producto'
+			AND u.username = '$username';";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_dislike_user_google($db, $id_producto, $username){
+			$sql = "DELETE l FROM likes l
+			JOIN google_users u ON l.id_user_like_google = u.uid
+			WHERE l.id_producto_like = '$id_producto'
+			AND u.username = '$username';";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function set_dislike_user_github($db, $id_producto, $username){
+			$sql = "DELETE l FROM likes l
+			JOIN github_users u ON l.id_user_like_github = u.uid
 			WHERE l.id_producto_like = '$id_producto'
 			AND u.username = '$username';";
 

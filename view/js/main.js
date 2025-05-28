@@ -40,17 +40,17 @@ function load_menu() {
     );
     // var token = localStorage.getItem('token');
     var token = JSON.parse(localStorage.getItem('token'));
-    var provider = localStorage.getItem('provider');
+    // var provider = localStorage.getItem('provider');
     // const token = JSON.parse(localStorage.getItem("token"));
     // console.log(token)
     // console.log(token.username)
     // return false;
     $('.submenu-cuenta').empty();
     if (token) {
-        ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token, 'provider': provider })
+        ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token})
             .then(function(data) {
                 console.log(data);
-                console.log(data[0].avatar);
+                // console.log(data[0].avatar);
                 // return false;
                 $('.submenu-cuenta').empty();
                 $('<a href="javascript:;"><img src="' + data[0].avatar + '" id="user-icon">' + data[0].username + '</a>' +

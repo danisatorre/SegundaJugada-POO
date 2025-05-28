@@ -48,24 +48,48 @@
             return $this -> dao -> select_count_all($this -> db);
         }
 
-        public function get_load_likes_user_BLL($username){
-            return $this -> dao -> select_load_likes_user($this -> db, $username);
+        public function get_load_likes_user_BLL($username, $provider){
+            if($provider == "local"){
+                return $this -> dao -> select_load_likes_user($this -> db, $username);
+            }else if($provider == "google"){
+                return $this -> dao -> select_load_likes_user_google($this -> db, $username);
+            }else if($provider == "github"){
+                return $this -> dao -> select_load_likes_user_github($this -> db, $username);
+            }
         }
 
-        public function get_likes_BLL($id_producto, $username){
-            return $this -> dao -> select_likes($this -> db, $id_producto, $username);
+        public function get_likes_BLL($id_producto, $username, $provider){
+            if($provider == "local"){
+                return $this -> dao -> select_likes($this -> db, $id_producto, $username);
+            }else if($provider == "google"){
+                return $this -> dao -> select_likes_google($this -> db, $id_producto, $username);   
+            }else if($provider == "github"){
+                return $this -> dao -> select_likes_github($this -> db, $id_producto, $username);
+            }
         }
 
-        public function like_BLL($id_producto, $username){
-            $this -> dao -> set_like_user($this -> db, $id_producto, $username);
+        public function like_BLL($id_producto, $username, $provider){
+            if($provider == "local"){
+                $this -> dao -> set_like_user($this -> db, $id_producto, $username);
+            }else if($provider == "google"){
+                $this -> dao -> set_like_user_google($this -> db, $id_producto, $username);
+            }else if($provider == "github"){
+                $this -> dao -> set_like_user_github($this -> db, $id_producto, $username);
+            }
         }
 
         public function sumar_like_BLL($id_producto){
             $this -> dao -> set_like_producto($this -> db, $id_producto);
         }
 
-        public function dislike_BLL($id_producto, $username){
-            $this -> dao -> set_dislike_user($this -> db, $id_producto, $username);
+        public function dislike_BLL($id_producto, $username, $provider){
+            if($provider == "local"){
+                $this -> dao -> set_dislike_user($this -> db, $id_producto, $username);
+            }else if($provider == "google"){
+                $this -> dao -> set_dislike_user_google($this -> db, $id_producto, $username);
+            }else if($provider == "github"){
+                $this -> dao -> set_dislike_user_github($this -> db, $id_producto, $username);
+            }
         }
 
         public function restar_like_BLL($id_producto){

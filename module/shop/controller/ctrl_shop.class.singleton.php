@@ -85,9 +85,10 @@
             $tokenNormal = $_POST['token'];
             $token = middleware::decode_token($tokenNormal);
             $username = $token['username'];
+            $provider = $token['provider'];
             // echo json_encode($username);
             // exit;
-            echo json_encode(common::load_model('shop_model', 'getLoadLikesUser', $username));
+            echo json_encode(common::load_model('shop_model', 'getLoadLikesUser', [$username, $provider]));
         }
 
         function ctrl_likes(){
@@ -95,21 +96,22 @@
             $tokenNormal = $_POST['token'];
             $token = middleware::decode_token($tokenNormal);
             $username = $token['username'];
+            $provider = $token['provider'];
             // echo json_encode($username);
             // exit;
             
-            $likes = common::load_model('shop_model', 'getLikes', [$id_producto, $username]);
+            $likes = common::load_model('shop_model', 'getLikes', [$id_producto, $username, $provider]);
 
             // echo json_encode($likes);
             // exit;
 
             if (empty($likes)) {
-                $select_ctrl_likes = common::load_model('shop_model', 'like', [$id_producto, $username]);
+                $select_ctrl_likes = common::load_model('shop_model', 'like', [$id_producto, $username, $provider]);
                 $update_ctrl_likes = common::load_model('shop_model', 'sumar_like', $id_producto);
                 echo json_encode('0');
                 exit;
             } else {
-                $select_ctrl_likes = common::load_model('shop_model', 'dislike', [$id_producto, $username]);
+                $select_ctrl_likes = common::load_model('shop_model', 'dislike', [$id_producto, $username, $provider]);
                 $update_ctrl_likes = common::load_model('shop_model', 'restar_like', $id_producto);
                 echo json_encode('1');
                 exit;

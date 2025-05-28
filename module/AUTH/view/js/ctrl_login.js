@@ -161,9 +161,9 @@ function social_login(param){
             .then(function(data) {
                 // console.log(data);
                 // return false;
-                localStorage.setItem("provider", param);
+                // localStorage.setItem("provider", param);
                 localStorage.setItem("token", JSON.stringify(data));
-                console.log('social_login despues de añadir el token en localStorage')
+                // console.log('social_login despues de añadir el token en localStorage')
                     Swal.fire({
                         title: "Has iniciado sesión",
                         text: "Pulsa en Continuar para ver todos nuestros productos",
