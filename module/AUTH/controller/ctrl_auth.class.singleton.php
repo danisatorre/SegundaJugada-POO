@@ -253,7 +253,7 @@
             // exit;
             // $provider = $_POST['provider'];
             $json_token = middleware::decode_token($token);
-            $provider = $json_token['provider'];
+            $provider = $json_token['provider']; // coger el provider del token
             // echo json_encode($provider);
             // echo json_encode($json_token);
             // echo json_encode($json_token['username']);
