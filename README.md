@@ -12,7 +12,7 @@ Permite a los usuarios:
 - Publicar anuncios de productos **(no disponible por el momento)**.
 - Buscar, filtrar y visualizar artículos.
 - Acceder a productos destacados, populares y con mejor valoración.
-- Iniciar sesión tanto como usuario local, usuario de google <img style="width:2%;" src="https://brandlogos.net/wp-content/uploads/2025/05/google_icon_2025-logo_brandlogos.net_qm5ka-512x523.png">, o usuario de gitbub <img style="width:2.7%;" src="https://www.pngmart.com/files/23/Github-Logo-PNG.png">.
+- Iniciar sesión tanto como usuario local, usuario de google <img style="width:2%;" src="https://brandlogos.net/wp-content/uploads/2025/05/google_icon_2025-logo_brandlogos.net_qm5ka-512x523.png">, o usuario de gitbub <img style="width:3%;" src="https://www.pngmart.com/files/23/Github-Logo-PNG.png">.
 
 ---
 
