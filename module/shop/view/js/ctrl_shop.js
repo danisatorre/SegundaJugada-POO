@@ -834,7 +834,7 @@ function loadProductoDetails(id_producto){
 
             pintar_estrellas(shop[0][0].rating);
 
-            estrellas_rating(id_producto);
+            estrellas_rating(id_producto, shop[0][0].rating);
 
             load_likes_user();
     }).catch(function(){
@@ -855,9 +855,10 @@ function pintar_estrellas(rating) {
     });
 } // end pintar_estrellas
 
-function estrellas_rating(id_producto) {
+function estrellas_rating(id_producto, ratingDB) {
     var estrellas = document.querySelectorAll('.estrella');
-    var estrella_click = -1; // última estrella seleccionada
+    // var estrella_click = -1; // última estrella seleccionada
+     var estrella_click = typeof ratingDB === 'number' ? ratingDB -1 : -1;
 
     var clickHandler = function () {
         var index = Array.from(estrellas).indexOf(this); // obtener la estrella pulsada
@@ -883,12 +884,20 @@ function estrellas_rating(id_producto) {
         });
     };
 
-    var mouseLeaveHandler = function () { // manejar cuando el puntero sale de las estrellas
+    var mouseLeaveHandler = function () { // manejar cuando el ratón sale de las estrellas
         estrellas.forEach(function (estrella, i) {
-            if (i <= estrella_click) {
-                estrella.style.color = 'orangered'; // pintar de naranja las estrellas seleccionadas
-            } else {
-                estrella.style.color = 'black'; // pintar de negro las estrellas no seleccionadas
+            if(estrella_click === -1){
+                if(i < ratingDB){
+                    estrella.style.color = "orangered"; // manejar cuando se tiene el ratón encima
+                }else{
+                    estrella.style.color = "black"; // manejar cuando se tiene el ratón encima
+                }
+            }else{
+                if (i <= estrella_click) {
+                    estrella.style.color = 'orangered'; // pintar de naranja las estrellas seleccionadas
+                } else {
+                    estrella.style.color = 'black'; // pintar de negro las estrellas no seleccionadas
+                }
             }
         });
     };
