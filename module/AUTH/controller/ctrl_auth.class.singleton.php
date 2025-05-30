@@ -16,27 +16,27 @@
 			return self::$_instance;
 		}
 
-        function login_view(){
+        function login_view(){ // vista del login
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'login.html');
         }
 
-        function register_view(){
+        function register_view(){ // vista del register
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'register.html');
         }
 
-        function recover_view(){
+        function recover_view(){ // vista del recover para introducir el email
             common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'recover.html');
         }
 
-        function recover(){
+        function recover(){ // vista del recover para introducir la nueva contraseña
             ctrl_auth::recover_view();
         }
 
-        function verify(){
+        function verify(){ // verificar un nuevo usuario registrado
             ctrl_auth::login_view();
         }
 
-        function social_login(){
+        function social_login(){ // iniciar sesión con usuarios de tipo social
             $uid = $_POST['id'];
             // echo json_encode($uid);
             // exit;
@@ -77,7 +77,7 @@
             }
         }
 
-        function login(){
+        function login(){ // hacer login con usuarios locales
             $username = $_POST['username'];
             // echo json_encode($username);
             // exit;
@@ -171,7 +171,7 @@
             }
         }
 
-        function register(){
+        function register(){ // hacer register para un usuario local
             // $pruebaTokenSecure = common::generate_token_secure(20);
             // echo json_encode($pruebaTokenSecure);
             // exit;
@@ -247,7 +247,7 @@
                 
         }
 
-        function data_user(){
+        function data_user(){ // cargar los datos del usuario para el menu
             $token = $_POST['token'];
             // echo json_encode($token);
             // exit;
@@ -269,7 +269,7 @@
             }
         }
 
-        function control_user(){
+        function control_user(){ // verificar si el usuario es o no válido
             $tokenNormal = $_POST['token'];
             // echo json_encode($tokenNormal);
             // exit();
@@ -292,7 +292,7 @@
             }
         }
 
-        function actividad(){
+        function actividad(){ // revisar la actividad del usuario
             if(!isset($_SESSION["tiempo"])){
                 echo json_encode("inactivo");
                 exit();
@@ -307,7 +307,7 @@
             }
         }
 
-        function refres_token(){
+        function refres_token(){ // actualizar el token
             $tokenNormal = $_POST['token'];
             // echo json_encode($tokenNormal);
             // exit;
@@ -317,12 +317,12 @@
             echo json_encode($newToken);
         }
 
-        function refres_cookie(){
+        function refres_cookie(){ // actualizar la cookie
             session_regenerate_id();
             echo json_encode("cookie_actualizada");
         }
 
-        function logout(){
+        function logout(){ // cerrar la sesión en curso
             unset($_SESSION['username']);
             unset($_SESSION['tiempo']);
             session_destroy();
@@ -352,11 +352,11 @@
             echo json_encode(common::load_model('auth_model', 'getVerifyToken', [$tokenEmail, $pwd]));
         }
 
-        function get_prefijos_phone(){
+        function get_prefijos_phone(){ // coger los prefijos de nº de tlf de la tabla country
             echo json_encode(common::load_model('auth_model', 'getPrefijosPhone'));
         }
 
-        function verify_OTP(){
+        function verify_OTP(){ // verificar si el OTP enviado al cliente es el correcto
             $user = $_POST['otp_username'];
             $digit1 = $_POST['otp_digit_1'];
             $digit2 = $_POST['otp_digit_2'];
