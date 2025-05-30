@@ -101,6 +101,7 @@ El proyecto divide las tecnologías entre **Frontend** y **Backend** y usa tecno
 <img src="https://i.imgur.com/tzSTUHH.png">
 - Al tener la sesión iniciada<br>
 <img src="https://i.imgur.com/oZPAyDK.png">
+
 ## 📁 Estructura del proyecto
 - El proyecto esta realizado con el framework ***ORM*** *(object-relational mapping)*
 
