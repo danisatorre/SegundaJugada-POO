@@ -152,6 +152,7 @@
 
         function details(){
             $id_producto = $_POST['id_producto'];
+            $token = $_POST['token'];
             // echo json_encode($id_producto);
             // exit;
             $infProducto = common::load_model('shop_model', 'getDetails', $id_producto);
@@ -161,10 +162,27 @@
             // echo json_encode($imgProducto);
             // exit;
 
+            if($token != "noToken"){
+                $tokenDec = middleware::decode_token($token);
+                if($tokenDec['provider'] == "local"){
+                    $tokenDec = common::load_model('auth_model', 'getDataUser', $tokenDec['username']);
+                }else if($tokenDec['provider'] == "google"){
+                    $tokenDec = common::load_model('auth_model', 'getDataUserGoogle', $tokenDec['username']);
+                }else if($tokenDec['provider'] == "github"){
+                    $tokenDec = common::load_model('auth_model', 'getDataUserGithub', $tokenDec['username']);
+                }
+            }else{
+                $tokenDec = "noToken";
+            }
+
+            $comentarios = common::load_model('shop_model', 'getComentarios', $id_producto);
+
             if (!empty($infProducto) || !empty($imgProducto)) {
                 $rdo = array();
-                $rdo[0] = $infProducto;
-                $rdo[1][] = $imgProducto;
+                $rdo[0] = $infProducto; // detalles del producto
+                $rdo[1][] = $imgProducto; // imagenes del producto
+                $rdo[2][] = $tokenDec; // información del usuario logeado
+                $rdo[3][] = $comentarios; // comentarios del producto
                 echo json_encode($rdo);
                 exit;
             } else {

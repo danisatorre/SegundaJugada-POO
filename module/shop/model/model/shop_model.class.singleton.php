@@ -214,6 +214,10 @@
             return $this -> bll -> get_filtro_home_BLL($filtro_home);
         }
 
+        public function getComentarios($id_producto){
+            return $this -> bll -> get_comentarios_bll($id_producto);
+        }
+
     } // shop_model
 
 ?>

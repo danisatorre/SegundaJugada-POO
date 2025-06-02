@@ -691,7 +691,11 @@ function loadProductoDetails(id_producto){
     // return false;
     update_visitas(id_producto);
     localStorage.removeItem('items');
-    ajaxPromise('index.php?module=shop&op=details', 'POST', 'JSON', {'id_producto': id_producto})
+    var token = JSON.parse(localStorage.getItem('token'));
+    if(!token){
+        token = "noToken";
+    }
+    ajaxPromise('index.php?module=shop&op=details', 'POST', 'JSON', {'id_producto': id_producto, 'token': token})
     .then(function(shop){
         $('.container-productos').empty(); // vaciar todos los productos para dejar la web vacia y pintar el details
         $('.container-filtros').empty(); // vaciar los filtros para que no aparezcan en el details
@@ -820,6 +824,8 @@ function loadProductoDetails(id_producto){
             // return false;
             mas_productos_relacionados(shop[0][0].id_tipo, id_producto);
 
+            load_comentarios(id_producto, shop[3][0], shop[2][0]);
+
             // $('.rating_select').change(function (){
             //     update_rating(id_producto, this.value);
             // });
@@ -843,6 +849,51 @@ function loadProductoDetails(id_producto){
         window.location.href = "index.php?module=ctrl_exceptions&op=503";
     })
 } // end loadProductoDetails (vista del detalle de los productos)
+
+function load_comentarios(id_producto, comentarios, user){
+    console.log(comentarios);
+    console.log(user);
+    load_view_comentarios(comentarios, user);
+} // load_comentarios
+
+function load_view_comentarios(comentarios, user){
+            $('.details_comentarios').empty();
+            var html = `<div class="view_comentarios">`;
+            // si no hay sesion iniciada cargar un boton para iniciar sesión
+            if(user == 'noToken'){
+                html += `
+                    <div class="comentario-login-box">
+                        <button class="btn-login-comentario" onclick="window.location.href='${friendlyURL("?module=auth&op=login_view")}'">
+                            Inicia sesión para poder comentar
+                        </button>
+                    </div>
+                `
+            }else{ // si hay sesion iniciada cargar la vista para comentar
+                html += `
+                    <form class="insertComentario" method="POST">
+                        <div class="comentario-user-box">
+                            <img class="comentario-avatar" src="${user[0].avatar}" alt="avatar">
+                            <input type="text" class="comentario-input" placeholder="Escribe tu comentario..." name="comentario">
+                            <button type="submit" class="btn-enviar-comentario">Enviar</button>
+                        </div>
+                    </form>
+                `;
+            }
+            html += `<div class="comentarios-list>"`;
+            if(comentarios.comentarios && comentarios.comentarios.length > 0){
+                for(row in comentarios.comentarios){
+                    html += `
+                        <div class="comentarios">
+                            <img class="comentario-avatar" src="${comentarios.comentarios[row].avatar}" alt="avatar">
+                            <div class="comentario-text">${comentarios.comentarios[row].comentario}</div>
+                        </div>
+                    `
+                }
+            }else{
+                html += `<div class="comentarios noComentarios">Todavía no hay comentarios sobre este producto</div>`;
+            }
+            $('.details_comentarios').html(html);
+} // load_view_comentarios
 
 function pintar_estrellas(rating) {
     var estrellas = document.querySelectorAll('.estrella');

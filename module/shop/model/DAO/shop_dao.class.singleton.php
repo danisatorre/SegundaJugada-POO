@@ -528,6 +528,18 @@
             return $db -> listar($stmt);
 		}
 
+		public function select_comentarios($db, $id_producto){
+			$sql = "SELECT *
+					FROM comentarios c
+					LEFT JOIN users u ON c.id_user_local = u.id_user
+					LEFT JOIN google_users gu ON c.id_user_google = gu.uid
+					LEFT JOIN github_users ghu ON c.id_user_github = ghu.uid
+					WHERE c.id_producto_comentario = $id_producto";
+			
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
     } // shop_dao
 
 ?>

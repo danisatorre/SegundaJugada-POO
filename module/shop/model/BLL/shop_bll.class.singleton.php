@@ -159,6 +159,10 @@
         public function get_filtro_home_BLL($filtro_home){
             return $this -> dao -> filtro_home($this -> db, $filtro_home);
         }
+        
+        public function get_comentarios_bll($id_producto){
+            return $this -> dao -> select_comentarios($this -> db, $id_producto);
+        }
 
     } // shop_bll
 
