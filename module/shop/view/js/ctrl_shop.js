@@ -9,12 +9,16 @@ function loadShop(total_productos, items_por_pagina){
     var buscador_filtros = localStorage.getItem('buscar') || false;
     var details_home = localStorage.getItem('details_home') || false;
     var like = localStorage.getItem('redirect_like') || false;
+    var comentario = localStorage.getItem('redirect_comentario') || false;
     // console.log("loadShop verificar_filtros: ", verificar_filtros);
     // console.log("loadShop buscador_filtros: ", buscador_filtros);
     // console.log("loadShop details_home id producto: ", details_home);
     // return false;
     if(like != false){
         redirect_login_like();
+    }else if(comentario != false){
+        $('#paginacion').empty();
+        loadProductoDetails(comentario);
     }else if(verificar_filtros != false){
         // console.log("loadShop verificar_filtros");
         getall(total_productos, items_por_pagina);
@@ -688,6 +692,7 @@ function loadProductoDetails(id_producto){
     // console.log("hola loadProductoDetails");
     localStorage.removeItem('details_home');
     localStorage.removeItem('id_producto');
+    localStorage.removeItem('redirect_comentario');
     // return false;
     update_visitas(id_producto);
     localStorage.removeItem('items');
@@ -853,7 +858,34 @@ function loadProductoDetails(id_producto){
 function load_comentarios(id_producto, comentarios, user){
     console.log(comentarios);
     console.log(user);
+    var token = JSON.parse(localStorage.getItem('token'));
+    if(!token){
+        token = "noToken";
+    }
     load_view_comentarios(comentarios, user);
+    $(document).on('click', '.btn-login-comentario', function(){ // enviar comentario haciendo click en el boton de enviar
+        redirect_login_comentario(id_producto);
+    });
+    $(document).on('click', '.btn-enviar-comentario', function(e){ // enviar comentario haciendo click en el boton de enviar
+        e.preventDefault();
+        if(validate_comentario() != 0){
+            alert('validate_comentario correcto');
+            return false;
+            send_comentario(id_producto, token);
+        }
+    });
+    $("#insertComentario").keypress(function(e) { // enviar el comentario pulsando enter
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            e.preventDefault();
+            if(validate_comentario() != 0){
+                alert('validate_comentario correcto');
+                return false;
+                send_comentario(id_producto, token);
+            }
+        }
+    });
+    
 } // load_comentarios
 
 function load_view_comentarios(comentarios, user){
@@ -863,7 +895,7 @@ function load_view_comentarios(comentarios, user){
             if(user == 'noToken'){
                 html += `
                     <div class="comentario-login-box">
-                        <button class="btn-login-comentario" onclick="window.location.href='${friendlyURL("?module=auth&op=login_view")}'">
+                        <button class="btn-login-comentario">
                             Inicia sesión para poder comentar
                         </button>
                     </div>
@@ -873,9 +905,10 @@ function load_view_comentarios(comentarios, user){
                     <form class="insertComentario" method="POST">
                         <div class="comentario-user-box">
                             <img class="comentario-avatar" src="${user[0].avatar}" alt="avatar">
-                            <input type="text" class="comentario-input" placeholder="Escribe tu comentario..." name="comentario">
+                            <textarea class="comentario-input" id="insertComentario" placeholder="Escribe tu comentario..." name="comentario" rows="3" cols="60"></textarea>
                             <button type="submit" class="btn-enviar-comentario">Enviar</button>
                         </div>
+                        <span class="error" id="error_comentario"></span>
                     </form>
                 `;
             }
@@ -884,8 +917,14 @@ function load_view_comentarios(comentarios, user){
                 for(row in comentarios.comentarios){
                     html += `
                         <div class="comentarios">
-                            <img class="comentario-avatar" src="${comentarios.comentarios[row].avatar}" alt="avatar">
-                            <div class="comentario-text">${comentarios.comentarios[row].comentario}</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img class="comentario-avatar" src="${comentarios.comentarios[row].avatar}" alt="avatar">
+                                <span class="comentario-username" style="font-weight: bold;">${comentarios.comentarios[row].username}</span>
+                            </div>
+                            <textarea class="comentario-text" readonly rows="3" cols="60" style="resize:vertical; margin-top:5px;">${comentarios.comentarios[row].comentario}</textarea>
+                            <div class="comentario-fecha" style="color: #888; font-size: 0.9em; margin-top: 2px;">
+                                ${comentarios.comentarios[row].fecha}
+                            </div>
                         </div>
                     `
                 }
@@ -894,6 +933,35 @@ function load_view_comentarios(comentarios, user){
             }
             $('.details_comentarios').html(html);
 } // load_view_comentarios
+
+function validate_comentario(){
+    var error = false;
+
+    if(document.getElementById('insertComentario').value.length < 5){
+        document.getElementById('error_comentario').innerHTML = "El comentario debe de tener un mínimo de 5 caracteres";
+        error = true;
+    }else{
+        document.getElementById('error_comentario').innerHTML = "";
+    }
+
+    if(error == true){
+        return 0;
+    }
+} // validate_comentario
+
+function send_comentario(id_producto, user){
+
+} // send_comentarios
+
+function redirect_login_comentario(id_producto){
+    localStorage.setItem('redirect_comentario', id_producto);
+
+    toastr.warning("Inicia sesión para poder añadir comentarios");
+
+    setTimeout(function() {
+        window.location.href = friendlyURL("?module=auth&op=login_view");
+    }, 1000);
+} // redirect_login_comentario
 
 function pintar_estrellas(rating) {
     var estrellas = document.querySelectorAll('.estrella');

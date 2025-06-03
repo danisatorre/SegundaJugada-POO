@@ -28,7 +28,7 @@ function login() {
                         confirmButtonText: "Continuar"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            if(localStorage.getItem('redirect_like')){
+                            if(localStorage.getItem('redirect_like') || localStorage.getItem('redirect_comentario')){
                                 setTimeout(function() {
                                     window.location.href = friendlyURL("?module=shop");
                                 }, 2000);
@@ -171,7 +171,7 @@ function social_login(param){
                         confirmButtonText: "Continuar"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            if(localStorage.getItem('redirect_like')){
+                            if(localStorage.getItem('redirect_like') || localStorage.getItem('redirect_comentario')){
                                 setTimeout(function() {
                                     window.location.href = friendlyURL("?module=shop");
                                 }, 2000);

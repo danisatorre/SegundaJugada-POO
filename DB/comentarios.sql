@@ -8,6 +8,8 @@ CREATE TABLE comentarios (
   id_producto_comentario INT(20) UNSIGNED NOT NULL,
 
   comentario VARCHAR(250) NOT NULL,
+
+  fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   
   PRIMARY KEY (id_comentario),
 

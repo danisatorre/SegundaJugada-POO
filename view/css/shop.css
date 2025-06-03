@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+.error{color:red;}
+
+#error_comentario{text-align: center;}
+
 #title-shop{
     padding-top:6%;
     width:80%;
