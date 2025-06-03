@@ -76,4 +76,8 @@
         <name>filtro_home</name>
         <uri>filtro_home</uri>
     </function>
+    <function>
+        <name>send_comentario</name>
+        <uri>send_comentario</uri>
+    </function>
 </functions>

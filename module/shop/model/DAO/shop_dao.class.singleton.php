@@ -529,7 +529,11 @@
 		}
 
 		public function select_comentarios($db, $id_producto){
-			$sql = "SELECT *
+			$sql = "SELECT 
+					c.*, 
+					u.username AS local_username, u.avatar AS local_avatar,
+					gu.username AS google_username, gu.avatar AS google_avatar,
+					ghu.username AS github_username, ghu.avatar AS github_avatar
 					FROM comentarios c
 					LEFT JOIN users u ON c.id_user_local = u.id_user
 					LEFT JOIN google_users gu ON c.id_user_google = gu.uid
@@ -537,7 +541,37 @@
 					WHERE c.id_producto_comentario = $id_producto";
 			
 			$stmt = $db -> ejecutar($sql);
-            return $db -> listar($stmt);
+            $comentarios =  $db -> listar($stmt);
+
+			foreach ($comentarios as &$comentario) { // elegir el primer username y avatar que no sea null
+				$comentario['username'] = $comentario['local_username'] ?: ($comentario['google_username'] ?: $comentario['github_username']);
+				$comentario['avatar'] = $comentario['local_avatar'] ?: ($comentario['google_avatar'] ?: $comentario['github_avatar']);
+			}
+			return $comentarios;
+		}
+
+		public function insert_comentario_local($db, $id_producto, $userID, $comentario){
+			$sql = "INSERT INTO comentarios (id_user_local, id_producto_comentario, comentario) VALUES
+					('$userID', '$id_producto', '$comentario')";
+			
+			// echo json_encode($sql);
+			// exit;
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function insert_comentario_google($db, $id_producto, $userID, $comentario){
+			$sql = "INSERT INTO comentarios (id_user_google, id_producto_comentario, comentario) VALUES
+					('$userID', '$id_producto', '$comentario')";
+			
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function insert_comentario_github($db, $id_producto, $userID, $comentario){
+			$sql = "INSERT INTO comentarios (id_user_github, id_producto_comentario, comentario) VALUES
+					('$userID', '$id_producto', '$comentario')";
+			
+			$stmt = $db -> ejecutar($sql);
 		}
 
     } // shop_dao

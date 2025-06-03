@@ -191,6 +191,32 @@
             }
         }
 
+        function send_comentario(){
+            $id_producto = $_POST['id_producto'];
+            $token = $_POST['token'];
+            $comentario = $_POST['comentario'];
+            // echo json_encode($comentario);
+            // exit;
+
+            $tokenDec = middleware::decode_token($token);
+            if($tokenDec['provider'] == "local"){
+                $dataUser = common::load_model('auth_model', 'getDataUser', $tokenDec['username']);
+                $userID = $dataUser[0]['id_user'];
+                // echo json_encode($userID);
+                // exit;
+            }else if($tokenDec['provider'] == "google"){
+                $dataUser = common::load_model('auth_model', 'getDataUserGoogle', $tokenDec['username']);
+                $userID = $dataUser[0]['uid'];
+            }else if($tokenDec['provider'] == "github"){
+                $dataUser = common::load_model('auth_model', 'getDataUserGithub', $tokenDec['username']);
+                $userID = $dataUser[0]['uid'];
+            }
+
+            common::load_model('shop_model', 'sendComentario', [$id_producto, $userID, $tokenDec['provider'], $comentario]);
+            echo json_encode('ok');
+            exit;
+        }
+
         function count_productos_relacionados(){
             $tipo = $_POST['tipo'];
             $id_producto = $_POST['id_producto'];

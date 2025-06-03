@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 28-05-2025 a las 20:02:23
+-- Tiempo de generación: 03-06-2025 a las 14:21:49
 -- Versión del servidor: 11.5.2-MariaDB
 -- Versión de PHP: 8.3.14
 
@@ -86,11 +86,40 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `categoria`, `img_categoria`, `visitas_cat`) VALUES
-(1, 'hombre', 'hombre.png', 14),
+(1, 'hombre', 'hombre.png', 15),
 (2, 'mujer', 'mujer.png', 7),
 (3, 'ninos', 'ninos.png', 1),
 (4, 'adolescentes', 'adolescentes.png', 3),
 (5, 'bebes', 'bebes.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+DROP TABLE IF EXISTS `comentarios`;
+CREATE TABLE IF NOT EXISTS `comentarios` (
+  `id_comentario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_user_local` int(10) UNSIGNED DEFAULT NULL,
+  `id_user_google` varchar(250) DEFAULT NULL,
+  `id_user_github` varchar(250) DEFAULT NULL,
+  `id_producto_comentario` int(20) UNSIGNED NOT NULL,
+  `comentario` varchar(250) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_comentario`),
+  KEY `fk_comentarios_local` (`id_user_local`),
+  KEY `fk_comentarios_google` (`id_user_google`),
+  KEY `fk_comentarios_github` (`id_user_github`),
+  KEY `fk_comentarios_producto` (`id_producto_comentario`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `id_user_local`, `id_user_google`, `id_user_github`, `id_producto_comentario`, `comentario`, `fecha`) VALUES
+(2, 101, NULL, NULL, 17, 'Prueba de comentario desde usuario local', '2025-06-03');
 
 -- --------------------------------------------------------
 
@@ -511,7 +540,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
   KEY `id_user_like` (`id_user_like`),
   KEY `fk_likes_google` (`id_user_like_google`),
   KEY `fk_likes_github` (`id_user_like_github`)
-) ENGINE=InnoDB AUTO_INCREMENT=3063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3070 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 --
 -- Volcado de datos para la tabla `likes`
@@ -542,7 +571,6 @@ INSERT INTO `likes` (`id_like`, `id_user_like`, `id_user_like_google`, `id_user_
 (3038, 113, NULL, NULL, 9),
 (3039, 113, NULL, NULL, 24),
 (3040, 113, NULL, NULL, 28),
-(3041, 101, NULL, NULL, 4),
 (3045, 101, NULL, NULL, 6),
 (3048, 138, NULL, NULL, 19),
 (3049, 138, NULL, NULL, 8),
@@ -554,7 +582,13 @@ INSERT INTO `likes` (`id_like`, `id_user_like`, `id_user_like_google`, `id_user_
 (3059, 101, NULL, NULL, 27),
 (3060, 101, NULL, NULL, 23),
 (3061, NULL, 'UWuEtpXpdhbJDUqAns70pd6cXne2', NULL, 20),
-(3062, NULL, NULL, 'kzm0D5epNpgxA51IkW6wjIBrkYx2', 18);
+(3062, NULL, NULL, 'kzm0D5epNpgxA51IkW6wjIBrkYx2', 18),
+(3063, NULL, 'UWuEtpXpdhbJDUqAns70pd6cXne2', NULL, 15),
+(3065, NULL, 'UWuEtpXpdhbJDUqAns70pd6cXne2', NULL, 38),
+(3066, 101, NULL, NULL, 4),
+(3067, 101, NULL, NULL, 7),
+(3068, 101, NULL, NULL, 3),
+(3069, NULL, 'UWuEtpXpdhbJDUqAns70pd6cXne2', NULL, 27);
 
 -- --------------------------------------------------------
 
@@ -708,44 +742,44 @@ CREATE TABLE IF NOT EXISTS `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `id_vendedor`, `marca`, `categoria`, `tipo`, `equipo`, `nom_prod`, `sexo_prod`, `color`, `ciudad`, `talla`, `entrega`, `descripcion`, `condicion`, `stock`, `precio`, `img_producto`, `altitud`, `longitud`, `visitas`, `rating`, `likes`) VALUES
-(1, 101, 2, 1, 7, 1906, 'Camiseta Bulls Rose', 'masculino', 'rojo', 'Ontinyent, Valencia', 'M', 'persona', 'Camiseta de los Chicago Bulls del jugador Rose con el numero 1', 'usado', 3, 20, 'i5399202774.webp', '38.821', '-0.610547', 11, 3, 1),
+(1, 101, 2, 1, 7, 1906, 'Camiseta Bulls Rose', 'masculino', 'rojo', 'Ontinyent, Valencia', 'M', 'persona', 'Camiseta de los Chicago Bulls del jugador Rose con el numero 1', 'usado', 3, 20, 'i5399202774.webp', '38.821', '-0.610547', 12, 3, 1),
 (2, 102, 3, 4, 2, 1904, 'Camiseta Milwaukee', 'masculino', 'verde', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta Milwaukee', 'nuevo', 5, 20, 'i5399202785_2.webp', '38.8205', '-0.6098', 3, 3, 0),
-(3, 103, 2, 1, 7, 1905, 'Camiseta firmada RM', 'masculino', 'blanco', 'Ontinyent, Valencia', 'XL', 'persona', 'Marco con una camiseta del Real Madrid dentro firmada por varios de sus jugadores', 'bueno', 1, 500, 'i5380960382.webp', '38.8198', '-0.6089', 13, 1, 0),
-(4, 104, 1, 1, 3, NULL, 'Zapatillas Puma MB', 'masculino', 'Negro', 'Ontinyent, Valencia', '44', 'persona', 'Zapatillas de la marca Puma colaboracion con el jugador Melo Bo de la NBA', 'bueno', 1, 40, 'i53992027853.webp', '38.8231', '-0.6123', 106, 4, 2),
+(3, 103, 2, 1, 7, 1905, 'Camiseta firmada RM', 'masculino', 'blanco', 'Ontinyent, Valencia', 'XL', 'persona', 'Marco con una camiseta del Real Madrid dentro firmada por varios de sus jugadores', 'bueno', 1, 500, 'i5380960382.webp', '38.8198', '-0.6089', 15, 1, 1),
+(4, 104, 1, 1, 3, NULL, 'Zapatillas Puma MB', 'masculino', 'Negro', 'Ontinyent, Valencia', '44', 'persona', 'Zapatillas de la marca Puma colaboracion con el jugador Melo Bo de la NBA', 'bueno', 1, 40, 'i53992027853.webp', '38.8231', '-0.6123', 130, 4, 2),
 (5, 105, 3, 1, 6, 1903, 'Pantalones Grizzlies', 'masculino', 'azul', 'Ontinyent, Valencia', 'M', 'domicilio', 'Pantalones del equipo Grizzlies de la NBA', 'nuevo', 1, 18, 'i5376709596.webp', '38.8185', '-0.6075', 9, 3, 1),
 (6, 101, 7, 1, 5, NULL, 'Balon spalding TF50', 'todos', 'marron', 'Ontinyent, Valencia', 'M', 'persona', 'Balon de la marca Spalding, modelo TF 50', 'bueno', 3, 10, 'i5368871734.webp', '38.8240', '-0.6130', 2, 1, 1),
-(7, 102, 2, 4, 7, 1902, 'Camiseta Orlando 12', 'femenino', 'azul', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta de Orlando del jugador Howard', 'nuevo', 5, 20, 'i5344037323.webp', '38.8172', '-0.6062', 4, 2, 0),
+(7, 102, 2, 4, 7, 1902, 'Camiseta Orlando 12', 'femenino', 'azul', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta de Orlando del jugador Howard', 'nuevo', 5, 20, 'i5344037323.webp', '38.8172', '-0.6062', 5, 2, 1),
 (8, 103, 6, 1, 7, 5, 'Camiseta Valencia Basket 24 25', 'masculino', 'naranja', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta del Valencia Basket de la temporada 2024 2025', 'nuevo', 2, 30, 'i5313602310.webp', '38.8255', '-0.6141', 18, 5, 2),
 (9, 104, 12, 1, 5, NULL, 'Balon Molten MB7', 'todos', 'naranja', 'Ontinyent, Valencia', 'unica', 'persona', 'Balon marca Molten modelo MB 7', 'bueno', 1, 15, 'i5423756299.webp', '38.8160', '-0.6050', 4, 5, 1),
 (10, 104, 11, 3, 8, NULL, 'Canasta para ninos pequenos', 'todos', 'negro:rojo', 'Ontinyent, Valencia', 'unica', 'persona', 'Canasta pequena para ninos', 'desgastado', 1, 35, 'i5416906875.webp', '38.8300', '-0.6200', 4, 2, 0),
 (11, 104, 3, 1, 7, 1901, 'Camiseta Spurs 41', 'masculino', 'blanco:azul', 'Ontinyent, Valencia', 'XL', 'persona', 'Camiseta de los San Antonio Spurs del jugador Willy Hernangomez', 'desgastado', 1, 15, 'i5397876223.webp', '38.8350', '-0.6250', 11, 5, 1),
 (12, 104, 4, 1, 8, NULL, 'Figura Michael Jordan', 'todos', 'rojo:marron', 'Ontinyent, Valencia', 'unica', 'domicilio', 'Figura del jugador Michael Jordan con su numero 23', 'bueno', 1, 40, 'i5378159407.webp', '38.8400', '-0.6300', 2, 1, 1),
 (13, 104, 4, 1, 8, NULL, 'Libro de KB', 'masculino', 'negro', 'Ontinyent, Valencia', 'unica', 'persona', 'Libro sobre Kobe Bryant Mentalidad Mamba', 'bueno', 1, 40, 'i5344670697.webp', '38.8450', '-0.6350', 1, 1, 0),
-(14, 104, 3, 1, 7, 1907, 'Camiseta Timberwolves  21', 'masculino', 'negro', 'Ontinyent, Valencia', 'L', 'persona', 'Camiseta de los timberwolves del jugador Garnett con el numero 21', 'bueno', 1, 22, 'i5345691035.webp', '38.8500', '-0.6400', 12, 3, 1),
-(15, 104, 4, 1, 8, NULL, 'Figura Kobe Bryant', 'masculino', 'marron:amarillo', 'Ontinyent, Valencia', 'unica', 'persona', 'Figura de Kobe Bryant', 'bueno', 1, 70, 'i5331284865.webp', '38.8550', '-0.6450', 1, 1, 0),
+(14, 104, 3, 1, 7, 1907, 'Camiseta Timberwolves  21', 'masculino', 'negro', 'Ontinyent, Valencia', 'L', 'persona', 'Camiseta de los timberwolves del jugador Garnett con el numero 21', 'bueno', 1, 22, 'i5345691035.webp', '38.8500', '-0.6400', 14, 3, 1),
+(15, 104, 4, 1, 8, NULL, 'Figura Kobe Bryant', 'masculino', 'marron:amarillo', 'Ontinyent, Valencia', 'unica', 'persona', 'Figura de Kobe Bryant', 'bueno', 1, 70, 'i5331284865.webp', '38.8550', '-0.6450', 1, 1, 1),
 (16, 104, 3, 2, 7, 1906, 'Camiseta Bulls 23', 'femenino', 'rojo', 'Ontinyent, Valencia', 'L', 'persona', 'Camiseta para mujeres de Michael Jordan en los Bulls con el numero 23', 'bueno', 1, 23, 'i5319710320.webp', '38.8600', '-0.6500', 5, 1, 0),
-(17, 104, 3, 1, 3, NULL, 'Zapatillas Nike altas', 'masculino', 'blanco', 'Ontinyent, Valencia', 'XL', 'persona', 'Zapatillas Nike altas', 'bueno', 1, 45, 'i5328717027.webp', '38.8650', '-0.6550', 60, 3, 4),
+(17, 104, 3, 1, 3, NULL, 'Zapatillas Nike altas', 'masculino', 'blanco', 'Ontinyent, Valencia', 'XL', 'persona', 'Zapatillas Nike altas', 'bueno', 1, 45, 'i5328717027.webp', '38.8650', '-0.6550', 69, 3, 4),
 (18, 104, 1, 4, 7, 1908, 'Camiseta de los Piston DH', 'masculino', 'blanco', 'Vallada, Valencia', 'L', 'persona', 'Camiseta de los Piston de Hill con el numero 33', 'bueno', 1, 12, 'i5415905457.webp', '38.8700', '-0.6600', 11, 1, 1),
 (19, 104, 2, 2, 3, NULL, 'Zapatillas Adidas running', 'masculino', 'blanco', 'Vallada, Valencia', '41', 'persona', 'Zapatillas para correr de Adidas', 'bueno', 1, 32, 'i5401436993.webp', '38.8750', '-0.6650', 19, 2, 2),
 (20, 105, 2, 4, 7, 1, 'Camiseta KB LA', 'masculino', 'blanco:amarillo', 'Madrid', 'M', 'domicilio', 'Camiseta de Kobre Bryant en Los Lakers con su numero 24', 'nuevo', 1, 40, 'i5381087208.webp', '40.4168', '-3.7038', 7, 1, 1),
-(21, 106, 3, 1, 7, 1, 'Camiseta LA 23', 'masculino', 'blanco', 'Barcelona', 'XL', 'persona', 'Camiseta de Los Angeles Lakers de Lebron James con su iconico numero 23', 'bueno', 2, 28, 'i5380787377.webp', '41.3879', '2.1699', 19, 4, 2),
+(21, 106, 3, 1, 7, 1, 'Camiseta LA 23', 'masculino', 'blanco', 'Barcelona', 'XL', 'persona', 'Camiseta de Los Angeles Lakers de Lebron James con su iconico numero 23', 'bueno', 2, 28, 'i5380787377.webp', '41.3879', '2.1699', 21, 4, 2),
 (22, 107, 3, 2, 7, 1909, 'Camiseta Miami Wade', 'femenino', 'rosa', 'Sevilla', 'M', 'persona', 'Camiseta de Wade en los Miami Heat', 'nuevo', 4, 10, 'i5380773862.webp', '37.3891', '-5.9845', 7, 2, 0),
-(23, 108, 11, 3, 6, NULL, 'Pantalon corto', 'masculino', 'negro:rojo', 'Valencia', 'S', 'persona', 'Pantalon corto para ninos', 'desgastado', 1, 5, 'i5378467878.webp', '39.4699', '-0.3763', 1, 1, 1),
+(23, 108, 11, 3, 6, NULL, 'Pantalon corto', 'masculino', 'negro:rojo', 'Valencia', 'S', 'persona', 'Pantalon corto para ninos', 'desgastado', 1, 5, 'i5378467878.webp', '39.4699', '-0.3763', 5, 1, 1),
 (24, 109, 8, 4, 5, NULL, 'Balon de baloncesto', 'todos', 'morado:amarillo', 'A Coruna, La Coruna', 'unica', 'persona', 'Balon de baloncesto', 'bueno', 5, 8, 'i5373503161.webp', '43.3623', '-8.4115', 3, 1, 1),
-(25, 110, 3, 1, 6, 1910, 'Pantalones CAVS', 'masculino', 'rojo:amarillo', 'Malaga', 'XL', 'persona', 'Pantalones cortos para jugar de los Cavs', 'bueno', 6, 19, 'i5377110901.webp', '36.7213', '-4.4216', 2, 1, 1),
+(25, 110, 3, 1, 6, 1910, 'Pantalones CAVS', 'masculino', 'rojo:amarillo', 'Malaga', 'XL', 'persona', 'Pantalones cortos para jugar de los Cavs', 'bueno', 6, 19, 'i5377110901.webp', '36.7213', '-4.4216', 5, 1, 1),
 (26, 106, 5, 3, 3, NULL, 'Zapatillas NB', 'masculino', 'blanco:azul', 'Palma, Mallorca', '38', 'domicilio', 'Zapatillas New Balance nuevas', 'nuevo', 3, 28, 'i5367014735.webp', '39.5696', '2.6502', 7, 1, 1),
-(27, 103, 3, 1, 3, NULL, 'Zapatillas Nike de color blanco y negro', 'masculino', 'Blanco:Negro', 'Santa Cruz de Tenerife', '43', 'domicilio', 'Zapatillas nike de color blanco y negro para salir por la calle', 'bueno', 1, 55, 'i5360803300.webp', '28.4824', '-16.2493', 150, 4, 3),
+(27, 103, 3, 1, 3, NULL, 'Zapatillas Nike de color blanco y negro', 'masculino', 'Blanco:Negro', 'Santa Cruz de Tenerife', '43', 'domicilio', 'Zapatillas nike de color blanco y negro para salir por la calle', 'bueno', 1, 55, 'i5360803300.webp', '28.4824', '-16.2493', 168, 5, 4),
 (28, 108, 5, 1, 5, NULL, 'Balon blando', 'todos', 'azul:negro', 'Maspalomas, Canarias', 'unica', 'persona', 'Balon blando para ninos pequenos', 'desgastado', 1, 9, 'i5356866821.webp', '27.7666', '-15.5785', 1, 1, 1),
 (29, 109, 1202, 1, 7, 1901, 'Camiseta Spurs', 'masculino', 'blanco:negro', 'Cordoba', 'M', 'persona', 'Camiseta de los Spurs de Ginobili', 'bueno', 2, 26, 'i5329783106.webp', '37.8833', '-4.7794', 17, 1, 1),
 (30, 110, 8, 1, 5, NULL, 'Balon FIBA 3x3', 'todos', 'Negro', 'Alicante, Valencia', 'unica', 'domicilio', 'Balon oficial FIBA ligas 3x3', 'bueno', 3, 17, 'i5331336754.webp', '38.3452', '-0.4810', 3, 4, 0),
-(31, 106, 9, 5, 8, NULL, 'Rodilleras Nike Pro', 'todos', 'naranja:negro', 'Vigo', 'unica', 'domicilio', 'Canasta sola sin el palo de soporte', 'nuevo', 4, 22, 'i5375191847.webp', '42.2370', '-8.7177', 2, 1, 0),
-(32, 107, 3, 1, 7, 1, 'Camiseta Lebron J 23', 'masculino', 'amarillo', 'Murcia', 'XXL', 'persona', 'Camiseta de los Lakers de Lebron James amarilla', 'bueno', 2, 25, 'i5334435135.webp', '37.9922', '-1.1307', 14, 5, 1),
+(31, 106, 9, 5, 8, NULL, 'Rodilleras Nike Pro', 'todos', 'naranja:negro', 'Vigo', 'unica', 'domicilio', 'Canasta sola sin el palo de soporte', 'nuevo', 4, 22, 'i5375191847.webp', '42.2370', '-8.7177', 3, 1, 0),
+(32, 107, 3, 1, 7, 1, 'Camiseta Lebron J 23', 'masculino', 'amarillo', 'Murcia', 'XXL', 'persona', 'Camiseta de los Lakers de Lebron James amarilla', 'bueno', 2, 25, 'i5334435135.webp', '37.9922', '-1.1307', 17, 3, 1),
 (33, 108, 1203, 4, 7, 1900, 'Camiseta UCAM Murcia', 'masculino', 'rojo', 'Zaragoza', 'S', 'domicilio', 'Camiseta de la liga ACB de Murcia', 'bueno', 6, 20, 'i5347298036.webp', '41.6561', '-0.8773', 8, 1, 1),
-(34, 109, 6, 3, 7, 5, 'Camiseta Valencia Basket', 'masculino', 'naranja', 'Salamanca', 'M', 'persona', 'Camiseta del Valencia Basket para jugar', 'desgastado', 2, 12, 'i5347555887.webp', '40.9652', '-5.6635', 8, 1, 1),
+(34, 109, 6, 3, 7, 5, 'Camiseta Valencia Basket', 'masculino', 'naranja', 'Salamanca', 'M', 'persona', 'Camiseta del Valencia Basket para jugar', 'desgastado', 2, 12, 'i5347555887.webp', '40.9652', '-5.6635', 10, 3, 1),
 (35, 110, 6, 1, 10, 5, 'Chaqueta del Valencia Basket', 'masculino', 'blanco:azul', 'Albacete', 'L', 'persona', 'Chaqueta del valencia basket', 'bueno', 3, 14, 'i5384523579.webp', '38.9869', '-1.8564', 1, 1, 1),
 (36, 106, 3, 2, 9, 5, 'Sudadera valencia basket gris', 'masculino', 'gris', 'La Colilla', 'L', 'persona', 'Sudadera del valencia basket gris', 'bueno', 2, 20, 'i5386194302.webp', '40.6401', '-4.7470', 1, 1, 1),
 (37, 107, 6, 1, 2, 5, 'Sueter entrenamiento vb', 'masculino', 'blanco:azul:naranja', 'Bilbao', 'L', 'domicilio', 'Sueter de entrenamiento valencia basket ', 'nuevo', 3, 29, 'i5340975714.webp', '43.2630', '-2.9349', 12, 1, 2),
-(38, 108, 6, 1, 6, 5, 'Pantalon corto valencia basket', 'masculino', 'blanco', 'Granada', 'L', 'persona', 'Pantalon corto para jugar del valencia basket', 'bueno', 5, 15, 'i5407596825.webp', '37.1765', '-3.5979', 2, 1, 0),
+(38, 108, 6, 1, 6, 5, 'Pantalon corto valencia basket', 'masculino', 'blanco', 'Granada', 'L', 'persona', 'Pantalon corto para jugar del valencia basket', 'bueno', 5, 15, 'i5407596825.webp', '37.1765', '-3.5979', 6, 1, 1),
 (39, 109, 3, 1, 7, 1911, 'Camiseta Curry Warriors', 'masculino', 'Blanco:Azul', 'Toledo', 'M', 'persona', 'Camiseta de los Golden State Warriors de Stephen Curry', 'bueno', 3, 90, 'IMG_0500.webp', '39.8786', '-4.0245', 1, 1, 0),
 (40, 110, 7, 1, 5, NULL, 'Balon Liga ACB 23/23', 'masculino', 'Negro:Blanco', 'Monaco', 'M', 'persona', 'Balon Spalding de la liga endesa de la temporada 2023/2024', 'bueno', 4, 30, 'IMG_0511.webp', '43.7384', '7.4246', 1, 1, 0);
 
@@ -1114,7 +1148,7 @@ INSERT INTO `tipo` (`id_tipo`, `tipo`, `img_tipo`, `visitas_tipo`) VALUES
 (4, 'gorras', 'gorras.png', 1),
 (5, 'balones', 'balones.png', 1),
 (6, 'pantalones', 'pantalones.png', 2),
-(7, 'camisetas', 'camisetas.png', 12),
+(7, 'camisetas', 'camisetas.png', 13),
 (8, 'accesorios', 'accesorios.png', 1),
 (9, 'sudaderas', 'sudaderas.png', 2),
 (10, 'chaquetas', 'chaquetas.png', 1);
@@ -1139,7 +1173,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `log_intents` int(3) NOT NULL DEFAULT 0,
   `otp` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -1164,11 +1198,22 @@ INSERT INTO `users` (`id_user`, `username`, `pwd`, `email`, `tipo_usuario`, `ava
 (131, 'daniel', '$2y$12$AarBK4Wdxuti4v0zwX2n8.vQZu/0gm32Udcdqgk0xB8FYnPrC/3MG', 'daniel@gmail.com', 'client', 'https://i.pravatar.cc/500?u=d79da72d537151678c9c4433b0b798b7', '+34697612065', '', 1, 0, NULL),
 (134, 'angel', '$2y$12$/atPF0ET/D3gcBHc75Ojoe.i3DSC8fWvxqEylt1f9cBoFyJL6oCH6', 'angel@gmail.com', 'client', 'https://i.pravatar.cc/500?u=49f02bb09c861720239469a11589ec00', '+34697612065', 'eyJ0eXAiOiJKV1QiLCAiYWxnIjoiSFMyNTYifQ.eyJpYXQiOiIxNzQ3OTIyMjA2IiwiZXhwIjoiMTc0NzkyOTQwNiIsInVzZXJuYW1lIjoiYW5nZWxAZ21haWwuY29tIn0.NGL0_tJyDJSCNnDSGr6LvZgrQ6LN5MbJlMco5joBKGw', 0, 0, NULL),
 (135, 'angel2', '$2y$12$vMaFh/iYKggSZSaCMexrUeXavRy41QC5GYvauOpapurR6Gb28cVvC', 'angel2@gmail.com', 'client', 'https://i.pravatar.cc/500?u=020578e1c915cdcb19b780cfc33a11b5', '+34697612065', '', 1, 0, ''),
-(138, 'daniel3', '$2y$12$685qlx6zoLVDIZpRNG.dHeR2es2qK/P0gysK/YOBcVojYU8Ii3hSm', 'daniel3@gmail.com', 'client', 'https://i.pravatar.cc/500?u=f6860b98b5aedab20457f2fb50e8829b', '+34697612065', '', 1, 0, '');
+(138, 'daniel3', '$2y$12$an2lYvhOcUMLZRl/KjABx.hebLdsyhF3M777/7A6njKWqG7Jsj2H6', 'daniel3@gmail.com', 'client', 'https://i.pravatar.cc/500?u=f6860b98b5aedab20457f2fb50e8829b', '+34697612065', '', 1, 2, ''),
+(139, 'daniel4', '$2y$12$5itq3ddzwI5tg5hMCwDx6.OeKiH9QKmo9zPcfXnrHGbTFJVdr2O3m', 'daniel4@gmail.com', 'client', 'https://i.pravatar.cc/500?u=3ec70b0848c3cd401b04bcc0efe1e831', '+34697612065', '', 1, 0, ''),
+(140, 'satorre5', '$2y$12$9LPZy1QOl0HH3btIqNWQc.A1LLI6n5SpFIMQovnyJwwSf9dIqn6Pa', 'satorre5@gmail.com', 'client', 'https://i.pravatar.cc/500?u=32395e64a27b7a9294dce110ba21f1a4', '+34697612065', '', 1, 0, '');
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `fk_comentarios_github` FOREIGN KEY (`id_user_github`) REFERENCES `github_users` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_comentarios_google` FOREIGN KEY (`id_user_google`) REFERENCES `google_users` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_comentarios_local` FOREIGN KEY (`id_user_local`) REFERENCES `users` (`id_user`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_comentarios_producto` FOREIGN KEY (`id_producto_comentario`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `devoluciones`

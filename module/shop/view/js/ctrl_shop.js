@@ -869,9 +869,10 @@ function load_comentarios(id_producto, comentarios, user){
     $(document).on('click', '.btn-enviar-comentario', function(e){ // enviar comentario haciendo click en el boton de enviar
         e.preventDefault();
         if(validate_comentario() != 0){
-            alert('validate_comentario correcto');
-            return false;
-            send_comentario(id_producto, token);
+            // alert('validate_comentario correcto');
+            // return false;
+            var comentario = $('#insertComentario').val();
+            send_comentario(id_producto, token, comentario);
         }
     });
     $("#insertComentario").keypress(function(e) { // enviar el comentario pulsando enter
@@ -879,9 +880,10 @@ function load_comentarios(id_producto, comentarios, user){
         if (code == 13) {
             e.preventDefault();
             if(validate_comentario() != 0){
-                alert('validate_comentario correcto');
-                return false;
-                send_comentario(id_producto, token);
+                // alert('validate_comentario correcto');
+                // return false;
+                var comentario = $('#insertComentario').val();
+                send_comentario(id_producto, token, comentario);
             }
         }
     });
@@ -889,6 +891,8 @@ function load_comentarios(id_producto, comentarios, user){
 } // load_comentarios
 
 function load_view_comentarios(comentarios, user){
+    console.log(comentarios);
+    console.log(user);
             $('.details_comentarios').empty();
             var html = `<div class="view_comentarios">`;
             // si no hay sesion iniciada cargar un boton para iniciar sesión
@@ -912,23 +916,26 @@ function load_view_comentarios(comentarios, user){
                     </form>
                 `;
             }
-            html += `<div class="comentarios-list>"`;
-            if(comentarios.comentarios && comentarios.comentarios.length > 0){
-                for(row in comentarios.comentarios){
+            html += `<div class="comentarios-list">`;
+            if(Array.isArray(comentarios) && comentarios.length > 0){ // si existe un array con comentarios cargar la vista de comentarios
+                for(row in comentarios){
                     html += `
                         <div class="comentarios">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <img class="comentario-avatar" src="${comentarios.comentarios[row].avatar}" alt="avatar">
-                                <span class="comentario-username" style="font-weight: bold;">${comentarios.comentarios[row].username}</span>
+                                <img class="comentario-avatar" src="${comentarios[row].avatar}" alt="avatar">
+                                <span class="comentario-username" style="font-weight: bold;">${comentarios[row].username}</span>
                             </div>
-                            <textarea class="comentario-text" readonly rows="3" cols="60" style="resize:vertical; margin-top:5px;">${comentarios.comentarios[row].comentario}</textarea>
+                            <textarea class="comentario-text" readonly 
+                                style="resize: none; overflow: hidden; width: 100%; min-height: 40px; height: auto;"
+                                oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"
+                            >${comentarios[row].comentario}</textarea>
                             <div class="comentario-fecha" style="color: #888; font-size: 0.9em; margin-top: 2px;">
-                                ${comentarios.comentarios[row].fecha}
+                                ${comentarios[row].fecha}
                             </div>
                         </div>
                     `
                 }
-            }else{
+            }else{ // si no existe un array con comentarios cargar el mensaje de que no existen comentarios
                 html += `<div class="comentarios noComentarios">Todavía no hay comentarios sobre este producto</div>`;
             }
             $('.details_comentarios').html(html);
@@ -937,8 +944,11 @@ function load_view_comentarios(comentarios, user){
 function validate_comentario(){
     var error = false;
 
-    if(document.getElementById('insertComentario').value.length < 5){
+    if(document.getElementById('insertComentario').value.length < 5){ // no permitir comentarios de menos de 5 caracteres
         document.getElementById('error_comentario').innerHTML = "El comentario debe de tener un mínimo de 5 caracteres";
+        error = true;
+    }else if(document.getElementById('insertComentario').value.length > 250){ // no permitir comentarios de más de 250 caracteres para evitar error al insertar en la db
+        document.getElementById('error_comentario').innerHTML = "El comentario no puede superar los 250 caracteres";
         error = true;
     }else{
         document.getElementById('error_comentario').innerHTML = "";
@@ -949,8 +959,11 @@ function validate_comentario(){
     }
 } // validate_comentario
 
-function send_comentario(id_producto, user){
-
+function send_comentario(id_producto, token, comentario){
+    ajaxPromise(friendlyURL("?module=shop&op=send_comentario"), 'POST', 'JSON', {'id_producto': id_producto, 'token': token, 'comentario': comentario})
+        // .then(function(data){
+        //     console.log(data);
+        // });
 } // send_comentarios
 
 function redirect_login_comentario(id_producto){

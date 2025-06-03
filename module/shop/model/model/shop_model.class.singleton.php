@@ -215,7 +215,15 @@
         }
 
         public function getComentarios($id_producto){
-            return $this -> bll -> get_comentarios_bll($id_producto);
+            return $this -> bll -> get_comentarios_BLL($id_producto);
+        }
+
+        public function sendComentario($params){
+            $id_producto = $params[0];
+            $userID = $params[1];
+            $provider = $params[2];
+            $comentario = $params[3];
+            $this -> bll -> send_comentario_BLL($id_producto, $userID, $provider, $comentario);
         }
 
     } // shop_model

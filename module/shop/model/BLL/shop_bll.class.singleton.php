@@ -160,8 +160,18 @@
             return $this -> dao -> filtro_home($this -> db, $filtro_home);
         }
         
-        public function get_comentarios_bll($id_producto){
+        public function get_comentarios_BLL($id_producto){
             return $this -> dao -> select_comentarios($this -> db, $id_producto);
+        }
+
+        public function send_comentario_BLL($id_producto, $userID, $provider, $comentario){
+            if($provider == "local"){
+                $this -> dao -> insert_comentario_local($this -> db, $id_producto, $userID, $comentario);
+            }else if($provider == "google"){
+                $this -> dao -> insert_comentario_google($this -> db, $id_producto, $userID, $comentario);
+            }else if($provider == "github"){
+                $this -> dao -> insert_comentario_github($this -> db, $id_producto, $userID, $comentario);
+            }
         }
 
     } // shop_bll
