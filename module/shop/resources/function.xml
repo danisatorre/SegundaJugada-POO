@@ -80,4 +80,8 @@
         <name>send_comentario</name>
         <uri>send_comentario</uri>
     </function>
+    <function>
+        <name>delete_comentario</name>
+        <uri>delete_comentario</uri>
+    </function>
 </functions>

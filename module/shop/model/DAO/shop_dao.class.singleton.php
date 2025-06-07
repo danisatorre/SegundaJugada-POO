@@ -574,6 +574,15 @@
 			$stmt = $db -> ejecutar($sql);
 		}
 
+		public function delete_comentario($db, $id_comentario){
+			$sql = "DELETE
+					FROM comentarios
+					WHERE id_comentario = '$id_comentario'";
+			
+			$stmt = $db -> ejecutar($sql);
+			return "ok";
+		}
+
     } // shop_dao
 
 ?>

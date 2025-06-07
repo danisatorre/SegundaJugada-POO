@@ -226,6 +226,10 @@
             $this -> bll -> send_comentario_BLL($id_producto, $userID, $provider, $comentario);
         }
 
+        public function deleteComentario($id_comentario){
+            return $this -> bll -> delete_comentario_BLL($id_comentario);
+        }
+
     } // shop_model
 
 ?>

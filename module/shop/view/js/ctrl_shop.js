@@ -887,12 +887,22 @@ function load_comentarios(id_producto, comentarios, user){
             }
         }
     });
+    $(document).on('click', '.btn-eliminar-comentario', function(e){ // eliminar comentario
+        e.preventDefault();
+        var id_comentario = $(this).data('id');
+        delete_comentario(id_comentario, id_producto);
+    });
     
 } // load_comentarios
 
 function load_view_comentarios(comentarios, user){
     console.log(comentarios);
     console.log(user);
+    if(user[0].id_user){
+        var id_user = user[0].id_user;
+    }else if(user[0].uid){
+        var id_user = user[0].uid;
+    }
             $('.details_comentarios').empty();
             var html = `<div class="view_comentarios">`;
             // si no hay sesion iniciada cargar un boton para iniciar sesión
@@ -919,8 +929,29 @@ function load_view_comentarios(comentarios, user){
             html += `<div class="comentarios-list">`;
             if(Array.isArray(comentarios) && comentarios.length > 0){ // si existe un array con comentarios cargar la vista de comentarios
                 for(row in comentarios){
-                    html += `
-                        <div class="comentarios">
+                    // hacer que si uno de los comentarios es de el mismo usuario que hay logeado darle la opción de poder eliminar el comentario
+                    if(id_user == comentarios[row].id_user_local || id_user == comentarios[row].id_user_google || id_user == comentarios[row].id_user_github){
+                        html +=`
+                        <div class="comentarios" id="${comentarios[row].id_comentario}">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img class="comentario-avatar" src="${comentarios[row].avatar}" alt="avatar">
+                                <span class="comentario-username" style="font-weight: bold;">${comentarios[row].username}</span>
+                                <button class="btn-eliminar-comentario" data-id="${comentarios[row].id_comentario}" title="Eliminar comentario">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                            <textarea class="comentario-text" readonly 
+                                style="resize: none; overflow: hidden; width: 100%; min-height: 40px; height: auto;"
+                                oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"
+                            >${comentarios[row].comentario}</textarea>
+                            <div class="comentario-fecha" style="color: #888; font-size: 0.9em; margin-top: 2px;">
+                                ${comentarios[row].fecha}
+                            </div>
+                        </div>
+                        `
+                    }else{
+                        html += `
+                        <div class="comentarios" id="${comentarios[row].id_comentario}">
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <img class="comentario-avatar" src="${comentarios[row].avatar}" alt="avatar">
                                 <span class="comentario-username" style="font-weight: bold;">${comentarios[row].username}</span>
@@ -933,7 +964,8 @@ function load_view_comentarios(comentarios, user){
                                 ${comentarios[row].fecha}
                             </div>
                         </div>
-                    `
+                        `
+                    }
                 }
             }else{ // si no existe un array con comentarios cargar el mensaje de que no existen comentarios
                 html += `<div class="comentarios noComentarios">Todavía no hay comentarios sobre este producto</div>`;
@@ -961,10 +993,28 @@ function validate_comentario(){
 
 function send_comentario(id_producto, token, comentario){
     ajaxPromise(friendlyURL("?module=shop&op=send_comentario"), 'POST', 'JSON', {'id_producto': id_producto, 'token': token, 'comentario': comentario})
-        // .then(function(data){
-        //     console.log(data);
-        // });
+        .then(function(data){
+            // console.log(data);
+            localStorage.setItem('redirect_comentario', id_producto);
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        });
 } // send_comentarios
+
+function delete_comentario(id_comentario, id_producto){
+    ajaxPromise(friendlyURL("?module=shop&op=delete_comentario"), 'POST', 'JSON', {'id_comentario': id_comentario})
+        .then(function(data){
+            if(data == "ok"){
+                localStorage.setItem('redirect_comentario', id_producto);
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            }else if(data == "error"){
+                toastr.error("Hubo un error al eliminar el comentario");
+            }
+        });
+} // delete_comentario
 
 function redirect_login_comentario(id_producto){
     localStorage.setItem('redirect_comentario', id_producto);

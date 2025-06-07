@@ -640,6 +640,31 @@ body {
     margin-left: 10px;
 }
 
+.btn-eliminar-comentario {
+    background: #fff;
+    color: #d32f2f;
+    border: none;
+    border-radius: 50%;
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar-comentario i.fa-trash {
+    pointer-events: none;
+}
+
+.btn-eliminar-comentario:hover {
+    background: #d32f2f;
+    color: #fff;
+    transition: background 0.3s, color 0.3s;
+}
+
 /* BOTONES DE LA PAGINACION */
 
 #paginacion{

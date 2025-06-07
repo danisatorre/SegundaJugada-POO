@@ -217,6 +217,20 @@
             exit;
         }
 
+        function delete_comentario(){
+            $id_comentario = $_POST['id_comentario'];
+
+            $delete = common::load_model('shop_model', 'deleteComentario', $id_comentario);
+
+            if($delete == "ok"){
+                echo json_encode("ok");
+                exit;
+            }else{
+                echo json_encode("error");
+                exit;
+            }
+        }
+
         function count_productos_relacionados(){
             $tipo = $_POST['tipo'];
             $id_producto = $_POST['id_producto'];

@@ -174,6 +174,10 @@
             }
         }
 
+        public function delete_comentario_BLL($id_comentario){
+            return $this -> dao -> delete_comentario($this -> db, $id_comentario);
+        }
+
     } // shop_bll
 
 ?>
