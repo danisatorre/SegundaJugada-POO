@@ -33,7 +33,18 @@
             $offset = $_POST['offset'];
             $limit = $_POST['limit'];
 
-            echo json_encode(common::load_model('shop_model', 'getAll', [$offset, $limit]));
+            $productos = common::load_model('shop_model', 'getAll', [$offset, $limit]);
+
+            foreach ($productos as &$producto){
+                $id_producto = $producto['id_producto'];
+                $imagenes = common::load_model('shop_model', 'getImgDetails', $id_producto);
+                $producto['imagenes'] = array();
+                foreach($imagenes as $img){
+                    $producto['imagenes'][] = $img['pimage_route'];
+                }
+            }
+
+            echo json_encode($productos);
         }
 
         function filtro_equipos(){
@@ -61,7 +72,18 @@
             $offset = $_POST['offset'];
             $limit = $_POST['limit'];
 
-            echo json_encode(common::load_model('shop_model', 'getFiltrar', [$filtro, $offset, $limit]));
+            $productos = common::load_model('shop_model', 'getFiltrar', [$filtro, $offset, $limit]);
+
+            foreach($productos as &$producto){
+                $id_producto = $producto['id_producto'];
+                $imagenes = common::load_model('shop_model', 'getImgDetails', $id_producto);
+                $producto['imagenes'] = array();
+                foreach($imagenes as $img){
+                    $producto['imagenes'][] = $img['pimage_route'];
+                }
+            }
+
+            echo json_encode($productos);
         }
         
         function count_productos_filtros(){
@@ -128,22 +150,33 @@
 
             try {
                 if (($categoria != "0") && ($tipo == "0") && ($ciudad == "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getCategoriaBuscador', [$categoria, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getCategoriaBuscador', [$categoria, $offset, $limit]);
                 } else if (($categoria == "0") && ($tipo != "0") && ($ciudad == "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getTipoBuscador', [$tipo, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getTipoBuscador', [$tipo, $offset, $limit]);
                 } else if (($categoria == "0") && ($tipo == "0") && ($ciudad != "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getCiudadBuscador', [$ciudad, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getCiudadBuscador', [$ciudad, $offset, $limit]);
                 } else if (($categoria != "0") && ($tipo != "0") && ($ciudad == "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getCategoriaTipoBuscador', [$categoria, $tipo, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getCategoriaTipoBuscador', [$categoria, $tipo, $offset, $limit]);
                 } else if (($categoria == "0") && ($tipo != "0") && ($ciudad != "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getTipoCiudadBuscador', [$tipo, $ciudad, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getTipoCiudadBuscador', [$tipo, $ciudad, $offset, $limit]);
                 } else if (($categoria != "0") && ($tipo == "0") && ($ciudad != "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getCategoriaCiudadBuscador', [$categoria, $ciudad, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getCategoriaCiudadBuscador', [$categoria, $ciudad, $offset, $limit]);
                 } else if (($categoria != "0") && ($tipo != "0") && ($ciudad != "0")) {
-                    echo json_encode(common::load_model('shop_model', 'getAllBuscador', [$categoria, $tipo, $ciudad, $offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getAllBuscador', [$categoria, $tipo, $ciudad, $offset, $limit]);
                 } else {
-                    echo json_encode(common::load_model('shop_model', 'getAll', [$offset, $limit]));
+                    $productos = common::load_model('shop_model', 'getAll', [$offset, $limit]);
                 }
+
+                foreach($productos as &$producto){
+                    $id_producto = $producto['id_producto'];
+                    $imagenes = common::load_model('shop_model', 'getImgDetails', $id_producto);
+                    $producto['imagenes'] = array();
+                    foreach($imagenes as $img){
+                        $producto['imagenes'][] = $img['pimage_route'];
+                    }
+                }
+                
+                echo json_encode($productos);
             } catch (Exception $e) {
                 echo json_encode("error");
                 exit;
@@ -291,7 +324,19 @@
                 $filtro_home = "p.tipo = '" . $filtro . "'";
             }
 
-            echo json_encode(common::load_model('shop_model', 'getFiltroHome', $filtro_home));
+            $productos = common::load_model('shop_model', 'getFiltroHome', $filtro_home);
+
+            foreach ($productos as &$producto){
+                $id_producto = $producto['id_producto'];
+                $imagenes = common::load_model('shop_model', 'getImgDetails', $id_producto);
+                $producto['imagenes'] = array();
+                foreach($imagenes as $img){
+                    $producto['imagenes'][] = $img['pimage_route'];
+                }
+            }
+
+            echo json_encode($productos);
+
         }
 
     } // ctrl_home

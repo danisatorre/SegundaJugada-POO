@@ -495,6 +495,24 @@ function goToShop(){
             window.location.href = friendlyURL("?module=shop");
         }, 500);
     });
+    $(document).on("click", '.div_producto', function(){
+        var producto = this.getAttribute('id_producto');
+        localStorage.removeItem('filtro');
+        localStorage.removeItem('filtro_marca');
+        localStorage.removeItem('filtro_precio');
+        localStorage.removeItem('filtro_equipo');
+        localStorage.removeItem('filtro_categoria');
+        localStorage.removeItem('filtro_tipo');
+        localStorage.removeItem('filtro_visitas');
+        localStorage.removeItem('pagina');
+        localStorage.removeItem('filtro_ciudad');
+        localStorage.removeItem('buscar');
+        localStorage.setItem('details_home', producto);
+
+        setTimeout(function(){
+            window.location.href = friendlyURL("?module=shop");
+        }, 500);
+    });
     // rating (go to detials)
     $(document).on("click", '.div_rating', function(){
         var rating = this.getAttribute('id_rating');

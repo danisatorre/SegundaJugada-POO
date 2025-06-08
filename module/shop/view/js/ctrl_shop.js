@@ -39,7 +39,7 @@ function loadShop(total_productos, items_por_pagina){
 function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina = 3) {
     // console.log("hola ajaxForSearch");
     // console.log("AFS filtros: ", filtro);
-    // console.log("AFS url: ", url);
+    console.log("AFS url: ", url);
     // console.log("AFS total_productos: ", total_productos);
     // console.log("AFS items_por_pagina: ", items_por_pagina);
     // return false;
@@ -63,7 +63,7 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
     
     ajaxPromise(url, 'POST', 'JSON', sdata)
         .then(function (shop) {
-            // console.log("Datos shop: ", shop);
+            console.log("Datos shop: ", shop);
             // return false;
             $(".container-productos").empty();
             if(shop != "error"){
@@ -73,12 +73,22 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
                         $("#nofiltros").empty();
                         $("#texto-nofiltros").empty();
                         $(".nofiltrosdiv").empty();
+                        var carouselList = `<div class="owl-carousel owl-theme productos_img_list" id="carousel-list-${shop[row].id_producto}">`;
+                        if (Array.isArray(shop[row].imagenes) && shop[row].imagenes.length > 0) {
+                            for (var img of shop[row].imagenes) {
+                                carouselList += `<div class="click-producto" id="${shop[row].id_producto}"><img src="${PRODUCT_IMAGES + img}" alt="foto"></div>`;
+                            }
+                        } else {
+                            // Imagen por defecto si no hay imágenes
+                            carouselList += `<div class="item"><img src="${PRODUCT_IMAGES + shop[row].img_producto}" alt="foto"></div>`;
+                        }
+                        carouselList += `</div>`;
                         $('<div></div>').attr('class', "producto").attr({'id': shop[row].id_producto}).appendTo('.container-productos')
                             .html(
+                                carouselList +
                                 "<div class='click-producto' id='" + shop[row].id_producto + "'>" +
-                                    "<img src = "+ PRODUCT_IMAGES + shop[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
-                                    "<h3>" + shop[row].nom_prod + "</h5>" +
+                                    "<h3>" + shop[row].nom_prod + "</h3>" +
                                     "<p class='precio'>" + shop[row].precio + "€</p>" +
                                     "</div>" + // end .inf-producto
                                 "</div>" + // end .click-producto
@@ -88,6 +98,14 @@ function ajaxForSearch(url, filtro = null, total_productos = 0, items_por_pagina
                                 "<span class='count-likes'>" + shop[row].likes + "</span>"
                             ); // end .html
                     }
+                    $('.productos_img_list').owlCarousel({
+                        items: 1,
+                        nav: true,
+                        navText: [
+                            '<button class="owl-prev">⟨</button>',
+                            '<button class="owl-next">⟩</button>'
+                        ]
+                    });
                     paginacion();
                     leafleft(shop, 6);
                     highlight();
@@ -1346,10 +1364,20 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
                         $("#texto-nofiltros").empty();
                         $('.imgnofdiv').empty();
                         $('.nofiltrosdiv').empty();
+                        var carouselList = `<div class="owl-carousel owl-theme productos_img_list" id="carousel-list-${buscador[row].id_producto}">`;
+                        if (Array.isArray(buscador[row].imagenes) && buscador[row].imagenes.length > 0) {
+                            for (var img of buscador[row].imagenes) {
+                                carouselList += `<div class="click-producto" id="${buscador[row].id_producto}"><img src="${PRODUCT_IMAGES + img}" alt="foto"></div>`;
+                            }
+                        } else {
+                            // Imagen por defecto si no hay imágenes
+                            carouselList += `<div class="item"><img src="${PRODUCT_IMAGES + buscador[row].img_producto}" alt="foto"></div>`;
+                        }
+                        carouselList += `</div>`;
                         $('<div></div>').attr('class', "producto").attr({'id': buscador[row].id_producto}).appendTo('.container-productos')
                             .html(
+                                carouselList +
                                 "<div class='click-producto' id='" + buscador[row].id_producto + "'>" +
-                                    "<img src = "+ PRODUCT_IMAGES + buscador[row].img_producto + " alt='foto' </img> " +
                                     "<div class='inf-producto'>" +
                                         "<h3>" + buscador[row].nom_prod + "</h5>" +
                                         "<p class='precio'>" + buscador[row].precio + "€</p>" +
@@ -1361,6 +1389,14 @@ function load_buscador_shop(total_productos = 0, items_por_pagina = 3){
                                 "<span class='count-likes'>" + buscador[row].likes + "</span>"
                             ); // end .html
                     }
+                    $('.productos_img_list').owlCarousel({
+                        items: 1,
+                        nav: true,
+                        navText: [
+                            '<button class="owl-prev">⟨</button>',
+                            '<button class="owl-next">⟩</button>'
+                        ]
+                    });
                     paginacion();
                     click_buscador();
                     leafleft(buscador, 6);
