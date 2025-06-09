@@ -1643,6 +1643,7 @@ function load_likes_user(){
                 for(row in like){
                     // console.log(like[row].id_producto_like);
                     $("#" + like[row].id_producto_like + ".fa-heart").toggleClass('like_red');
+                    $("#" + like[row].id_producto_like + ".producto").toggleClass('red_border');
                 }
             }).catch(function(error){
                 console.error("ERROR load_likes_user:\n", error);

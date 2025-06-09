@@ -186,85 +186,90 @@ footer {
     margin-right: 10px;
 }
 
-/* Estilos generales para dispositivos móviles */
-@media (max-width: 768px) {
+/* RESPONSIVE */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
     .register-container {
-        margin-top: 20%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 90%; /* Ocupa el 90% del ancho de la pantalla */
-        max-width: 400px; /* Mantén un límite máximo */
-        padding: 15px; /* Reduce el padding */
+        margin-top: 5vw;
+        margin-left: 0;
+        width: 90vw;
+        max-width: 380px;
+        padding: 18px;
     }
-
     .register-title {
-        font-size: 24px; /* Reduce el tamaño del título */
-        margin-bottom: 15px;
+        font-size: 24px;
     }
-
     .register-form {
-        gap: 10px; /* Reduce el espacio entre los elementos */
+        gap: 12px;
     }
-
-    .form-group-register label {
-        font-size: 12px; /* Reduce el tamaño del texto */
-    }
-
     .form-group-register input {
-        font-size: 14px; /* Reduce el tamaño del texto en los inputs */
-        padding: 8px; /* Reduce el padding */
+        font-size: 15px;
+        padding: 9px;
     }
-
-    .register-button {
-        font-size: 14px; /* Reduce el tamaño del texto */
-        padding: 8px 15px; /* Ajusta el padding */
-    }
-
-    .google-login-button {
-        font-size: 14px; /* Reduce el tamaño del texto */
-        padding: 8px 15px; /* Ajusta el padding */
-    }
-
-    .login-link {
-        font-size: 12px; /* Reduce el tamaño del texto */
-    }
-
-    .google-login-button img {
-        width: 18px; /* Reduce el tamaño del icono */
-        height: 18px;
-        margin-right: 8px;
+    .register-button, .google-login-button, .github-login-button {
+        font-size: 15px;
+        padding: 9px 16px;
     }
 }
 
-/* Estilos para pantallas muy pequeñas (por ejemplo, teléfonos de 320px de ancho) */
-@media (max-width: 480px) {
+/* Móviles (≤ 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
     .register-container {
-        margin-top: 15%;
-        width: 95%; /* Ocupa casi todo el ancho de la pantalla */
+        margin-top: 10vw;
+        margin-left: 0;
+        width: 98vw;
+        max-width: 99vw;
+        min-width: 0;
+        padding: 10vw 2vw 6vw 2vw;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
-
     .register-title {
-        font-size: 20px; /* Reduce aún más el tamaño del título */
+        font-size: 20px;
+        margin-bottom: 16px;
     }
-
+    .register-form {
+        gap: 10px;
+    }
+    .form-group-register label {
+        font-size: 13px;
+    }
     .form-group-register input {
-        font-size: 12px; /* Reduce el tamaño del texto en los inputs */
-        padding: 6px; /* Reduce el padding */
+        font-size: 14px;
+        padding: 8px;
     }
-
-    .register-button,
-    .google-login-button {
-        font-size: 12px; /* Reduce el tamaño del texto */
-        padding: 6px 10px; /* Ajusta el padding */
+    .register-button, .google-login-button, .github-login-button {
+        font-size: 14px;
+        padding: 8px 10px;
+        border-radius: 4px;
     }
-
-    .google-login-button img {
-        width: 16px; /* Reduce el tamaño del icono */
-        height: 16px;
-        margin-right: 5px;
+    .google-login-button img,
+    .github-login-button img {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
     }
-
     .login-link {
-        font-size: 10px; /* Reduce el tamaño del texto */
+        font-size: 13px;
+        margin-top: 8px;
+    }
+}
+
+/* Ajustes extra para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .register-container {
+        padding: 6vw 1vw 4vw 1vw;
+    }
+    .register-title {
+        font-size: 17px;
+    }
+    .register-button, .google-login-button, .github-login-button {
+        font-size: 13px;
+        padding: 7px 6px;
     }
 }

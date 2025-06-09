@@ -174,9 +174,22 @@ function load_content() {
     }
 }
 
+function desplegable_menu(){
+    $(document).on('click', '.menu-trigger', function() {
+        $('.main-nav ul.nav').slideToggle(200);
+    });
+
+    $(document).on('click', '.submenu > a', function(e) {
+        e.preventDefault();
+        $(this).next('ul').slideToggle(200);
+        $(this).parent().siblings('.submenu').find('ul').slideUp(200); // Cierra otros submenús
+    });
+} // desplegar el menu en mobiles y tablets
+
 $(document).ready(function() {
     load_content();
     load_menu();
     click_logout();
     click_shop();
+    desplegable_menu();
 });

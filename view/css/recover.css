@@ -1,4 +1,3 @@
-/* Puedes añadir esto al final de tu login.css o en un nuevo recover.css */
 .recover-email-container{
     margin-top: 8%;
     margin-left: 35%;
@@ -70,4 +69,87 @@
     background-color: goldenrod;
     border-color: orange;
     box-shadow: 0 0 10px goldenrod;
+}
+
+/* RESPONSIVE */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
+    .recover-email-container,
+    .recover-codigo-container,
+    .recover-pwd-container {
+        margin-top: 6vw;
+        margin-left: 0;
+        width: 90vw;
+        max-width: 380px;
+        padding: 18px;
+    }
+    .recover-title {
+        font-size: 22px;
+    }
+    .recover-form, .codigo-form {
+        gap: 12px;
+    }
+    .recover-email-button,
+    .recover-codigo-button,
+    .recover-pwd-button {
+        font-size: 15px;
+        padding: 9px 16px;
+    }
+}
+
+/* Móviles (≤ 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    .recover-email-container,
+    .recover-codigo-container,
+    .recover-pwd-container {
+        margin-top: 10vw;
+        margin-left: 0;
+        width: 98vw;
+        max-width: 99vw;
+        min-width: 0;
+        padding: 8vw 2vw 6vw 2vw;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .recover-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+    .recover-form, .codigo-form {
+        gap: 10px;
+    }
+    .recover-form input, .codigo-form input {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .recover-email-button,
+    .recover-codigo-button,
+    .recover-pwd-button {
+        font-size: 14px;
+        padding: 8px 10px;
+        border-radius: 4px;
+    }
+}
+
+/* Ajustes extra para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .recover-email-container,
+    .recover-codigo-container,
+    .recover-pwd-container {
+        padding: 6vw 1vw 4vw 1vw;
+    }
+    .recover-title {
+        font-size: 15px;
+    }
+    .recover-email-button,
+    .recover-codigo-button,
+    .recover-pwd-button {
+        font-size: 13px;
+        padding: 7px 6px;
+    }
 }

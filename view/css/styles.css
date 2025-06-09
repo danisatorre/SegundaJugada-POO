@@ -161,3 +161,153 @@
     color: orange;
     text-shadow: 0 0 5px goldenrod;
 }
+
+/* RESPONSIVE */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
+    .div_cp {
+        height: 38vh;
+    }
+    #carousel-principal {
+        height: 160px;
+    }
+    .div_categoria, .div_marca, .carousel__elements {
+        width: 32%;
+    }
+    .div_tipo, .div_producto {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .carousel-home .div_marca,
+    .carousel-tipo .div_tipo,
+    .carousel-producto .div_producto,
+    .carousel-accesorio .div_accesorio,
+    .carousel-popular .div_popular,
+    .carousel-rating .div_rating,
+    .carousel-rating-categoria .div_rating_categoria,
+    .carousel-rating-tipo .div_rating_tipo {
+        width: 180px;
+        height: 180px;
+    }
+    .carousel-home .div_marca img,
+    .carousel-tipo .div_tipo img,
+    .carousel-producto .div_producto img,
+    .carousel-accesorio .div_accesorio img,
+    .carousel-popular .div_popular img,
+    .carousel-rating .div_rating img,
+    .carousel-rating-categoria .div_rating_categoria img,
+    .carousel-rating-tipo .div_rating_tipo img {
+        height: 65%;
+    }
+    .carousel-home .div_marca h5,
+    .carousel-tipo .div_tipo h5,
+    .carousel-producto .div_producto h5,
+    .carousel-accesorio .div_accesorio h5,
+    .carousel-popular .div_popular h5,
+    .carousel-rating .div_rating h5,
+    .carousel-rating-categoria .div_rating_categoria h5,
+    .carousel-rating-tipo .div_rating_tipo h5 {
+        font-size: 15px;
+        margin: 8px 0;
+    }
+}
+
+/* Móviles (≤ 600px) */
+@media (max-width: 600px) {
+    .div_cp {
+        margin-top: -40px;
+        height: 22vh;
+    }
+    #carousel-principal {
+        height: 80px;
+    }
+    .div_categoria, .div_marca, .carousel__elements {
+        width: 90vw;
+        min-width: 0;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+    .div_tipo, .div_producto {
+        width: 98vw;
+        margin-left: 0;
+    }
+    .carousel-home .div_marca,
+    .carousel-tipo .div_tipo,
+    .carousel-producto .div_producto,
+    .carousel-accesorio .div_accesorio,
+    .carousel-popular .div_popular,
+    .carousel-rating .div_rating,
+    .carousel-rating-categoria .div_rating_categoria,
+    .carousel-rating-tipo .div_rating_tipo {
+        width: 98vw;
+        min-width: 0;
+        height: 110px;
+        margin: 8px auto;
+        border-radius: 6px;
+    }
+    .carousel-home .div_marca img,
+    .carousel-tipo .div_tipo img,
+    .carousel-producto .div_producto img,
+    .carousel-accesorio .div_accesorio img,
+    .carousel-popular .div_popular img,
+    .carousel-rating .div_rating img,
+    .carousel-rating-categoria .div_rating_categoria img,
+    .carousel-rating-tipo .div_rating_tipo img {
+        height: 60px;
+        border-bottom: 1px solid goldenrod;
+    }
+    .carousel-home .div_marca h5,
+    .carousel-tipo .div_tipo h5,
+    .carousel-producto .div_producto h5,
+    .carousel-accesorio .div_accesorio h5,
+    .carousel-popular .div_popular h5,
+    .carousel-rating .div_rating h5,
+    .carousel-rating-categoria .div_rating_categoria h5,
+    .carousel-rating-tipo .div_rating_tipo h5 {
+        font-size: 13px;
+        margin: 5px 0;
+    }
+    .portfolio-items2-col-1, .home-demo, .portfolio-items-col-3, .portfolio-items2-col-3 {
+        margin-top: 4vw;
+    }
+    #title-carousel-home, #title-carousel-tipo, #title-carousel-producto, #title-carousel-accesorio, #title-carousel-popularidad, #title-carousel-rating, #title-carousel-rating-categoria, #title-carousel-rating-tipo {
+        font-size: 1.1em;
+        padding: 0 2vw;
+    }
+}
+
+/* Ajustes extra para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .carousel-home .div_marca,
+    .carousel-tipo .div_tipo,
+    .carousel-producto .div_producto,
+    .carousel-accesorio .div_accesorio,
+    .carousel-popular .div_popular,
+    .carousel-rating .div_rating,
+    .carousel-rating-categoria .div_rating_categoria,
+    .carousel-rating-tipo .div_rating_tipo {
+        height: 80px;
+    }
+    .carousel-home .div_marca img,
+    .carousel-tipo .div_tipo img,
+    .carousel-producto .div_producto img,
+    .carousel-accesorio .div_accesorio img,
+    .carousel-popular .div_popular img,
+    .carousel-rating .div_rating img,
+    .carousel-rating-categoria .div_rating_categoria img,
+    .carousel-rating-tipo .div_rating_tipo img {
+        height: 40px;
+    }
+    .carousel-home .div_marca h5,
+    .carousel-tipo .div_tipo h5,
+    .carousel-producto .div_producto h5,
+    .carousel-accesorio .div_accesorio h5,
+    .carousel-popular .div_popular h5,
+    .carousel-rating .div_rating h5,
+    .carousel-rating-categoria .div_rating_categoria h5,
+    .carousel-rating-tipo .div_rating_tipo h5 {
+        font-size: 11px;
+        margin: 3px 0;
+    }
+}
