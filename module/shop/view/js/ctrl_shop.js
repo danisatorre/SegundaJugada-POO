@@ -215,6 +215,13 @@ function loadEquipos() {
 } // end loadEquipos (llenar los checkboxes de equipo dinamicamente desde la base de datos)
 
 function print_filtros() {
+    var btn_productos_like = "";
+    var token = JSON.parse(localStorage.getItem('token'));
+    if(token){
+        btn_productos_like = `
+            <button class="btn-productos-like">Ver mis favoritos</button>
+        `
+    }
     $('<div class="div-filtros"></div>').appendTo('.container-filtros')
         .html(
             // select tipo
@@ -347,6 +354,7 @@ function print_filtros() {
             '<p> </p>' +
             '<button class="boton_filtrar button_spinner" id="Button_filter">Filtrar</button>' +
             '<button class="boton_remover" id="Remove_filter">Remover filtros</button>' +
+            btn_productos_like +
             '<button class="boton_mapa" id="goToMap"> Viajar al mapa de productos </button>'
         
         );
@@ -359,6 +367,10 @@ function print_filtros() {
     // boton remover filtros
     $(document).on('click', '.boton_remover', function() {
         eliminar_filtros();
+    });
+    // boton para ver los likes del usuario logeado
+    $(document).on('click', '.btn-productos-like', function(){
+        load_productos_like(token);
     });
     // boton para desplazarse al mapa
     $(document).on('click', '.boton_mapa', function() {
@@ -394,6 +406,76 @@ function print_filtros() {
         $('.radio-visitas').slideToggle();
     });
 } // end print_filtros (mostrar los filtros en la página)
+
+function load_productos_like(token){
+    // console.log(token);
+    ajaxPromise(friendlyURL('?module=shop&op=load_productos_like'), 'POST', 'JSON', {'token': token})
+        .then(function(favoritos){
+            console.log(favoritos);
+            // console.log(favoritos.length);
+
+            $('.productos-favoritos').slideToggle();
+
+            $('.boton-ocultar-productos-favoritos').append(
+                `<button class='btn-ocultar-favoritos'>Ocultar mis productos favoritos</button>`
+            )
+
+            $('.titulo-productos-favoritos').append(
+                `<h2 class='title-pfavoritos'>MIS ${favoritos.length} PRODUCTOS FAVORITOS</h2>`
+            )
+
+            for (row in favoritos) {
+                $("#nofiltros").empty();
+                $("#texto-nofiltros").empty();
+                $(".nofiltrosdiv").empty();
+                var carouselList = `<div class="owl-carousel owl-theme productos_img_favoritos" id="carousel-list-${favoritos[row].id_producto}">`;
+                if (Array.isArray(favoritos[row].imagenes) && favoritos[row].imagenes.length > 0) {
+                    for (var img of favoritos[row].imagenes) {
+                        carouselList += `<div class="click-producto" id="${favoritos[row].id_producto}"><img src="${PRODUCT_IMAGES + img}" alt="foto"></div>`;
+                    }
+                } else {
+                    // Imagen por defecto si no hay imágenes
+                    carouselList += `<div class="item"><img src="${PRODUCT_IMAGES + favoritos[row].img_producto}" alt="foto"></div>`;
+                }
+                carouselList += `</div>`;
+                $('<div></div>').attr('class', "item").attr({'id': favoritos[row].id_producto}).appendTo('.pfavoritos')
+                    .html(
+                        "<div class='producto-favorito'>" +
+                            carouselList +
+                            "<div class='click-producto' id='" + favoritos[row].id_producto + "'>" +
+                                "<div class='inf-producto'>" +
+                                "<h3>" + favoritos[row].nom_prod + "</h3>" +
+                                "<p class='precio'>" + favoritos[row].precio + "€</p>" +
+                                "</div>" + // end .inf-producto
+                            "</div>" + // end .click-producto
+                        "</div>"
+                    ); // end .html
+            }
+
+            $('.pfavoritos').owlCarousel({ // carousel para que los productos se vean dentro de un carousel
+                items: 3,
+                nav: true,
+                loop: true,
+                navText: [
+                    '<button class="owl-prev">⟨</button>',
+                    '<button class="owl-next">⟩</button>'
+                ]
+            });
+
+            $('.productos_img_favoritos').owlCarousel({ // carousel para las imagenes de cada producto
+                items: 1,
+                nav: true,
+                navText: [
+                    '<button class="owl-prev">⟨</button>',
+                    '<button class="owl-next">⟩</button>'
+                ]
+            });
+        });
+        
+        $(document).on('click', '.btn-ocultar-favoritos', function(){
+            location.reload();
+        });
+} // cargar la vista de los productos favoritos del usuario
 
 function eliminar_filtros() {
     localStorage.removeItem('filtro');
@@ -726,6 +808,7 @@ function loadProductoDetails(id_producto){
         $('.inf-producto').empty();
         $('#paginacion').empty();
         $('.down-details').empty();
+        $('.productos-favoritos').empty();
         // console.log(shop);
         // return false;
         leafleft(shop[0][0], 16);

@@ -339,6 +339,35 @@
 
         }
 
+        function load_productos_like(){
+            $tokenNormal = $_POST['token'];
+            $token = middleware::decode_token($tokenNormal);
+            $username = $token['username'];
+            $provider = $token['provider'];
+            // echo json_encode($username);
+            // exit;
+
+            $idsProductos = common::load_model('shop_model', 'getLoadLikesUser', [$username, $provider]);
+            
+            $productos = array();
+            foreach($idsProductos as $row){
+                $id_producto = $row['id_producto_like'];
+                $producto = common::load_model('shop_model', 'getDetails', $id_producto);
+                if($producto){
+                    // añadir las imagenes del producto al array del producto
+                    $imagenes = common::load_model('shop_model', 'getImgDetails', $id_producto);
+                    $producto[0]['imagenes'] = array();
+                    foreach($imagenes as $img){
+                        $producto[0]['imagenes'][] = $img['pimage_route']; // coger las imagenes del producto
+                    }
+                    $productos[] = $producto[0]; // coger el primer elemento del array (los detalles del producto)
+                }
+            }
+
+            echo json_encode($productos);
+            exit;
+        }
+
     } // ctrl_home
 
 ?>

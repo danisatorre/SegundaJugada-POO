@@ -29,7 +29,7 @@ body {
     margin-top:4%;
 }
 
-.boton_filtrar, .botn_remover, .boton_mapa, .sotButton{
+.boton_filtrar, .botn_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-ocultar-favoritos{
     margin-top:2%;
 }
 
@@ -37,7 +37,7 @@ body {
     text-align:center;
 }
 
-.boton_filtrar:hover, .boton_remover:hover, .boton_mapa:hover, .sotButton:hover{
+.boton_filtrar:hover, .boton_mapa:hover, .sotButton:hover, .btn-productos-like:hover, .btn-ocultar-favoritos:hover{
     background-color: orange;
     border-color: goldenrod;
     box-shadow: 0 0 8px orange;
@@ -45,9 +45,30 @@ body {
     transition: 1s;
 }
 
-.boton_filtrar, .boton_remover, .boton_mapa, .sotButton{
+.boton_filtrar, .boton_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-ocultar-favoritos{
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.boton-ocultar-productos-favoritos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-ocultar-favoritos {
+    display: inline-block;
+    margin: 0 auto;
+    margin-bottom: 1%;
+}
+
+.boton_remover:hover{
+    background-color: red;
+    border-color: goldenrod;
+    box-shadow: 0 0 8px orange;
+    color:#fff;
+    transition: 1s;
 }
 
 .div-filtros select, .div-filtros button {
@@ -100,7 +121,7 @@ body {
     margin-top:3%;
 }
 
-.options-tipo, .options-categoria, .radio-precio, .checkbox-equipo, .options-marca, .options-ciudad{
+.options-tipo, .options-categoria, .radio-precio, .checkbox-equipo, .options-marca, .options-ciudad, .productos-favoritos{
     display:none;
 }
 
@@ -124,7 +145,7 @@ body {
     align-items: start;
 }
 
-.producto{
+.producto, .producto-favorito{
     background-color: gainsboro;
     border-radius: 8px;
     overflow: hidden;
@@ -140,7 +161,7 @@ body {
     margin: 0 auto;
 }
 
-.producto:hover{
+.producto:hover, .producto-favorito:hover{
     transform: translateY(-5px);
     border-color: goldenrod;
     box-shadow: 0 0 8px orange;
@@ -148,7 +169,7 @@ body {
     transition: 1s;
 }
 
-.producto img{
+.producto img, .producto-favorito img{
     width: 100%;
     height: 270px;
     object-fit: cover;
@@ -158,7 +179,7 @@ body {
 }
 
 .red_border{
-    background-color:rgb(255, 154, 118);
+    /* background-color:rgb(255, 154, 118); */
     border: 2px solid red;
     box-shadow: 0 0 8px orange;
 }
@@ -198,6 +219,18 @@ body {
 .filtros{
     display:block;
     float:left;
+}
+
+.productos-favoritos {
+    max-height: 500px;
+    overflow: visible;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.productos-favoritos.owl-loaded {
+    height: auto !important;
+    min-height: 0 !important;
 }
 
 /* LEAFLET */
@@ -428,7 +461,7 @@ body {
 
 /* DETAILS PRODUCTOS RELACIONADOS */
 
-.title-prelacionados {
+.title-prelacionados, .title-pfavoritos {
     text-align: center;
     display: block;
     width: 100%;
@@ -441,7 +474,7 @@ body {
     transition: all 0.3s ease; /* Animación suave */
 }
 
-.title-prelacionados:hover {
+.title-prelacionados:hover, .title-pfavoritos:hover {
     color: orange; /* Cambia el color al pasar el cursor */
     text-shadow: 0 0 10px goldenrod; /* Efecto de brillo */
     transform: scale(1.05); /* Aumenta ligeramente el tamaño */

@@ -84,4 +84,8 @@
         <name>delete_comentario</name>
         <uri>delete_comentario</uri>
     </function>
+    <function>
+        <name>load_productos_like</name>
+        <uri>load_productos_like</uri>
+    </function>
 </functions>

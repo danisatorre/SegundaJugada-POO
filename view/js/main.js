@@ -49,7 +49,7 @@ function load_menu() {
     if (token) {
         ajaxPromise('index.php?module=auth&op=data_user', 'POST', 'JSON', { 'token': token})
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 // console.log(data[0].avatar);
                 // return false;
                 $('.submenu-cuenta').empty();
@@ -134,7 +134,7 @@ function click_shop() {
 
 function load_content() {
     let path = window.location.pathname.split('/');
-    console.log(path);
+    // console.log(path);
     // return false;
     
     if(path[3] === 'recover'){
