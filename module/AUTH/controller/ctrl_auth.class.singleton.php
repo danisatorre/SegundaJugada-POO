@@ -36,6 +36,10 @@
             ctrl_auth::login_view();
         }
 
+        function update(){
+            common::load_view('top_page_auth.html', VIEW_PATH_AUTH . 'updateUser.html');
+        }
+
         function social_login(){ // iniciar sesión con usuarios de tipo social
             $uid = $_POST['id'];
             // echo json_encode($uid);

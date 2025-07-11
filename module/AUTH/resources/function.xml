@@ -76,4 +76,8 @@
         <name>verify_OTP</name>
         <uri>verify_OTP</uri>
     </function>
+    <function>
+        <name>update</name>
+        <uri>update</uri>
+    </function>
 </functions>

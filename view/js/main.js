@@ -57,6 +57,7 @@ function load_menu() {
                     '<ul>' +
                     '<li id="logout"><a>Cerrar sesión</a></li>' +
                     '<li id="switch-cuenta"><a href="'+ friendlyURL("?module=auth&op=login_view") +'">Cambiar de cuenta</a></li>' +
+                    '<li id="update-cuenta"><a href="'+ friendlyURL("?module=auth&op=update") +'">Actualizar mis datos</a></li>' +
                     '</ul>' 
                 ).appendTo('.submenu-cuenta');
                 // $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
