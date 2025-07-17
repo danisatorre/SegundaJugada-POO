@@ -221,6 +221,22 @@
 		public function disable_OTP_db_BLL($username){ // eliminar el código OTP al usuario al iniciar sesión
 			$this -> dao -> disable_OTP_db($this -> db, $username);
 		}
+
+		public function updateUsernameGoogle_BLL($oldUsername, $newUsername){
+			return $this -> dao -> updateUsernameGoogle_DB($this -> db, $oldUsername, $newUsername);
+		}
+
+		public function updateUsernameGitHub_BLL($oldUsername, $newUsername){
+			return $this -> dao -> updateUsernameGitHub_DB($this -> db, $oldUsername, $newUsername);
+		}
+
+		public function updateUsernameLocal_BLL($oldUsername, $newUsername){
+			// echo json_encode($oldUsername);
+			// exit;
+			// echo json_encode($newUsername);
+			// exit;
+			return $this -> dao -> updateUsernameLocal_DB($this -> db, $oldUsername, $newUsername);
+		}
     } // auth_bll
 
 ?>

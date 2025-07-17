@@ -273,6 +273,51 @@
             }
         }
 
+        function updateUsername(){
+            $token = $_POST['token'];
+            $oldUsername = $_POST['oldUsername'];
+            $newUsername = $_POST['newUsername'];
+
+            // echo json_encode($token);
+            // exit;
+            // echo json_encode($oldUsername);
+            // exit;
+            // echo json_encode($newUsername);
+            // exit;
+
+            $json_token = middleware::decode_token($token);
+            $provider = $json_token['provider'];
+
+            // echo json_encode($provider);
+            // exit;
+
+            try {
+                $checkUsernameLocal = common::load_model('auth_model', 'checkUsername', $newUsername);
+            } catch (Exception $e) {
+                echo json_encode("error");
+                exit;
+            }
+
+            if($checkUsernameLocal == "error_username"){
+                echo json_encode('error_username');
+                exit;
+            }
+
+            if($provider == "google"){
+                common::load_model('auth_model', 'updateUsernameGoogle', [$oldUsername, $newUsername]);
+                $token = middleware::create_token_provider($newUsername, 'google');
+                echo json_encode($token);
+            }else if($provider == "github"){
+                common::load_model('auth_model', 'updateUsernameGitHub', [$oldUsername, $newUsername]);
+                $token = middleware::create_token_provider($newUsername, 'github');
+                echo json_encode($token);
+            }else if($provider == "local"){
+                common::load_model('auth_model', 'updateUsernameLocal', [$oldUsername, $newUsername]);
+                $token = middleware::create_token_provider($newUsername, 'local');
+                echo json_encode($token);
+            }
+        }
+
         function control_user(){ // verificar si el usuario es o no válido
             $tokenNormal = $_POST['token'];
             // echo json_encode($tokenNormal);

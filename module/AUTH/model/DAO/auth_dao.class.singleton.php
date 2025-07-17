@@ -299,6 +299,30 @@
 
             $stmt = $db -> ejecutar($sql);
         }
+
+        public function updateUsernameGoogle_DB($db, $oldUsername, $newUsername){
+            $sql = "UPDATE google_users
+                    SET username = '$newUsername'
+                    WHERE username = '$oldUsername'";
+            
+            $stmt = $db -> ejecutar($sql);
+        }
+
+        public function updateUsernameGitHub_DB($db, $oldUsername, $newUsername){
+            $sql = "UPDATE github_users
+                    SET username = '$newUsername'
+                    WHERE username = '$oldUsername'";
+            
+            $stmt = $db -> ejecutar($sql);
+        }
+
+        public function updateUsernameLocal_DB($db, $oldUsername, $newUsername){
+            $sql = "UPDATE users
+                    SET username = '$newUsername'
+                    WHERE username = '$oldUsername'";
+            
+            $stmt = $db -> ejecutar($sql);
+        }
     } // auth_dao
 
 ?>

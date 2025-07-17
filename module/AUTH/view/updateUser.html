@@ -4,7 +4,8 @@
     <form class="update-form" id="form-username">
         <label class="update-label" for="new-username">Nuevo nombre de usuario</label>
         <input class="update-input" type="text" id="new-username" name="new-username" required>
-        <button class="update-btn" type="submit">Cambiar nombre de usuario</button>
+        <span class="error" id="error_username_update"></span>
+        <button class="update-btn" id="update-username-btn" type="button">Cambiar nombre de usuario</button>
         <div id="username-msg"></div>
     </form>
     <!-- Formulario para cambiar contraseña -->
@@ -15,7 +16,7 @@
         <input class="update-input" type="password" id="new-pwd" name="new-pwd" required>
         <label class="update-label" for="confirm-pwd">Repetir nueva contraseña</label>
         <input class="update-input" type="password" id="confirm-pwd" name="confirm-pwd" required>
-        <button class="update-btn" type="submit">Cambiar contraseña</button>
+        <button class="update-btn" id="update-pwd-btn" type="submit">Cambiar contraseña</button>
         <div id="password-msg"></div>
     </form>
 </div>

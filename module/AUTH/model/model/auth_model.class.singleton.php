@@ -122,6 +122,26 @@
         public function disableOTPDb($username){ // eliminar el código OTP de la tabla users al iniciar sesión
             $this -> bll -> disable_OTP_db_BLL($username);
         }
+
+        public function updateUsernameGoogle($params){
+            $oldUsername = $params[0];
+            $newUsername = $params[1];
+            return $this -> bll -> updateUsernameGoogle_BLL($oldUsername, $newUsername);
+        }
+
+        public function updateUsernameGitHub($params){
+            $oldUsername = $params[0];
+            $newUsername = $params[1];
+            return $this -> bll -> updateUsernameGitHub_BLL($oldUsername, $newUsername);
+        }
+
+        public function updateUsernameLocal($params){
+            // echo json_encode('hola updateUsernameLocal MODEL');
+            // exit;
+            $oldUsername = $params[0];
+            $newUsername = $params[1];
+            return $this -> bll -> updateUsernameLocal_BLL($oldUsername, $newUsername);
+        }
     } // auth_model
 
 ?>
