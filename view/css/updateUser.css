@@ -72,6 +72,71 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        /* ACCESO DENEGADO */
+
+        .provider-blocked {
+            max-width: 400px;
+            margin: 80px auto;
+            background: #fffbe6;
+            border: 2px solid orange;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(255, 193, 7, 0.12);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .google-blocked {
+            border-color: #4285F4;
+        }
+        .github-blocked {
+            border-color: #333;
+        }
+        .provider-title {
+            color: goldenrod;
+            font-size: 1.6em;
+            margin-bottom: 16px;
+        }
+        .provider-msg {
+            color: #333;
+            font-size: 1.1em;
+        }
+        .provider-name {
+            color: orange;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .provider-logo {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+        }
+
+        .login-blocked {
+            border-color: #d32f2f;
+            background: #ffeaea;
+        }
+
+        .login-btn {
+            margin-top: 18px;
+            background: orange;
+            color: #fff;
+            border: 2px solid goldenrod;
+            border-radius: 5px;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .login-btn:hover {
+            background: goldenrod;
+            box-shadow: 0 0 8px orange;
+        }
+
+        .noUpdate{
+            margin-top:5%;
+        }
+
         @media (max-width: 600px) {
             .update-container {
                 width: 100vw;

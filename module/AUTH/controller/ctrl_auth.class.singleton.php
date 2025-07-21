@@ -437,6 +437,15 @@
             }
         }
 
+        function checkProvider(){ // saber el provider del usuario
+            $token = $_POST['token'];
+
+            $json_token = middleware::decode_token($token);
+            $provider = $json_token['provider'];
+
+            echo json_encode($provider);
+        }
+
     } //ctrl_auth
 
 ?>

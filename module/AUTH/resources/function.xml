@@ -84,4 +84,8 @@
         <name>updateUsername</name>
         <uri>updateUsername</uri>
     </function>
+    <function>
+        <name>checkProvider</name>
+        <uri>checkProvider</uri>
+    </function>
 </functions>

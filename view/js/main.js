@@ -187,10 +187,22 @@ function desplegable_menu(){
     });
 } // desplegar el menu en mobiles y tablets
 
+function delete_update_option(){ // si el usuario es de google o de github que no aparezca la opcion en el menu de cambiar los datos de su cuenta
+    var token = JSON.parse(localStorage.getItem('token'))
+
+    ajaxPromise(friendlyURL('?module=auth&op=checkProvider'), 'POST', 'JSON', {'token': token})
+        .then(function(provider){
+            if(provider == 'google' || provider == 'github'){
+                $('#update-cuenta').remove();
+            }
+        });
+}
+
 $(document).ready(function() {
     load_content();
     load_menu();
     click_logout();
     click_shop();
     desplegable_menu();
+    delete_update_option();
 });
