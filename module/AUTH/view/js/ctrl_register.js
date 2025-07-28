@@ -69,7 +69,7 @@ function button_register() {
 
 function validate_register() {
     // console.log("hola validate_register")
-    var username_regex = /^(?=.{5,}$)(?=.*[a-zA-Z0-9]).*$/;
+    var username_regex = /^[a-zA-Z0-9]{5,}$/;
     var mail_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     var pwd_regex = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
     var phone_regex = /^[0-9]{9}$/;
