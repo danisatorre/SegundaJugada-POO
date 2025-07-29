@@ -88,4 +88,8 @@
         <name>checkProvider</name>
         <uri>checkProvider</uri>
     </function>
+    <function>
+        <name>update_user_pwd</name>
+        <uri>update_user_pwd</uri>
+    </function>
 </functions>

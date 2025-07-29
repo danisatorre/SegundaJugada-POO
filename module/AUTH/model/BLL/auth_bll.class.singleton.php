@@ -168,6 +168,24 @@
 			}
 		}
 
+		public function update_user_pwd_BLL($username, $newPwd, $currentPwd){ // manejar el cambio de contraseña desde el menú de actualizar los datos
+			$checkPwd = $this -> dao -> select_user_log($this->db, $username);
+			if(password_verify($currentPwd, $checkPwd[0]['pwd'])){
+				if(password_verify($newPwd, $checkPwd[0]['pwd'])){
+					return 'samePwd';
+					exit;
+				}else{
+					$updatePwd = $this -> dao -> update_pwd_user($this->db, $newPwd, $username);
+					return 'ok';
+				}
+			}else{
+				return 'incorrectPwd';
+				// exit;
+				// echo json_encode('incorrectPwd');
+				// exit;
+			}
+		}
+
 		public function get_prefijos_phone_BLL(){ // coger los nº de los prefijos de tlf de la tabla country
 			return $this -> dao -> select_prefijos_phone($this->db);
 		}

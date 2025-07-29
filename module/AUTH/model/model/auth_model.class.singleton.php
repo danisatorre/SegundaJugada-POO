@@ -101,6 +101,13 @@
             return $this -> bll -> get_verify_token_BLL($tokenEmail, $pwd);
         }
 
+        public function updateUserPwd($params){ // actualizar la contraseña del usuario desde el menú de actualizar los datos
+            $username = $params[0];
+            $newPwd = $params[1];
+            $currentPwd = $params[2];
+            return $this -> bll -> update_user_pwd_BLL($username, $newPwd, $currentPwd);
+        }
+
         public function getPrefijosPhone(){ // coger los prefijos de nº de tlf de la tabla country
             return $this -> bll -> get_prefijos_phone_BLL();
         }

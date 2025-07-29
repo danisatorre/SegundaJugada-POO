@@ -401,6 +401,17 @@
             echo json_encode(common::load_model('auth_model', 'getVerifyToken', [$tokenEmail, $pwd]));
         }
 
+        function update_user_pwd(){
+            $newPwd = $_POST['newPwd'];
+            $token = $_POST['token'];
+            $currentPwd = $_POST['currentPwd'];
+            $dataUser = middleware::decode_token($token);
+            $username = $dataUser['username'];
+            // echo json_encode($dataUser);
+            // exit;
+            echo json_encode(common::load_model('auth_model', 'updateUserPwd', [$username, $newPwd, $currentPwd]));
+        }
+
         function get_prefijos_phone(){ // coger los prefijos de nº de tlf de la tabla country
             echo json_encode(common::load_model('auth_model', 'getPrefijosPhone'));
         }

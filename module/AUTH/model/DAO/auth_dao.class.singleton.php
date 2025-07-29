@@ -198,13 +198,23 @@
             return 'ok';
         }
 
-        public function update_pwd($db, $tokenEmail, $pwd, $email){
+        public function update_pwd($db, $tokenEmail, $pwd, $email){ // actualizar la contraseña mediante el metodo de 'he olvidado la contraseña'
             $hashpwd = password_hash($pwd, PASSWORD_DEFAULT, ['cost' => 12]);
 
             $sql = "UPDATE users
                     SET activate = 1, token_email = '', pwd = '$hashpwd'
                     WHERE email = '$email'
                     AND token_email = '$tokenEmail'";
+
+            return $stmt = $db->ejecutar($sql);
+        }
+
+        public function update_pwd_user($db, $newPwd, $username){ // actualizar la contraseña mediante el menú de 'actualizar mis datos'
+            $hashpwd = password_hash($newPwd, PASSWORD_DEFAULT, ['cost' => 12]);
+
+            $sql = "UPDATE users
+                    SET pwd = '$hashpwd'
+                    WHERE username = '$username'";
 
             return $stmt = $db->ejecutar($sql);
         }

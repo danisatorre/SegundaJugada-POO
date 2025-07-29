@@ -45,13 +45,26 @@ function changeUsername(username){ // cambiar el nombre de usuario
 function updateUserPwd(pwd){
     $(document).on('click', '#update-pwd-btn', function(){
         if(validateNewPwd() != 0){
-            var newPwd = document.getElementById('new-pwd').value;
+            var newPwd = document.getElementById('new-pwd').value; // contraseña nueva introducida por el usuario
             var newPwdC = document.getElementById('confirm-pwd').value;
+            var currentPwd = document.getElementById('current-pwd').value; // contraseña actual introducida por el usuario
+            var token = JSON.parse(localStorage.getItem('token')); // token con los datos del usuario logeado en el momento
             if(newPwd != newPwdC){
-                console.log('LAS CONTRASEÑAS NO COINCIDEN');
+                // console.log('LAS CONTRASEÑAS NO COINCIDEN');
                 document.getElementById('error_pwd_update').innerHTML = '<br>*La contraseña nueva no es la misma en los dos recuadros, vuelve a introducir la contraseña en los dos recuadros<br>';
             }else{
-                console.log('LAS CONTRASEÑAS SI COINCIDEN');
+                // console.log('LAS CONTRASEÑAS SI COINCIDEN');
+                ajaxPromise(friendlyURL('?module=auth&op=update_user_pwd'), 'POST', 'JSON', {'token': token, 'newPwd': newPwd, 'currentPwd': currentPwd})
+                    .then(function(data){
+                        console.log(data);
+                        if(data == 'samePwd'){
+                            document.getElementById('error_pwd_update').innerHTML = '<br>*La nueva contraseña no puede ser la misma que la anterior<br>';
+                        }else if(data == 'incorrectPwd'){
+                            document.getElementById('error_pwd_update').innerHTML = '<br>*La contraseña introducida no coincide con tu contraseña, vueve a intentar con otra contraseña<br>';
+                        }else if(data == 'ok'){
+                            updatePwdLogout(); // cerrar la sesión (función en main.js)
+                        }
+                    });
             }
         }else{
             console.warn('Las contraseñas no cumplen con el requisito');

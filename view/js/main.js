@@ -126,6 +126,23 @@ function logout() {
     }
 }
 
+function updatePwdLogout(){
+    Swal.fire({
+        title: "Contraseña actualizada",
+        text: "Tu contraseña ha sido actualizada correctamente, inicia sesión con tu nueva contraseña",
+        icon: "success",
+        confirmButtonText: "Iniciar Sesión"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            ajaxPromise(friendlyURL('?module=auth&op=logout'), 'POST', 'JSON')
+                .then(function(data){
+                    localStorage.removeItem('token');
+                    window.location.href = friendlyURL("?module=auth&op=login_view");
+                });
+        }
+    });
+}
+
 // Eliminar la pagina del localStorage al acceder al shop para entrar siempre desde la 1ª página
 function click_shop() {
     $(document).on('click', '#page-productos', function() {
