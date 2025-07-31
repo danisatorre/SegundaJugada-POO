@@ -1,5 +1,16 @@
 <div class="update-container">
     <div class="update-title">Actualizar datos de tu cuenta</div>
+    <!-- Cambiar la imagen de perfil del usuario -->
+    <div class="profile-pic-wrapper">
+        <div class="profile-pic-circle" id="profile-pic-circle">
+            <img id="profile-pic-img" src="" alt="Imagen de perfil" />
+            <span class="edit-icon">
+                <i class="fa fa-edit"></i>
+            </span>
+        </div>
+        <input type="file" id="profile-pic-input" accept="image/*" style="display:none;">
+    </div>
+    <button class="update-btn" id="save-profile-pic-btn" type="button">Guardar imagen</button>
     <!-- Formulario para cambiar nombre de usuario -->
     <form class="update-form" id="form-username">
         <label class="update-label" for="new-username">Nuevo nombre de usuario</label>

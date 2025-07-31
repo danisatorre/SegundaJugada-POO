@@ -9,6 +9,7 @@
             box-sizing: border-box;
         }
         .update-title {
+            margin-top:13%;
             text-align: center;
             color: goldenrod;
             font-size: 2em;
@@ -135,6 +136,64 @@
 
         .noUpdate{
             margin-top:5%;
+        }
+
+        .profile-pic-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .profile-pic-circle {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #f5f5f5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+        }
+
+        .profile-pic-circle:hover {
+            box-shadow: 0 4px 16px orange;
+        }
+
+        .profile-pic-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s;
+            display: block;
+        }
+
+        .profile-pic-circle:hover img {
+            filter: brightness(0.7);
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            background: rgba(255, 165, 0, 0.85);
+            border-radius: 50%;
+            padding: 12px;
+            font-size: 28px;
+            display: none;
+            pointer-events: none;
+        }
+
+        .profile-pic-circle:hover .edit-icon {
+            display: block;
+            pointer-events: auto;
+        }
+
+        #save-profile-pic-btn{
+            margin-left:8%;
         }
 
         @media (max-width: 600px) {

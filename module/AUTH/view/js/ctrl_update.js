@@ -182,10 +182,41 @@ function checkProviderUpdate(){ // consultar si el usuario es local o no para pe
     }
 }
 
+function clickProfilePhoto(){ // abrir el explorador de archivos para elegir imagen de perfil al hacer click en el circulo de la imagen de perfil
+    document.getElementById('profile-pic-circle').addEventListener('click', function() {
+        document.getElementById('profile-pic-input').click();
+    });
+}
+
+function previewProfilePhoto(){ // generar una vista previa en el circulo de la imagen de perfil elegida
+    document.getElementById('profile-pic-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        console.log(file);
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profile-pic-img').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+function viewProfilePhoto(){ // ver la imagen de perfil del usuario en el circulo
+    var token = JSON.parse(localStorage.getItem('token'));
+    ajaxPromise(friendlyURL('?module=auth&op=data_user'), 'POST', 'JSON', {'token': token})
+        .then(function(profile){
+            document.getElementById('profile-pic-img').src = profile[0].avatar;
+        });
+}
+
 
 $(document).ready(function() {
     checkProviderUpdate();
     getDataUserUpdate();
     changeUsername();
     updateUserPwd();
+    clickProfilePhoto();
+    previewProfilePhoto();
+    viewProfilePhoto();
 });
