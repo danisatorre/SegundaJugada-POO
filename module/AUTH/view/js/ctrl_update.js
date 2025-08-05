@@ -210,6 +210,32 @@ function viewProfilePhoto(){ // ver la imagen de perfil del usuario en el circul
         });
 }
 
+function saveProfilePhoto(){ // guardar la imagen de perfil de usuario en la DB
+    $(document).on('click', '#save-profile-pic-btn', function(){
+        var token = JSON.parse(localStorage.getItem('token'));
+        var fileInput = document.getElementById('profile-pic-input');
+        var foto = fileInput.files[0];
+        if(foto){
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('foto', foto);
+            ajaxPromise(friendlyURL('?module=auth&op=saveProfilePicture'), 'POST', 'JSON', formData)
+                .then(function(data){
+                    console.log(data);
+                    return false;
+                    if(data == 'ok'){
+                        location.reload();
+                    }else if(data == 'error'){
+                        toastr.error('Hubo un problema al actualizar tu foto de perfil');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
+                    }
+                });
+        }
+    });
+}
+
 
 $(document).ready(function() {
     checkProviderUpdate();
@@ -219,4 +245,5 @@ $(document).ready(function() {
     clickProfilePhoto();
     previewProfilePhoto();
     viewProfilePhoto();
+    saveProfilePhoto();
 });

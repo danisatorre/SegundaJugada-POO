@@ -7,7 +7,9 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             url: sUrl, // url del servidor
             type: sType, // tipo de petición (GET / POST)
             dataType: sTData,
-            data: sData
+            data: sData,
+            processData: !(sData instanceof FormData),
+            contentType: !(sData instanceof FormData) ? 'application/x-www-form-urlencoded; charset=UTF-8' : false
         }).done((data) => {
             // console.log("Respuesta del servidor: ", data);
             // return false;

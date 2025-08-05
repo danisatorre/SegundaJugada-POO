@@ -92,4 +92,8 @@
         <name>update_user_pwd</name>
         <uri>update_user_pwd</uri>
     </function>
+    <function>
+        <name>saveProfilePicture</name>
+        <uri>saveProfilePicture</uri>
+    </function>
 </functions>

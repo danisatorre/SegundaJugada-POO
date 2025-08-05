@@ -457,6 +457,13 @@
             echo json_encode($provider);
         }
 
+        function saveProfilePicture(){ // guardar la nueva imagen de perfil del usuario en la DB
+            $token = $_POST['token'];
+            $foto = $_FILES['foto'];
+            echo json_encode($foto);
+            exit;
+        }
+
     } //ctrl_auth
 
 ?>
