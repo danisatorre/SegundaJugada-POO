@@ -333,6 +333,15 @@
             
             $stmt = $db -> ejecutar($sql);
         }
+
+        public function saveProfilePhoto_DB($db, $username, $ruta){
+            $sql = "UPDATE users
+                    SET avatar = '$ruta'
+                    WHERE username = '$username'";
+            
+            $stmt = $db -> ejecutar($sql);
+            return 'ok';
+        }
     } // auth_dao
 
 ?>

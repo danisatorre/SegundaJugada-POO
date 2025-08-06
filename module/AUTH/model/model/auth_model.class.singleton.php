@@ -149,6 +149,12 @@
             $newUsername = $params[1];
             return $this -> bll -> updateUsernameLocal_BLL($oldUsername, $newUsername);
         }
+
+        public function saveProfilePhoto($params){
+            $username = $params[0];
+            $ruta = $params[1];
+            return $this -> bll -> saveProfilePhoto_BLL($username, $ruta);
+        }
     } // auth_model
 
 ?>

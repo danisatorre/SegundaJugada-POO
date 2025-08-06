@@ -222,11 +222,34 @@ function saveProfilePhoto(){ // guardar la imagen de perfil de usuario en la DB
             ajaxPromise(friendlyURL('?module=auth&op=saveProfilePicture'), 'POST', 'JSON', formData)
                 .then(function(data){
                     console.log(data);
-                    return false;
+                    // return false;
                     if(data == 'ok'){
-                        location.reload();
+                        toastr.success('La imagen de perfil se actualizo correctamente');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
                     }else if(data == 'error'){
                         toastr.error('Hubo un problema al actualizar tu foto de perfil');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
+                    }else if(data == 'noFoto'){
+                        toastr.warn('Debes de elegir una foto para poder continuar');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
+                    }else if(data == 'errorFormat'){
+                        toastr.error('El formato del archivo elegido no se permite para una imagen de perfil');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
+                    }else if(data == 'fotoPesada'){
+                        toastr.error('La imagen no puede superar los 2MB de tamaño');
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
+                    }else if(data == 'errorUpload'){
+                        toastr.error('Hubo un problema al subir la imagen a nuestro servidor. Vuelve a intentarlo');
                         setTimeout(function(){
                             location.reload();
                         }, 5000);

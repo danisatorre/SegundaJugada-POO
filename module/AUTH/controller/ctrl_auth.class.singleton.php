@@ -460,8 +460,45 @@
         function saveProfilePicture(){ // guardar la nueva imagen de perfil del usuario en la DB
             $token = $_POST['token'];
             $foto = $_FILES['foto'];
-            echo json_encode($foto);
-            exit;
+            $data_token = middleware::decode_token($token);
+            $username = $data_token['username'];
+            // echo json_encode($foto);
+            // echo json_encode($username);
+            // exit;
+            if(isset($foto)){
+                $tipo = $foto['type'];
+                $fotoName = $foto['name'];
+                $tmpName = $foto['tmp_name'];
+                $size = $foto['size'];
+                if($tipo != 'image/jpg' && $tipo != 'image/JGP' && $tipo != 'image/jpeg' && $tipo != 'image/png'){
+                    echo json_encode('errorFormat');
+                    exit;
+                }else if($size > 2*1024*1024){
+                    echo json_encode('fotoPesada');
+                    exit;
+                }else{
+                    $rutaFisica = IMG_PATH . 'profilePhoto/' . $username . '_' . $fotoName;
+                    $rutaWeb = '/SegundaJugada-POO/view/images/profilePhoto/' . $username . '_' . $fotoName;
+                    // echo json_encode($ruta);
+                    // exit;
+                    if(move_uploaded_file($tmpName, $rutaFisica)){
+                        $saveIMG = common::load_model('auth_model', 'saveProfilePhoto', [$username, $rutaWeb]);
+                        if($saveIMG == 'ok'){
+                            echo json_encode('ok');
+                            exit;
+                        }else{
+                            echo json_encode('error');
+                            exit;
+                        }
+                    }else{
+                        echo json_encode('errorUpload');
+                        exit;
+                    }
+                }
+            }else{
+                echo json_encode('noFoto');
+                exit;
+            }
         }
 
     } //ctrl_auth

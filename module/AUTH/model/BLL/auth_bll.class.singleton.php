@@ -255,6 +255,10 @@
 			// exit;
 			return $this -> dao -> updateUsernameLocal_DB($this -> db, $oldUsername, $newUsername);
 		}
+		
+		public function saveProfilePhoto_BLL($username, $ruta){
+			return $this -> dao -> saveProfilePhoto_DB($this -> db, $username, $ruta);
+		}
     } // auth_bll
 
 ?>
