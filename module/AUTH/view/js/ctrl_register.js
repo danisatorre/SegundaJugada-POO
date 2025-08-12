@@ -155,7 +155,7 @@ function load_prefijos_phone(){ // cargar los prefijos de teléfonos en los sele
             // return false;
             var select = $('#phone_prefix');
             select.empty();
-            select.append('<option value="">Prefijo</option>');
+            select.append('<option value="" disabled selected>Prefijo</option>');
             for (row in prefijos) {
                 select.append(
                     '<option value="+' + prefijos[row].country_phone_code + '">' +

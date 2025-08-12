@@ -215,11 +215,12 @@ function loadEquipos() {
 } // end loadEquipos (llenar los checkboxes de equipo dinamicamente desde la base de datos)
 
 function print_filtros() {
-    var btn_productos_like = "";
+    var login_buttons = "";
     var token = JSON.parse(localStorage.getItem('token'));
     if(token){
-        btn_productos_like = `
+        login_buttons = `
             <button class="btn-productos-like">Ver mis favoritos</button>
+            <button class="btn-formulario" id="link_formulario">Subir mi producto</button>
         `
     }
     $('<div class="div-filtros"></div>').appendTo('.container-filtros')
@@ -354,7 +355,7 @@ function print_filtros() {
             '<p> </p>' +
             '<button class="boton_filtrar button_spinner" id="Button_filter">Filtrar</button>' +
             '<button class="boton_remover" id="Remove_filter">Remover filtros</button>' +
-            btn_productos_like +
+            login_buttons +
             '<button class="boton_mapa" id="goToMap"> Viajar al mapa de productos </button>'
         
         );
@@ -404,6 +405,10 @@ function print_filtros() {
     // desplegable popularidad
     $(document).on('click', '.desplegable_visitas', function(){
         $('.radio-visitas').slideToggle();
+    });
+
+    $(document).on('click', '#link_formulario', function() {
+        window.location.href = friendlyURL('?module=shop&op=subir_producto');
     });
 } // end print_filtros (mostrar los filtros en la página)
 
@@ -1752,6 +1757,39 @@ function redirect_login_like(){
     }
 } // end redirect_login_like
 
+////////////////
+// FORMULARIO //
+////////////////
+
+function load_formulario(){ // si el usuario esta en la página de subir producto se cargan todas las funciones necesarias
+    console.log('hola load_formulario');
+    let path = window.location.pathname.split('/');
+    if(path[3] === 'subir_producto'){
+        load_colores();
+    }
+}
+
+function load_colores(){ // llenar el select de colores
+    console.log('hola load_colores');
+    ajaxPromise(friendlyURL('?module=shop&op=load_colores'), 'POST', 'JSON')
+        .then(function(colores) {
+            // console.log(colores);
+            // return false;
+            var select = $('#select_color');
+            select.empty();
+            select.append('<option value="" disabled selected>Selecciona un color</option>');
+            for (row in colores) {
+                select.append(
+                    '<option value="+' + colores[row].color + '">' +
+                        colores[row].color +
+                    '</option>'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar los colores:', error);
+        });
+}
+
 function prueba_POST_framework(){
     // $parametro1 = "parametro1_prueba_POST";
     // $parametro2 = "parametro2_prueba_POST";
@@ -1764,7 +1802,7 @@ function prueba_POST_framework(){
         .then(function(data){
             console.log('Dato parametro solo de POST\n' + data);
         });
-} // 
+} // prueba para entender como funciona este framework en el backend
 
 $(document).ready(function(){
     // prueba_POST_framework();
@@ -1784,4 +1822,7 @@ $(document).ready(function(){
     delete_home_details();
 
     like_clicks();
+
+    // formulario
+    load_formulario();
 });

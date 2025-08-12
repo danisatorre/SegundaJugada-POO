@@ -583,6 +583,15 @@
 			return "ok";
 		}
 
+		public function loadColoresDB($db){
+			// echo json_encode('hola loadColoresDB backend php');
+			// exit;
+			$sql = "SELECT * FROM colores";
+
+			$stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+		}
+
     } // shop_dao
 
 ?>

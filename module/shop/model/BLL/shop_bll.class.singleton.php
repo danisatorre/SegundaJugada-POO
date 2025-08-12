@@ -178,6 +178,12 @@
             return $this -> dao -> delete_comentario($this -> db, $id_comentario);
         }
 
+        public function load_colores_BLL(){
+            // echo json_encode('hola load_colores_BLL backend php');
+            // exit;
+            return $this -> dao -> loadColoresDB($this -> db);
+        }
+
     } // shop_bll
 
 ?>

@@ -29,6 +29,10 @@
             common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
         }
 
+        function subir_producto(){
+            common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'formulario.html');
+        }
+
         function getall(){
             $offset = $_POST['offset'];
             $limit = $_POST['limit'];
@@ -366,6 +370,12 @@
 
             echo json_encode($productos);
             exit;
+        }
+
+        function load_colores(){
+            // echo json_encode('hola load_colores php backend');
+            // exit;
+            echo json_encode(common::load_model('shop_model', 'loadColores'));
         }
 
     } // ctrl_home

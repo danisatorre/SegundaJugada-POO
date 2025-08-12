@@ -88,4 +88,12 @@
         <name>load_productos_like</name>
         <uri>load_productos_like</uri>
     </function>
+    <function>
+        <name>subir_producto</name>
+        <uri>subir_producto</uri>
+    </function>
+    <function>
+        <name>load_colores</name>
+        <uri>load_colores</uri>
+    </function>
 </functions>

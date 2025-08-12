@@ -230,6 +230,12 @@
             return $this -> bll -> delete_comentario_BLL($id_comentario);
         }
 
+        public function loadColores(){
+            // echo json_encode('hola loadColores model php backend');
+            // exit;
+            return $this -> bll -> load_colores_BLL();
+        }
+
     } // shop_model
 
 ?>

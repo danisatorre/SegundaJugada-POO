@@ -29,7 +29,7 @@ body {
     margin-top:4%;
 }
 
-.boton_filtrar, .botn_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-ocultar-favoritos{
+.boton_filtrar, .botn_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-formulario, .btn-ocultar-favoritos{
     margin-top:2%;
 }
 
@@ -37,7 +37,7 @@ body {
     text-align:center;
 }
 
-.boton_filtrar:hover, .boton_mapa:hover, .sotButton:hover, .btn-productos-like:hover, .btn-ocultar-favoritos:hover{
+.boton_filtrar:hover, .boton_mapa:hover, .sotButton:hover, .btn-productos-like:hover, .btn-formulario:hover, .btn-ocultar-favoritos:hover{
     background-color: orange;
     border-color: goldenrod;
     box-shadow: 0 0 8px orange;
@@ -45,7 +45,7 @@ body {
     transition: 1s;
 }
 
-.boton_filtrar, .boton_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-ocultar-favoritos{
+.boton_filtrar, .boton_remover, .boton_mapa, .sotButton, .btn-productos-like, .btn-formulario, .btn-ocultar-favoritos{
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -965,5 +965,119 @@ body {
     }
     .view_comentarios {
         padding: 4px;
+    }
+}
+
+/* ESTILO DEL FORMULARIO DE SUBIR PRODUCTOS */
+
+.form-container {
+    background: rgba(255,255,255,0.97);
+    max-width: 540px;
+    margin: 48px auto 48px auto;
+    padding: 40px 36px 32px 36px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(255, 165, 0, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+    border: 2.5px solid orange;
+    position: relative;
+}
+
+.form-container h2 {
+    text-align: left;
+    color: orange;
+    margin-bottom: 8px;
+    font-size: 2.2em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.form-container form > p {
+    color: #555;
+    margin-bottom: 28px;
+    font-size: 1.08em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.05em;
+    letter-spacing: 0.5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    padding: 12px 14px;
+    border: 1.5px solid #ffb347;
+    border-radius: 7px;
+    font-size: 1em;
+    background: #fff8ee;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: orange;
+    box-shadow: 0 0 10px #ffb34755;
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    background: #fff;
+    border: none;
+    padding: 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+    max-height: 180px;
+}
+
+.btn-formulario-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, orange 60%, goldenrod 100%);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 18px;
+    box-shadow: 0 2px 12px rgba(255, 165, 0, 0.13);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    letter-spacing: 1px;
+}
+
+.btn-formulario-submit:hover {
+    background: linear-gradient(90deg, goldenrod 60%, orange 100%);
+    box-shadow: 0 0 18px orange;
+    transform: translateY(-2px) scale(1.03);
+}
+
+@media (max-width: 700px) {
+    .form-container {
+        max-width: 98vw;
+        padding: 8vw 2vw 6vw 2vw;
+    }
+    .form-container h2 {
+        font-size: 1.5em;
+    }
+    .btn-formulario-submit {
+        font-size: 1em;
     }
 }
