@@ -1771,6 +1771,7 @@ function load_formulario(){ // si el usuario esta en la página de subir product
         load_marcas();
         load_tipos();
         load_categorias();
+        preview_images_product();
     }
 }
 
@@ -1884,6 +1885,25 @@ function load_categorias(){
         }).catch(function(error){
             console.error('Error al cargar el select de categorias:', error);
         });
+}
+
+function preview_images_product(){
+    document.getElementById('imagenes_producto').addEventListener('change', function(imagenes){
+        const imgs = imagenes.target.files;
+        console.log('Número de imagenes: ', imgs.length);
+        $('.imagenes-subidas-producto').empty();
+        for(let i = 0; i < imgs.length; i++){
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('.imagenes-subidas-producto').append(
+                    `<div style="display:inline-block;margin:5px;">
+                        <img src="${e.target.result}" style="width:200px;height:200px;object-fit:cover;border:1.5px solid orange;border-radius:8px;box-shadow:0 2px 6px rgba(255,165,0,0.15);" alt="preview">
+                    </div>`
+                );
+            }
+            reader.readAsDataURL(imgs[i]);
+        }
+    });
 }
 
 function prueba_POST_framework(){
