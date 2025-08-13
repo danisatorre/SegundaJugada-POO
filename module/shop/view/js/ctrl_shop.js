@@ -1762,15 +1762,20 @@ function redirect_login_like(){
 ////////////////
 
 function load_formulario(){ // si el usuario esta en la página de subir producto se cargan todas las funciones necesarias
-    console.log('hola load_formulario');
+    // console.log('hola load_formulario');
     let path = window.location.pathname.split('/');
     if(path[3] === 'subir_producto'){
         load_colores();
+        load_tallas();
+        load_equipos();
+        load_marcas();
+        load_tipos();
+        load_categorias();
     }
 }
 
 function load_colores(){ // llenar el select de colores
-    console.log('hola load_colores');
+    // console.log('hola load_colores');
     ajaxPromise(friendlyURL('?module=shop&op=load_colores'), 'POST', 'JSON')
         .then(function(colores) {
             // console.log(colores);
@@ -1780,13 +1785,104 @@ function load_colores(){ // llenar el select de colores
             select.append('<option value="" disabled selected>Selecciona un color</option>');
             for (row in colores) {
                 select.append(
-                    '<option value="+' + colores[row].color + '">' +
+                    '<option value="' + colores[row].color + '">' +
                         colores[row].color +
                     '</option>'
                 );
             }
         }).catch(function(error){
             console.error('Error al cargar los colores:', error);
+        });
+}
+
+function load_tallas(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_tallas'), 'POST', 'JSON')
+        .then(function(tallas){
+            var select = $('#select_tallas');
+            select.empty();
+            select.append('<option value="" disabled selected>Selecciona una talla</option>');
+            for(row in tallas){
+                select.append(
+                    '<option value="' + tallas[row].talla + '">' +
+                        tallas[row].talla +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar las tallas:', error);
+        });
+}
+
+function load_equipos(){
+    ajaxPromise(friendlyURL('?module=shop&op=filtro_equipos'), 'POST', 'JSON')
+        .then(function(equipos){
+            var select = $('#select_equipo');
+            select.empty();
+            select.append(`<option value="" disabled selected>¿Tu producto pertenece a un equipo?</option>
+                            <option value="noEquipo">Este producto no pertenece a ningún equipo</option>`);
+            for(row in equipos){
+                select.append(
+                    '<option value="' + equipos[row].id_team + '">' +
+                        equipos[row].nom_team +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de equipos:', error);
+        });
+}
+
+function load_marcas(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_marcas'), 'POST', 'JSON')
+        .then(function(marcas){
+            var select = $('#select_marca');
+            select.empty();
+            select.append(`<option value="" disabled selected>¿De que marca es tu producto?</option>`);
+            for(row in marcas){
+                select.append(
+                    '<option value="' + marcas[row].id_marca + '">' +
+                        marcas[row].nom_marca +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de marcas:', error);
+        });
+}
+
+function load_tipos(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_tipos'), 'POST', 'JSON')
+        .then(function(tipos){
+            var select = $('#select_tipo');
+            select.empty();
+            select.append(`<option value="" disabled selected>Selecciona el tipo de producto</option>`);
+            for(row in tipos){
+                select.append(
+                    '<option value="' + tipos[row].id_tipo + '">' +
+                        tipos[row].tipo +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de tipos:', error);
+        });
+}
+
+function load_categorias(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_categorias'), 'POST', 'JSON')
+        .then(function(categorias){
+            var select = $('#select_categoria');
+            select.empty();
+            select.append(`<option value="" disabled selected>Selecciona la categoría del producto</option>`);
+            for(row in categorias){
+                select.append(
+                    '<option value="' + categorias[row].id_categoria + '">' +
+                        categorias[row].categoria +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de categorias:', error);
         });
 }
 

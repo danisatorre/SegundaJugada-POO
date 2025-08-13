@@ -377,6 +377,22 @@
             // exit;
             echo json_encode(common::load_model('shop_model', 'loadColores'));
         }
+        
+        function load_tallas(){
+            echo json_encode(common::load_model('shop_model', 'loadTallas'));
+        }
+
+        function load_marcas(){
+            echo json_encode(common::load_model('shop_model', 'loadMarcas'));
+        }
+
+        function load_tipos(){
+            echo json_encode(common::load_model('shop_model', 'loadTipos'));
+        }
+
+        function load_categorias(){
+            echo json_encode(common::load_model('shop_model', 'loadCategorias'));
+        }
 
     } // ctrl_home
 

@@ -184,6 +184,22 @@
             return $this -> dao -> loadColoresDB($this -> db);
         }
 
+        public function load_tallas_BLL(){
+            return $this -> dao -> loadTallasDB($this -> db);
+        }
+
+        public function load_marcas_BLL(){
+            return $this -> dao -> loadMarcasDB($this -> db);
+        }
+
+        public function load_tipos_BLL(){
+            return $this -> dao -> loadTiposDB($this -> db);
+        }
+
+        public function load_categorias_BLL(){
+            return $this -> dao -> loadCategoriasDB($this -> db);
+        }
+
     } // shop_bll
 
 ?>

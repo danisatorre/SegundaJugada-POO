@@ -236,6 +236,24 @@
             return $this -> bll -> load_colores_BLL();
         }
 
+        public function loadTallas(){
+            return $this -> bll -> load_tallas_BLL();
+        }
+
+        public function loadMarcas(){
+            return $this -> bll -> load_marcas_BLL();
+        }
+
+        public function loadTipos(){
+            return $this -> bll -> load_tipos_BLL();
+        }
+
+        public function loadCategorias(){
+            return $this -> bll -> load_categorias_BLL();
+        }
+
+
+
     } // shop_model
 
 ?>

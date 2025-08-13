@@ -592,6 +592,34 @@
             return $db -> listar($stmt);
 		}
 
+		public function loadTallasDB($db){
+			$sql = "SELECT * FROM tallas_ropa";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadMarcasDB($db){
+			$sql = "SELECT * FROM marcas";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadTiposDB($db){
+			$sql = "SELECT * FROM tipo";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadCategoriasDB($db){
+			$sql = "SELECT * FROM categorias";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
     } // shop_dao
 
 ?>
