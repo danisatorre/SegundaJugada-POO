@@ -1,6 +1,23 @@
 // console.log("hola ctrl shop js");
 // return false;
 
+function load_view_shop(){
+    let path = window.location.pathname.split('/');
+    // console.log(path);
+    // console.log(path.length);
+    if(path.length === 3){
+        print_filtros();
+        loadEquipos();
+        loadShop();
+        botones_filtros();
+        loadDetails();
+        scrollOnTop();
+        // paginacion();
+        delete_home_details();
+        like_clicks();
+    }
+}
+
 function loadShop(total_productos, items_por_pagina){
     // console.log("hola loadShop");
     // console.log(total_productos)
@@ -1922,22 +1939,8 @@ function prueba_POST_framework(){
 
 $(document).ready(function(){
     // prueba_POST_framework();
-    print_filtros();
-    loadEquipos();
-
-    loadShop();
-
-    botones_filtros();
-
-    loadDetails();
-
-    scrollOnTop();
-
-    // paginacion();
-
-    delete_home_details();
-
-    like_clicks();
+    // ver productos
+    load_view_shop();
 
     // formulario
     load_formulario();
