@@ -1782,15 +1782,34 @@ function load_formulario(){ // si el usuario esta en la página de subir product
     // console.log('hola load_formulario');
     let path = window.location.pathname.split('/');
     if(path[3] === 'subir_producto'){
-        button_formulario();
-        key_formulario();
-        load_colores();
-        load_tallas();
-        load_equipos();
-        load_marcas();
-        load_tipos();
-        load_categorias();
-        preview_images_product();
+        var token = JSON.parse(localStorage.getItem('token'));
+        if(token){
+            button_formulario();
+            key_formulario();
+            load_colores();
+            load_tallas();
+            load_equipos();
+            load_marcas();
+            load_tipos();
+            load_categorias();
+            preview_images_product();
+            marcarCoordenadas();
+        }else{
+            $('.form-container').remove();
+            $('.imagenes-subidas-producto').remove();
+            $('#title-preview-imagenes-producto').remove();
+            $('.noLogin').html(
+                `
+                <div class="provider-blocked login-blocked">
+                    <h2 class="provider-title">Acceso restringido</h2>
+                    <p class="provider-msg">
+                        Debes iniciar sesión para poder subir un producto
+                    </p>
+                    <button class="login-btn" onclick="window.location.href='${friendlyURL('?module=auth&op=login_view')}'">Iniciar Sesión</button>
+                </div>
+                `
+            );
+        }
     }
 }
 
@@ -1915,9 +1934,7 @@ function preview_images_product(){
             const reader = new FileReader();
             reader.onload = function(e) {
                 $('.imagenes-subidas-producto').append(
-                    `<div style="display:inline-block;margin:5px;">
-                        <img src="${e.target.result}" style="width:200px;height:200px;object-fit:cover;border:1.5px solid orange;border-radius:8px;box-shadow:0 2px 6px rgba(255,165,0,0.15);" alt="preview">
-                    </div>`
+                    `<img src="${e.target.result}" alt="preview">`
                 );
             }
             reader.readAsDataURL(imgs[i]);
@@ -2051,6 +2068,52 @@ function button_formulario() {
     $('.btn-formulario').on('click', function(e) {
         e.preventDefault();
         upload_producto();
+    });
+}
+
+function marcarCoordenadas(){ // marcar en el mapa las coordenadas del dispositivo y poder cambiar las coordenadas
+    // coordenadas por defecto
+    let lat = 40.4168;
+    let lng = -3.7038;
+
+    // obtener las coordenadas del cliente
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(ubicacion){
+            lat = ubicacion.coords.latitude;
+            lng = ubicacion.coords.longitude;
+            console.log(lat);
+            console.log(lng);
+            addUbicacionMapa(lat, lng); // mandar las coordenadas al mapa
+        }, function(){
+            addUbicacionMapa(lat, lng) // usar las coordenadas por defecto si falla
+        });
+    }else{
+        addUbicacionMapa(lat, lng); // usar las coordenadas por defecto
+    }
+
+}
+
+function addUbicacionMapa(lat, lng){
+    var map = L.map('mapa-ubicacion').setView([lat, lng], 16);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        maxZoom: 19,
+        attribution: '$copy; OpenStreetMap'
+    }).addTo(map);
+
+    var marker = L.marker([lat, lng], {draggable:true}).addTo(map);
+
+    // guardar las coordenadas
+    document.getElementById('latitud_producto').value = lat;
+    document.getElementById('longitud_producto').value = lng;
+
+    // modificar las coordenadas
+    marker.on('dragend', function(e){
+        var coords = marker.getLatLng();
+        document.getElementById('latitud_producto').value = coords.lat;
+        document.getElementById('longitud_producto').value = coords.lng;
+        console.log(document.getElementById('latitud_producto').value);
+        console.log(document.getElementById('longitud_producto').value);
     });
 }
 
