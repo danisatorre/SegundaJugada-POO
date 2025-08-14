@@ -1782,6 +1782,8 @@ function load_formulario(){ // si el usuario esta en la página de subir product
     // console.log('hola load_formulario');
     let path = window.location.pathname.split('/');
     if(path[3] === 'subir_producto'){
+        button_formulario();
+        key_formulario();
         load_colores();
         load_tallas();
         load_equipos();
@@ -1920,6 +1922,135 @@ function preview_images_product(){
             }
             reader.readAsDataURL(imgs[i]);
         }
+    });
+}
+
+function upload_producto(){
+    if(validate_producto() != 0){
+        alert('formulario correcto');
+    }
+}
+
+function validate_producto(){
+    var error = false;
+    
+    if(document.getElementById('nombre_producto').value.length < 5){
+        document.getElementById('error-nom-producto').innerHTML = '*El nombre del producto debe de contener un mínimo de 5 caracteres';
+        error = true;
+    }else{
+        document.getElementById('error-nom-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('sexo_producto').value === ""){
+        document.getElementById('error-sexo-producto').innerHTML = '*Debes de elegir el sexo del producto';
+        error = true;
+    }else{
+        document.getElementById('error-sexo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_color').value === ""){
+        document.getElementById('error-color-producto').innerHTML = '*Debes de elegir el color del producto';
+        error = true;
+    }else{
+        document.getElementById('error-color-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_tallas').value === ""){
+        document.getElementById('error-talla-producto').innerHTML = '*Debes de elegir una talla para el producto';
+        error = true;
+    }else{
+        document.getElementById('error-talla-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('entrega_producto').value === ""){
+        document.getElementById('error-entrega-producto').innerHTML = '*Debes de elegir un tipo de entrega para el producto';
+        error = true;
+    }else{
+        document.getElementById('error-entrega-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('descripcion_producto').value.length < 10){
+        document.getElementById('error-desc-producto').innerHTML = '*La descripción del producto debe de tener un mínimo de 10 caracteres';
+        error = true;
+    }else{
+        document.getElementById('error-desc-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('condicion_producto').value === ""){
+        document.getElementById('error-condicion-producto').innerHTML = '*Debes de especificar la condicion del producto';
+        error = true;
+    }else{
+        document.getElementById('error-condicion-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('precio_producto').value < 1){
+        document.getElementById('error-precio-producto').innerHTML = '*El precio debe ser de ser de un mínimo de 1€';
+        error = true;
+    }else{
+        document.getElementById('error-precio-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('stock_producto').value < 1){
+        document.getElementById('error-stock-producto').innerHTML = '*Debes de añadir una existencia como mínimo';
+        error = true;
+    }else{
+        document.getElementById('error-stock-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('imagenes_producto').files.length < 1){
+        document.getElementById('error-imagenes-producto').innerHTML = '*Debes de subir como mínimo una imagen del producto'
+        error = true;
+    }else{
+        document.getElementById('error-imagenes-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_equipo').value === ""){
+        document.getElementById('error-equipo-producto').innerHTML = '*Indica si el producto pertenece a un equipo o si no pertenece a ninguno';
+        error = true;
+    }else{
+        document.getElementById('error-equipo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_marca').value === ""){
+        document.getElementById('error-marca-producto').innerHTML = '*Indica a que marca pertenece este producto';
+        error = true;
+    }else{
+        document.getElementById('error-marca-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_tipo').value === ""){
+        document.getElementById('error-tipo-producto').innerHTML = '*Especifica el tipo de producto';
+        error = true;
+    }else{
+        document.getElementById('error-tipo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_categoria').value === ""){
+        document.getElementById('error-categoria-producto').innerHTML = '*Escoge a que categoría pertenece este producto';
+        error = true;
+    }else{
+        document.getElementById('error-categoria-producto').innerHTML = '';
+    }
+
+    if(error == true){
+        return 0;
+    }
+}
+
+function key_formulario() {
+    $(".btn-formulario").keypress(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            e.preventDefault();
+            upload_producto();
+        }
+    });
+}
+
+function button_formulario() {
+    $('.btn-formulario').on('click', function(e) {
+        e.preventDefault();
+        upload_producto();
     });
 }
 
