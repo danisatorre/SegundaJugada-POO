@@ -394,6 +394,39 @@
             echo json_encode(common::load_model('shop_model', 'loadCategorias'));
         }
 
+        function upload_producto(){
+            // datos del formulario
+            $nombreProd = $_POST['nombre_producto'];
+            $sexoProd = $_POST['sexo_producto'];
+            $colorProd = $_POST['select_color'];
+            $tallaProd = $_POST['select_tallas'];
+            $entregaProd = $_POST['entrega_producto'];
+            $condicionProd = $_POST['condicion_producto'];
+            $stockProd = $_POST['stock_producto'];
+            $precioProd = $_POST['precio_producto'];
+            $equipoProd = $_POST['select_equipo'];
+            $marcaProd = $_POST['select_marca'];
+            $tipoProd = $_POST['select_tipo'];
+            $categoriaProd = $_POST['select_categoria'];
+            $descProd = $_POST['descripcion_producto'];
+            $latitudProd = $_POST['latitud_producto'];
+            $longitudProd = $_POST['longitud_producto'];
+            // echo json_encode($colorProd);
+            // exit;
+            
+            // imagenes del producto
+            $imgs = $_FILES['imagenes_producto'];
+            $numImgs = count($imgs['name']); // nº de imagenes subidas
+            // echo json_encode($numImgs);
+            // exit;
+            $nombresImgs = array(); // crear un array con los nombres
+            for($i = 0; $i < $numImgs; $i ++){
+                $nombresImgs[] = $imgs['name'][$i]; // añadir los nombres de las imagenes al array
+            }
+            echo json_encode($nombresImgs);
+            exit;
+        }
+
     } // ctrl_home
 
 ?>

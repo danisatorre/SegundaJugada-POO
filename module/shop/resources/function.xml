@@ -112,4 +112,8 @@
         <name>load_categorias</name>
         <uri>load_categorias</uri>
     </function>
+    <function>
+        <name>upload_producto</name>
+        <uri>upload_producto</uri>
+    </function>
 </functions>

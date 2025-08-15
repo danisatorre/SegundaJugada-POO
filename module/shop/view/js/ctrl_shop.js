@@ -1944,7 +1944,24 @@ function preview_images_product(){
 
 function upload_producto(){
     if(validate_producto() != 0){
-        alert('formulario correcto');
+        // alert('formulario correcto');
+        // var dataForm = $('#form-subir-producto').serialize();
+        var dataForm = document.getElementById('form-subir-producto');
+        var filesImg = document.getElementById('imagenes_producto');
+        var imgs = filesImg.files; // recoger todas las imagenes del producto
+        var token = JSON.parse(localStorage.getItem('token'));
+        console.log(dataForm);
+        // console.log(imgs);
+        var data = new FormData(dataForm);
+        // console.log(data);
+        data.append('token', token); // información del usuario
+        data.append('imgs', imgs); // imagenes del producto
+        
+        ajaxPromise(friendlyURL('?module=shop&op=upload_producto'), 'POST', 'JSON', data)
+            .then(function(data){
+                console.log(data);
+            });
+
     }
 }
 
