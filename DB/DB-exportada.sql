@@ -21,6 +21,10 @@ SET time_zone = "+00:00";
 -- Base de datos: `segunda_jugada`
 --
 
+DROP DATABASE IF EXISTS segunda_jugada;
+CREATE DATABASE segunda_jugada;
+USE segunda_jugada;
+
 -- --------------------------------------------------------
 
 --
@@ -79,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `img_categoria` varchar(255) NOT NULL,
   `visitas_cat` int(20) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -106,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `id_user_github` varchar(250) DEFAULT NULL,
   `id_producto_comentario` int(20) UNSIGNED NOT NULL,
   `comentario` varchar(250) NOT NULL,
-  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `fecha` date NOT NULL DEFAULT (CURRENT_DATE),
   PRIMARY KEY (`id_comentario`),
   KEY `fk_comentarios_local` (`id_user_local`),
   KEY `fk_comentarios_google` (`id_user_google`),
   KEY `fk_comentarios_github` (`id_user_github`),
   KEY `fk_comentarios_producto` (`id_producto_comentario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -141,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `country` (
   `country_deleted_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`country_id`),
   UNIQUE KEY `country_id` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `country`
@@ -405,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `devoluciones` (
   PRIMARY KEY (`id_dev`),
   KEY `FK_producto_dev` (`producto_dev`),
   KEY `FK_motivo` (`motivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=1300 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1300 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `devoluciones`
@@ -432,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `pais` varchar(50) NOT NULL,
   `cp` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dir`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `direccion`
@@ -453,7 +457,7 @@ INSERT INTO `direccion` (`id_dir`, `ciudad`, `calle`, `pais`, `cp`) VALUES
 
 DROP TABLE IF EXISTS `github_users`;
 CREATE TABLE IF NOT EXISTS `github_users` (
-  `uid` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NOT NULL,
+  `uid` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `username` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `tipo_usuario` varchar(250) NOT NULL,
@@ -461,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `github_users` (
   `token_email` varchar(250) DEFAULT NULL,
   `activate` int(1) NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `github_users`
@@ -478,7 +482,7 @@ INSERT INTO `github_users` (`uid`, `username`, `email`, `tipo_usuario`, `avatar`
 
 DROP TABLE IF EXISTS `google_users`;
 CREATE TABLE IF NOT EXISTS `google_users` (
-  `uid` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NOT NULL,
+  `uid` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `username` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `tipo_usuario` varchar(250) NOT NULL,
@@ -486,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `google_users` (
   `token_email` varchar(250) DEFAULT NULL,
   `activate` int(250) NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `google_users`
@@ -509,7 +513,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `img_route` varchar(255) NOT NULL,
   PRIMARY KEY (`id_image`),
   KEY `FK_img_producto` (`img_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `images`
@@ -540,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
   KEY `id_user_like` (`id_user_like`),
   KEY `fk_likes_google` (`id_user_like_google`),
   KEY `fk_likes_github` (`id_user_like_github`)
-) ENGINE=InnoDB AUTO_INCREMENT=3070 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3070 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `likes`
@@ -602,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `marcas` (
   `nom_marca` varchar(30) NOT NULL,
   `img_marca` varchar(255) NOT NULL,
   PRIMARY KEY (`id_marca`)
-) ENGINE=InnoDB AUTO_INCREMENT=1204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `marcas`
@@ -638,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `metodos_pago` (
   `id_metodo` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `metodo` varchar(30) NOT NULL,
   PRIMARY KEY (`id_metodo`)
-) ENGINE=InnoDB AUTO_INCREMENT=1800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `metodos_pago`
@@ -662,7 +666,7 @@ CREATE TABLE IF NOT EXISTS `motivos` (
   `id_motivo` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `motivo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_motivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=1500 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1500 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `motivos`
@@ -686,7 +690,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `id_player` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nom_player` varchar(50) NOT NULL,
   PRIMARY KEY (`id_player`)
-) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `players`
@@ -735,7 +739,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   KEY `FK_tipo` (`tipo`),
   KEY `FK_equipo` (`equipo`),
   KEY `FK_user` (`id_vendedor`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=600 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=600 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -795,7 +799,7 @@ CREATE TABLE IF NOT EXISTS `productos_categorias` (
   `id_categoria` int(20) UNSIGNED NOT NULL,
   KEY `FK_prod_categoria` (`id_producto`),
   KEY `FK_categoria_prod` (`id_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `productos_categorias`
@@ -821,7 +825,7 @@ CREATE TABLE IF NOT EXISTS `productos_marcas` (
   `id_marca` int(20) UNSIGNED NOT NULL,
   KEY `FK_prod_marca` (`id_producto`),
   KEY `FK_marca_prod` (`id_marca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `productos_marcas`
@@ -846,7 +850,7 @@ CREATE TABLE IF NOT EXISTS `productos_tipo` (
   `id_tipo` int(20) UNSIGNED NOT NULL,
   KEY `FK_prod_tipo` (`id_producto`),
   KEY `FK_tipo_prod` (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `productos_tipo`
@@ -873,7 +877,7 @@ CREATE TABLE IF NOT EXISTS `producto_img` (
   `pimage_route` varchar(255) NOT NULL,
   PRIMARY KEY (`id_pimg`),
   KEY `FK_pimage_producto` (`pimage_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=939 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=939 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `producto_img`
@@ -1046,7 +1050,7 @@ CREATE TABLE IF NOT EXISTS `resenas` (
   `fecha_resena` varchar(10) NOT NULL,
   PRIMARY KEY (`id_resena`),
   KEY `FK_producto_resena` (`producto_resena`)
-) ENGINE=InnoDB AUTO_INCREMENT=1100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `resenas`
@@ -1073,7 +1077,7 @@ CREATE TABLE IF NOT EXISTS `subastas` (
   `puja` int(5) NOT NULL,
   PRIMARY KEY (`id_subasta`),
   KEY `FK_producto_sub` (`producto_sub`)
-) ENGINE=InnoDB AUTO_INCREMENT=1700 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1700 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `subastas`
@@ -1097,7 +1101,7 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `id_team` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nom_team` varchar(50) NOT NULL,
   PRIMARY KEY (`id_team`)
-) ENGINE=InnoDB AUTO_INCREMENT=1912 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1912 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `teams`
@@ -1135,7 +1139,7 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   `img_tipo` varchar(255) NOT NULL,
   `visitas_tipo` int(20) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=900 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=900 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tipo`
@@ -1173,7 +1177,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `log_intents` int(3) NOT NULL DEFAULT 0,
   `otp` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `users`

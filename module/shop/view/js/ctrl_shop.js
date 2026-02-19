@@ -1009,6 +1009,12 @@ function load_view_comentarios(comentarios, user){
     }else if(user[0].uid){
         var id_user = user[0].uid;
     }
+    // console.log(id_user);
+    // if(id_user == undefined){
+    //     id_user = 'no_user_loged';
+    //     // console.log('no user loged');
+    // }
+    // console.log(id_user);
             $('.details_comentarios').empty();
             var html = `<div class="view_comentarios">`;
             // si no hay sesion iniciada cargar un boton para iniciar sesión
@@ -1045,6 +1051,22 @@ function load_view_comentarios(comentarios, user){
                                 <button class="btn-eliminar-comentario" data-id="${comentarios[row].id_comentario}" title="Eliminar comentario">
                                     <i class="fa fa-trash"></i>
                                 </button>
+                            </div>
+                            <textarea class="comentario-text" readonly 
+                                style="resize: none; overflow: hidden; width: 100%; min-height: 40px; height: auto;"
+                                oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"
+                            >${comentarios[row].comentario}</textarea>
+                            <div class="comentario-fecha" style="color: #888; font-size: 0.9em; margin-top: 2px;">
+                                ${comentarios[row].fecha}
+                            </div>
+                        </div>
+                        `
+                    }else if(id_user == 'no_user_loged'){
+                        html += `
+                        <div class="comentarios" id="${comentarios[row].id_comentario}">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img class="comentario-avatar" src="${comentarios[row].avatar}" alt="avatar">
+                                <span class="comentario-username" style="font-weight: bold;">${comentarios[row].username}</span>
                             </div>
                             <textarea class="comentario-text" readonly 
                                 style="resize: none; overflow: hidden; width: 100%; min-height: 40px; height: auto;"
