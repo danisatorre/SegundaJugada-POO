@@ -31,6 +31,72 @@ USE segunda_jugada;
 -- Estructura de tabla para la tabla `actor`
 --
 
+DROP TABLE IF EXISTS `tallas_ropa`;
+CREATE TABLE IF NOT EXISTS `tallas_ropa`(
+  `id_talla` INT NOT NULL AUTO_INCREMENT,
+  `talla` VARCHAR(50) NOT NULL UNIQUE,
+  PRIMARY KEY(`id_talla`)
+) ENGINE=InnoDB AUTO_INCREMENT=800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+INSERT INTO `tallas_ropa` (`id_talla`, `talla`) VALUES
+(1,'XS'),
+(2,'S'),
+(3,'M'),
+(4,'L'),
+(5,'XL'),
+(6,'XXL'),
+(7,'XXXL'),
+(8,'unica'),
+(9,'38'),
+(10,'39'),
+(11,'40'),
+(12,'41'),
+(13,'42'),
+(14,'43'),
+(15,'44'),
+(16,'45'),
+(17,'46'),
+(18,'47'),
+(19,'48'),
+(20,'49'),
+(21,'50'),
+(22,'51'),
+(23,'52'),
+(24,'53'),
+(25,'54'),
+(26,'55'),
+(27,'56'),
+(28,'57'),
+(29,'58'),
+(30,'59'),
+(31,'60');
+
+DROP TABLE IF EXISTS `colores`;
+CREATE TABLE IF NOT EXISTS `colores`(
+  `id_color` INT NOT NULL AUTO_INCREMENT,
+  `color` VARCHAR(50) NOT NULL UNIQUE,
+  PRIMARY KEY(`id_color`)
+) ENGINE=InnoDB AUTO_INCREMENT=800 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+INSERT INTO `colores` (`id_color`, `color`) VALUES
+(1,'blanco)'),
+(2,'negro'),
+(3,'rojo'),
+(4,'azul'),
+(5,'verde'),
+(6,'amarillo'),
+(7,'naranja'),
+(8,'morado'),
+(9,'rosa'),
+(10,'gris'),
+(11,'marron'),
+(12,'beige'),
+(13,'turquesa'),
+(14,'lila'),
+(15,'fucsia'),
+(16,'celeste'),
+(17,'dorado');
+
 DROP TABLE IF EXISTS `actor`;
 CREATE TABLE IF NOT EXISTS `actor` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -749,7 +815,7 @@ INSERT INTO `productos` (`id_producto`, `id_vendedor`, `marca`, `categoria`, `ti
 (1, 101, 2, 1, 7, 1906, 'Camiseta Bulls Rose', 'masculino', 'rojo', 'Ontinyent, Valencia', 'M', 'persona', 'Camiseta de los Chicago Bulls del jugador Rose con el numero 1', 'usado', 3, 20, 'i5399202774.webp', '38.821', '-0.610547', 12, 3, 1),
 (2, 102, 3, 4, 2, 1904, 'Camiseta Milwaukee', 'masculino', 'verde', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta Milwaukee', 'nuevo', 5, 20, 'i5399202785_2.webp', '38.8205', '-0.6098', 3, 3, 0),
 (3, 103, 2, 1, 7, 1905, 'Camiseta firmada RM', 'masculino', 'blanco', 'Ontinyent, Valencia', 'XL', 'persona', 'Marco con una camiseta del Real Madrid dentro firmada por varios de sus jugadores', 'bueno', 1, 500, 'i5380960382.webp', '38.8198', '-0.6089', 15, 1, 1),
-(4, 104, 1, 1, 3, NULL, 'Zapatillas Puma MB', 'masculino', 'Negro', 'Ontinyent, Valencia', '44', 'persona', 'Zapatillas de la marca Puma colaboracion con el jugador Melo Bo de la NBA', 'bueno', 1, 40, 'i53992027853.webp', '38.8231', '-0.6123', 130, 4, 2),
+(4, 104, 1, 1, 3, NULL, 'Zapatillas Puma MB', 'masculino', 'negro', 'Ontinyent, Valencia', '44', 'persona', 'Zapatillas de la marca Puma colaboracion con el jugador Melo Bo de la NBA', 'bueno', 1, 40, 'i53992027853.webp', '38.8231', '-0.6123', 130, 4, 2),
 (5, 105, 3, 1, 6, 1903, 'Pantalones Grizzlies', 'masculino', 'azul', 'Ontinyent, Valencia', 'M', 'domicilio', 'Pantalones del equipo Grizzlies de la NBA', 'nuevo', 1, 18, 'i5376709596.webp', '38.8185', '-0.6075', 9, 3, 1),
 (6, 101, 7, 1, 5, NULL, 'Balon spalding TF50', 'todos', 'marron', 'Ontinyent, Valencia', 'M', 'persona', 'Balon de la marca Spalding, modelo TF 50', 'bueno', 3, 10, 'i5368871734.webp', '38.8240', '-0.6130', 2, 1, 1),
 (7, 102, 2, 4, 7, 1902, 'Camiseta Orlando 12', 'femenino', 'azul', 'Ontinyent, Valencia', 'L', 'domicilio', 'Camiseta de Orlando del jugador Howard', 'nuevo', 5, 20, 'i5344037323.webp', '38.8172', '-0.6062', 5, 2, 1),
@@ -772,10 +838,10 @@ INSERT INTO `productos` (`id_producto`, `id_vendedor`, `marca`, `categoria`, `ti
 (24, 109, 8, 4, 5, NULL, 'Balon de baloncesto', 'todos', 'morado:amarillo', 'A Coruna, La Coruna', 'unica', 'persona', 'Balon de baloncesto', 'bueno', 5, 8, 'i5373503161.webp', '43.3623', '-8.4115', 3, 1, 1),
 (25, 110, 3, 1, 6, 1910, 'Pantalones CAVS', 'masculino', 'rojo:amarillo', 'Malaga', 'XL', 'persona', 'Pantalones cortos para jugar de los Cavs', 'bueno', 6, 19, 'i5377110901.webp', '36.7213', '-4.4216', 5, 1, 1),
 (26, 106, 5, 3, 3, NULL, 'Zapatillas NB', 'masculino', 'blanco:azul', 'Palma, Mallorca', '38', 'domicilio', 'Zapatillas New Balance nuevas', 'nuevo', 3, 28, 'i5367014735.webp', '39.5696', '2.6502', 7, 1, 1),
-(27, 103, 3, 1, 3, NULL, 'Zapatillas Nike de color blanco y negro', 'masculino', 'Blanco:Negro', 'Santa Cruz de Tenerife', '43', 'domicilio', 'Zapatillas nike de color blanco y negro para salir por la calle', 'bueno', 1, 55, 'i5360803300.webp', '28.4824', '-16.2493', 168, 5, 4),
+(27, 103, 3, 1, 3, NULL, 'Zapatillas Nike de color blanco y negro', 'masculino', 'blanco:negro', 'Santa Cruz de Tenerife', '43', 'domicilio', 'Zapatillas nike de color blanco y negro para salir por la calle', 'bueno', 1, 55, 'i5360803300.webp', '28.4824', '-16.2493', 168, 5, 4),
 (28, 108, 5, 1, 5, NULL, 'Balon blando', 'todos', 'azul:negro', 'Maspalomas, Canarias', 'unica', 'persona', 'Balon blando para ninos pequenos', 'desgastado', 1, 9, 'i5356866821.webp', '27.7666', '-15.5785', 1, 1, 1),
 (29, 109, 1202, 1, 7, 1901, 'Camiseta Spurs', 'masculino', 'blanco:negro', 'Cordoba', 'M', 'persona', 'Camiseta de los Spurs de Ginobili', 'bueno', 2, 26, 'i5329783106.webp', '37.8833', '-4.7794', 17, 1, 1),
-(30, 110, 8, 1, 5, NULL, 'Balon FIBA 3x3', 'todos', 'Negro', 'Alicante, Valencia', 'unica', 'domicilio', 'Balon oficial FIBA ligas 3x3', 'bueno', 3, 17, 'i5331336754.webp', '38.3452', '-0.4810', 3, 4, 0),
+(30, 110, 8, 1, 5, NULL, 'Balon FIBA 3x3', 'todos', 'negro', 'Alicante, Valencia', 'unica', 'domicilio', 'Balon oficial FIBA ligas 3x3', 'bueno', 3, 17, 'i5331336754.webp', '38.3452', '-0.4810', 3, 4, 0),
 (31, 106, 9, 5, 8, NULL, 'Rodilleras Nike Pro', 'todos', 'naranja:negro', 'Vigo', 'unica', 'domicilio', 'Canasta sola sin el palo de soporte', 'nuevo', 4, 22, 'i5375191847.webp', '42.2370', '-8.7177', 3, 1, 0),
 (32, 107, 3, 1, 7, 1, 'Camiseta Lebron J 23', 'masculino', 'amarillo', 'Murcia', 'XXL', 'persona', 'Camiseta de los Lakers de Lebron James amarilla', 'bueno', 2, 25, 'i5334435135.webp', '37.9922', '-1.1307', 17, 3, 1),
 (33, 108, 1203, 4, 7, 1900, 'Camiseta UCAM Murcia', 'masculino', 'rojo', 'Zaragoza', 'S', 'domicilio', 'Camiseta de la liga ACB de Murcia', 'bueno', 6, 20, 'i5347298036.webp', '41.6561', '-0.8773', 8, 1, 1),
@@ -784,8 +850,8 @@ INSERT INTO `productos` (`id_producto`, `id_vendedor`, `marca`, `categoria`, `ti
 (36, 106, 3, 2, 9, 5, 'Sudadera valencia basket gris', 'masculino', 'gris', 'La Colilla', 'L', 'persona', 'Sudadera del valencia basket gris', 'bueno', 2, 20, 'i5386194302.webp', '40.6401', '-4.7470', 1, 1, 1),
 (37, 107, 6, 1, 2, 5, 'Sueter entrenamiento vb', 'masculino', 'blanco:azul:naranja', 'Bilbao', 'L', 'domicilio', 'Sueter de entrenamiento valencia basket ', 'nuevo', 3, 29, 'i5340975714.webp', '43.2630', '-2.9349', 12, 1, 2),
 (38, 108, 6, 1, 6, 5, 'Pantalon corto valencia basket', 'masculino', 'blanco', 'Granada', 'L', 'persona', 'Pantalon corto para jugar del valencia basket', 'bueno', 5, 15, 'i5407596825.webp', '37.1765', '-3.5979', 6, 1, 1),
-(39, 109, 3, 1, 7, 1911, 'Camiseta Curry Warriors', 'masculino', 'Blanco:Azul', 'Toledo', 'M', 'persona', 'Camiseta de los Golden State Warriors de Stephen Curry', 'bueno', 3, 90, 'IMG_0500.webp', '39.8786', '-4.0245', 1, 1, 0),
-(40, 110, 7, 1, 5, NULL, 'Balon Liga ACB 23/23', 'masculino', 'Negro:Blanco', 'Monaco', 'M', 'persona', 'Balon Spalding de la liga endesa de la temporada 2023/2024', 'bueno', 4, 30, 'IMG_0511.webp', '43.7384', '7.4246', 1, 1, 0);
+(39, 109, 3, 1, 7, 1911, 'Camiseta Curry Warriors', 'masculino', 'blanco:azul', 'Toledo', 'M', 'persona', 'Camiseta de los Golden State Warriors de Stephen Curry', 'bueno', 3, 90, 'IMG_0500.webp', '39.8786', '-4.0245', 1, 1, 0),
+(40, 110, 7, 1, 5, NULL, 'Balon Liga ACB 23/23', 'masculino', 'blanco:negro', 'Monaco', 'M', 'persona', 'Balon Spalding de la liga endesa de la temporada 2023/2024', 'bueno', 4, 30, 'IMG_0511.webp', '43.7384', '7.4246', 1, 1, 0);
 
 -- --------------------------------------------------------
 
