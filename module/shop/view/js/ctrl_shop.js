@@ -1943,6 +1943,8 @@ function preview_images_product(){
 }
 
 function upload_producto(){
+    // console.log('hola upload_producto');
+    // return false;
     if(validate_producto() != 0){
         // alert('formulario correcto');
         // var dataForm = $('#form-subir-producto').serialize();
@@ -1956,6 +1958,8 @@ function upload_producto(){
         // console.log(data);
         data.append('token', token); // información del usuario
         data.append('imgs', imgs); // imagenes del producto
+        // console.log(data);
+        // return false;
         
         ajaxPromise(friendlyURL('?module=shop&op=upload_producto'), 'POST', 'JSON', data)
             .then(function(data){
