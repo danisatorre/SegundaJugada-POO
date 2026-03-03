@@ -199,6 +199,13 @@
         public function load_categorias_BLL(){
             return $this -> dao -> loadCategoriasDB($this -> db);
         }
+        public function get_last_id_prod_BLL(){
+            return $this -> dao -> loadLastIdProdDB($this -> db);
+        }
+
+        public function get_user_id_BLL($username){
+            return $this -> dao -> getUserIdDB($this -> db, $username);
+        }
 
     } // shop_bll
 

@@ -395,6 +395,25 @@
         }
 
         function upload_producto(){
+            // datos del usuario
+            $token = $_POST['token'];
+            $data_token = middleware::decode_token($token);
+            $username = $data_token['username'];
+            $provider = $data_token['provider'];
+            // echo json_encode($data_token);
+            // echo json_encode($username);
+            // echo json_encode($provider);
+            // exit;
+            if($provider == 'local'){
+                $id_user = common::load_model('shop_model', 'getUserId', $username);
+                $idUser = $id_user[0]['id_user'];
+            }else{
+                echo json_encode('cancelUpload');
+                exit;
+            }
+            // echo json_encode($idUser);
+            // exit;
+
             // datos del formulario
             $nombreProd = $_POST['nombre_producto'];
             $sexoProd = $_POST['sexo_producto'];
@@ -414,17 +433,63 @@
             // echo json_encode($colorProd);
             // exit;
             
+            $idLastProd = common::load_model('shop_model', 'getLastIdProd'); // conseguir el último id de producto
+            // echo json_encode($idLastProd);
+            // exit;
+
+            $idProd = $idLastProd[0]['max_id'] + 1;
+            // echo json_encode($idProd);
+            // exit;
+
             // imagenes del producto
             $imgs = $_FILES['imagenes_producto'];
             $numImgs = count($imgs['name']); // nº de imagenes subidas
             // echo json_encode($numImgs);
             // exit;
-            $nombresImgs = array(); // crear un array con los nombres
-            for($i = 0; $i < $numImgs; $i ++){
-                $nombresImgs[] = $imgs['name'][$i]; // añadir los nombres de las imagenes al array
+            if ($numImgs === 0) {
+                echo json_encode('noFoto');
+                exit;
             }
-            echo json_encode($nombresImgs);
+            //$nombresImgs = array(); // crear un array con los nombres
+            for($i = 0; $i < $numImgs; $i ++){
+                //$nombresImgs[] = $imgs['name'][$i]; // añadir los nombres de las imagenes al array
+                // subir las imagenes a la DB
+                $tipo = $imgs['type'][$i];
+                $fotoName = $imgs['name'][$i];
+                $tmpName = $imgs['tmp_name'][$i];
+                $size = $imgs['size'][$i];
+                if($tipo != 'image/jpg' && $tipo != 'image/JGP' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/webp'){ // validar formato
+                    echo json_encode('errorFormat');
+                    exit;
+                }
+                if($size > 5*1024*1024){ // validar tamaño
+                    echo json_encode('fotoPesada');
+                    exit;
+                }else{
+                    $rutaFisica = IMG_PATH . 'products/pimages' . $fotoName;
+                    $rutaWeb = '/SegundaJugada-POO/view/images/products/pimages/' . $fotoName;
+                    // echo json_encode($rutaFisica);
+                    // exit;
+                    if(move_uploaded_file($tmpName, $rutaFisica)){
+                        $saveIMG = common::load_model('shop_model', 'uploadProdImg', [$rutaWeb, $idProd]);
+                        if($saveIMG == 'ok'){
+                            echo json_encode('ok_saveIMG');
+                            exit;
+                        }else{
+                            echo json_encode('error_saveIMG');
+                            exit;
+                        }
+                    }else{
+                        echo json_encode('errorUpload');
+                        exit;
+                    }
+                }
+            }
+
+            echo json_encode('upload_complete');
             exit;
+            // echo json_encode($nombresImgs);
+            // exit;
         }
 
     } // ctrl_home

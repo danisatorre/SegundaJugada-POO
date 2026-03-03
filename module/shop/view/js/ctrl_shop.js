@@ -1964,6 +1964,18 @@ function upload_producto(){
         ajaxPromise(friendlyURL('?module=shop&op=upload_producto'), 'POST', 'JSON', data)
             .then(function(data){
                 console.log(data);
+                if(data == 'cancelUpload'){
+                    Swal.fire({
+                        title: "Lo sentimos",
+                        text: "La subida de productos esta solamente habilitada para los usuarios locales",
+                        icon: "error",
+                        confirmButtonText: "Volver a los productos"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = friendlyURL("?module=shop");
+                        }
+                    });
+                }
             });
 
     }

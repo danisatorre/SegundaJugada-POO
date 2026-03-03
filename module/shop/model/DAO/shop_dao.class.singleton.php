@@ -620,6 +620,20 @@
 			return $db -> listar($stmt);
 		}
 
+		public function loadLastIdProdDB($db){
+			$sql = "SELECT MAX(id_producto) max_id FROM productos";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function getUserIdDB($db, $username){
+			$sql = "SELECT id_user FROM users WHERE username = '$username'";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
     } // shop_dao
 
 ?>

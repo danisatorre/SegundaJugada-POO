@@ -252,6 +252,14 @@
             return $this -> bll -> load_categorias_BLL();
         }
 
+        public function getLastIdProd(){
+            return $this -> bll -> get_last_id_prod_BLL();
+        }
+
+        public function getUserId($username){
+            return $this -> bll -> get_user_id_BLL($username);
+        }
+
 
 
     } // shop_model
