@@ -96,4 +96,24 @@
         <name>load_colores</name>
         <uri>load_colores</uri>
     </function>
+    <function>
+        <name>load_tallas</name>
+        <uri>load_tallas</uri>
+    </function>
+    <function>
+        <name>load_marcas</name>
+        <uri>load_marcas</uri>
+    </function>
+    <function>
+        <name>load_tipos</name>
+        <uri>load_tipos</uri>
+    </function>
+    <function>
+        <name>load_categorias</name>
+        <uri>load_categorias</uri>
+    </function>
+    <function>
+        <name>upload_producto</name>
+        <uri>upload_producto</uri>
+    </function>
 </functions>

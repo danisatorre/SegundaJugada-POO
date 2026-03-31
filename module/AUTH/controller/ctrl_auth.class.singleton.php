@@ -346,7 +346,7 @@
                 echo json_encode("inactivo");
                 exit();
             }else{
-                if((time() - $_SESSION["tiempo"]) >= 60){ // 1800s = 30min
+                if((time() - $_SESSION["tiempo"]) >= 1800){ // 1800s = 30min
                     echo json_encode("inactivo");
                     exit();
                 }else{

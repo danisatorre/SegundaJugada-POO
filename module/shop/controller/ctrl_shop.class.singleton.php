@@ -377,6 +377,138 @@
             // exit;
             echo json_encode(common::load_model('shop_model', 'loadColores'));
         }
+        
+        function load_tallas(){
+            echo json_encode(common::load_model('shop_model', 'loadTallas'));
+        }
+
+        function load_marcas(){
+            echo json_encode(common::load_model('shop_model', 'loadMarcas'));
+        }
+
+        function load_tipos(){
+            echo json_encode(common::load_model('shop_model', 'loadTipos'));
+        }
+
+        function load_categorias(){
+            echo json_encode(common::load_model('shop_model', 'loadCategorias'));
+        }
+
+        function upload_producto(){
+            // datos del usuario
+            $token = $_POST['token'];
+            $data_token = middleware::decode_token($token);
+            $username = $data_token['username'];
+            $provider = $data_token['provider'];
+            // echo json_encode($data_token);
+            // echo json_encode($username);
+            // echo json_encode($provider);
+            // exit;
+            if($provider == 'local'){
+                $id_user = common::load_model('shop_model', 'getUserId', $username);
+                $idUser = $id_user[0]['id_user'];
+            }else{
+                echo json_encode('cancelUpload');
+                exit;
+            }
+            // echo json_encode($idUser);
+            // exit;
+
+            // datos del formulario
+            $nombreProd = $_POST['nombre_producto'];
+            $sexoProd = $_POST['sexo_producto'];
+            $colorProd = $_POST['select_color'];
+            $tallaProd = $_POST['select_tallas'];
+            $entregaProd = $_POST['entrega_producto'];
+            $condicionProd = $_POST['condicion_producto'];
+            $stockProd = $_POST['stock_producto'];
+            $precioProd = $_POST['precio_producto'];
+            $equipoProd = $_POST['select_equipo'];
+            $marcaProd = $_POST['select_marca'];
+            $tipoProd = $_POST['select_tipo'];
+            $categoriaProd = $_POST['select_categoria'];
+            $descProd = $_POST['descripcion_producto'];
+            $latitudProd = $_POST['latitud_producto'];
+            $longitudProd = $_POST['longitud_producto'];
+            // echo json_encode($colorProd);
+            // exit;
+
+            $ciudad = 'Madrid'; // temporal
+            
+            $idLastProd = common::load_model('shop_model', 'getLastIdProd'); // conseguir el último id de producto
+            // echo json_encode($idLastProd);
+            // exit;
+
+            $idProd = $idLastProd[0]['max_id'] + 1;
+            // echo json_encode($idProd);
+            // exit;
+
+            // imagenes del producto
+            $imgs = $_FILES['imagenes_producto'];
+            $numImgs = count($imgs['name']); // nº de imagenes subidas
+            // echo json_encode($numImgs);
+            // exit;
+            if ($numImgs === 0) {
+                echo json_encode('noFoto');
+                exit;
+            }
+            $extensionPrincipal = pathinfo($imgs['name'][0], PATHINFO_EXTENSION); // extraer la extensión de la primera img
+            $foto_principal = 'p' . $idProd . '_0.' . $extensionPrincipal; // cambiar el nombre de la primera img
+            // echo json_encode($foto_principal);
+            // exit;
+            // $foto_principal = $imgs['name'][0]; // nombre de la primera imagen que se ira a la tabla productos
+            //$nombresImgs = array(); // crear un array con los nombres
+            // echo json_encode($imgs['tmp_name'][0]);
+            // exit;
+
+            $uploadProd = common::load_model('shop_model', 'uploadProd', [$idProd, $idUser, $marcaProd, $categoriaProd, $tipoProd, $equipoProd, $nombreProd, $sexoProd, $colorProd, $ciudad, $tallaProd, $entregaProd, $descProd, $condicionProd, $stockProd, $precioProd, $foto_principal, $latitudProd, $longitudProd]);
+
+            for($i = 0; $i < $numImgs; $i ++){
+                //$nombresImgs[] = $imgs['name'][$i]; // añadir los nombres de las imagenes al array
+                // subir las imagenes a la DB
+                $tipo = $imgs['type'][$i];
+                $fotoName = $imgs['name'][$i];
+                $tmpName = $imgs['tmp_name'][$i];
+                $size = $imgs['size'][$i];
+                // generar el nuevo nombre de la img
+                $extension = pathinfo($fotoName, PATHINFO_EXTENSION); // extraer la extensión de la img
+                $newImgName = 'p' . $idProd . '_' . $i . '.' . $extension; // nuevo nombre de la img
+
+                if($tipo != 'image/jpg' && $tipo != 'image/JGP' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/webp'){ // validar formato
+                    echo json_encode('errorFormat');
+                    exit;
+                }
+                if($size > 5*1024*1024){ // validar tamaño
+                    echo json_encode('fotoPesada');
+                    exit;
+                }else{
+                    $rutaFisica = IMG_PATH . 'products/pimages/' . $newImgName;
+                    $rutaWeb = '/SegundaJugada-POO/view/images/products/pimages/' . $newImgName;
+                    // echo json_encode($rutaFisica);
+                    // exit;
+                    // echo json_encode($fotoName);
+                    // exit;
+                    if(move_uploaded_file($tmpName, $rutaFisica)){
+                        $saveIMG = common::load_model('shop_model', 'uploadProdImg', [$newImgName, $idProd]);
+                        // if($saveIMG == 'ok'){
+                        //     echo json_encode('ok_saveIMG');
+                        //     exit;
+                        // }else{
+                        //     echo json_encode('error_saveIMG');
+                        //     exit;
+                        // }
+                    }else{
+                        echo json_encode('errorUploadImg');
+                        exit;
+                    }
+                }
+            }
+
+            echo json_encode('upload_complete');
+            exit;
+            // echo json_encode($nombresImgs);
+            // exit;
+        }
 
     } // ctrl_home
 
