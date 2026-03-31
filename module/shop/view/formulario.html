@@ -1,110 +1,116 @@
 <div class="form-container">
-    <h2>Subir nuevo producto</h2>
-    <form id="form-subir-producto" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="nombre">Nombre del producto</label>
-            <input type="text" id="nombre" name="nombre" required>
-        </div>
-
-        <div class="form-group">
-            <label for="sexo">Sexo</label>
-            <select id="sexo" name="sexo" required>
-                <option value="" disabled selected>Selecciona el sexo del producto</option>
-                <option value="masculino">Hombre</option>
-                <option value="femenino">Mujer</option>
-                <option value="unisex">Unisex</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="select_color">Color</label>
-            <select id="select_color" name="select_color" required>
-                <!-- colores dinamicos desde la db -->
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="tallas">Talla</label>
-            <select id="tallas" name="tallas" required>
-                <option value="" disabled selected>Selecciona una talla</option>
-                <!-- tallas dinamicas desde la db -->
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="entrega">Entrega</label>
-            <select id="entrega" name="entrega" required>
-                <option value="" disabled selected>Selecciona tipo de entrega</option>
-                <option value="domicilio">A domicilio</option>
-                <option value="persona">En persona</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="condicion">Condición</label>
-            <select id="condicion" name="condicion" required>
-                <option value="" disabled selected>Selecciona condición</option>
-                <option value="nuevo">Nuevo</option>
-                <option value="usado">Usado</option>
-                <option value="bueno">Bueno</option>
-                <option value="desgastado">Desgastado</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="stock">Stock disponible</label>
-            <input type="number" id="stock" name="stock" min="1" required>
-        </div>
-
-        <div class="form-group">
-            <label for="precio">Precio (€)</label>
-            <input type="number" id="precio" name="precio" min="0" step="0.01" required>
-        </div>
-
-        <div class="form-group">
-            <label for="imagenes">Imágenes del producto</label>
-            <input type="file" id="imagenes" name="imagenes[]" accept="image/*" multiple required>
-        </div>
-
-        <div class="form-group">
-            <label for="equipo">Equipo</label>
-            <select id="equipo" name="equipo" required>
-                <option value="" disabled selected>¿Tu producto pertenece a un equipo?</option>
-                <option value="noEquipo">Este producto no pertenece a ningún equipo</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="marca">Marca</label>
-            <select id="marca" name="marca" required>
-                <option value="" disabled selected>Selecciona marca</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="tipo">Tipo de producto</label>
-            <select id="tipo" name="tipo" required>
-                <option value="" disabled selected>Selecciona el tipo de producto</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="categoria">Categoría</label>
-            <select id="categoria" name="categoria" required>
-                <option value="" disabled selected>Selecciona la categoría del producto</option>
-                <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>
-                <option value="ninos">Niños</option>
-                <option value="adolescentes">Adolescentes</option>
-                <option value="bebes">Bebés</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn-formulario-submit">Subir producto</button>
-    </form>
+    <div class="form-main">
+        <h2>Subir nuevo producto</h2>
+        <form id="form-subir-producto" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre_producto">Nombre del producto</label>
+                    <input type="text" id="nombre_producto" name="nombre_producto" required>
+                    <span class="error" id="error-nom-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="sexo_producto">Sexo</label>
+                    <select id="sexo_producto" name="sexo_producto" required>
+                        <option value="" disabled selected>Selecciona el sexo del producto</option>
+                        <option value="masculino">Hombre</option>
+                        <option value="femenino">Mujer</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                    <span class="error" id="error-sexo-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="select_color">Color</label>
+                    <select id="select_color" name="select_color" required></select>
+                    <span class="error" id="error-color-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="select_tallas">Talla</label>
+                    <select id="select_tallas" name="select_tallas" required></select>
+                    <span class="error" id="error-talla-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="entrega_producto">Entrega</label>
+                    <select id="entrega_producto" name="entrega_producto" required>
+                        <option value="" disabled selected>Selecciona tipo de entrega</option>
+                        <option value="domicilio">A domicilio</option>
+                        <option value="persona">En persona</option>
+                    </select>
+                    <span class="error" id="error-entrega-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="condicion_producto">Condición</label>
+                    <select id="condicion_producto" name="condicion_producto" required>
+                        <option value="" disabled selected>Selecciona condición</option>
+                        <option value="nuevo">Nuevo</option>
+                        <option value="usado">Usado</option>
+                        <option value="bueno">Bueno</option>
+                        <option value="desgastado">Desgastado</option>
+                    </select>
+                    <span class="error" id="error-condicion-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="stock_producto">Stock disponible</label>
+                    <input type="number" id="stock_producto" name="stock_producto" min="1" required>
+                    <span class="error" id="error-stock-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="precio_producto">Precio (€)</label>
+                    <input type="number" id="precio_producto" name="precio_producto" min="0" step="0.10" required>
+                    <span class="error" id="error-precio-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="select_equipo">Equipo</label>
+                    <select id="select_equipo" name="select_equipo" required></select>
+                    <span class="error" id="error-equipo-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="select_marca">Marca</label>
+                    <select id="select_marca" name="select_marca" required></select>
+                    <span class="error" id="error-marca-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="select_tipo">Tipo de producto</label>
+                    <select id="select_tipo" name="select_tipo" required></select>
+                    <span class="error" id="error-tipo-producto"></span>
+                </div>
+                <div class="form-group">
+                    <label for="select_categoria">Categoría</label>
+                    <select id="select_categoria" name="select_categoria" required></select>
+                    <span class="error" id="error-categoria-producto"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group" style="flex:1;">
+                    <label for="descripcion_producto">Descripción</label>
+                    <textarea id="descripcion_producto" name="descripcion_producto" rows="3" required></textarea>
+                    <span class="error" id="error-desc-producto"></span>
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label for="imagenes_producto">Sube las imagenes del producto</label>
+                    <input type="file" id="imagenes_producto" name="imagenes_producto[]" accept="image/*" multiple required>
+                    <span class="error" id="error-imagenes-producto"></span>
+                </div>
+            </div>
+            <div class="form-mapa">
+                <label for="ubicacion_producto" style="font-weight:600;color:#333;margin-bottom:7px;">Ubicación del producto</label>
+                <div id="mapa-ubicacion"></div>
+                <input type="hidden" id="latitud_producto" name="latitud_producto">
+                <input type="hidden" id="longitud_producto" name="longitud_producto">
+            </div>
+            <button type="submit" class="btn-formulario">Subir producto</button>
+        </form>
+    </div>
 </div>
+<h3 id="title-preview-imagenes-producto">Imagenes del producto</h3>
+<div class="imagenes-subidas-producto"></div>
+<div class="noLogin"></div>

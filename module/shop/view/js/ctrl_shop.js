@@ -1,6 +1,23 @@
 // console.log("hola ctrl shop js");
 // return false;
 
+function load_view_shop(){
+    let path = window.location.pathname.split('/');
+    // console.log(path);
+    // console.log(path.length);
+    if(path.length === 3){
+        print_filtros();
+        loadEquipos();
+        loadShop();
+        botones_filtros();
+        loadDetails();
+        scrollOnTop();
+        // paginacion();
+        delete_home_details();
+        like_clicks();
+    }
+}
+
 function loadShop(total_productos, items_por_pagina){
     // console.log("hola loadShop");
     // console.log(total_productos)
@@ -873,7 +890,7 @@ function loadProductoDetails(id_producto){
                     "</div>" + // end .estrellas-rating
                     // end estrellas de valoración
                     "<div class='user_details'>" +
-                        "<img class='img_user_details' src='" + shop[0][0].avatar + ">" +
+                        "<img class='img_user_details' src='" + shop[0][0].avatar + "'/>" +
                         "<a class='nom_user_details'>" + shop[0][0].username + "</a>" +
                     "</div>" + // end .user_details
                     "<h3>" + shop[0][0].nom_prod + "</h3>" +
@@ -1784,15 +1801,42 @@ function redirect_login_like(){
 ////////////////
 
 function load_formulario(){ // si el usuario esta en la página de subir producto se cargan todas las funciones necesarias
-    console.log('hola load_formulario');
+    // console.log('hola load_formulario');
     let path = window.location.pathname.split('/');
     if(path[3] === 'subir_producto'){
-        load_colores();
+        var token = JSON.parse(localStorage.getItem('token'));
+        if(token){
+            button_formulario();
+            key_formulario();
+            load_colores();
+            load_tallas();
+            load_equipos();
+            load_marcas();
+            load_tipos();
+            load_categorias();
+            preview_images_product();
+            marcarCoordenadas();
+        }else{
+            $('.form-container').remove();
+            $('.imagenes-subidas-producto').remove();
+            $('#title-preview-imagenes-producto').remove();
+            $('.noLogin').html(
+                `
+                <div class="provider-blocked login-blocked">
+                    <h2 class="provider-title">Acceso restringido</h2>
+                    <p class="provider-msg">
+                        Debes iniciar sesión para poder subir un producto
+                    </p>
+                    <button class="login-btn" onclick="window.location.href='${friendlyURL('?module=auth&op=login_view')}'">Iniciar Sesión</button>
+                </div>
+                `
+            );
+        }
     }
 }
 
 function load_colores(){ // llenar el select de colores
-    console.log('hola load_colores');
+    // console.log('hola load_colores');
     ajaxPromise(friendlyURL('?module=shop&op=load_colores'), 'POST', 'JSON')
         .then(function(colores) {
             // console.log(colores);
@@ -1802,7 +1846,7 @@ function load_colores(){ // llenar el select de colores
             select.append('<option value="" disabled selected>Selecciona un color</option>');
             for (row in colores) {
                 select.append(
-                    '<option value="+' + colores[row].color + '">' +
+                    '<option value="' + colores[row].color + '">' +
                         colores[row].color +
                     '</option>'
                 );
@@ -1810,6 +1854,344 @@ function load_colores(){ // llenar el select de colores
         }).catch(function(error){
             console.error('Error al cargar los colores:', error);
         });
+}
+
+function load_tallas(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_tallas'), 'POST', 'JSON')
+        .then(function(tallas){
+            var select = $('#select_tallas');
+            select.empty();
+            select.append('<option value="" disabled selected>Selecciona una talla</option>');
+            for(row in tallas){
+                select.append(
+                    '<option value="' + tallas[row].talla + '">' +
+                        tallas[row].talla +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar las tallas:', error);
+        });
+}
+
+function load_equipos(){
+    ajaxPromise(friendlyURL('?module=shop&op=filtro_equipos'), 'POST', 'JSON')
+        .then(function(equipos){
+            var select = $('#select_equipo');
+            select.empty();
+            select.append(`<option value="" disabled selected>¿Tu producto pertenece a un equipo?</option>
+                            <option value="noEquipo">Este producto no pertenece a ningún equipo</option>`);
+            for(row in equipos){
+                select.append(
+                    '<option value="' + equipos[row].id_team + '">' +
+                        equipos[row].nom_team +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de equipos:', error);
+        });
+}
+
+function load_marcas(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_marcas'), 'POST', 'JSON')
+        .then(function(marcas){
+            var select = $('#select_marca');
+            select.empty();
+            select.append(`<option value="" disabled selected>¿De que marca es tu producto?</option>`);
+            for(row in marcas){
+                select.append(
+                    '<option value="' + marcas[row].id_marca + '">' +
+                        marcas[row].nom_marca +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de marcas:', error);
+        });
+}
+
+function load_tipos(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_tipos'), 'POST', 'JSON')
+        .then(function(tipos){
+            var select = $('#select_tipo');
+            select.empty();
+            select.append(`<option value="" disabled selected>Selecciona el tipo de producto</option>`);
+            for(row in tipos){
+                select.append(
+                    '<option value="' + tipos[row].id_tipo + '">' +
+                        tipos[row].tipo +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de tipos:', error);
+        });
+}
+
+function load_categorias(){
+    ajaxPromise(friendlyURL('?module=shop&op=load_categorias'), 'POST', 'JSON')
+        .then(function(categorias){
+            var select = $('#select_categoria');
+            select.empty();
+            select.append(`<option value="" disabled selected>Selecciona la categoría del producto</option>`);
+            for(row in categorias){
+                select.append(
+                    '<option value="' + categorias[row].id_categoria + '">' +
+                        categorias[row].categoria +
+                    '</option'
+                );
+            }
+        }).catch(function(error){
+            console.error('Error al cargar el select de categorias:', error);
+        });
+}
+
+function preview_images_product(){
+    document.getElementById('imagenes_producto').addEventListener('change', function(imagenes){
+        const imgs = imagenes.target.files;
+        console.log('Número de imagenes: ', imgs.length);
+        $('.imagenes-subidas-producto').empty();
+        for(let i = 0; i < imgs.length; i++){
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('.imagenes-subidas-producto').append(
+                    `<img src="${e.target.result}" alt="preview">`
+                );
+            }
+            reader.readAsDataURL(imgs[i]);
+        }
+    });
+}
+
+function upload_producto(){
+    // console.log('hola upload_producto');
+    // return false;
+    if(validate_producto() != 0){
+        // alert('formulario correcto');
+        // var dataForm = $('#form-subir-producto').serialize();
+        var dataForm = document.getElementById('form-subir-producto');
+        var filesImg = document.getElementById('imagenes_producto');
+        var imgs = filesImg.files; // recoger todas las imagenes del producto
+        var token = JSON.parse(localStorage.getItem('token'));
+        console.log(dataForm);
+        // console.log(imgs);
+        var data = new FormData(dataForm);
+        // console.log(data);
+        data.append('token', token); // información del usuario
+        data.append('imgs', imgs); // imagenes del producto
+        // console.log(data);
+        // return false;
+        
+        ajaxPromise(friendlyURL('?module=shop&op=upload_producto'), 'POST', 'JSON', data)
+            .then(function(data){
+                // console.log(data);
+                // return false;
+                if(data == 'cancelUpload'){
+                    Swal.fire({
+                        title: "Lo sentimos",
+                        text: "La subida de productos esta solamente habilitada para los usuarios locales",
+                        icon: "error",
+                        confirmButtonText: "Volver a los productos"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = friendlyURL("?module=shop");
+                        }
+                    });
+                }else if(data == 'noFoto'){
+                    toastr.error('Debes de subir al menos una imagen sobre el producto');
+                }else if(data == 'errorFormat'){
+                    toastr.error('La extensión de alguna de las imagenes no es válida');
+                }else if(data == 'fotoPesada'){
+                    toastr.error('Has intentado subir una imagen pesada, prueba a bajar la resolución');
+                }else if(data == 'errorUploadImg'){
+                    toastr.error('Hubo un problema al guardar tus imagenes. Recarge la página y vuelva a intentarlo');
+                }else if(data == 'error_saveIMG'){
+                    toastr.error('Hubo un problema al subir tus imagenes. Recarge la página y vuelva a intentarlo');
+                }else if(data == 'upload_complete'){
+                    Swal.fire({
+                        title: "Producto publicado",
+                        text: "El producto se publico correctamente",
+                        icon: "success",
+                        confirmButtonText: "Volver a los productos"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = friendlyURL("?module=shop");
+                        }
+                    });
+                }
+            });
+
+    }
+}
+
+function validate_producto(){
+    var error = false;
+    
+    if(document.getElementById('nombre_producto').value.length < 5){
+        document.getElementById('error-nom-producto').innerHTML = '*El nombre del producto debe de contener un mínimo de 5 caracteres';
+        error = true;
+    }else{
+        document.getElementById('error-nom-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('sexo_producto').value === ""){
+        document.getElementById('error-sexo-producto').innerHTML = '*Debes de elegir el sexo del producto';
+        error = true;
+    }else{
+        document.getElementById('error-sexo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_color').value === ""){
+        document.getElementById('error-color-producto').innerHTML = '*Debes de elegir el color del producto';
+        error = true;
+    }else{
+        document.getElementById('error-color-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_tallas').value === ""){
+        document.getElementById('error-talla-producto').innerHTML = '*Debes de elegir una talla para el producto';
+        error = true;
+    }else{
+        document.getElementById('error-talla-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('entrega_producto').value === ""){
+        document.getElementById('error-entrega-producto').innerHTML = '*Debes de elegir un tipo de entrega para el producto';
+        error = true;
+    }else{
+        document.getElementById('error-entrega-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('descripcion_producto').value.length < 10){
+        document.getElementById('error-desc-producto').innerHTML = '*La descripción del producto debe de tener un mínimo de 10 caracteres';
+        error = true;
+    }else{
+        document.getElementById('error-desc-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('condicion_producto').value === ""){
+        document.getElementById('error-condicion-producto').innerHTML = '*Debes de especificar la condicion del producto';
+        error = true;
+    }else{
+        document.getElementById('error-condicion-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('precio_producto').value < 1){
+        document.getElementById('error-precio-producto').innerHTML = '*El precio debe ser de ser de un mínimo de 1€';
+        error = true;
+    }else{
+        document.getElementById('error-precio-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('stock_producto').value < 1){
+        document.getElementById('error-stock-producto').innerHTML = '*Debes de añadir una existencia como mínimo';
+        error = true;
+    }else{
+        document.getElementById('error-stock-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('imagenes_producto').files.length < 1){
+        document.getElementById('error-imagenes-producto').innerHTML = '*Debes de subir como mínimo una imagen del producto'
+        error = true;
+    }else{
+        document.getElementById('error-imagenes-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_equipo').value === ""){
+        document.getElementById('error-equipo-producto').innerHTML = '*Indica si el producto pertenece a un equipo o si no pertenece a ninguno';
+        error = true;
+    }else{
+        document.getElementById('error-equipo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_marca').value === ""){
+        document.getElementById('error-marca-producto').innerHTML = '*Indica a que marca pertenece este producto';
+        error = true;
+    }else{
+        document.getElementById('error-marca-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_tipo').value === ""){
+        document.getElementById('error-tipo-producto').innerHTML = '*Especifica el tipo de producto';
+        error = true;
+    }else{
+        document.getElementById('error-tipo-producto').innerHTML = '';
+    }
+
+    if(document.getElementById('select_categoria').value === ""){
+        document.getElementById('error-categoria-producto').innerHTML = '*Escoge a que categoría pertenece este producto';
+        error = true;
+    }else{
+        document.getElementById('error-categoria-producto').innerHTML = '';
+    }
+
+    if(error == true){
+        return 0;
+    }
+}
+
+function key_formulario() {
+    $(".btn-formulario").keypress(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            e.preventDefault();
+            upload_producto();
+        }
+    });
+}
+
+function button_formulario() {
+    $('.btn-formulario').on('click', function(e) {
+        e.preventDefault();
+        upload_producto();
+    });
+}
+
+function marcarCoordenadas(){ // marcar en el mapa las coordenadas del dispositivo y poder cambiar las coordenadas
+    // coordenadas por defecto
+    let lat = 40.4168;
+    let lng = -3.7038;
+
+    // obtener las coordenadas del cliente
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(ubicacion){
+            lat = ubicacion.coords.latitude;
+            lng = ubicacion.coords.longitude;
+            console.log(lat);
+            console.log(lng);
+            addUbicacionMapa(lat, lng); // mandar las coordenadas al mapa
+        }, function(){
+            addUbicacionMapa(lat, lng) // usar las coordenadas por defecto si falla
+        });
+    }else{
+        addUbicacionMapa(lat, lng); // usar las coordenadas por defecto
+    }
+
+}
+
+function addUbicacionMapa(lat, lng){
+    var map = L.map('mapa-ubicacion').setView([lat, lng], 16);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        maxZoom: 19,
+        attribution: '$copy; OpenStreetMap'
+    }).addTo(map);
+
+    var marker = L.marker([lat, lng], {draggable:true}).addTo(map);
+
+    // guardar las coordenadas
+    document.getElementById('latitud_producto').value = lat;
+    document.getElementById('longitud_producto').value = lng;
+
+    // modificar las coordenadas
+    marker.on('dragend', function(e){
+        var coords = marker.getLatLng();
+        document.getElementById('latitud_producto').value = coords.lat;
+        document.getElementById('longitud_producto').value = coords.lng;
+        console.log(document.getElementById('latitud_producto').value);
+        console.log(document.getElementById('longitud_producto').value);
+    });
 }
 
 function prueba_POST_framework(){
@@ -1828,22 +2210,8 @@ function prueba_POST_framework(){
 
 $(document).ready(function(){
     // prueba_POST_framework();
-    print_filtros();
-    loadEquipos();
-
-    loadShop();
-
-    botones_filtros();
-
-    loadDetails();
-
-    scrollOnTop();
-
-    // paginacion();
-
-    delete_home_details();
-
-    like_clicks();
+    // ver productos
+    load_view_shop();
 
     // formulario
     load_formulario();

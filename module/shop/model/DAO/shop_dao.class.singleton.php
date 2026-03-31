@@ -592,6 +592,83 @@
             return $db -> listar($stmt);
 		}
 
+		public function loadTallasDB($db){
+			$sql = "SELECT * FROM tallas_ropa";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadMarcasDB($db){
+			$sql = "SELECT * FROM marcas";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadTiposDB($db){
+			$sql = "SELECT * FROM tipo";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadCategoriasDB($db){
+			$sql = "SELECT * FROM categorias";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function loadLastIdProdDB($db){
+			$sql = "SELECT MAX(id_producto) max_id FROM productos";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function getUserIdDB($db, $username){
+			$sql = "SELECT id_user FROM users WHERE username = '$username'";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function uploadProdImgDB($db, $fotoName, $idProd){ // subir las imagenes del producto a la tabla de imagenes de productos
+			// echo json_encode($fotoName);
+			// echo json_encode($idProd);
+			// exit;
+			$sql = "INSERT INTO producto_img (pimage_producto, pimage_route) VALUES
+					('$idProd', '$fotoName')";
+
+			$stmt = $db -> ejecutar($sql);
+		}
+
+		public function uploadProdDB($db, $idProd, $idUser, $marcaProd, $categoriaProd, $tipoProd, $equipoProd, $nombreProd, $sexoProd, $colorProd, $ciudad, $tallaProd, $entregaProd, $descProd, $condicionProd, $stockProd, $precioProd, $foto_principal, $latitudProd, $longitudProd){
+			// echo json_encode('hola uploadProdDB');
+			// echo json_encode($equipoProd);
+			// echo json_encode($longitudProd);
+			// exit;
+			if($equipoProd != 'noEquipo'){
+				// echo json_encode('conEquipo');
+				// exit;
+				$sql = "INSERT INTO productos (id_producto, id_vendedor, marca, categoria, tipo, equipo, nom_prod, sexo_prod, color, ciudad, talla, entrega, descripcion, condicion, stock, precio, img_producto, altitud, longitud) VALUES
+					('$idProd', '$idUser', '$marcaProd', '$categoriaProd', '$tipoProd', '$equipoProd', '$nombreProd', '$sexoProd', '$colorProd', '$ciudad', '$tallaProd', '$entregaProd', '$descProd', '$condicionProd', '$stockProd', '$precioProd', '$foto_principal', '$latitudProd', '$longitudProd')";
+				// echo json_encode($sql);
+				// exit;
+			}else{
+				// echo json_encode('sinEquipo');
+				// exit;
+				$sql = "INSERT INTO productos (id_producto, id_vendedor, marca, categoria, tipo, equipo, nom_prod, sexo_prod, color, ciudad, talla, entrega, descripcion, condicion, stock, precio, img_producto, altitud, longitud) VALUES
+					('$idProd', '$idUser', '$marcaProd', '$categoriaProd', '$tipoProd', null, '$nombreProd', '$sexoProd', '$colorProd', '$ciudad', '$tallaProd', '$entregaProd', '$descProd', '$condicionProd', '$stockProd', '$precioProd', '$foto_principal', '$latitudProd', '$longitudProd')";
+				// echo json_encode($sql);
+				// exit;
+			}
+
+			$stmt = $db -> ejecutar($sql);
+			// return ('ok');
+		}
+
     } // shop_dao
 
 ?>
