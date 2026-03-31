@@ -207,6 +207,14 @@
             return $this -> dao -> getUserIdDB($this -> db, $username);
         }
 
+        public function upload_prod_img_BLL($fotoName, $idProd){
+            return $this -> dao -> uploadProdImgDB($this -> db, $fotoName, $idProd);
+        }
+
+        public function upload_prod_BLL($idProd, $idUser, $marcaProd, $categoriaProd, $tipoProd, $equipoProd, $nombreProd, $sexoProd, $colorProd, $ciudad, $tallaProd, $entregaProd, $descProd, $condicionProd, $stockProd, $precioProd, $foto_principal, $latitudProd, $longitudProd){
+            return $this -> dao -> uploadProdDB($this -> db, $idProd, $idUser, $marcaProd, $categoriaProd, $tipoProd, $equipoProd, $nombreProd, $sexoProd, $colorProd, $ciudad, $tallaProd, $entregaProd, $descProd, $condicionProd, $stockProd, $precioProd, $foto_principal, $latitudProd, $longitudProd);
+        }
+
     } // shop_bll
 
 ?>

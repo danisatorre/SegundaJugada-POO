@@ -890,7 +890,7 @@ function loadProductoDetails(id_producto){
                     "</div>" + // end .estrellas-rating
                     // end estrellas de valoración
                     "<div class='user_details'>" +
-                        "<img class='img_user_details' src='" + shop[0][0].avatar + ">" +
+                        "<img class='img_user_details' src='" + shop[0][0].avatar + "'/>" +
                         "<a class='nom_user_details'>" + shop[0][0].username + "</a>" +
                     "</div>" + // end .user_details
                     "<h3>" + shop[0][0].nom_prod + "</h3>" +
@@ -1963,12 +1963,34 @@ function upload_producto(){
         
         ajaxPromise(friendlyURL('?module=shop&op=upload_producto'), 'POST', 'JSON', data)
             .then(function(data){
-                console.log(data);
+                // console.log(data);
+                // return false;
                 if(data == 'cancelUpload'){
                     Swal.fire({
                         title: "Lo sentimos",
                         text: "La subida de productos esta solamente habilitada para los usuarios locales",
                         icon: "error",
+                        confirmButtonText: "Volver a los productos"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = friendlyURL("?module=shop");
+                        }
+                    });
+                }else if(data == 'noFoto'){
+                    toastr.error('Debes de subir al menos una imagen sobre el producto');
+                }else if(data == 'errorFormat'){
+                    toastr.error('La extensión de alguna de las imagenes no es válida');
+                }else if(data == 'fotoPesada'){
+                    toastr.error('Has intentado subir una imagen pesada, prueba a bajar la resolución');
+                }else if(data == 'errorUploadImg'){
+                    toastr.error('Hubo un problema al guardar tus imagenes. Recarge la página y vuelva a intentarlo');
+                }else if(data == 'error_saveIMG'){
+                    toastr.error('Hubo un problema al subir tus imagenes. Recarge la página y vuelva a intentarlo');
+                }else if(data == 'upload_complete'){
+                    Swal.fire({
+                        title: "Producto publicado",
+                        text: "El producto se publico correctamente",
+                        icon: "success",
                         confirmButtonText: "Volver a los productos"
                     }).then((result) => {
                         if (result.isConfirmed) {

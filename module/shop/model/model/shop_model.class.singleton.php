@@ -260,6 +260,38 @@
             return $this -> bll -> get_user_id_BLL($username);
         }
 
+        public function uploadProdImg($params){
+            $fotoName = $params[0];
+            $idProd = $params[1];
+            // echo json_encode($fotoName);
+            // echo json_encode($idProd);
+            // exit;
+            return $this -> bll -> upload_prod_img_BLL($fotoName, $idProd);
+        }
+
+        public function uploadProd($params){
+            $idProd = $params[0];
+            $idUser = $params[1];
+            $marcaProd = $params[2];
+            $categoriaProd = $params[3];
+            $tipoProd = $params[4];
+            $equipoProd = $params[5];
+            $nombreProd = $params[6];
+            $sexoProd = $params[7];
+            $colorProd = $params[8];
+            $ciudad = $params[9];
+            $tallaProd = $params[10];
+            $entregaProd = $params[11];
+            $descProd = $params[12];
+            $condicionProd = $params[13];
+            $stockProd = $params[14];
+            $precioProd = $params[15];
+            $foto_principal = $params[16];
+            $latitudProd = $params[17];
+            $longitudProd = $params[18];
+            return $this -> bll -> upload_prod_BLL($idProd, $idUser, $marcaProd, $categoriaProd, $tipoProd, $equipoProd, $nombreProd, $sexoProd, $colorProd, $ciudad, $tallaProd, $entregaProd, $descProd, $condicionProd, $stockProd, $precioProd, $foto_principal, $latitudProd, $longitudProd);
+        }
+
 
 
     } // shop_model
