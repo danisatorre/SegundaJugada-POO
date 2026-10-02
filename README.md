@@ -79,7 +79,7 @@ El proyecto divide las tecnologías entre **Frontend** y **Backend** y usa tecno
 
 ## 📸 Imágenes de ejemplo
 - En la vista principal de la web ***(home)*** podemos observar varios carruseles sobre diferentes productos en la web
-<img src="https://i.imgur.com/77B01Zy.png">
+<img src="https://github.com/user-attachments/assets/f8f7af21-98af-4359-b178-353467d80cbb">
 - Al estar 30 minutos inactivo se te cierra la sesión por seguridad
 <img src="https://i.imgur.com/5OgQLdW.png" width="50%">
 - Paginación en el apartado del shop donde puedes ir cambiando de página para ver los diferentes productos
