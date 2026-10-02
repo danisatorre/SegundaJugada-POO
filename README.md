@@ -79,28 +79,28 @@ El proyecto divide las tecnologías entre **Frontend** y **Backend** y usa tecno
 
 ## 📸 Imágenes de ejemplo
 - En la vista principal de la web ***(home)*** podemos observar varios carruseles sobre diferentes productos en la web
-<img src="https://github.com/user-attachments/assets/f8f7af21-98af-4359-b178-353467d80cbb">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664088468-f8f7af21-98af-4359-b178-353467d80cbb.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T144633Z&X-Amz-Expires=300&X-Amz-Signature=cd43768bf1f34fea7e77325c0d18295e9863f15198f23f8d5995523badbdbc3b&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - Al estar 30 minutos inactivo se te cierra la sesión por seguridad
-<img src="https://i.imgur.com/5OgQLdW.png" width="50%">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664103634-6a8dccce-e245-4182-82f9-1c54e8971d91.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T150256Z&X-Amz-Expires=300&X-Amz-Signature=813eeb8d24ac4fe3476b5ac140233bd8bc002e6e61c17f836f472200ad1875bf&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng" width="50%">
 - Paginación en el apartado del shop donde puedes ir cambiando de página para ver los diferentes productos
-<img src="https://i.imgur.com/rCaATcP.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664094467-8e445c62-2666-4f1a-8bdc-b05b55880fe4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145039Z&X-Amz-Expires=300&X-Amz-Signature=2e3fded4ddb91650d078aafe24d66424b6a788bbe8b9e280ec7c172d772ba077&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - Puedes filtrar productos según tus necesidades con las casillas desplegables situadas al lado de los productos en el shop<br>
-<img src="https://i.imgur.com/o9ur3o0.png" width="30%">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664095407-10d49be0-2bad-4dbe-b241-57a4bcbcf162.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145151Z&X-Amz-Expires=300&X-Amz-Signature=05b280efc33f353bcc2866f80492fb73144badbeb667f313af4c3f498a0780fc&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng" width="30%">
 - Abajo de los productos puedes ver un mapa para ver donde esta ubicado cada producto
-<img src="https://i.imgur.com/NNxuKch.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664096486-d2a081f9-f5ba-49fa-9be3-c07e8f86dd06.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145256Z&X-Amz-Expires=300&X-Amz-Signature=bda73f6a513e7cff2b7b0b8afdfac16cede3f8dd184f31b4446ac7f2ae75c017&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - En la vista de los detalles de un producto se pueden encontrar diferentes cosas sobre el producto, podemos encontrar las imágenes del producto en un carrusel para poder ir pasandolas, podemos ver el avatar y nombre de usuario a quien pertenece dicho producto, también podemos ver la valoración que tiene en estrellas y cuantos likes tiene el producto ademas de en la parte baja de los detalles del producto donde podemos ver los extras que tiene cada producto como por ejemplo saber si el producto admite envío o solamente admite venta en persona dependiendo de si el primer icono es un camión o una persona a parte de los de poder ver los demás extras como ver al lado del icono de la ubicación donde se situa el producto
-<img src="https://i.imgur.com/4x800AP.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664097014-c33f50ee-3000-4b85-8ee3-f2c1fd9d236d.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145334Z&X-Amz-Expires=300&X-Amz-Signature=b5e6bb07c63a74a5271cf9b9bdc0a3e6da9ef24c9fdfbb6bac6121487dd71058&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - Si deslizamos más hacia abajo en el details podemos ver como tenemos una sección de productos relacionados con el producto que estemos viendo en dicho momento
-<img src="https://i.imgur.com/GpeniYL.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664097629-3901ea00-3da1-45ce-92f6-187cefc82e0e.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145423Z&X-Amz-Expires=300&X-Amz-Signature=0b6c0f4872df540b00768089758532527f09a14dc1843ed2a7309bcfd44deea8&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - Por último en los detalles del producto, abajo del todo hay un mapa donde se puede ver donde esta úbicado el producto con más exactitud que en la vista del shop ya que se ve con más zoom la ubicación del producto
-<img src="https://i.imgur.com/JxyUwDv.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664098127-e6b3dc60-5b75-479f-a4f6-f6ce47bdda3e.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145502Z&X-Amz-Expires=300&X-Amz-Signature=b8eaf16c0fb4be5e2e937b2c624f710d2fb4d7ab7de5f3f390fc61467fa1b08c&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - En la parte superior de la web se puede ver un buscador en el que podemos filtrar productos por su tipo categoria y ciudad para buscar más precisamente lo que el cliente desea
-<img src="https://i.imgur.com/H345uhQ.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664098506-77e56e7d-1bea-4e7f-9010-9bee00c5d0a5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145538Z&X-Amz-Expires=300&X-Amz-Signature=c7c5cbb64e8952af7f954236d7868f7f82b16aa4bd0abe524844ec6e012a7d1e&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 **Tenemos dos formas de ver el menú de la web las cuales son:**<br>
 - Al no tener sesión iniciada<br>
-<img src="https://i.imgur.com/tzSTUHH.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664098986-cd95d6b6-bfba-483d-8b35-2052e4f1d2cc.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145629Z&X-Amz-Expires=300&X-Amz-Signature=f34631ae1654e614d8ad1573d9c281489db4c0288cafa5e12cbc4340dd391a4c&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 - Al tener la sesión iniciada<br>
-<img src="https://i.imgur.com/oZPAyDK.png">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/121343433/664099460-2a22c803-fc35-4980-bf88-0153dc6d7c4b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20261002%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261002T145707Z&X-Amz-Expires=300&X-Amz-Signature=5e1735ebcaa4940811f91caf38205a330c211fda982cbb6b7b5035b0d1281b1d&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
 
 ## 📁 Estructura del proyecto
 - El proyecto esta realizado con el framework ***ORM*** *(object-relational mapping)*
