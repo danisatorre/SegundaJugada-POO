@@ -79,28 +79,28 @@ El proyecto divide las tecnologías entre **Frontend** y **Backend** y usa tecno
 
 ## 📸 Imágenes de ejemplo
 - En la vista principal de la web ***(home)*** podemos observar varios carruseles sobre diferentes productos en la web
-<img src="https://github.com/user-attachments/assets/f8f7af21-98af-4359-b178-353467d80cbb">
+<img src="img/1.png">
 - Al estar 30 minutos inactivo se te cierra la sesión por seguridad
-<img src="https://github.com/user-attachments/assets/6a8dccce-e245-4182-82f9-1c54e8971d91" width="50%">
+<img src="img/2.png" width="50%">
 - Paginación en el apartado del shop donde puedes ir cambiando de página para ver los diferentes productos
-<img src="https://github.com/user-attachments/assets/8e445c62-2666-4f1a-8bdc-b05b55880fe4">
+<img src="img/3.png">
 - Puedes filtrar productos según tus necesidades con las casillas desplegables situadas al lado de los productos en el shop<br>
-<img src="https://github.com/user-attachments/assets/10d49be0-2bad-4dbe-b241-57a4bcbcf162" width="30%">
+<img src="img/4.png" width="30%">
 - Abajo de los productos puedes ver un mapa para ver donde esta ubicado cada producto
-<img src="https://github.com/user-attachments/assets/d2a081f9-f5ba-49fa-9be3-c07e8f86dd06">
+<img src="img/5.png">
 - En la vista de los detalles de un producto se pueden encontrar diferentes cosas sobre el producto, podemos encontrar las imágenes del producto en un carrusel para poder ir pasandolas, podemos ver el avatar y nombre de usuario a quien pertenece dicho producto, también podemos ver la valoración que tiene en estrellas y cuantos likes tiene el producto ademas de en la parte baja de los detalles del producto donde podemos ver los extras que tiene cada producto como por ejemplo saber si el producto admite envío o solamente admite venta en persona dependiendo de si el primer icono es un camión o una persona a parte de los de poder ver los demás extras como ver al lado del icono de la ubicación donde se situa el producto
-<img src="https://github.com/user-attachments/assets/c33f50ee-3000-4b85-8ee3-f2c1fd9d236d">
+<img src="img/6.png">
 - Si deslizamos más hacia abajo en el details podemos ver como tenemos una sección de productos relacionados con el producto que estemos viendo en dicho momento
-<img src="https://github.com/user-attachments/assets/3901ea00-3da1-45ce-92f6-187cefc82e0e">
+<img src="img/7.png">
 - Por último en los detalles del producto, abajo del todo hay un mapa donde se puede ver donde esta úbicado el producto con más exactitud que en la vista del shop ya que se ve con más zoom la ubicación del producto
-<img src="https://github.com/user-attachments/assets/e6b3dc60-5b75-479f-a4f6-f6ce47bdda3e">
+<img src="img/8.png">
 - En la parte superior de la web se puede ver un buscador en el que podemos filtrar productos por su tipo categoria y ciudad para buscar más precisamente lo que el cliente desea
-<img src="https://github.com/user-attachments/assets/77e56e7d-1bea-4e7f-9010-9bee00c5d0a5">
+<img src="img/9.png">
 **Tenemos dos formas de ver el menú de la web las cuales son:**<br>
 - Al no tener sesión iniciada<br>
-<img src="https://github.com/user-attachments/assets/cd95d6b6-bfba-483d-8b35-2052e4f1d2cc">
+<img src="img/10.png">
 - Al tener la sesión iniciada<br>
-<img src="https://github.com/user-attachments/assets/2a22c803-fc35-4980-bf88-0153dc6d7c4b">
+<img src="img/11.png">
 
 ## 📁 Estructura del proyecto
 - El proyecto esta realizado con el framework ***ORM*** *(object-relational mapping)*
